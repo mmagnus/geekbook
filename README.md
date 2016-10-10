@@ -1,6 +1,6 @@
-# geekbook
+# geekbook (manifesto)
 
-A neat way how to combine Emacs (not requried) + Markdown Syntax + Git + html engine (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name). 
+A neat way how to combine **Emacs (not requried) + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name). 
 
 Freatures:
 
@@ -14,7 +14,7 @@ Freatures:
 - Super light!
 - Pandoc markdown files to anything you want!
 
-I recommend to use Emacs (or VIM or other super-powerfull editor) to:
+I recommend to use **Emacs** (or VIM or other super-powerfull editor) to:
 
 - run git on your notes in your editor,
 - grep them in the editor,
@@ -24,7 +24,7 @@ I recommend to use Emacs (or VIM or other super-powerfull editor) to:
 - ispell,
 - outline mode.
 
-Sync with github to have your notes (full-text searchable) with you all the time (in a private repository):
+Sync with **Github** to have your notes (full-text searchable) with you all the time (in a private repository):
 
 ![index](docs/imgs/geekbookx.png)
 
