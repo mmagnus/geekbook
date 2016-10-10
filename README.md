@@ -35,7 +35,8 @@ I recommend to use **Emacs** (or VIM or other super-powerfull editor) to:
 - copy-paste from your notes to your programs you're writing,
 - use Google Translate (https://github.com/atykhonov/google-translate)
 - ispell,
-- outline mode.
+- outline mode,
+- focuse mode.
 
 Sync with **Github** to have your notes (full-text searchable) with you all the time (in a private repository):
 
