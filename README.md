@@ -81,6 +81,8 @@ On your phone: (in this case using Dropbox & Byword on my iPhone).
 
 ![](docs/imgs/notes_at_phone.png)
 
+Or Draft (http://lifehacker.com/draft-is-a-clean-note-taking-app-with-markdown-support-844836670) for Android (not tested by me).
+
 # Food for thought
 ## Long notes vs short notes
 
