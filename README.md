@@ -1,4 +1,4 @@
-# geekbook (manifesto)
+# geekbook (manifesto) - note taking system for nerds!
 
   * [Features](#features)
     * [Index](#index)
