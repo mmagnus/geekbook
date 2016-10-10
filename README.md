@@ -1,6 +1,6 @@
 # geekbook
 
-soon...
+A neat way how to combine Emacs (not requried) + Markdown Syntax + Git + html engine (bootstrap/python) to get the best notes-talking experience ever.
 
 # Features
 ## Index
