@@ -1,5 +1,8 @@
 # geekbook (manifesto) - note taking system for nerds/geeks!
 
+[![Documentation Status](https://readthedocs.org/projects/geekbook/badge/?version=latest)](http://geekbook.readthedocs.io/en/latest/?badge=latest)
+
+
   * [Features](#features)
     * [Index](#index)
     * [Dashboard](#dashboard)
