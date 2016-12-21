@@ -90,3 +90,5 @@ ENV/
 *~
 data/
 doc/_build
+\#*#
+_*
