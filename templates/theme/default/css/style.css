@@ -1,11 +1,3 @@
-@font-face {
-
-    font-family: "MavenPro";
-    /*src: url("/home/magnus/Dropbox/lb_v2/css/maven.ttf") format("truetype");*/
-    src: url("/home/magnus/Dropbox/lb_v2/css/MavenProRegular.otf") format ("opentype");
-
-}
-
 h1 {
     font: 400 21px/1.5 Georgia;
     font-size: 40px;
@@ -55,13 +47,8 @@ pre {
     font-size: 10px;
     line-height: 14px;
 
-    white-space: pre;
+    white-space: pre-wrap;
     background-color: #F8F8F8;
-}
-
-pre code{
-    white-space: pre;
-
 }
 
 li p{
