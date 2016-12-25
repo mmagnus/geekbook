@@ -76,7 +76,7 @@ class App(object):
             if DEV:
                 index = Index()
                 index.update(mf.get_files())
-                p = Page('rna-dca.md')
+                p = Page('test.md')
                 p.compile()
                 p.save()
 
