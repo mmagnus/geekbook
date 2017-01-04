@@ -8,14 +8,17 @@ import time
 import os
 import sys
 import argparse
+import platform
+
+
 
 PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-print "root path:", PATH
 sys.path.append(PATH)
 
-from geekbook.app.conf import PATH_TO_MD, PATH_TO_HTML
+from geekbook.app.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG
 from geekbook.app.src.page import Page
 from geekbook.app.src.make_index import Index
+
 
 class MdFiles(object):
     """MdFiles class"""
@@ -55,7 +58,13 @@ class App(object):
     def start(self):
         """Start the App.
         """
-        print 'geekbook is up... [ok]'
+        os.system('clear')
+        print ("\n                 ________               __   __________               __    \n                /  _____/  ____   ____ |  | _\______   \ ____   ____ |  | __\n               /   \  ____/ __ \_/ __ \|  |/ /|    |  _//  _ \ /  _ \|  |/ /\n               \    \_\  \  ___/\  ___/|    < |    |   (  <_> |  <_> )    < \n                \______  /\___  >\___  >__|_ \|______  /\____/ \____/|__|_ \ \n                       \/     \/     \/     \/       \/                   \/ \n")
+        print ('G33kB00k is Running... [ok] \n')
+        print ("root path:", PATH)
+        print ("html path: <file://" + PATH_TO_HTML + 'index.html>')
+        print ("imgs path: " + PATH_TO_IMG +"\n")
+
 
         while 1:
 
@@ -87,21 +96,33 @@ class App(object):
                 time.sleep(1)
 
 
+
 def start_gitweb():
     """Start git instaweb"""
     os.chdir(PATH_TO_MD)
     os.system('git instaweb')
 
-def start_browser_with_index():
-    os.system('firefox %s' % PATH_TO_HTML + '/index.html')
+
+
+def start_browser_with_index(): ### This function allows to detect the operative system in use and open the html file.
+    if platform.system() == "Linux":
+        os.system('xdg-open file://' + PATH_TO_HTML + 'index.html')
+    if platform.system() == "Darwin":
+        os.system('open file://' + PATH_TO_HTML + 'index.html')
+    else:
+        print ("Sorry, I cannot detect your system, you will have to open the file manually @")
+
+
+
 
 def get_parser():
     parser = argparse.ArgumentParser('geekbookapp.py')
     parser.add_argument('-d', '--debug', help='debug mode', action='store_true')
     return parser
 
+
 if __name__ == '__main__':
-    
+
     args = get_parser().parse_args()
 
     a = App()
@@ -111,5 +132,5 @@ if __name__ == '__main__':
     else:
         DEV = False
         start_gitweb()
-        #start_browser_with_index()
+        start_browser_with_index()
     a.start()
