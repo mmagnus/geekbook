@@ -1,4 +1,6 @@
-# geekbook (manifesto) - note taking system for nerds/geeks!
+# geekbook - note taking system for nerds/geeks!
+
+(under heavy development)
 
 [![Twitter Follow](http://img.shields.io/twitter/follow/geekbookx.svg?style=social&label=Follow)](https://twitter.com/geekbookx)
 [![Documentation Status](https://readthedocs.org/projects/geekbook/badge/?version=latest)](http://geekbook.readthedocs.io/en/latest/?badge=latest)

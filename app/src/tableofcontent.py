@@ -19,6 +19,26 @@ import re
 TAG='[tableofcontent]'
 VERBOSE = False
 
+def tag_heading(heading):
+    """Find all tags in a heading and replace it with "my" tags
+
+    Get:
+    - heading
+
+    Return:
+    - heading with "my" tags
+    """
+    tags = re.findall('@\w+', heading)
+    for t in tags:
+        if t == '@done':
+            heading = heading.replace(t, '<a href="http://127.0.0.1:8011/search/' + t + '"><span style="font-family:"  class="label label-success">' + t + '</span></a>')
+        elif t == '@progress':
+            heading = heading.replace(t, '<a href="http://127.0.0.1:8011/search/' + t + '"><span style="font-family:"  class="label label-warning">' + t + '</span></a>')
+        elif t == '@todo':
+            heading = heading.replace(t, '<a href="http://127.0.0.1:8011/search/' + t + '"><span style="font-family:"  class="label label-important">' + t + '</span></a>')
+        else:
+            heading = heading.replace(t, '<a href="http://127.0.0.1:8011/search/' + t + '"><span style="font-family:"  class="label">' + t + '</span></a>')
+    return heading
 
 def replace_space_with_minus(text):
     replace = text.replace(' ', '-')

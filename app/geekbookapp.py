@@ -10,7 +10,7 @@ import sys
 import argparse
 
 PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-print PATH
+print "root path:", PATH
 sys.path.append(PATH)
 
 from geekbook.app.conf import PATH_TO_MD, PATH_TO_HTML
@@ -76,7 +76,7 @@ class App(object):
             if DEV:
                 index = Index()
                 index.update(mf.get_files())
-                p = Page('rna-dca.md')
+                p = Page('test.md')
                 p.compile()
                 p.save()
 

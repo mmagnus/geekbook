@@ -17,11 +17,10 @@ h3 {
     font-weight: bold;
     color: #333333;
 }
+
 h4 {
     font-size: 14px;
     font: 400 21px/1.5 Georgia;
-    margin-left: 50px;
-    border-bottom: 1px solid #CCCCCC;
     padding-top: 2px;
     padding-bottom: 2px;
     color: #333333;

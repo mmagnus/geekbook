@@ -8,6 +8,7 @@ PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 PATH_TO_MD = PATH + '/data/md/'
 PATH_TO_HTML = PATH + "/data/html/"
+print "html path: <file://" + PATH_TO_HTML + 'index.html>'
 PATH_TO_ORIG = PATH + "/data/orig/"
 
 PATH_TO_IMG = PATH + '/data/md/imgs/'
