@@ -17,6 +17,7 @@
     * [magit\-based diff of your notes](#magit-based-diff-of-your-notes)
   * [On your OSX](#on-your-osx)
   * [On your phone](#on-your-phone)
+  * [Install & Get Started!](#install)
   * [Food for thought](#food-for-thought)
     * [Long notes vs short notes](#long-notes-vs-short-notes)
 
