@@ -10,6 +10,7 @@
   * [Features](#features)
     * [Index](#index)
     * [Dashboard](#dashboard)
+    * [Extensions](#extensions)
   * [EMACS\-powered](#emacs-powered)
     * [focus\-mode](#focus-mode)
     * [list notes in Emacs (sort by Date/Name)](#list-notes-in-emacs-sort-by-datename)
@@ -63,6 +64,11 @@ Kinda similar projects:
 ## Dashboard
 
 ![dashboard](docs/imgs/dashboard.png)
+
+## Extensions
+
+    [tableofcontent] # give you table of content in a given place of your note
+    [date] # give you date when a note was compiled
 
 # EMACS-powered
 ## Focus on your notes
