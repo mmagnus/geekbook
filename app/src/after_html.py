@@ -36,6 +36,7 @@ def add_head(text):
     head = open(PATH_TO_TEMPLATE_HTML).read()
     head = head.replace('{{ url_index }}', PATH_TO_HTML + '/' + 'index.html')
     
+    head = head.replace('href="img/', 'href="' + PATH_TO_TEMPLATE + '/img/')
     head = head.replace('="lib/', '="' + PATH_TO_TEMPLATE + '/lib/')
     head = head.replace('="css/', '="' + PATH_TO_TEMPLATE + '/css/')
 
