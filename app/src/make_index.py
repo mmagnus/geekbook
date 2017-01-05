@@ -21,6 +21,7 @@ class Index(object):
         html = html.replace('{{ url_index }}', PATH_TO_HTML + '/' + 'index.html')
 
         # @todo
+        html = html.replace('href="img/', 'href="' + PATH_TO_TEMPLATE + '/img/')
         html = html.replace('="lib/', '="' + PATH_TO_TEMPLATE + '/lib/')
         html = html.replace('="css/', '="' + PATH_TO_TEMPLATE + '/css/')
 
