@@ -101,12 +101,16 @@ Or Draft (http://lifehacker.com/draft-is-a-clean-note-taking-app-with-markdown-s
 
 # Install
 
-Requirements: `pip install markdown` (https://pypi.python.org/pypi/Markdown)
-
 To get the code:
 
     git clone git@github.com:mmagnus/geekbook.git
+    
+Requirements: 
 
+    `pip install markdown py-gfm` # or ./install.sh
+   
+https://pypi.python.org/pypi/Markdown, https://pypi.python.org/pypi/py-gfm
+   
 to run:
 
     $ python app/geekbookapp.py
