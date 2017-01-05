@@ -11,13 +11,16 @@ from mdx_gfm import GithubFlavoredMarkdownExtension
 import os
 from os import sep
 from shutil import copy
+from sys import stdout
+from time import sleep
+
 
 from geekbook.app.src.after_html import add_head, change_data_tag_into_actual_data, change_todo_square_chainbox_or_icon
 from geekbook.app.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
 from geekbook.app.src.lib import get_image_path
 from geekbook.app.src.tableofcontent import make_table_of_content
 
-
+from colors import bcolors
 
 
 class Page(object):
@@ -78,8 +81,15 @@ class Page(object):
             with codecs.open(PATH_TO_ORIG + sep + self.fn, "r", "utf-8") as f:
                 orig_md = f.read()
         except IOError:
-            print 'IOError %s' % self.fn
+            fail_message = bcolors.FAIL + 'IOError: ' + self.fn + " is empty. Write something and save it." + bcolors.ENDC
+            pass_message = bcolors.OKGREEN + 'IOError: ' + self.fn + " resolved" + bcolors.ENDC
+            for i in range(1,20):
+                stdout.write("\r" + fail_message)
+                stdout.flush()
+                sleep(1)
+            print(pass_message)
             orig_md = ''
+            pass
 
         if not os.path.exists(PATH_TO_ORIG):
             os.mkdir(PATH_TO_ORIG)

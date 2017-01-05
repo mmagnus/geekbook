@@ -12,12 +12,14 @@ import platform
 
 
 
+
 PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(PATH)
 
 from geekbook.app.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG
 from geekbook.app.src.page import Page
 from geekbook.app.src.make_index import Index
+from geekbook.app.src.colors import bcolors
 
 
 class MdFiles(object):
@@ -59,7 +61,7 @@ class App(object):
         """Start the App.
         """
         os.system('clear')
-        print ("\n                 ________               __   __________               __    \n                /  _____/  ____   ____ |  | _\______   \ ____   ____ |  | __\n               /   \  ____/ __ \_/ __ \|  |/ /|    |  _//  _ \ /  _ \|  |/ /\n               \    \_\  \  ___/\  ___/|    < |    |   (  <_> |  <_> )    < \n                \______  /\___  >\___  >__|_ \|______  /\____/ \____/|__|_ \ \n                       \/     \/     \/     \/       \/                   \/ \n")
+        print (bcolors.OKGREEN + "\n                 ________               __   __________               __    \n                /  _____/  ____   ____ |  | _\______   \ ____   ____ |  | __\n               /   \  ____/ __ \_/ __ \|  |/ /|    |  _//  _ \ /  _ \|  |/ /\n               \    \_\  \  ___/\  ___/|    < |    |   (  <_> |  <_> )    < \n                \______  /\___  >\___  >__|_ \|______  /\____/ \____/|__|_ \ \n                       \/     \/     \/     \/       \/                   \/ \n" + bcolors.ENDC)
         print ("G33kB00k is Running... [ok] \n")
         print ("root path:" + PATH)
         print ("html path: <file://" + PATH_TO_HTML + 'index.html>')
