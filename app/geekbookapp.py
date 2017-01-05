@@ -60,8 +60,8 @@ class App(object):
         """
         os.system('clear')
         print ("\n                 ________               __   __________               __    \n                /  _____/  ____   ____ |  | _\______   \ ____   ____ |  | __\n               /   \  ____/ __ \_/ __ \|  |/ /|    |  _//  _ \ /  _ \|  |/ /\n               \    \_\  \  ___/\  ___/|    < |    |   (  <_> |  <_> )    < \n                \______  /\___  >\___  >__|_ \|______  /\____/ \____/|__|_ \ \n                       \/     \/     \/     \/       \/                   \/ \n")
-        print ('G33kB00k is Running... [ok] \n')
-        print ("root path:", PATH)
+        print ("G33kB00k is Running... [ok] \n")
+        print ("root path:" + PATH)
         print ("html path: <file://" + PATH_TO_HTML + 'index.html>')
         print ("imgs path: " + PATH_TO_IMG +"\n")
 
