@@ -8,9 +8,11 @@ import re
 import datetime
 import os
 
+from pygments import highlight
+from pygments.lexers import PythonLexer
+from pygments.formatters import HtmlFormatter
+
 from geekbook.engine.conf import PATH_TO_BASE_IMG, PATH_TO_TEMPLATE, PATH_TO_TEMPLATE_HTML, PATH_TO_HTML
-
-
 
 
 def change_data_tag_into_actual_data(text):
@@ -61,15 +63,25 @@ def add_head(text):
     #        head_new += l
     #return head + text
 
+
 def change_html_tags_bootstrap(text):
     """ searches for html tags and adds the proper bootstrap class"""
     #tables
     text = text.replace('<table>', '<table class="table table-hover">')
     text = text.replace('<h2>', '<br><hr><br><h2>') #add contest separator
-
-
+    text = text.replace('<h1>', '<center><h1>') #center the Title
+    text = text.replace('</h1>', '</h1></center>') #center the Title
     return(text)
 
+
+def pigmentize(text):
+#    """ searches for <span></span> and replace with HTML pigmented code """
+    start_code = text.find('<pre>') + 5
+    end_code = text.find('</pre')
+    code = text[start_code:end_code]
+    if code[0:5] == 'python':
+        text.replace('<div class="highlight"><pre>' + highlight(code, PythonLexer(), HtmlFormatter()) + '</pre></div>')
+    return(text)
 
 def add_path_to_img(text):
     text = text.replace('src="img/', 'src="' + PATH_TO_TEMPLATE + '/img/')
@@ -86,5 +98,6 @@ if __name__ == '__main__':
     output = include_file(output)
     #output = make_inner_link(output)
     output = add_path_to_img(output)
+    output = pigmentize(output)
     sys.stdout.write(output)
     sys.stdout.write

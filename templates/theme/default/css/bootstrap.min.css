@@ -1386,10 +1386,9 @@ pre {
 	margin:0 0 10px;
 	font-size:13px;
 	line-height:1.42857143;
-	color:#333;
+	color:#fff;
 	word-break:break-all;
 	word-wrap:break-word;
-	background-color:#f5f5f5;
 	border-radius:5px
 }
 pre code {
