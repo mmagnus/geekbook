@@ -70,7 +70,7 @@ def change_html_tags_bootstrap(text):
 
 
 def add_path_to_img(text):
-    text = text.replace('href="img/', 'href="' + PATH_TO_TEMPLATE + '/img/')
+    text = text.replace('src="img/', 'src="' + PATH_TO_TEMPLATE + '/img/')
     return(text)
 
 if __name__ == '__main__':
