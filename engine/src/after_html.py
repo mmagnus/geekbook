@@ -65,7 +65,9 @@ def change_html_tags_bootstrap(text):
     """ searches for html tags and adds the proper bootstrap class"""
     #tables
     text = text.replace('<table>', '<table class="table table-hover">')
-    #text = text.replace()
+    text = text.replace('<h2>', '<br><hr><br><h2>') #add contest separator
+
+
     return(text)
 
 

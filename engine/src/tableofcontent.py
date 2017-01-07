@@ -48,8 +48,8 @@ def replace_space_with_minus(text):
 def make_table_of_content(text, version2=True):
     output = ''
 
-    list_type_start = '<div id="tableofcontent"></div><ul class="table_of_content" id="tableofcontent_">'
-    list_type_end = '</ul>'
+    list_type_start = '<div id="tableofcontent"><ul class="table_of_content" id="tableofcontent_">'
+    list_type_end = '</ul></div>'
 
     collect_headings = list_type_start
 

@@ -1360,14 +1360,13 @@ code,kbd,pre,samp {
 }
 code {
 	padding:2px 4px;
-	font-size:90%;
-	color:#fff;
+	font-size:95%;
 	background-color:#f9f2f4;
 	border-radius:4px
 }
 kbd {
 	padding:2px 4px;
-	font-size:90%;
+	font-size:95%;
 	color:#fff;
 	background-color:#333;
 	border-radius:3px;
