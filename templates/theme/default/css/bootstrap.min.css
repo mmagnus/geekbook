@@ -1361,7 +1361,7 @@ code,kbd,pre,samp {
 code {
 	padding:2px 4px;
 	font-size:90%;
-	color:#c7254e;
+	color:#fff;
 	background-color:#f9f2f4;
 	border-radius:4px
 }
@@ -1391,8 +1391,7 @@ pre {
 	word-break:break-all;
 	word-wrap:break-word;
 	background-color:#f5f5f5;
-	border:1px solid #ccc;
-	border-radius:4px
+	border-radius:5px
 }
 pre code {
 	padding:0;
