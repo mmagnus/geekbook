@@ -9,7 +9,7 @@ import datetime
 import os
 
 from pygments import highlight
-from pygments.lexers import PythonLexer, HtmlLexer, CssLexer, EmacsLispLexer, BashLexer, HexdumpLexer, DiffLexer
+from pygments.lexers import PythonLexer, HtmlLexer, CssLexer, EmacsLispLexer, BashLexer, HexdumpLexer, DjangoLexer
 from pygments.formatters import HtmlFormatter
 
 from geekbook.engine.conf import PATH_TO_BASE_IMG, PATH_TO_TEMPLATE, PATH_TO_TEMPLATE_HTML, PATH_TO_HTML
@@ -76,7 +76,7 @@ def change_html_tags_bootstrap(text):
 
 def pigmentize(text):
     """ searches for <span></span> and replace with HTML pigmented code """
-    """ supported languages: python ; html ; css ; emacs ; bash ; hexdump"""
+    """ supported languages: python ; html ; css ; emacs ; bash ; hexdump ; DjangoLexer"""
     start_code = text.find('<pre>') + 5
     end_code = text.find('</pre')
     code = text[start_code:end_code]
@@ -92,6 +92,8 @@ def pigmentize(text):
         text.replace('<div class="highlight"><pre>' + highlight(code, BashLexer(), HtmlFormatter()) + '</pre></div>')
     if code[0:7] == 'hexdump':
         text.replace('<div class="highlight"><pre>' + highlight(code, HexdumpLexer(), HtmlFormatter()) + '</pre></div>')
+    if code[0:6] == 'django':
+        text.replace('<div class="highlight"><pre>' + highlight(code, DjangoLexer(), HtmlFormatter()) + '</pre></div>')
     return(text)
 
 def add_path_to_img(text):
