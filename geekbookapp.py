@@ -147,11 +147,13 @@ if __name__ == '__main__':
 
     if args.debug:
         DEV = True
+        UPDATE = False
     if args.update:
         UPDATE = True
         DEV = False
     else:
         DEV = False
+        UPDATE = False
         start_gitweb()
         start_browser_with_index()
     a.start()

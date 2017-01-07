@@ -43,10 +43,13 @@ def add_head(text):
     head = head.replace('="lib/', '="' + PATH_TO_TEMPLATE + '/lib/')
     head = head.replace('="css/', '="' + PATH_TO_TEMPLATE + '/css/')
 
+
     # remove demo content
     head = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->', r'', head, flags=re.M | re.DOTALL)
 
     return head + text
+
+
 
     #head_new = ''
     #for l in head.split('\n'):
@@ -65,6 +68,11 @@ def change_html_tags_bootstrap(text):
     #text = text.replace()
     return(text)
 
+
+def add_path_to_img(text):
+    text = text.replace('href="img/', 'href="' + PATH_TO_TEMPLATE + '/img/')
+    return(text)
+
 if __name__ == '__main__':
     content = sys.stdin.read()
     output = change_infotags_into_icon(content)
@@ -75,5 +83,6 @@ if __name__ == '__main__':
     #output = remove_em(output)
     output = include_file(output)
     #output = make_inner_link(output)
+    output = add_path_to_img(output)
     sys.stdout.write(output)
     sys.stdout.write
