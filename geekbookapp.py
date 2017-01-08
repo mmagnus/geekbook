@@ -10,7 +10,7 @@ import sys
 import argparse
 
 import logging
-logging.basicConfig()
+logging.basicConfig(format='%(asctime)s - %(filename)s - %(message)s')
 logger = logging.getLogger('geekbook')
 logger.setLevel('INFO')
 
@@ -65,7 +65,7 @@ class App(object):
         """
         os.system('clear')
         print (bcolors.OKGREEN + "\n                 ________               __   __________               __    \n                /  _____/  ____   ____ |  | _\______   \ ____   ____ |  | __\n               /   \  ____/ __ \_/ __ \|  |/ /|    |  _//  _ \ /  _ \|  |/ /\n               \    \_\  \  ___/\  ___/|    < |    |   (  <_> |  <_> )    < \n                \______  /\___  >\___  >__|_ \|______  /\____/ \____/|__|_ \ \n                       \/     \/     \/     \/       \/                   \/ \n" + bcolors.ENDC)
-        print ("G33kB00k is Running... [ok] \n")
+        logger.info("G33kB00k is Running... [ok]")
         logger.info("root path: %s" % PATH)
         logger.info("html path: <file://" + PATH_TO_HTML + 'index.html>')
         logger.info("imgs path: " + PATH_TO_IMG)
@@ -84,22 +84,15 @@ class App(object):
                     if p.is_changed():
                         p.compile()
                         p.save()
-
                         index = Index()
                         index.update(mf.get_files())
 
-            if UPDATE:
-                index = Index()
-                index.update(mf.get_files())
-                for f in mf.get_files():
-                    if f == 'imgs':
-                        pass
-                    else:
-                        p = Page(f)
-                        p.update()
+                    if UPDATE:
+                        p.compile()
                         p.save()
-                print(' \n [OK] - All the pages have been updated')
-                sys.exit(1)
+
+            if UPDATE:
+                sys.exit(0)
 
             if DEV:
                 index = Index()
@@ -108,12 +101,7 @@ class App(object):
                 p.compile()
                 p.save()
 
-                sys.exit(1)
-
-                time.sleep(3)
-            else:
-                time.sleep(1)
-
+                sys.exit(0)
 
 
 def start_gitweb():
@@ -122,8 +110,8 @@ def start_gitweb():
     os.system('git instaweb')
 
 
-
-def start_browser_with_index(): ### This function allows to detect the operative system in use and open the html file.
+def start_browser_with_index():
+    """This function allows to detect the operative system in use and open the html file."""
     if platform.system() == "Linux":
         os.system('xdg-open file://' + PATH_TO_HTML + 'index.html')
     if platform.system() == "Darwin":

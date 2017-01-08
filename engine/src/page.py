@@ -19,6 +19,8 @@ from geekbook.engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
 from geekbook.engine.src.lib import get_image_path
 from geekbook.engine.src.tableofcontent import make_table_of_content
 
+import logging
+logger = logging.getLogger('geekbook')
 
 class Page(object):
     """Page class
@@ -45,20 +47,10 @@ class Page(object):
     def compile(self):
         """
         """
-        print '['+ strftime("%H:%M:%S", gmtime())+'] -'+' compiling --> %s' % self.fn,
+        logger.info('compiling --> %s' % self.fn)
         self.pre_process()
         self.get_md()
         self.post_process()
-        print '[ok]'
-
-    def update(self):
-        """
-        """
-        print '['+ strftime("%H:%M:%S", gmtime())+'] -'+' updating --> %s' % self.fn,
-        self.pre_process()
-        self.get_md()
-        self.post_process()
-        print '[ok]'
 
     def pre_process(self):
         """
