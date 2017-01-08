@@ -38,6 +38,8 @@ def personal_tags_to_html(text):
     text = text.replace('[!info]','<p class="bg-info">')
     text = text.replace('[info!]','<br></p>')
 
+    return text
+
 
 def change_todo_square_chainbox_or_icon(text, verbose=False):
     """
