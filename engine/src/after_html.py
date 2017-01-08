@@ -96,8 +96,9 @@ def change_html_tags_bootstrap(text):
 
 
 def pigmentize(text):
-    """ searches for <span></span> and replace with HTML pigmented code """
-    """ supported languages: python ; html ; css ; emacs ; bash ; hexdump ; DjangoLexer"""
+    """ searches for <span></span> and replace with HTML pigmented code
+        supported languages: python ; html ; css ; emacs ; bash ; hexdump ; DjangoLexer"""
+
     start_code = text.find('<pre>') + 5
     end_code = text.find('</pre')
     code = text[start_code:end_code]
