@@ -1065,13 +1065,12 @@ img {
 }
 .img-thumbnail {
 	display:inline-block;
-	max-width:100%;
+	max-width:80%;
 	height:auto;
 	padding:4px;
 	line-height:1.42857143;
 	background-color:#fff;
-	border:1px solid #ddd;
-	border-radius:4px;
+	border-radius:5px;
 	-webkit-transition:all .2s ease-in-out;
 	-o-transition:all .2s ease-in-out;
 	transition:all .2s ease-in-out
@@ -1360,14 +1359,13 @@ code,kbd,pre,samp {
 }
 code {
 	padding:2px 4px;
-	font-size:90%;
-	color:#c7254e;
+	font-size:95%;
 	background-color:#f9f2f4;
 	border-radius:4px
 }
 kbd {
 	padding:2px 4px;
-	font-size:90%;
+	font-size:95%;
 	color:#fff;
 	background-color:#333;
 	border-radius:3px;
@@ -1387,12 +1385,10 @@ pre {
 	margin:0 0 10px;
 	font-size:13px;
 	line-height:1.42857143;
-	color:#333;
+	color:#fff;
 	word-break:break-all;
 	word-wrap:break-word;
-	background-color:#f5f5f5;
-	border:1px solid #ccc;
-	border-radius:4px
+	border-radius:5px
 }
 pre code {
 	padding:0;

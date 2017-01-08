@@ -1,4 +1,4 @@
-from geekbook.app.conf import PATH_TO_IMG
+from geekbook.engine.conf import PATH_TO_IMG
 import re
 
 

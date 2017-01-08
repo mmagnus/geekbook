@@ -6,10 +6,10 @@
 Welcome to geekbook documentation!
 ================================
 
-.. automodule:: app.geekbookapp
+.. automodule:: geekbookapp
    :members:
 
-.. automodule:: app.src.page
+.. automodule:: engine.src.page
    :members:
 
 

@@ -7,17 +7,17 @@ import markdown
 import codecs
 from mdx_gfm import GithubFlavoredMarkdownExtension
 
-
 import os
 from os import sep
 from shutil import copy
+from sys import stdout
+from time import sleep, gmtime, strftime
+from colors import bcolors
 
-from geekbook.app.src.after_html import add_head, change_data_tag_into_actual_data, change_todo_square_chainbox_or_icon, get_youtube_embeds
-from geekbook.app.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
-from geekbook.app.src.lib import get_image_path
-from geekbook.app.src.tableofcontent import make_table_of_content
-
-
+from geekbook.engine.src.after_html import add_head, change_data_tag_into_actual_data, change_todo_square_chainbox_or_icon, change_html_tags_bootstrap, add_path_to_img, pigmentize, get_youtube_embeds
+from geekbook.engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
+from geekbook.engine.src.lib import get_image_path
+from geekbook.engine.src.tableofcontent import make_table_of_content
 
 
 class Page(object):
@@ -45,7 +45,16 @@ class Page(object):
     def compile(self):
         """
         """
-        print 'compiling... %s' % self.fn,
+        print '['+ strftime("%H:%M:%S", gmtime())+'] -'+' compiling --> %s' % self.fn,
+        self.pre_process()
+        self.get_md()
+        self.post_process()
+        print '[ok]'
+
+    def update(self):
+        """
+        """
+        print '['+ strftime("%H:%M:%S", gmtime())+'] -'+' updating --> %s' % self.fn,
         self.pre_process()
         self.get_md()
         self.post_process()
@@ -68,7 +77,10 @@ class Page(object):
         self.html = add_head(self.html)
         self.html = make_table_of_content(self.html)
         self.html = change_data_tag_into_actual_data(self.html)
-        
+        self.html = add_path_to_img(self.html)
+        self.html = change_html_tags_bootstrap(self.html)
+        self.html = pigmentize(self.html)
+
     def is_changed(self):
         """Check if the file on disc is different than `md`.
 
@@ -79,8 +91,15 @@ class Page(object):
             with codecs.open(PATH_TO_ORIG + sep + self.fn, "r", "utf-8") as f:
                 orig_md = f.read()
         except IOError:
-            print 'IOError %s' % self.fn
+            fail_message = bcolors.FAIL + 'IOError: ' + self.fn + bcolors.ENDC
+            pass_message = bcolors.OKGREEN + 'IOError: ' + self.fn + "Ok" + bcolors.ENDC
+            for i in range(1,20):
+                stdout.write("\r" + fail_message)
+                stdout.flush()
+                sleep(1)
+            print(pass_message)
             orig_md = ''
+            pass
 
         if not os.path.exists(PATH_TO_ORIG):
             os.mkdir(PATH_TO_ORIG)
