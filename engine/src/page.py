@@ -14,7 +14,8 @@ from shutil import copy
 from sys import stdout
 from time import sleep, gmtime, strftime
 
-from geekbook.engine.src.after_html import add_head, change_data_tag_into_actual_data, change_todo_square_chainbox_or_icon, change_html_tags_bootstrap, add_path_to_img, pigmentize
+from geekbook.engine.src.after_html import add_head, change_data_tag_into_actual_data, change_todo_square_chainbox_or_icon
+from geekbook.engine.src.after_html import change_html_tags_bootstrap, add_path_to_img, pigmentize, personal_tags_to_html
 from geekbook.engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
 from geekbook.engine.src.lib import get_image_path
 from geekbook.engine.src.tableofcontent import make_table_of_content
@@ -81,6 +82,7 @@ class Page(object):
         self.html = add_path_to_img(self.html)
         self.html = change_html_tags_bootstrap(self.html)
         self.html = pigmentize(self.html)
+        self.html = personal_tags_to_html(self.html)
 
     def is_changed(self):
         """Check if the file on disc is different than `md`.

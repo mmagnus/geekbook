@@ -21,11 +21,27 @@ def change_data_tag_into_actual_data(text):
     text = text.replace('[date]', str(today))
     return text
 
+def personal_tags_to_html(text):
+    """ insert here your personal tags!"""
+
+# Change text background depending on text contest.
+## warning text
+    text = text.replace('[!warning]','<p class="bg-warning">')
+    text = text.replace('[warning!]','<br></p>')
+# danger text
+    text = text.replace('[!danger]','<p class="bg-danger">')
+    text = text.replace('[danger!]','<br></p>')
+# succes text
+    text = text.replace('[!success]','<p class="bg-success">')
+    text = text.replace('[success!]','<br></p>')
+# info text
+    text = text.replace('[!info]','<p class="bg-info">')
+    text = text.replace('[info!]','<br></p>')
+
+
 def change_todo_square_chainbox_or_icon(text, verbose=False):
     """
-    Set of rules to replace [i] etc with <img ... >
-
-    [ OK ]
+    Set of rules to replace [i] etc with <img ... >  [ OK ]
     """
     ## of list
     text = text.replace('<li>[ ]', '<li><input type="checkbox" />')
@@ -36,8 +52,7 @@ def change_todo_square_chainbox_or_icon(text, verbose=False):
     return text
 
 def add_head(text):
-    """Add head html from template
-    """
+    """Add head html from template  """
     head = open(PATH_TO_TEMPLATE_HTML).read()
     head = head.replace('{{ url_index }}', PATH_TO_HTML + '/' + 'index.html')
 
@@ -76,8 +91,7 @@ def change_html_tags_bootstrap(text):
 
 
 def pigmentize(text):
-    """ searches for <span></span> and replace with HTML pigmented code """
-    """ supported languages: python ; html ; css ; emacs ; bash ; hexdump ; DjangoLexer"""
+    """ searches for <span></span> and replace with HTML pigmented code supported languages: python ; html ; css ; emacs ; bash ; hexdump ; DjangoLexer"""
     start_code = text.find('<pre>') + 5
     end_code = text.find('</pre')
     code = text[start_code:end_code]
@@ -108,6 +122,7 @@ if __name__ == '__main__':
     output = change_data_tag_into_actual_data(output)
     output = add_path_to_img(output)
     output = change_html_tags_bootstrap(output)
+    output = personal_tags_to_html(output)
     #output = change_tags_into_searchtaglinks(text)
     #output = remove_em(output)
     output = include_file(output)
