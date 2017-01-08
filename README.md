@@ -17,6 +17,7 @@
     * [magit\-based diff of your notes](#magit-based-diff-of-your-notes)
   * [On your OSX](#on-your-osx)
   * [On your phone](#on-your-phone)
+  * [Install & Get Started!](#install)
   * [Food for thought](#food-for-thought)
     * [Long notes vs short notes](#long-notes-vs-short-notes)
 
@@ -97,6 +98,33 @@ On your phone: (in this case using Dropbox & Byword on my iPhone).
 ![](docs/imgs/notes_at_phone.png)
 
 Or Draft (http://lifehacker.com/draft-is-a-clean-note-taking-app-with-markdown-support-844836670) for Android (not tested by me).
+
+# Install
+
+To get the code:
+
+    git clone git@github.com:mmagnus/geekbook.git
+    
+Requirements: 
+
+    `pip install markdown py-gfm` # or ./install.sh
+   
+https://pypi.python.org/pypi/Markdown, https://pypi.python.org/pypi/py-gfm
+   
+to run:
+
+    $ python app/geekbookapp.py
+    root path: /Users/magnus/Dropbox
+    html path: <file:///Users/magnus/Dropbox/geekbook/data/html/index.html>
+    /home/magnus/Dropbox/geekbook/data/md/
+    2017-01-04 21:09:25: (network.c.410) can't bind to port:  1234 Address already in use
+    Could not execute http daemon lighttpd -f.
+    geekbook is up... [ok]
+    compiling... test.md [ok]
+   
+open your browser and copy-paste the ```html path``` (in my case is ```file:///Users/magnus/Dropbox/geekbook/data/html/index.html```). 
+
+To make a new note, create a file in ```<path to your geekbook>/data/md/<notes here>```. Keep geekbookapp.py running all the time, it will detect a new note and compile it for you.
 
 # Food for thought
 ## Long notes vs short notes

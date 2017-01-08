@@ -5,6 +5,8 @@
 
 import markdown
 import codecs
+from mdx_gfm import GithubFlavoredMarkdownExtension
+
 
 import os
 from os import sep
@@ -14,6 +16,8 @@ from geekbook.app.src.after_html import add_head, change_data_tag_into_actual_da
 from geekbook.app.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
 from geekbook.app.src.lib import get_image_path
 from geekbook.app.src.tableofcontent import make_table_of_content
+
+
 
 
 class Page(object):
@@ -35,7 +39,7 @@ class Page(object):
     def get_md(self):
         """
         """
-        self.html = markdown.markdown(self.md, extensions=['codehilite'])#(linenums=False)])
+        self.html = markdown.markdown(self.md, extensions=[GithubFlavoredMarkdownExtension()])#(linenums=False)'])
         #html = '<link rel="stylesheet" href="/home/magnus/Dropbox/lb_v2/templates/Pygments/css/pygments.css" type="text/css">' + html
 
     def compile(self):
