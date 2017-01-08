@@ -48,21 +48,20 @@ def replace_space_with_minus(text):
 def make_table_of_content(text, version2=True):
     output = ''
 
-    list_type_start = '<div id="tableofcontent"></div><ul class="table_of_content" id="tableofcontent_">'
-    list_type_end = '</ul>'
+    list_type_start = '<div id="tableofcontent"><ul class="table_of_content" id="tableofcontent_">'
+    list_type_end = '</ul></div>'
 
     collect_headings = list_type_start
 
     tableofcontent_in_pure_text = ''
     for l in text.split('\n'):
-
         ## h1
         rx = re.compile('<h1>(?P<h1>.+)</h1>').search(l)
         if rx:
             h1 = rx.group('h1')
             if VERBOSE: print 'h1', h1
             id_of_div = replace_space_with_minus(h1)
-            # '</div>'  
+            # '</div>'
             l = '<div id="' + id_of_div + '"><h1>' \
                 + '<a class="nondecoration" href="#' + id_of_div + '">' \
                 + tag_heading(h1) \
@@ -130,5 +129,5 @@ def start(): pass
 if __name__ == '__main__':
     text = sys.stdin.read()
     output = make_table_of_content(text)
-    sys.stdout.write(output)        
-    #tag_heading('How to setup priorities? # @priority @test @pla')    
+    sys.stdout.write(output)
+    #tag_heading('How to setup priorities? # @priority @test @pla')

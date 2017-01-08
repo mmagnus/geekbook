@@ -7,7 +7,7 @@ import os
 import time
 import re
 
-from geekbook.app.conf import PATH_TO_HTML, PATH_TO_TEMPLATE, PATH_HOMEPAGE, PATH_TO_MD
+from geekbook.engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE, PATH_HOMEPAGE, PATH_TO_MD
 
 
 class Index(object):
@@ -22,15 +22,16 @@ class Index(object):
 
         # @todo
         html = html.replace('href="img/', 'href="' + PATH_TO_TEMPLATE + '/img/')
+        html = html.replace('src="img/', 'src="' + PATH_TO_TEMPLATE + '/img/')
         html = html.replace('="lib/', '="' + PATH_TO_TEMPLATE + '/lib/')
         html = html.replace('="css/', '="' + PATH_TO_TEMPLATE + '/css/')
 
         # remove demo content
         html = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->', r'', html, flags=re.M | re.DOTALL)
-        ## 
+        ##
 
         html += open(PATH_HOMEPAGE).read()
-        html += '<table style="width:100%">'
+        html += '<table class="table table-hover"><tr><th>Title</th><th><center>Last Update</center></th></tr>'
 
         for l in list_md:
             if l == 'imgs':
@@ -43,8 +44,8 @@ class Index(object):
                     #if l.find('::')>=0:
                     #    html += '<li class="table_of_content_h2"><a style="" href="' + path + '.html">' + l + '</a></li>'
                     #else:
-                    html += '<tr><td><li class="index_list"><a class="index_list_a" href="' + path + '.html">' + l + '</a>' \
-                            + '<td><small style="font-family: Courier New">' + time.ctime(os.stat(os.path.join(PATH_TO_MD, l + '.md')).st_mtime) + '</small></td></li></tr>'
+                    html += '<tr><td><a class="index_list_a" href="' + path + '.html">' + l + '</a>' \
+                            + '<td><small><center>' + time.ctime(os.stat(os.path.join(PATH_TO_MD, l + '.md')).st_mtime) + '</center></small></td></tr>'
 
         html += '</p>'
 

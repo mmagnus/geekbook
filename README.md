@@ -1,5 +1,10 @@
 # geekbook - note taking system for nerds/geeks!
 
+This is a fork of the original project by mmagnus. I'm just making it more suitable for my tastes :P
+
+The following text refers to the original project + some personal editing.
+
+
 (under heavy development)
 
 [![Twitter Follow](http://img.shields.io/twitter/follow/geekbookx.svg?style=social&label=Follow)](https://twitter.com/geekbookx)
@@ -20,7 +25,6 @@
   * [Install & Get Started!](#install)
   * [Food for thought](#food-for-thought)
     * [Long notes vs short notes](#long-notes-vs-short-notes)
-
 ![](preview/qubCXZcWHl.gif)
 
 A neat way how to combine **Emacs (not requried) + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
@@ -101,17 +105,17 @@ Or Draft (http://lifehacker.com/draft-is-a-clean-note-taking-app-with-markdown-s
 
 # Install
 
-To get the code:
-
-    git clone git@github.com:mmagnus/geekbook.git
-    
 Requirements: 
 
-    `pip install markdown py-gfm` # or ./install.sh
-   
-https://pypi.python.org/pypi/Markdown, https://pypi.python.org/pypi/py-gfm
-   
-to run:
+- `pip install markdown` (https://pypi.python.org/pypi/Markdown)
+- `pip install py-gfm` (http://pythonhosted.org/py-gfm/)
+
+To get the code:
+
+- Original project - `git clone git@github.com:mmagnus/geekbook.git`
+- This project -  `git clone git@github.com:akaped/geekbook.git`  
+
+and then run:
 
     $ python app/geekbookapp.py
     root path: /Users/magnus/Dropbox
@@ -121,8 +125,8 @@ to run:
     Could not execute http daemon lighttpd -f.
     geekbook is up... [ok]
     compiling... test.md [ok]
-   
-open your browser and copy-paste the ```html path``` (in my case is ```file:///Users/magnus/Dropbox/geekbook/data/html/index.html```). 
+
+open your browser and copy-paste the ```html path``` (in my case is ```file:///Users/magnus/Dropbox/geekbook/data/html/index.html```).
 
 To make a new note, create a file in ```<path to your geekbook>/data/md/<notes here>```. Keep geekbookapp.py running all the time, it will detect a new note and compile it for you.
 
