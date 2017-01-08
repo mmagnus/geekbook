@@ -113,11 +113,11 @@ Requirements:
 To get the code:
 
 - Original project - `git clone git@github.com:mmagnus/geekbook.git`
-- This project -  `git clone git@github.com:akaped/geekbook.git`  
+- Pietro's flavor -  `git clone git@github.com:akaped/geekbook.git`  
 
 and then run:
 
-    $ python app/geekbookapp.py
+    $ python geekbookapp.py
     root path: /Users/magnus/Dropbox
     html path: <file:///Users/magnus/Dropbox/geekbook/data/html/index.html>
     /home/magnus/Dropbox/geekbook/data/md/
