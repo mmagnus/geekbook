@@ -92,3 +92,4 @@ data/
 doc/_build
 \#*#
 _*
+*pyc
