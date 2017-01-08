@@ -68,6 +68,7 @@ def change_html_tags_bootstrap(text):
     """ searches for html tags and adds the proper bootstrap class"""
     #tables
     text = text.replace('<table>', '<table class="table table-hover">')
+    text = text.replace('<img', '<img class="img-thumbnail center-block"')
     text = text.replace('<h2>', '<br><hr><br><h2>') #add contest separator
     text = text.replace('<h1>', '<center><h1>') #center the Title
     text = text.replace('</h1>', '</h1></center>') #center the Title
@@ -105,12 +106,12 @@ if __name__ == '__main__':
     output = change_infotags_into_icon(content)
     output = change_todo_square_chainbox_or_icon(output)
     output = change_data_tag_into_actual_data(output)
+    output = add_path_to_img(output)
     output = change_html_tags_bootstrap(output)
     #output = change_tags_into_searchtaglinks(text)
     #output = remove_em(output)
     output = include_file(output)
     #output = make_inner_link(output)
-    output = add_path_to_img(output)
     output = pigmentize(output)
     sys.stdout.write(output)
     sys.stdout.write
