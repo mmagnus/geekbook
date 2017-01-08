@@ -21,6 +21,19 @@ def change_data_tag_into_actual_data(text):
     text = text.replace('[date]', str(today))
     return text
 
+def get_youtube_embeds(text):
+    """change [date] into actual date"""
+    today = datetime.date.today()
+    ntext = ''
+    logger.info('youtube video detected')
+    for l in text.split('\n'):
+        if l.strip().startswith('[yt:'):
+            video_id = l.replace('[yt:','').replace(']','').strip()
+            l = '<iframe width="800" height="441" src="https://www.youtube.com/embed/' + video_id + '" frameborder="0" allowfullscreen></iframe>'
+            print '\n' + l 
+        ntext += l + '\n'
+    return ntext
+
 def change_todo_square_chainbox_or_icon(text, verbose=False):
     """
     Set of rules to replace [i] etc with <img ... >

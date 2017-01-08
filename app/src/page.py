@@ -10,7 +10,7 @@ import os
 from os import sep
 from shutil import copy
 
-from geekbook.app.src.after_html import add_head, change_data_tag_into_actual_data, change_todo_square_chainbox_or_icon
+from geekbook.app.src.after_html import add_head, change_data_tag_into_actual_data, change_todo_square_chainbox_or_icon, get_youtube_embeds
 from geekbook.app.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
 from geekbook.app.src.lib import get_image_path
 from geekbook.app.src.tableofcontent import make_table_of_content
@@ -35,7 +35,7 @@ class Page(object):
     def get_md(self):
         """
         """
-        self.html = markdown.markdown(self.md, extensions=['codehilite'])#(linenums=False)'])
+        self.html = markdown.markdown(self.md, extensions=['codehilite'])#(linenums=False)])
         #html = '<link rel="stylesheet" href="/home/magnus/Dropbox/lb_v2/templates/Pygments/css/pygments.css" type="text/css">' + html
 
     def compile(self):
@@ -56,6 +56,7 @@ class Page(object):
             ntext += l + '\n'
         ntext = change_todo_square_chainbox_or_icon(ntext)
         self.md = ntext
+        self.md = get_youtube_embeds(self.md)
 
     def post_process(self):
         """
@@ -63,7 +64,7 @@ class Page(object):
         self.html = add_head(self.html)
         self.html = make_table_of_content(self.html)
         self.html = change_data_tag_into_actual_data(self.html)
-
+        
     def is_changed(self):
         """Check if the file on disc is different than `md`.
 
