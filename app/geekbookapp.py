@@ -8,9 +8,13 @@ import time
 import os
 import sys
 import argparse
+import logging
+logging.basicConfig()
+logger = logging.getLogger('geekbook')
+logger.setLevel('INFO')
 
 PATH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-print "root path:", PATH
+logger.info("root path:" + PATH)
 sys.path.append(PATH)
 
 from geekbook.app.conf import PATH_TO_MD, PATH_TO_HTML

@@ -7,6 +7,11 @@ import sys
 import re
 import datetime
 import os
+import logging
+
+logger = logging.getLogger('geekbook')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger.setLevel(logging.INFO)
 
 from geekbook.app.conf import PATH_TO_BASE_IMG, PATH_TO_TEMPLATE, PATH_TO_TEMPLATE_HTML, PATH_TO_HTML
 
