@@ -9,7 +9,7 @@ PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 PATH_TO_MD = PATH + '/notes/'
 PATH_TO_HTML = PATH + "/engine/data/html/"
 PATH_TO_ORIG = PATH + "/engine/data/orig/"
-PATH_TO_IMG = PATH + '/notes/imgs/'
+PATH_TO_IMG = PATH + '/notes/'
 
 TEMPLATE = 'default'
 
