@@ -1,0 +1,17 @@
+language: python
+python:
+- 2.7
+- 2.6
+
+install:
+ - pip install -r docs/requirements.txt
+
+script:
+ - bash test.sh
+ 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+  
+notifications:
+   email:
+- magnus@genesilico.pl
