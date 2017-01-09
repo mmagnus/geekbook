@@ -63,6 +63,7 @@ class Page(object):
         ntext = change_todo_square_chainbox_or_icon(ntext)
         self.md = ntext
         self.md = get_youtube_embeds(self.md)
+        self.md = right_link_from_dropbox_screenshot(self.md)
 
     def post_process(self):
         """
