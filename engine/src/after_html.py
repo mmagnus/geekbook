@@ -86,12 +86,8 @@ def add_head(text):
 
 def change_html_tags_bootstrap(text):
     """ searches for html tags and adds the proper bootstrap class"""
-    #tables
     text = text.replace('<table>', '<table class="table table-hover">')
     text = text.replace('<img', '<img class="img-thumbnail center-block"')
-    text = text.replace('<h2>', '<br><hr><br><h2>') #add contest separator
-    text = text.replace('<h1>', '<center><h1>') #center the Title
-    text = text.replace('</h1>', '</h1></center>') #center the Title
     return(text)
 
 
