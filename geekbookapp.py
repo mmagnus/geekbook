@@ -19,10 +19,10 @@ sys.path.append(PATH)
 
 import platform
 
-from geekbook.engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG
-from geekbook.engine.page import Page
-from geekbook.engine.make_index import Index
-from geekbook.engine.colors import bcolors
+from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG
+from engine.page import Page
+from engine.make_index import Index
+from engine.colors import bcolors
 
 
 class MdFiles(object):
