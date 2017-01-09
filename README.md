@@ -1,9 +1,6 @@
 # geekbook - note taking system for nerds/geeks!
 
-This is a fork of the original project by mmagnus. I'm just making it more suitable for my tastes :P
-
-The following text refers to the original project + some personal editing.
-
+Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
 (under heavy development)
 
@@ -74,7 +71,8 @@ Kinda similar projects:
 
     [tableofcontent] # give you table of content in a given place of your note
     [date] # give you date when a note was compiled
-
+    [yt:EKyirtVHsK0] # it must be the only text in the line !!!
+    
 # EMACS-powered
 ## Focus on your notes
 
