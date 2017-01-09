@@ -14,10 +14,10 @@ from sys import stdout
 from time import sleep, gmtime, strftime
 from colors import bcolors
 
-from geekbook.engine.src.after_html import *
+from geekbook.engine.postprocessing import *
 from geekbook.engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
-from geekbook.engine.src.lib import get_image_path
-from geekbook.engine.src.tableofcontent import make_table_of_content
+from geekbook.engine.lib import get_image_path
+from geekbook.engine.tableofcontent import make_table_of_content
 
 import logging
 logger = logging.getLogger('geekbook')
@@ -79,25 +79,21 @@ class Page(object):
     def is_changed(self):
         """Check if the file on disc is different than `md`.
 
+        Make PATH_TO_ORIG if it does not exists.
+
         Return:
           boolean
         """
+        if not os.path.exists(PATH_TO_ORIG):
+            os.makedirs(PATH_TO_ORIG)
+
         try:
             with codecs.open(PATH_TO_ORIG + sep + self.fn, "r", "utf-8") as f:
                 orig_md = f.read()
         except IOError:
-            fail_message = bcolors.FAIL + 'IOError: ' + self.fn + bcolors.ENDC
-            pass_message = bcolors.OKGREEN + 'IOError: ' + self.fn + "Ok" + bcolors.ENDC
-            for i in range(1,20):
-                stdout.write("\r" + fail_message)
-                stdout.flush()
-                sleep(1)
-            print(pass_message)
+            logging.error('IOError: ' + self.fn) 
             orig_md = ''
             pass
-
-        if not os.path.exists(PATH_TO_ORIG):
-            os.mkdir(PATH_TO_ORIG)
 
         if self.md != orig_md:
             copy(PATH_TO_MD + sep + self.fn, PATH_TO_ORIG + sep + self.fn)

@@ -6,18 +6,14 @@
 Welcome to geekbook documentation!
 ================================
 
-.. automodule:: geekbookapp
-   :members:
-
-.. automodule:: engine.src.page
-   :members:
-
-
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
+   geekbook
+   page
+	      
 
 Indices and tables
 ==================
