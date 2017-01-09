@@ -1,9 +1,6 @@
 # geekbook - note taking system for nerds/geeks!
 
-This is a fork of the original project by mmagnus. I'm just making it more suitable for my tastes :P
-
-The following text refers to the original project + some personal editing.
-
+Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
 (under heavy development)
 
@@ -25,9 +22,12 @@ The following text refers to the original project + some personal editing.
   * [Install & Get Started!](#install)
   * [Food for thought](#food-for-thought)
     * [Long notes vs short notes](#long-notes-vs-short-notes)
-![](preview/qubCXZcWHl.gif)
 
-A neat way how to combine **Emacs (not requried) + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
+A neat way how to combine **Emacs/Atom/Sublime editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
+
+**The preview of the default template:**
+
+![](themes/default/qubCXZcWHl.gif)
 
 Freatures:
 
@@ -74,7 +74,8 @@ Kinda similar projects:
 
     [tableofcontent] # give you table of content in a given place of your note
     [date] # give you date when a note was compiled
-
+    [yt:EKyirtVHsK0] # it must be the only text in the line !!!
+    
 # EMACS-powered
 ## Focus on your notes
 
@@ -105,18 +106,19 @@ Or Draft (http://lifehacker.com/draft-is-a-clean-note-taking-app-with-markdown-s
 
 # Install
 
-Requirements: `pip install markdown` (https://pypi.python.org/pypi/Markdown)
-Requirements: `pip install py-gfm` (http://pythonhosted.org/py-gfm/)
+Requirements: 
 
+- `pip install markdown` (https://pypi.python.org/pypi/Markdown)
+- `pip install py-gfm` (http://pythonhosted.org/py-gfm/)
 
 To get the code:
 
-Original project - `git clone git@github.com:mmagnus/geekbook.git`
-This project -  `git clone git@github.com:akaped/geekbook.git`
+- Original project - `git clone git@github.com:mmagnus/geekbook.git`
+- Pietro's flavor -  `git clone git@github.com:akaped/geekbook.git`  
 
-To run:
+and then run:
 
-    $ python app/geekbookapp.py
+    $ python geekbookapp.py
     root path: /Users/magnus/Dropbox
     html path: <file:///Users/magnus/Dropbox/geekbook/data/html/index.html>
     /home/magnus/Dropbox/geekbook/data/md/

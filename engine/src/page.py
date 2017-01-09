@@ -7,20 +7,20 @@ import markdown
 import codecs
 from mdx_gfm import GithubFlavoredMarkdownExtension
 
-
 import os
 from os import sep
 from shutil import copy
 from sys import stdout
 from time import sleep, gmtime, strftime
+from colors import bcolors
 
-from geekbook.engine.src.after_html import add_head, change_data_tag_into_actual_data, change_todo_square_chainbox_or_icon
-from geekbook.engine.src.after_html import change_html_tags_bootstrap, add_path_to_img, pigmentize, personal_tags_to_html
+from geekbook.engine.src.after_html import *
 from geekbook.engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
 from geekbook.engine.src.lib import get_image_path
 from geekbook.engine.src.tableofcontent import make_table_of_content
 
-from colors import bcolors
+import logging
+logger = logging.getLogger('geekbook')
 
 
 class Page(object):
@@ -48,20 +48,10 @@ class Page(object):
     def compile(self):
         """
         """
-        print '['+ strftime("%H:%M:%S", gmtime())+'] -'+' compiling --> %s' % self.fn,
+        logger.info('compiling --> %s' % self.fn)
         self.pre_process()
         self.get_md()
         self.post_process()
-        print '[ok]'
-
-    def update(self):
-        """
-        """
-        print '['+ strftime("%H:%M:%S", gmtime())+'] -'+' updating --> %s' % self.fn,
-        self.pre_process()
-        self.get_md()
-        self.post_process()
-        print '[ok]'
 
     def pre_process(self):
         """
@@ -72,6 +62,7 @@ class Page(object):
             ntext += l + '\n'
         ntext = change_todo_square_chainbox_or_icon(ntext)
         self.md = ntext
+        self.md = get_youtube_embeds(self.md)
 
     def post_process(self):
         """

@@ -8,6 +8,11 @@ import re
 import datetime
 import os
 
+import logging
+logger = logging.getLogger('geekbook')
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger.setLevel(logging.INFO)
+
 from pygments import highlight
 from pygments.lexers import PythonLexer, HtmlLexer, CssLexer, EmacsLispLexer, BashLexer, HexdumpLexer, DjangoLexer
 from pygments.formatters import HtmlFormatter
@@ -20,6 +25,7 @@ def change_data_tag_into_actual_data(text):
     today = datetime.date.today()
     text = text.replace('[date]', str(today))
     return text
+
 
 def personal_tags_to_html(text):
     """ insert here your personal tags!"""
@@ -39,6 +45,21 @@ def personal_tags_to_html(text):
     text = text.replace('[info!]','<br></p>')
 
     return text
+
+
+def get_youtube_embeds(text):
+    """change [date] into actual date"""
+    today = datetime.date.today()
+    ntext = ''
+
+    for l in text.split('\n'):
+        if l.strip().startswith('[yt:'):
+            video_id = l.replace('[yt:','').replace(']','').strip()
+            logger.info('youtube video detected: %s', video_id)
+            l = '<iframe width="800" height="441" src="https://www.youtube.com/embed/' + video_id + '" frameborder="0" allowfullscreen></iframe>'
+        ntext += l + '\n'
+    return ntext
+
 
 
 def change_todo_square_chainbox_or_icon(text, verbose=False):
@@ -83,17 +104,15 @@ def add_head(text):
 
 def change_html_tags_bootstrap(text):
     """ searches for html tags and adds the proper bootstrap class"""
-    #tables
     text = text.replace('<table>', '<table class="table table-hover">')
     text = text.replace('<img', '<img class="img-thumbnail center-block"')
-    text = text.replace('<h2>', '<br><hr><br><h2>') #add contest separator
-    text = text.replace('<h1>', '<center><h1>') #center the Title
-    text = text.replace('</h1>', '</h1></center>') #center the Title
     return(text)
 
 
 def pigmentize(text):
-    """ searches for <span></span> and replace with HTML pigmented code supported languages: python ; html ; css ; emacs ; bash ; hexdump ; DjangoLexer"""
+    """searches for <span></span> and replace with HTML pigmented code
+    supported languages: python ; html ; css ; emacs ; bash ; hexdump ;
+     DjangoLexer"""
     start_code = text.find('<pre>') + 5
     end_code = text.find('</pre')
     code = text[start_code:end_code]

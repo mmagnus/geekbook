@@ -1,9 +1,5 @@
-.github-fork-ribbon a {
-    background-color: #090;
-}
-
 h1 {
-    font: 400 21px/1.5 Open Sans;
+    font: 400 21px/1.5 Georgia;
     font-size: 40px;
     color:#333333;
     color: #000000;
@@ -11,20 +7,20 @@ h1 {
 }
 
 h2 {
-    font: 400 23px/1.5 Open Sans;
+    font: 400 23px/1.5 Georgia;
     font-weight: bold;
     color: #333333;
 }
 
 h3 {
-    font: 400 26px/1.5 Open Sans;
+    font: 400 26px/1.5 Georgia;
     font-weight: bold;
     color: #333333;
 }
 
 h4 {
     font-size: 14px;
-    font: 400 21px/1.5 Open Sans;
+    font: 400 21px/1.5 Georgia;
     padding-top: 2px;
     padding-bottom: 2px;
     color: #333333;
@@ -38,7 +34,7 @@ p  {
 
 
 .text {
-    font-family: Open Sans;
+    font-family: monospace;
 }
 pre {
     border: 1px solid #CCCCCC;
@@ -47,7 +43,7 @@ pre {
     border-style: dashed;
 
     background-color: #FFFFFF;
-    font-size: 13px;
+    font-size: 10px;
     line-height: 14px;
 
     white-space: pre-wrap;
@@ -63,7 +59,7 @@ li p{
    height: 100%;
    position: fixed;
    left: 1px;
-   top: 1px;
+   top: 1px; 
    border-radius: 3px 3px 3px 3px;*/
    padding-left: 25px; }
 
@@ -73,7 +69,7 @@ li p{
 }
 .table_of_content_h2 {
     list-style-type: none;
-    margin-left: 70px;
+    margin-left: 70px;    
 
 }
 .table_of_content_h3 {
@@ -158,7 +154,7 @@ li p{
 }
 
 /*
-zielonkawy
+zielonkawy 
 yellow light #fdf9ba
 */
 ul strong{
@@ -193,7 +189,7 @@ ul strong{
 
 .index_list li{
     list-style-type: none;
-    margin-left: 50px;
+    margin-left: 50px;    
 }
 
 .index_list_a{
@@ -238,7 +234,7 @@ p, ol, li, pre code {
 }
 
 body{
-    width: 100%;
+    width: 100%; 
 }
 */
 /* priting end */
@@ -259,25 +255,3 @@ img {
     max-width: 100%;
     display: block;
 }
-
-table {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-tr:nth-child(even){background-color: #f2f2f2;}
-
-tr:hover {background-color: #ddd;}
-
-th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
