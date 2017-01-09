@@ -9,6 +9,8 @@ Welcome to geekbook documentation!
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
 .. image:: https://readthedocs.org/projects/geekbook/badge/?version=latest
+:target: http://geekbook.readthedocs.io/en/latest/?badge=latest
+:alt: Documentation Status
 
 The code of the project can be found at GitHub (https://github.com/mmagnus/geekbook).
 
