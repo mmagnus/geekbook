@@ -1,0 +1,4 @@
+#TEMPLATE='pietro'
+import os
+PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+PATH_TO_IMG = PATH + '/imgs/'
