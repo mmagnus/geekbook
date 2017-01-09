@@ -14,10 +14,10 @@ from sys import stdout
 from time import sleep, gmtime, strftime
 from colors import bcolors
 
-from geekbook.engine.postprocessing import *
-from geekbook.engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
-from geekbook.engine.lib import get_image_path
-from geekbook.engine.tableofcontent import make_table_of_content
+from engine.postprocessing import *
+from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
+from engine.lib import get_image_path
+from engine.tableofcontent import make_table_of_content
 
 import logging
 logger = logging.getLogger('geekbook')
