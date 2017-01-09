@@ -7,7 +7,7 @@ import os
 import time
 import re
 
-from geekbook.engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE, PATH_HOMEPAGE, PATH_TO_MD
+from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE, PATH_HOMEPAGE, PATH_TO_MD
 
 
 class Index(object):
