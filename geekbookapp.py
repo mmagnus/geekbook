@@ -84,6 +84,7 @@ class App(object):
                     if p.is_changed():
                         p.compile()
                         p.save()
+
                         index = Index()
                         index.update(mf.get_files())
 
@@ -92,6 +93,9 @@ class App(object):
                         p.save()
 
             if UPDATE:
+                index = Index()
+                index.update(mf.get_files())
+
                 sys.exit(0)
 
             if DEV:
