@@ -15,7 +15,7 @@ from time import sleep, gmtime, strftime
 from colors import bcolors
 
 from engine.postprocessing import *
-from engine.preprocessing import get_image_path
+from engine.preprocessing import *
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
 from engine.make_tableofcontent import make_table_of_content
 
