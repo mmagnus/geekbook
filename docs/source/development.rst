@@ -39,10 +39,8 @@ Postprocessing
    :members:
 
 
-Flask-based action
+Flask-based actions
 ======================================
-
-**proof of concept**
 
 Run the server::
 
