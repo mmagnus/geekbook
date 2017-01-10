@@ -50,9 +50,8 @@ Contents:
    install
    getstarted
    geekbook
-   page
-   processing
-
+   development
+   
 Indices and tables
 ==================
 
