@@ -1,6 +1,12 @@
 Development
 ---------------------------------------------
 
+Configuration
+======================================
+
+.. automodule:: engine.conf
+   :members:
+
 Geekbookapp
 =============================================
 .. automodule:: geekbookapp
@@ -12,20 +18,19 @@ Page
 .. automodule:: engine.page
    :members:
 
-Configuration
-======================================
-.. automodule:: engine.conf
-   :members:
-
-Make index
+Make Index
 ======================================
 .. automodule:: engine.make_index
    :members:
 
-
-Table of contents
+Make Table of Contents
 =======================================
-.. automodule:: engine.tableofcontent
+.. automodule:: engine.make_tableofcontent
+   :members:
+
+Preprocessing
+======================================
+.. automodule:: engine.preprocessing
    :members:
 
 Postprocessing
@@ -33,7 +38,3 @@ Postprocessing
 .. automodule:: engine.postprocessing      
    :members:
 
-Lib
-======================================
-.. automodule:: engine.lib
-   :members:
