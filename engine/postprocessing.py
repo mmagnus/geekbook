@@ -55,12 +55,9 @@ def add_head(text):
     head = head.replace('="lib/', '="' + PATH_TO_TEMPLATE + '/lib/')
     head = head.replace('="css/', '="' + PATH_TO_TEMPLATE + '/css/')
 
-
     # remove demo content
     head = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->', r'', head, flags=re.M | re.DOTALL)
-
     return head + text
-
 
 
     #head_new = ''
@@ -104,22 +101,24 @@ def pigmentize(text):
         text.replace('<div class="highlight"><pre>' + highlight(code, DjangoLexer(), HtmlFormatter()) + '</pre></div>')
     return(text)
 
+
 def add_path_to_img(text):
     text = text.replace('src="img/', 'src="' + PATH_TO_TEMPLATE + '/img/')
     return(text)
 
+
 if __name__ == '__main__':
     content = sys.stdin.read()
-    output = change_infotags_into_icon(content)
-    output = change_todo_square_chainbox_or_icon(output)
+    # output = change_infotags_into_icon(content)
+    # output = change_todo_square_chainbox_or_icon(output)
     output = change_data_tag_into_actual_data(output)
     output = add_path_to_img(output)
     output = change_html_tags_bootstrap(output)
     output = personal_tags_to_html(output)
-    #output = change_tags_into_searchtaglinks(text)
-    #output = remove_em(output)
-    output = include_file(output)
-    #output = make_inner_link(output)
+    # output = change_tags_into_searchtaglinks(text)
+    # output = remove_em(output)
+    # output = include_file(output)
+    # output = make_inner_link(output)
     output = pigmentize(output)
     sys.stdout.write(output)
     sys.stdout.write
