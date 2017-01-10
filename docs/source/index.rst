@@ -47,6 +47,8 @@ Contents:
 .. toctree::
    :maxdepth: 3
 
+   install
+   getstarted
    geekbook
    page
    processing
