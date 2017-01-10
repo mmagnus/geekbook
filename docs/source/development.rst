@@ -53,9 +53,11 @@ Run the server::
 
 To add new function, build on this simple example::
 
-	@app.route('/edit/<post_id>')
-	def edit(post_id):
-		# show the post with the given id, the id is an integer
-		os.system('open ../notes/' + post_id )
-		return 'edit %s' % post_id
-
+	@app.route('/edit/<note_title>')
+	def edit(note_title):
+		"""Open a note with your edit"""
+		os.system('open ../notes/' + note_title)
+		return 'edit note: %s' % note_title
+	
+.. automodule:: engine.webserverflask
+   :members:
