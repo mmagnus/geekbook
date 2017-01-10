@@ -1,6 +1,12 @@
 Development
 ---------------------------------------------
 
+Configuration
+======================================
+
+.. automodule:: engine.conf
+   :members:
+
 Geekbookapp
 =============================================
 .. automodule:: geekbookapp
@@ -12,20 +18,19 @@ Page
 .. automodule:: engine.page
    :members:
 
-Configuration
-======================================
-.. automodule:: engine.conf
-   :members:
-
-Make index
+Make Index
 ======================================
 .. automodule:: engine.make_index
    :members:
 
-
-Table of contents
+Make Table of Contents
 =======================================
-.. automodule:: engine.tableofcontent
+.. automodule:: engine.make_tableofcontent
+   :members:
+
+Preprocessing
+======================================
+.. automodule:: engine.preprocessing
    :members:
 
 Postprocessing
@@ -33,7 +38,27 @@ Postprocessing
 .. automodule:: engine.postprocessing      
    :members:
 
-Lib
+
+Flask-based action
 ======================================
-.. automodule:: engine.lib
+
+**proof of concept**
+
+Run the server::
+
+    [mm] geekbook git:(master) ✗ python engine/webserverflask.py
+    * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+
+and open in your browser http://127.0.0.1:5000/edit/test.md (you can add this to your notes 
+``<a href="http://127.0.0.1:5000/edit/test.md">edit</a>``.
+
+To add new function, build on this simple example::
+
+	@app.route('/edit/<note_title>')
+	def edit(note_title):
+		"""Open a note with your edit"""
+		os.system('open ../notes/' + note_title)
+		return 'edit note: %s' % note_title
+	
+.. automodule:: engine.webserverflask
    :members:
