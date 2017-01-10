@@ -3,6 +3,9 @@
 from engine.conf import PATH_TO_IMG
 import re
 
+import logging
+logger = logging.getLogger('geekbook')
+logger.setLevel(logging.INFO)
 
 def change_todo_square_chainbox_or_icon(text, verbose=False):
     """Set of rules to replace [i] etc with <img ... >  [ OK ]"""
@@ -42,8 +45,6 @@ def get_image_path(text):
 
 
 def get_youtube_embeds(text):
-    """change [date] into actual date"""
-    today = datetime.date.today()
     ntext = ''
 
     for l in text.split('\n'):
