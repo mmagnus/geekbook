@@ -164,3 +164,10 @@ With a reference later in the document defining the URL location:
 ## Youtube
 
 [yt:ICDGkVbSWUo]
+
+## Tags 
+
+- [!danger] [*!danger][*danger!] - The text mean something dangerous to pay attention of [danger!]
+- [!warning] [*!warning][*warning!] - The text mean that there is something important to consider [warning!]
+- [!success] [*!success][*success!] The text mean something good , something achieved [success!]
+- [!info] [*!info][*info!] General information, important piece of text [info!]
