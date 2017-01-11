@@ -110,5 +110,4 @@ See http://geekbook.readthedocs.io/en/latest/install.html
 
 # Food for thought
 ## Long notes vs short notes
-
-You can combine short notes into long ones.
+@todo
