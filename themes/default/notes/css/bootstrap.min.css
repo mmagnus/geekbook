@@ -78,7 +78,7 @@ hr {
 	box-sizing:content-box
 }
 pre {
-	overflow:auto
+	/*! overflow:auto */
 }
 code,kbd,pre,samp {
 	font-family:monospace,monospace;
@@ -1390,8 +1390,8 @@ pre {
 	color:#333;
 	word-break:break-all;
 	word-wrap:break-word;
-	border:1px solid #ccc;
-	border-radius:4px
+	/*! border:1px solid #ccc; */
+	/*! border-radius:4px */
 }
 pre code {
 	padding:0;
