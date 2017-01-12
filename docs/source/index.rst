@@ -51,6 +51,7 @@ Contents:
    getstarted
    features
    geekbook
+   misc
    development
    
 Indices and tables
