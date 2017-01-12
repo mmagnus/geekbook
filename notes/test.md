@@ -171,3 +171,10 @@ With a reference later in the document defining the URL location:
 - [!warning] [*!warning][*warning!] - The text mean that there is something important to consider [warning!]
 - [!success] [*!success][*success!] The text mean something good , something achieved [success!]
 - [!info] [*!info][*info!] General information, important piece of text [info!]
+
+## Tags todo, done, progress
+### task1 @todo
+### task2 @done
+### task2 @progress
+
+test @todo small task

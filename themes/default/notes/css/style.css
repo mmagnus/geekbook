@@ -238,3 +238,7 @@ img {
     max-width: 100%;
     display: block;
 }
+
+.index_date {
+    font-family: Monospace;
+}

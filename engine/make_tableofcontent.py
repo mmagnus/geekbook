@@ -31,13 +31,13 @@ def tag_heading(heading):
     tags = re.findall('@\w+', heading)
     for t in tags:
         if t == '@done':
-            heading = heading.replace(t, '<a href="http://127.0.0.1:8011/search/' + t + '"><span style="font-family:"  class="label label-success">' + t + '</span></a>')
+            heading = heading.replace(t, '<span style="font-family:"  class="label label-success">' + t + '</span>')
         elif t == '@progress':
-            heading = heading.replace(t, '<a href="http://127.0.0.1:8011/search/' + t + '"><span style="font-family:"  class="label label-warning">' + t + '</span></a>')
+            heading = heading.replace(t, '<span style="font-family:"  class="label label-warning">' + t + '</span>')
         elif t == '@todo':
-            heading = heading.replace(t, '<a href="http://127.0.0.1:8011/search/' + t + '"><span style="font-family:"  class="label label-important">' + t + '</span></a>')
+            heading = heading.replace(t, '<span style="font-family:"  class="label label-danger">' + t + '</span>')
         else:
-            heading = heading.replace(t, '<a href="http://127.0.0.1:8011/search/' + t + '"><span style="font-family:"  class="label">' + t + '</span></a>')
+            heading = heading.replace(t, '<span style="font-family:"  class="label">' + t + '</span>')
     return heading
 
 def replace_space_with_minus(text):

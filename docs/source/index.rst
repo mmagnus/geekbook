@@ -49,6 +49,7 @@ Contents:
 
    install
    getstarted
+   features
    geekbook
    development
    

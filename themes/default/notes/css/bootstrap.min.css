@@ -78,7 +78,7 @@ hr {
 	box-sizing:content-box
 }
 pre {
-	overflow:auto
+	/*! overflow:auto */
 }
 code,kbd,pre,samp {
 	font-family:monospace,monospace;
@@ -1390,8 +1390,8 @@ pre {
 	color:#333;
 	word-break:break-all;
 	word-wrap:break-word;
-	border:1px solid #ccc;
-	border-radius:4px
+	/*! border:1px solid #ccc; */
+	/*! border-radius:4px */
 }
 pre code {
 	padding:0;
@@ -2090,10 +2090,10 @@ th {
 	margin-bottom:20px
 }
 .table>tbody>tr>td,.table>tbody>tr>th,.table>tfoot>tr>td,.table>tfoot>tr>th,.table>thead>tr>td,.table>thead>tr>th {
-	padding:8px;
+	/*! padding:8px; */
 	line-height:1.42857143;
 	vertical-align:top;
-	border-top:1px solid #ddd
+	border-top:1px solid #ddd;
 }
 .table>thead>tr>th {
 	vertical-align:bottom;
@@ -4123,7 +4123,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 }
 .label {
 	display:inline;
-	padding:.2em .6em .3em;
+	padding:.1em .4em .2em;
 	font-size:75%;
 	font-weight:700;
 	line-height:1;
