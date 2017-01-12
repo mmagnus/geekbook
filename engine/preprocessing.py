@@ -2,6 +2,7 @@
 
 from engine.conf import PATH_TO_IMG
 import re
+import os
 
 import logging
 logger = logging.getLogger('geekbook')
@@ -28,6 +29,28 @@ def get_todo(text):
     ntext = change_todo_square_chainbox_or_icon(ntext)
     return ntext
 
+def get_ss(text):
+    try:
+        from rna_pdb_tools import SecondaryStructure
+    except ImportError:
+        return text
+
+    ltext = text.split('\n')
+    for c in range(0, len(ltext)):
+        print ltext[c]
+        if ltext[c].startswith('<pre>[ss'):
+            foo, name = ltext[c].split(':')
+            name = name.replace(']','')
+            title = name
+            name = 'ss_' + name + '.png'
+            seq = ltext[c+1]
+            ss = ltext[c+2]
+            print seq, ss, name
+            out = PATH_TO_IMG + os.sep + 'imgs' + os.sep + name
+            print out
+            SecondaryStructure.draw_ss(title,seq,ss,out)
+            ltext[c+4] = '![](imgs/' + name + ')'
+    return '\n'.join(ltext)
 
 def get_image_path(text):
     """Get image path for l(ine)."""

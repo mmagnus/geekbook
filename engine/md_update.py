@@ -4,7 +4,7 @@
 
 import codecs
 from engine.conf import PATH_TO_MD
-from engine.preprocessing import right_link_from_dropbox_screenshot
+from engine.preprocessing import right_link_from_dropbox_screenshot, get_ss
 from os import sep
 
 
@@ -32,6 +32,7 @@ class Md_update(object):
     def compile(self):
         """Preprocess, compile, postprocess.
         """
+        self.md = get_ss(self.md)
         self.md = right_link_from_dropbox_screenshot(self.md)
 
     def save(self):
