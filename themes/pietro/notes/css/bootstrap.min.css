@@ -1331,8 +1331,9 @@ abbr[data-original-title],abbr[title] {
 blockquote {
 	padding:10px 20px;
 	margin:0 0 20px;
-	font-size:17.5px;
-	border-left:5px solid #eee
+	font-size:14.5px;
+	border-left:5px solid #1abf45;
+    background-color: rgba(30, 156, 82, 0.14);
 }
 blockquote ol:last-child,blockquote p:last-child,blockquote ul:last-child {
 	margin-bottom:0
