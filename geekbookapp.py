@@ -21,6 +21,7 @@ import platform
 
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG
 from engine.page import Page
+from engine.md_update import Md_update
 from engine.make_index import Index
 from engine.colors import bcolors
 
@@ -80,8 +81,11 @@ class App(object):
                 if f == 'imgs':
                     pass
                 else:
+                    m = Md_update(f)
                     p = Page(f)
                     if p.is_changed():
+                        m .compile()
+                        m.save()
                         p.compile()
                         p.save()
 
@@ -89,6 +93,8 @@ class App(object):
                         index.update(mf.get_files())
 
                     if UPDATE:
+                        m.compile()
+                        m.save()
                         p.compile()
                         p.save()
 
