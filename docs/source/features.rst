@@ -16,7 +16,7 @@ Note that some features of GitHub Flavored Markdown are only available in the de
 - https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 Syntax highlighting
-------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Type::
 
