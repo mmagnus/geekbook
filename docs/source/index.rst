@@ -6,9 +6,9 @@
 Welcome to geekbook documentation!
 ================================
 
-Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
+G33KB00K - 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes) docs: http://geekbook.rtfd.io
 
-.. image:: https://readthedocs.org/projects/geekbook/badge/?version=latest
+Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
 The code of the project can be found at GitHub (https://github.com/mmagnus/geekbook).
 
@@ -18,7 +18,7 @@ The preview of the default template:
 
 .. image:: ../../themes/default/qubCXZcWHl.gif
 
-Freatures:
+Features:
 
 - Index html based
 - Sync them with Dropbox/iCloud/github
@@ -40,7 +40,7 @@ I recommend to use **Emacs** (or VIM or other super-powerfull editor) to:
 - use Google Translate (https://github.com/atykhonov/google-translate)
 - ispell,
 - outline mode,
-- focuse mode.
+- focus mode.
 
 Contents:
 
@@ -51,6 +51,8 @@ Contents:
    getstarted
    features
    geekbook
+   misc
+   rna
    development
    
 Indices and tables

@@ -5533,9 +5533,10 @@ button.close {
 	clear:both
 }
 .center-block {
-	display:block;
-	margin-right:auto;
-	margin-left:auto
+	/* draw_ss */
+	/*! display:block; */
+	/*! margin-right:auto; */
+	/*! margin-left:auto; */
 }
 .pull-right {
 	float:right!important

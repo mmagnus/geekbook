@@ -58,21 +58,23 @@ class MdFiles(object):
 
 class App(object):
     """App class"""
-    def __init__(self):
-        pass
+    def __init__(self, args):
+        args = args
 
     def start(self):
         """Start the App.
         """
-        os.system('clear')
-        print (bcolors.OKGREEN + "\n                 ________               __   __________               __    \n                /  _____/  ____   ____ |  | _\______   \ ____   ____ |  | __\n               /   \  ____/ __ \_/ __ \|  |/ /|    |  _//  _ \ /  _ \|  |/ /\n               \    \_\  \  ___/\  ___/|    < |    |   (  <_> |  <_> )    < \n                \______  /\___  >\___  >__|_ \|______  /\____/ \____/|__|_ \ \n                       \/     \/     \/     \/       \/                   \/ \n" + bcolors.ENDC)
+        if not args.debug:
+            os.system('clear')
+            print (bcolors.OKGREEN + "\n                 ________               __   __________               __    \n                /  _____/  ____   ____ |  | _\______   \ ____   ____ |  | __\n               /   \  ____/ __ \_/ __ \|  |/ /|    |  _//  _ \ /  _ \|  |/ /\n               \    \_\  \  ___/\  ___/|    < |    |   (  <_> |  <_> )    < \n                \______  /\___  >\___  >__|_ \|______  /\____/ \____/|__|_ \ \n                       \/     \/     \/     \/       \/                   \/ \n" + bcolors.ENDC)
         logger.info("G33kB00k is Running... [ok]")
+
         logger.info("root path: %s" % PATH)
         logger.info("html path: <file://" + PATH_TO_HTML + 'index.html>')
         logger.info("imgs path: " + PATH_TO_IMG)
 
         print
-
+        
         while 1:
 
             mf = MdFiles()
@@ -105,7 +107,12 @@ class App(object):
             if DEV:
                 index = Index()
                 index.update(mf.get_files())
-                p = Page('test.md')
+
+                m = Md_update(args.debug)
+                m.compile()
+                m.save()
+
+                p = Page(args.debug)
                 p.compile()
                 p.save()
 
@@ -130,7 +137,7 @@ def start_browser_with_index():
 
 def get_parser():
     parser = argparse.ArgumentParser('geekbookapp.py')
-    parser.add_argument('-d', '--debug', help='debug mode', action='store_true')
+    parser.add_argument('-d', '--debug', help='debug mode, run only for file')
     parser.add_argument('-u', '--update', help='updates all the pages', action='store_true')
     return parser
 
@@ -138,12 +145,14 @@ def get_parser():
 if __name__ == '__main__':
     args = get_parser().parse_args()
 
-    a = App()
+    a = App(args)
+
+    print args
 
     if args.debug:
         DEV = True
         UPDATE = False
-    if args.update:
+    elif args.update:
         UPDATE = True
         DEV = False
     else:
