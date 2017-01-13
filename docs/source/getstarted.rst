@@ -1,7 +1,7 @@
 Get Started
 ===========================================
 
-Run geekbookapp.py and edit your notes in ```./notes```::
+**Run geekbookapp.py and edit your notes in ```<path to your geekbook>/notes/```**::
 
   [mm] geekbook git:(master) ./geekbookapp.py
   2017-01-10 09:47:46: (network.c.410) can't bind to port:  1234 Address already in use
@@ -26,7 +26,7 @@ Run geekbookapp.py and edit your notes in ```./notes```::
 
 open your browser and copy-paste the ```html path``` (in my case is ```file:///private/tmp/geekbook/engine/data/html/index.html```).
 
-To make a new note, create a file in ```<path to your geekbook>/notes<notes here>```.
+To make a new note, create a file in ```<path to your geekbook>/notes/<notes here>```.
 
 Remember to keep geekbookapp.py running all the time, it will detect a new note and compile it for you.
 
