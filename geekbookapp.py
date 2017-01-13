@@ -45,7 +45,8 @@ class MdFiles(object):
                or f.startswith('.') or f.endswith('.org'):
                 continue
             else:
-                nfiles.append(f)
+                if f.endswith('.md'):
+                    nfiles.append(f)
         self.md_files = nfiles
 
     def sort_by_mtime(self):
