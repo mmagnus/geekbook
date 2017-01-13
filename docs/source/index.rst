@@ -20,7 +20,7 @@ The preview of the default template:
 
 .. image:: ../../themes/default/qubCXZcWHl.gif
 
-Freatures:
+Features:
 
 - Index html based
 - Sync them with Dropbox/iCloud/github
@@ -42,7 +42,7 @@ I recommend to use **Emacs** (or VIM or other super-powerfull editor) to:
 - use Google Translate (https://github.com/atykhonov/google-translate)
 - ispell,
 - outline mode,
-- focuse mode.
+- focus mode.
 
 Contents:
 
