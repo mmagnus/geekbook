@@ -10,8 +10,6 @@ G33KB00K - 🤓 eXtreme eXtendable note taking system for nerds/geeks (including
 
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
-.. image:: https://readthedocs.org/projects/geekbook/badge/?version=latest
-
 The code of the project can be found at GitHub (https://github.com/mmagnus/geekbook).
 
 A neat way how to combine Emacs/Atom/Sublime editor + Markdown Syntax + Git + Html engine (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
