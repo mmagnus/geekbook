@@ -16,7 +16,7 @@ def insert_image(d = '/home/magnus/Desktop/*png', td = '/home/magnus/Dropbox/gee
     newest = max(glob.iglob(d), key=os.path.getctime)
     # copy to img
     t = os.path.basename(newest.replace(' ','_'))
-    shutil.copy(newest, td + t)
+    shutil.copy(newest, td + IMG_PREFIX + t)
     return '![](' + IMG_PREFIX  + t + ')'
 
 if __name__ == '__main__':
