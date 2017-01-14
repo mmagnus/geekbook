@@ -60,7 +60,7 @@ To turn on this plugin in your ``engine.conf_local`` set the path, e.g. ::
 Abstract
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Start a line with ``|`` to mark the fragemnt as an abstract.
+Start a line with ``|`` to mark the fragment as an abstract.
 
 .. image:: ../imgs/abstract.png
 
