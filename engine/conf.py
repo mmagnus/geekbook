@@ -9,9 +9,13 @@ PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 PATH_TO_MD = PATH + '/notes/'
 PATH_TO_HTML = PATH + "/engine/data/html/"
 PATH_TO_ORIG = PATH + "/engine/data/orig/"
+
+IMG_PREFIX = 'imgs/' # /  # ![](imgs/<file> this 'imgs' is IMG_PREFIX
 PATH_TO_IMG = PATH + '/notes/'
 
 TEMPLATE = 'default'
+
+SCREENSHOT_INBOX=None
 
 # to use it, create conf_local.py with e.g. TEMPLATE='pietro'
 try:
@@ -33,3 +37,4 @@ try:
     from conf_local import *
 except ImportError:
     pass
+

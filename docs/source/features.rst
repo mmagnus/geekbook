@@ -40,6 +40,21 @@ Date
 
 Type ``[date]`` to get the current date ```2017-01-13``.
 
+Insert Image
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Type ``ii`` (and only this in a line) to ask geekbook to copy the last image to
+the folder with your images::
+
+   #before in your markdown file
+   ii
+
+   #save the file, reload, to get
+   ![](imgs/Screen_Shot_2017-01-14_at_1.25.21_PM.png)
+
+To turn on this plugin in your ``engine.conf_local`` set the path, e.g. ::
+
+   SCREENSHOT_INBOX='/home/magnus/Desktop/*png' 
+
 Youtube
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

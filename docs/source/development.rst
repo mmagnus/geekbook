@@ -38,6 +38,15 @@ Postprocessing
 .. automodule:: engine.postprocessing      
    :members:
 
+Plugins
+======================================
+
+Insert Image
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. automodule:: engine.plugins.insert_image
+   :members:
+
 
 Flask-based actions
 ======================================
