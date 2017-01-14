@@ -62,6 +62,7 @@ class Page(object):
         self.md = get_todo(self.md)
         self.md = get_image_path(self.md)
         self.md = get_youtube_embeds(self.md)
+        self.md = get_abstract(self.md)
         # self.md = right_link_from_dropbox_screenshot(self.md)
 
     def post_process(self):

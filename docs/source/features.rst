@@ -57,6 +57,13 @@ To turn on this plugin in your ``engine.conf_local`` set the path, e.g. ::
 
    SCREENSHOT_INBOX='/home/magnus/Desktop/*png' 
 
+Abstract
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Start a line with ``|`` to mark the fragemnt as an abstract.
+
+.. image:: ../imgs/abstract.png
+
 Youtube
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

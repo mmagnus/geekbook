@@ -53,6 +53,15 @@ def get_ss(text):
             ltext[c+4] = '![](imgs/' + name + ')' + '\n'
     return '\n'.join(ltext)
 
+def get_abstract(text):
+    ntext = ''
+    for l in text.split('\n'):
+        if l.startswith('|'):
+            l = '<div class="abstract"> ' + l[1:] + '</div>'
+        ntext += l + '\n'
+    return ntext
+
+
 def get_image_path(text):
     """Get image path for l(ine)."""
 
