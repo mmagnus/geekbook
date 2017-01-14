@@ -37,19 +37,20 @@ def get_ss(text):
 
     ltext = text.split('\n')
     for c in range(0, len(ltext)):
-        print ltext[c]
         if ltext[c].startswith('<pre>[ss'):
+            if ltext[c+4].startswith('!['):
+                continue
             foo, name = ltext[c].split(':')
             name = name.replace(']','')
             title = name
             name = 'ss_' + name + '.png'
             seq = ltext[c+1]
             ss = ltext[c+2]
-            print seq, ss, name
+            #print seq, ss, name
             out = PATH_TO_IMG + os.sep + 'imgs' + os.sep + name
-            print out
+            #print out
             SecondaryStructure.draw_ss(title,seq,ss,out)
-            ltext[c+4] = '![](imgs/' + name + ')'
+            ltext[c+4] = '![](imgs/' + name + ')' + '\n'
     return '\n'.join(ltext)
 
 def get_image_path(text):
