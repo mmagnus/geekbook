@@ -13,14 +13,13 @@ h2 {
 }
 
 h3 {
-    font: 400 26px/1.5 Georgia;
+    font: 400 18px/1.5 Georgia;
     font-weight: bold;
     color: #333333;
 }
 
 h4 {
-    font-size: 14px;
-    font: 400 21px/1.5 Georgia;
+    font: 400 16px/1.5 Georgia;
     padding-top: 2px;
     padding-bottom: 2px;
     color: #333333;
