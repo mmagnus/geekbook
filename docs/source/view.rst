@@ -4,7 +4,7 @@ Fun to Read
 .. image:: ../imgs/view.png
 **Fig**. The index in Safari.
 
-Of course you can browser your notes in any browser. I'm using (mmagnus) Firefox with following addons to improve the experience.
+Of course you can browser your notes in any browser. I'm using (mmagnus) Firefox with following addons to improve the experience, and Safari for screenshots ;-) 
 
 Auto-reload
 --------------------------------------------------------------
