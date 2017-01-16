@@ -1,4 +1,4 @@
-Fun to Write)
+Fun to Write
 ==========================================
 
 Editors (with Markdown support)
