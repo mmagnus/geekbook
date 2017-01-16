@@ -6,7 +6,7 @@ Editors (with Markdown support)
 
 It's important to use a good editor with support of Markdown.
 
-I'm (mmagnus) using EMACS (https://en.wikipedia.org/wiki/Emacs), sometimes I use MacDown (http://macdown.uranusjr.com/).
+I'm (mmagnus) using EMACS (https://en.wikipedia.org/wiki/Emacs), sometimes I use MacDown (http://macdown.uranusjr.com/) or Atom (https://atom.io/). 
 
 .. image:: ../imgs/emacs.png
 
