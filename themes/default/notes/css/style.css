@@ -188,16 +188,6 @@ a {
     color: #059BFF;
 }
 
-@media print
-{
-body {zoom:150%}
-/*body {width:800px;}*/
-/* h1 {page-break-before:always} -- break after h1 */
-img {page-break-inside:avoid}
-.lightbox {page-break-inside:avoid}
-/*p {font-family: Georgia} -- tylko dla p - to blad */
-}
-
 .abstract{
     background-color: #d8d8d8;
     padding: 10px;
