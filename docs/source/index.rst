@@ -49,7 +49,8 @@ Contents:
 
    install
    getstarted
-   features
+   edit
+   view
    geekbook
    misc
    rna

@@ -1,5 +1,24 @@
-Features
+Edit
 ==========================================
+
+Editors (with Markdown support)
+------------------------------------------
+
+It's important to use a good editor with support of Markdown.
+
+I'm (mmagnus) using EMACS (https://en.wikipedia.org/wiki/Emacs), sometimes I use MacDown (http://macdown.uranusjr.com/).
+
+.. image:: ../imgs/emacs.png
+
+**Fig** test.md in Emacs. I love EMACS for this Outline Mode - you can see immediately the structure of your note, it helps to navigate and *understand* (= keep it clean) your note.
+
+.. image:: ../imgs/atom.png
+
+**Fig** test.md in Atom is OK ;-)
+
+.. image:: ../imgs/macdown.png
+
+**Fig** test.md in MacDown is not bad ;-)
 
 Markdown (Github-Flavored Markdown)
 ------------------------------------------
