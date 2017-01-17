@@ -70,6 +70,7 @@ Information about development is also available:
 .. toctree::
    :maxdepth: 2
    :caption: Developer Documentation
+   
    development
    
 Indices and tables
