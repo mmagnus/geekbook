@@ -55,6 +55,12 @@ Contents:
    geekbook
    misc
    rna
+      
+.. _dev-docs:
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Developer Documentation
    development
    
 Indices and tables
