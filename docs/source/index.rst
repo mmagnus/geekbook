@@ -51,6 +51,7 @@ Contents:
    getstarted
    edit
    view
+   book
    geekbook
    misc
    rna
