@@ -8,16 +8,25 @@ It's important to use a good editor with support of Markdown.
 
 I'm (mmagnus) using EMACS (https://en.wikipedia.org/wiki/Emacs), sometimes I use MacDown (http://macdown.uranusjr.com/) or Atom (https://atom.io/). 
 
+Emacs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. image:: ../imgs/emacs.png
 
 **Fig** test.md in Emacs. I love EMACS for this Outline Mode - you can see immediately the structure of your note, it helps to navigate and *understand* (= keep it clean) your note.
 
 .. image:: ../imgs/emacs-split-mode.png
 **Fig** Emacs can "split" a note for you, so you can work in two (and more) places of your note at the same time!
-	   
+
+Atom
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. image:: ../imgs/atom.png
 
 **Fig** test.md in Atom is OK ;-)
+
+MacDown
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: ../imgs/macdown.png
 
