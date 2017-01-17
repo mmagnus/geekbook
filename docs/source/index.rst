@@ -42,10 +42,19 @@ I recommend to use **Emacs** (or VIM or other super-powerfull editor) to:
 - outline mode,
 - focus mode.
 
-Contents:
+The main documentation for the site is organized into sections:
+
+* :ref:`user-docs`
+    
+Information about development is also available:
+
+* :ref:`dev-docs`
+  
+.. _user-docs:
 
 .. toctree::
    :maxdepth: 5
+   :caption: User Documentation
 
    install
    getstarted
@@ -55,6 +64,13 @@ Contents:
    geekbook
    misc
    rna
+      
+.. _dev-docs:
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Developer Documentation
+   
    development
    
 Indices and tables
