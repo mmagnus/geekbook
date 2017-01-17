@@ -13,6 +13,8 @@ Type::
   ((.(((((...((((((.........))))))........(((((((.......)))))))..))))).))
   </pre>
 
+**IMPORTANT! Right now, `rna` will be a name of the VARNA image file, so please name your RNA accordingly (!) `[ss:ade]`**
+
 to get a VARNA-drawn image of secondary structure.
 
 .. image :: ../imgs/XQxIC1CrCP.gif
