@@ -4065,8 +4065,9 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 .label {
 	display:inline;
 	padding:.1em .4em .2em;
-	font-size:75%;
+	font-size:70%;
 	font-weight:700;
+	font-family: Monospace;
 	line-height:1;
 	color:#fff;
 	text-align:center;
