@@ -25,6 +25,11 @@ Atom
 
 **Fig** test.md in Atom is OK ;-)
 
+Search in project
+``````````````````````````````````````````
+
+.. image:: ../imgs/atom_search_in_project.png
+
 MacDown
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

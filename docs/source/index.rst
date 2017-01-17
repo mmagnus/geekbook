@@ -45,7 +45,7 @@ I recommend to use **Emacs** (or VIM or other super-powerfull editor) to:
 Contents:
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 5
 
    install
    getstarted
