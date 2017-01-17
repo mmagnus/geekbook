@@ -230,6 +230,7 @@ li {
 img {
     max-width: 100%;
     display: block;
+    max-height: 500px;
 }
 
 .index_date {
