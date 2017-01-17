@@ -1,4 +1,4 @@
-In/Write
+In | Write
 ==========================================
 
 Editors (with Markdown support)
