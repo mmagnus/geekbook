@@ -13,6 +13,8 @@ Before using Spotlight you tell Spotlight to stop indexing folder ``geekbook/eng
 
 .. image:: ../imgs/spotlight_orig_stop.png
 
+Read more: http://osxdaily.com/2011/12/30/exclude-drives-or-folders-from-spotlight-index-mac-os-x/ 
+
 How to backup your notes?
 -----------------------------------------------------------------
 
