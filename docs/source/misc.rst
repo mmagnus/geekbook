@@ -1,13 +1,25 @@
 Miscellaneous
 =================================================================
 
+Geekbook on Mac
+-----------------------------------------------------------------
+
+Spotlight
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: ../imgs/spotlight_mac.png
+
+Before using Spotlight you tell Spotlight to stop indexing folder ``geekbook/engine/data/orig``. Thus some technical copies used by Geekbook internally of your notes will not be index by Spotlight.
+
+.. image:: ../imgs/spotlight_orig_stop.png
+
 How to backup your notes?
 -----------------------------------------------------------------
 
 Dropbox
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can keep your notes under Drobpox etc.
+You can keep your notes under Dropbox etc.
 
 Git (GitHub)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
