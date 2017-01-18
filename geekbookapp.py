@@ -87,8 +87,10 @@ class App(object):
                     m = Md_update(f)
                     p = Page(f)
                     if p.is_changed():
-                        m.compile()
-                        m.save()
+                        changed = m.compile()
+                        if changed: # only if something is changed in md
+                            m.save()
+
                         p.compile()
                         p.save()
 
@@ -110,8 +112,9 @@ class App(object):
                 index.update(mf.get_files())
 
                 m = Md_update(args.debug)
-                m.compile()
-                m.save()
+                changed = m.compile() # if changed MD
+                if changed:
+                    m.save()
 
                 p = Page(args.debug)
                 p.compile()

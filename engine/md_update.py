@@ -33,10 +33,15 @@ class Md_update(object):
     def compile(self):
         """Preprocess, compile, postprocess.
         """
-        self.md = get_ss(self.md)
+        self.md, is_get_ss = get_ss(self.md)
+
         if SCREENSHOT_INBOX:
-            self.md = insert_image_in_md(self.md, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX)
-        self.md = right_link_from_dropbox_screenshot(self.md)
+            self.md, is_ii = insert_image_in_md(self.md, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX)
+        self.md, is_right_link = right_link_from_dropbox_screenshot(self.md)
+
+        if any([is_get_ss, is_ii, is_right_link]):
+            return True
+        else: False
 
     def save(self):
         with codecs.open(PATH_TO_MD + sep + self.fn, "w", "utf-8") as outfn:
