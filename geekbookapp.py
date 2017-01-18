@@ -74,7 +74,7 @@ class App(object):
         logger.info("html path: <file://" + PATH_TO_HTML + 'index.html>')
         logger.info("imgs path: " + PATH_TO_IMG)
 
-        print
+        print 'Ready to go! Please edit me: notes/'
         
         while 1:
 
