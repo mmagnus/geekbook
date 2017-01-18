@@ -35,6 +35,7 @@ class Md_update(object):
         """
         self.md, is_get_ss = get_ss(self.md)
 
+        is_ii = False
         if SCREENSHOT_INBOX:
             self.md, is_ii = insert_image_in_md(self.md, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX)
         self.md, is_right_link = right_link_from_dropbox_screenshot(self.md)
