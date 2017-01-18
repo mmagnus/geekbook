@@ -30,10 +30,11 @@ def get_todo(text):
     return ntext
 
 def get_ss(text):
+
     try:
         from rna_pdb_tools import SecondaryStructure
     except ImportError:
-        return text
+        return text, False
 
     changed = False
     ltext = text.split('\n')
