@@ -72,8 +72,11 @@ class App(object):
         logger.info("html path: <file://" + PATH_TO_HTML + 'index.html>')
         logger.info("imgs path: " + PATH_TO_IMG)
 
-        print 'Ready to go! Please edit me: notes/'
+        logger.info('Ready to go! Please edit me: notes/')
         
+        mf = MdFiles()
+        logger.info('You have %i notes! Congrats, keep noting!' % len(mf.get_files()))
+
         while 1:
 
             mf = MdFiles()
