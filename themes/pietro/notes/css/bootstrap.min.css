@@ -78,7 +78,12 @@ hr {
 	box-sizing:content-box
 }
 pre {
-	overflow:auto
+    height: auto;
+    max-height: 200px;
+	overflow:auto;
+    word-break: normal ;
+    word-wrap: normal ;
+    white-space: pre ;
 }
 code,kbd,pre,samp {
 	font-family:monospace,monospace;
