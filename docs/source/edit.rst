@@ -117,3 +117,6 @@ Now you can type these useful tags in your notes to know what was done, what are
 Type ```@todo```, ```@done```, ```@progress``` to get:
   
 .. image:: ../imgs/todo_done_progress.png
+
+How do we use this ? We like to introduce this tag in our titles to follow our progresses.
+```## 19.02.2017 - Go to buy the milk for Dj kitten @done```
