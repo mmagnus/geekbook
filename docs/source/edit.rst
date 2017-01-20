@@ -102,14 +102,21 @@ Start a line with ``|`` to mark the fragment as an abstract.
 
 Youtube
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Type ```[yt:video id]```:
+Make you notes look more fun! You can insert a youtube video by typing  ```[yt:video id]```:
+Where video_id corresponds to the 11 alphaumeric characters that you can see in the youtube url of your video. 
+Es. dj kitty -- url -- https://www.youtube.com/watch?v=ICDGkVbSWUo its video_id = ICDGkVbSWUo
+Type in geekbook ```[yt:ICDGkVbSWUo] to visualise one of our favourite Djs. 
 
 .. image:: ../imgs/youtube.png
 
 Task status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+It's fun to take notes and to take track of our projects ? Isn't it ?
+Now you can type these useful tags in your notes to know what was done, what are you doing and what to do !
 
 Type ```@todo```, ```@done```, ```@progress``` to get:
   
 .. image:: ../imgs/todo_done_progress.png
+
+How do we use this ? We like to introduce this tag in our titles to follow our progresses.
+```## 19.02.2017 - Go to buy the milk for Dj kitten @done```
