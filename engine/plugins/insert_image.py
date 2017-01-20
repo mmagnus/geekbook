@@ -15,6 +15,12 @@ def insert_image_in_md(text, d, td, IMG_PREFIX):
         
 def insert_image(d = '/home/magnus/Desktop/*png', td = '/home/magnus/Dropbox/geekbook/notes/imgs/', IMG_PREFIX='imgs/'):
     """Check the latest file in d-rectory and copy it to t-arget d-rectory"""
+    # make folder with imgs
+    try:
+        os.mkdir(td)
+    except OSError:
+        pass
+
     newest = max(glob.iglob(d), key=os.path.getctime)
     # copy to img
     t = os.path.basename(newest.replace(' ','_'))
