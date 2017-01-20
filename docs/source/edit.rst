@@ -103,7 +103,7 @@ What do you need to do now ?
 Just paste the link in your text editor, save the file, and whatch it change ! 
 
 ex. Dropbx link ``` https://www.dropbox.com/s/1yu4r8aosqwky4r/Screenshot%202017-01-20%2023.49.26.png?dl=0 ```
-Paste - Save > geekbook returns pure wonderful markdown ```![img](https://www.dropbox.com/s/1yu4r8aosqwky4r/Screenshot%202017-01-20%2023.49.26.png?raw=1). This will be then processes in html to appear as smooth as possible in your geeky notes.
+Paste - Save > geekbook returns pure wonderful markdown ```![img](https://www.dropbox.com/s/1yu4r8aosqwky4r/Screenshot%202017-01-20%2023.49.26.png?raw=1)```. This will be then processes in html to appear as smooth as possible in your geeky notes.
 
 DANGER! : This function changes your markdown file! You need a good text editor like emacs or Atom to detect this change in your code and avoid a possible crash. 
 
