@@ -31,14 +31,12 @@ class MdFiles(object):
     path_to_watch = PATH_TO_MD
 
     def __init__(self):
-        self._get_files()
-        self.clean_up()
+        self.md_files = []
+        self.get_filelist()
         self.sort_by_mtime()
 
-    def _get_files(self):
+    def get_filelist(self):
         self.md_files = os.listdir(self.path_to_watch)
-
-    def clean_up(self):
         nfiles = []
         for f in self.md_files:
             if f.find('#') > -1 or f.find('~') > -1 \
@@ -74,8 +72,11 @@ class App(object):
         logger.info("html path: <file://" + PATH_TO_HTML + 'index.html>')
         logger.info("imgs path: " + PATH_TO_IMG)
 
-        print 'Ready to go! Please edit me: notes/'
+        logger.info('Ready to go! Please edit me: notes/')
         
+        mf = MdFiles()
+        logger.info('You have %i notes! Congrats, keep noting!' % len(mf.get_files()))
+
         while 1:
 
             mf = MdFiles()

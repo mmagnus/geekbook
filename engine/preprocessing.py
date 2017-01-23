@@ -8,7 +8,6 @@ import logging
 logger = logging.getLogger('geekbook')
 logger.setLevel(logging.INFO)
 
-
 def change_todo_square_chainbox_or_icon(text, verbose=False):
     """Set of rules to replace [i] etc with <img ... >  [ OK ]"""
     ## of list
@@ -28,33 +27,6 @@ def get_todo(text):
         ntext += l + '\n'
     ntext = change_todo_square_chainbox_or_icon(ntext)
     return ntext
-
-def get_ss(text):
-
-    try:
-        from rna_pdb_tools import SecondaryStructure
-    except ImportError:
-        return text, False
-
-    changed = False
-    ltext = text.split('\n')
-    for c in range(0, len(ltext)):
-        if ltext[c].startswith('<pre>[ss'):
-            if ltext[c+4].startswith('!['):
-                continue
-            foo, name = ltext[c].split(':')
-            name = name.replace(']','')
-            title = name
-            name = 'ss_' + name + '.png'
-            seq = ltext[c+1]
-            ss = ltext[c+2]
-            #print seq, ss, name
-            out = PATH_TO_IMG + os.sep + 'imgs' + os.sep + name
-            #print out
-            SecondaryStructure.draw_ss(title,seq,ss,out)
-            ltext[c+4] = '![](imgs/' + name + ')' + '\n'
-            changed = True
-    return '\n'.join(ltext), changed
 
 def get_abstract(text):
     ntext = ''

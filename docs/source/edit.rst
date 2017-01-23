@@ -92,6 +92,20 @@ save the file, reload the file to get::
 To turn on this plugin in your ``engine.conf_local`` set the path, e.g. ::
 
    SCREENSHOT_INBOX='/home/magnus/Desktop/*png' 
+   
+   
+Insert Image from DropBox link
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If you use a Mac and you like to store your images in Dropbox this is the function for you! 
+I (akaped) use it to take screenshot with my mac, dropbox will automatically take the screenshot, copy it in a synced screenshot folder and return you a link ( in your clipboard !). 
+
+What do you need to do now ? 
+Just paste the link in your text editor, save the file, and whatch it change ! 
+
+ex. Dropbx link ``` https://www.dropbox.com/s/1yu4r8aosqwky4r/Screenshot%202017-01-20%2023.49.26.png?dl=0 ```
+Paste - Save > geekbook returns pure wonderful markdown ```![img](https://www.dropbox.com/s/1yu4r8aosqwky4r/Screenshot%202017-01-20%2023.49.26.png?raw=1)```. This will be then processes in html to appear as smooth as possible in your geeky notes.
+
+DANGER! : This function changes your markdown file! You need a good text editor like emacs or Atom to detect this change in your code and avoid a possible crash. 
 
 Abstract
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -104,8 +118,8 @@ Youtube
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Make you notes look more fun! You can insert a youtube video by typing  ```[yt:video id]```:
 Where video_id corresponds to the 11 alphaumeric characters that you can see in the youtube url of your video. 
-Es. dj kitty -- url -- https://www.youtube.com/watch?v=ICDGkVbSWUo its video_id = ICDGkVbSWUo
-Type in geekbook ```[yt:ICDGkVbSWUo] to visualise one of our favourite Djs. 
+Ex. dj kitty -- url -- https://www.youtube.com/watch?v=ICDGkVbSWUo its video_id = ICDGkVbSWUo
+Type in geekbook ```[yt:ICDGkVbSWUo]``` to visualise one of our favourite Djs. 
 
 .. image:: ../imgs/youtube.png
 

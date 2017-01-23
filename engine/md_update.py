@@ -4,8 +4,9 @@
 
 import codecs
 from engine.conf import PATH_TO_MD, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX
-from engine.preprocessing import right_MD_from_webservices, get_ss
+from engine.preprocessing import right_MD_from_webservices
 from engine.plugins.insert_image import insert_image_in_md
+from engine.plugins.draw_secondary_structure import get_ss
 from os import sep
 
 

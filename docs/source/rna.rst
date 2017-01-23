@@ -13,9 +13,10 @@ Type::
   ((.(((((...((((((.........))))))........(((((((.......)))))))..))))).))
   </pre>
 
-**IMPORTANT #1 Right now, `rna` will be a name of the VARNA image file, so please name your RNA accordingly (!) `[ss:ade]`**
+.. warning :: This plugin will change your Markdown file, so make sure that your editor will detect this change and ask you to reload the file!
 
-**IMPORTANT #2 This plugin will change your Markdown file, so make sure that your editor will detect this change and ask you to reload the file!**
+.. automodule:: engine.plugins.draw_secondary_structure
+   :members:
 
 to get a VARNA-drawn image of secondary structure.
 
