@@ -4,7 +4,7 @@
 
 import codecs
 from engine.conf import PATH_TO_MD, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX
-from engine.preprocessing import right_link_from_dropbox_screenshot, get_ss
+from engine.preprocessing import right_MD_from_webservices, get_ss
 from engine.plugins.insert_image import insert_image_in_md
 from os import sep
 
@@ -38,9 +38,9 @@ class Md_update(object):
         is_ii = False
         if SCREENSHOT_INBOX:
             self.md, is_ii = insert_image_in_md(self.md, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX)
-        self.md, is_right_link = right_link_from_dropbox_screenshot(self.md)
+        self.md, is_right_MD = right_MD_from_webservices(self.md)
 
-        if any([is_get_ss, is_ii, is_right_link]):
+        if any([is_get_ss, is_ii, is_right_MD]):
             return True
         else: False
 
