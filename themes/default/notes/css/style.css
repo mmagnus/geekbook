@@ -236,3 +236,11 @@ img {
 .index_date {
     font-family: Monospace;
 }
+
+@media print {
+    .nav {
+        display: none;
+    }
+    
+}
+
