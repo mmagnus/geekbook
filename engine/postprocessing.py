@@ -54,6 +54,7 @@ def add_head(text):
     head = head.replace('href="img/', 'href="' + PATH_TO_TEMPLATE + '/img/')
     head = head.replace('="lib/', '="' + PATH_TO_TEMPLATE + '/lib/')
     head = head.replace('="css/', '="' + PATH_TO_TEMPLATE + '/css/')
+    head = head.replace('="js/', '="' + PATH_TO_TEMPLATE + '/js/')
 
     # remove demo content
     head = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->', r'', head, flags=re.M | re.DOTALL)
