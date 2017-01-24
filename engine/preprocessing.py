@@ -48,9 +48,7 @@ def get_image_path(text):
         rx = re.compile('\!\[\]\((?P<filename>.+)\)').search(l)
 
         if rx:
-            path_new = '<a data-lightbox="image" href="' + PATH_TO_IMG + '/' + rx.group('filename') +'">'+\
-                       '<img src="' + PATH_TO_IMG + '/' + rx.group('filename') + \
-                       '" alt="" title=""></a> \n'
+            path_new = '<a data-lightbox="note" href="' + PATH_TO_IMG + '/' + rx.group('filename') +'"><img src="' + PATH_TO_IMG + '/' + rx.group('filename') +'"></a> \n'
             return path_new
         else:
             return l
