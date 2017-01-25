@@ -75,7 +75,7 @@ def add_head(text):
 def change_html_tags_bootstrap(text):
     """ searches for html tags and adds the proper bootstrap class"""
     text = text.replace('<table>', '<table class="table table-hover">')
-    text = text.replace('<img', '<img class="img-thumbnail center-block"')
+    #text = text.replace('<img', '<img class="img-thumbnail center-block"')
     # text = text.replace('<a href="','<a target="_blank" href="')
     return(text)
 
