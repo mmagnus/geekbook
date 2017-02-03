@@ -110,10 +110,26 @@ DANGER! : This function changes your markdown file! You need a good text editor 
 Abstract
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Start a line with ``|`` to mark the fragment as an abstract.
+Start a line with ```! ```(mind the space after !) to mark the fragment as an abstract.
 
-.. image:: ../imgs/abstract.png
+You can collect all lines marked as an abstract, use tag ``[abstract]``::
 
+   ! ble ble ble
+   [abstract]
+   # task
+   ! summary of task
+
+it will give you::
+
+  Ble Ble ble
+  Summary of task.
+
+.. image:: ../imgs/abstract1.png
+
+The last sentence is collected along a note.
+
+.. image:: ../imgs/abstract2.png
+   
 Youtube
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Make you notes look more fun! You can insert a youtube video by typing  ```[yt:video id]```:

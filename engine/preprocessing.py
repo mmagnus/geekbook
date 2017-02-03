@@ -29,11 +29,20 @@ def get_todo(text):
     return ntext
 
 def get_abstract(text):
+    """``! ``"""
     ntext = ''
+    abstract = []
+
+    abstract_flag = False
     for l in text.split('\n'):
-        if l.startswith('|'):
+        if l.strip() == '[abstract]':
+            abstract_flag = True
+        if l.startswith('! '):
+            if abstract_flag: abstract.append(l[1:])
             l = '<div class="abstract"> ' + l[1:] + '</div>'
         ntext += l + '\n'
+    abstract = '<div class="abstract">' + ' '.join(abstract) + '</div><br />\n\n'
+    ntext = ntext.replace('[abstract]', abstract)
     return ntext
 
 
