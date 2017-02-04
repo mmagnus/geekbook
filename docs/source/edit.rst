@@ -78,7 +78,7 @@ Find Files
 
 Type ``[ff:<name_of_the_file>]`` to trigger ``locate`` (on Linux) or ``glocate`` (on macOS, install ``brew install findutils``) to find a full path to your file and insert it in the given place in a generated html.
 
-.. warning:: You have to keep you locate database up to date, use ``sudo updatedb`` (on Linux) or ``sudo glocate`` regularly.
+.. warning:: You have to keep you locate database up to date, use ``sudo updatedb`` (on Linux) or ``sudo gupdatedb`` regularly.
 
 Example:
 
@@ -87,6 +87,8 @@ Example:
 to get this:
 
 .. image:: ../imgs/s111XHLEZF.gif
+
+.. warning:: For many links in one note, this might be slow to re-generate (geekbook has to locate all files). We might want to develop some cache system to speed this up at some point.
 
 Table of Content
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
