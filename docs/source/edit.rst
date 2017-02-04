@@ -69,7 +69,7 @@ Type::
 
 .. image:: ../imgs/syntax_hh.png
 
-Geekbook extensions
+Geekbook Only
 ------------------------------------------
 This a set of extensions developed by the Geekbook community.
 
