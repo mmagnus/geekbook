@@ -140,7 +140,6 @@ Right aligned columns
 
 Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
 
-
 ## Checklists
 
 - [ ] test test test
@@ -163,6 +162,10 @@ With a reference later in the document defining the URL location:
 
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
+# Geekbook Only
+## Locate
+
+[ff:XQxIC1CrCP.gif]
 
 ## Youtube
 
@@ -181,3 +184,4 @@ With a reference later in the document defining the URL location:
 ### task2 @progress
 
 test @todo small task
+

@@ -47,6 +47,13 @@ GitHub Flavored Markdown is a version of the Markdown syntax that provides an ad
 - https://guides.github.com/features/mastering-markdown/
 - https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
+Images
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: ../imgs/images_left_right.png
+
+Read more: http://stackoverflow.com/questions/14675913/how-to-change-image-size-markdown
+
 Syntax highlighting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -65,6 +72,21 @@ Type::
 Geekbook extensions
 ------------------------------------------
 This a set of extensions developed by the Geekbook community.
+
+Find Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Type ``[ff:<name_of_the_file>]`` to trigger ``locate`` (on Linux) or ``glocate`` (on macOS, install ``brew install findutils``) to find a full path to your file and insert it in the given place in a generated html.
+
+.. warning:: You have to keep you locate database up to date, use ``sudo updatedb`` (on Linux) or ``sudo glocate`` regularly.
+
+Example:
+
+.. image:: ../imgs/ff.png
+
+to get this:
+
+.. image:: ../imgs/s111XHLEZF.gif
 
 Table of Content
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
