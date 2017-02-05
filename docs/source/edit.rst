@@ -98,7 +98,7 @@ Type ``[tableofcontent]`` to get the table of content of a given note.
 Date
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Type ``[date]`` to get the current date ```2017-01-13``.
+Type ``[date]`` to get the current date ``2017-01-13``.
 
 Insert Image
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
