@@ -54,3 +54,10 @@ Borg is way more complex than this. Read please Borg_.
 
 .. _Borg: http://borgbackup.readthedocs.io/en/stable/usage.html
 
+Git/Github your notes
+-----------------------------------------------------------------
+We develop a plugin to automatically git your notes. The script can be added to your crontab. 
+
+``geekbook/plugins/ContentAutoCommit/git-auto-commit.sh``
+
+Magnus: I realized that I prefer to commit changes of my notes by myself. I usually improve some new information, fix some notes etc. So I developed the script but I'm not really using it right now.
