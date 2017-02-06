@@ -3,6 +3,7 @@
 """Get the list of md with sys.stdint.read() and generate html index.html.
 The top of the html file is defined here, see the html variable.
 The second part is generated in the loop, per md make a link in the index.html"""
+
 import os
 import time
 import re
@@ -15,7 +16,9 @@ class Index(object):
         pass
 
     def update(self, list_md):
-        """Update the index page"""
+        """Update the index page
+
+        :list_md: is a list of your md files"""
         html = open(PATH_TO_TEMPLATE + '/head.html').read()
 
         html = html.replace('{{ url_index }}', PATH_TO_HTML + '/' + 'index.html')

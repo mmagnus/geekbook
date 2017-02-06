@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-""" geekbookapp
-"""
+"""geekbookapp - the main program. The magic starts here!"""
 
 import time
 import os
@@ -27,7 +26,7 @@ from engine.colors import bcolors
 
 
 class MdFiles(object):
-    """MdFiles class"""
+    """MdFiles manages the index of your md files (notes)"""
     path_to_watch = PATH_TO_MD
 
     def __init__(self):
@@ -36,6 +35,7 @@ class MdFiles(object):
         self.sort_by_mtime()
 
     def get_filelist(self):
+        """Get a raw index of all files in your notes folder, clean it and save the list as self.md_files"""
         self.md_files = os.listdir(self.path_to_watch)
         nfiles = []
         for f in self.md_files:
@@ -48,22 +48,24 @@ class MdFiles(object):
         self.md_files = nfiles
 
     def sort_by_mtime(self):
+        """Sort by mtime the list of md files"""
         self.md_files.sort(key=lambda x: os.stat(os.path.join(self.path_to_watch, x)).st_mtime)
         self.md_files.reverse()
 
     def get_files(self):
+        """Get a list of your MD files"""
         return self.md_files
 
 
 class App(object):
     """App class"""
     def __init__(self, args):
-        args = args
+        self.args = args
 
     def start(self):
         """Start the App.
         """
-        if not args.debug:
+        if not self.args.debug:
             os.system('clear')
             print (bcolors.OKGREEN + "\n                 ________               __   __________               __    \n                /  _____/  ____   ____ |  | _\______   \ ____   ____ |  | __\n               /   \  ____/ __ \_/ __ \|  |/ /|    |  _//  _ \ /  _ \|  |/ /\n               \    \_\  \  ___/\  ___/|    < |    |   (  <_> |  <_> )    < \n                \______  /\___  >\___  >__|_ \|______  /\____/ \____/|__|_ \ \n                       \/     \/     \/     \/       \/                   \/ \n" + bcolors.ENDC)
         logger.info("G33kB00k is Running... [ok]")
@@ -102,12 +104,14 @@ class App(object):
                         p.compile()
                         p.save()
 
+            # update -u option
             if UPDATE:
                 index = Index()
                 index.update(mf.get_files())
 
                 sys.exit(0)
 
+            # dev -d <file>
             if DEV:
                 index = Index()
                 index.update(mf.get_files())
@@ -131,16 +135,18 @@ def start_gitweb():
 
 
 def start_browser_with_index():
-    """This function allows to detect the operative system in use and open the html file."""
+    """Detect the operative system in use and open the html file using the default browser. 
+    Works with Linux and macOS."""
     if platform.system() == "Linux":
         os.system('xdg-open file://' + PATH_TO_HTML + 'index.html')
     if platform.system() == "Darwin":
         os.system('open file://' + PATH_TO_HTML + 'index.html')
     else:
-        print ("Sorry, I cannot detect your system, you will have to open the file manually @")
+        logger.info("Sorry, I cannot detect your system, you will have to open the file manually @")
 
 
 def get_parser():
+    """Get parser of arguments"""
     parser = argparse.ArgumentParser('geekbookapp.py')
     parser.add_argument('-d', '--debug', help='debug mode, run only for file')
     parser.add_argument('-u', '--update', help='updates all the pages', action='store_true')
@@ -152,8 +158,6 @@ if __name__ == '__main__':
     args = get_parser().parse_args()
 
     a = App(args)
-
-    print args
 
     if args.debug:
         DEV = True
