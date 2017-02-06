@@ -13,6 +13,8 @@ We develop a plugin to automatically git your notes. The script can be added to 
 
 Magnus: I realized that I prefer to commit changes of my notes by myself. I usually improve some new information, fix some notes etc. So I developed the script but I'm not really using it right now.
 
+.. image:: ../imgs/gitgui-notes.png
+
 Images (external)
 -----------------------------------------------------------------
 It's also very useful in some applications to have images seperate than your notes. You can have dynamics notes, where your images are in varous places and you provide in Markdown links to them. You can also grab any image to Gimp, edit it and just save. The image in the note will be updated then. You can edit images in batch.
