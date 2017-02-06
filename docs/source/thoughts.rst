@@ -32,7 +32,7 @@ Super-flexible
 This system is super flexible. You can use whatever editor you like, you can edit your notes on your phone, one a cluster using Vi/Nano/etc. It's text file so you will be able to open it alwasy in the future.
 
 Cool alternatives
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------------------------------
 
 - Geeknote http://www.geeknote.me/ - Work with Evernote from command line
 - KeepNote http://keepnote.org/manual/#philosophy
