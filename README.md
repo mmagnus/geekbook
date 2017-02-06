@@ -109,7 +109,3 @@ Or Draft (http://lifehacker.com/draft-is-a-clean-note-taking-app-with-markdown-s
 # Install
 
 See http://geekbook.readthedocs.io/en/latest/install.html
-
-# Food for thought
-## Long notes vs short notes
-@todo
