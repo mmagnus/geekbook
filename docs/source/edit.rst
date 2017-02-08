@@ -88,8 +88,8 @@ to get this:
 
 .. image:: ../imgs/s111XHLEZF.gif
 
-.. warning:: For many links in one note, this might be slow to re-generate (geekbook has to locate all files). We might want to develop some cache system to speed this up at some point.
-
+.. warning:: For many links in one note, this might be slow to re-generate (geekbook has to locate all files). We might want to develop some cache system to speed this up at some point. Yeah, there is a cache system now implemented. All paths are save to ``find_file.json``, and if your file has been seen before, the path to that file will be recover from the db. @todo: Now we need a script that will update this database from time to time.
+	     
 Table of Content
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

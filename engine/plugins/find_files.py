@@ -6,24 +6,53 @@ import sys
 import re
 import platform
 import os
+import pandas as pd
+import commands
 
 import logging
 logger = logging.getLogger('geekbook')
 
+JSON_DB = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'find_file.json'
 
 def file_search(filename, verbose):
+    """Search for filename. Returns dirname of the filename's path, and the full path.
+    
+    170107 add cache. If the db is not found, create an empty pandas df 
+    and populate this df with append later. If the filename is not in the db
+    run g/locate. Then, save the found path to the db (using pandas, via df, to json)"""
+
+    # cache
+    if os.path.isfile(JSON_DB):
+        df = pd.read_json(JSON_DB, orient='records')
+        #filename = 'x.pse'
+        pathdf = df[df['fn'] == filename]['path']
+        if not pathdf.empty:
+            path = pathdf.to_string(index=False)
+            logger.info('find file [from the db]:' + filename)
+            return os.path.dirname(path), path
+    else:
+        df = pd.DataFrame()
+
+    # if filename is not found in the db
     logger.info('find file:' + filename)
-    import commands
+
     if platform.system() == "Linux":
         out = commands.getoutput('locate ' + filename)
     if platform.system() == "Darwin":
         out = commands.getoutput('glocate ' + filename)
     first_hit = out.split('\n')[0]
-    logger.info(out)
+    logger.info('out:', out)
     if not first_hit:
         logger.info('not found')
     else:
         logger.info('hit ' + first_hit)
+
+    # update cache
+    dffile = pd.DataFrame([[filename, first_hit],], columns=['fn', 'path'])
+    df = df.append(dffile, ignore_index=True)
+    # save to json
+    df.to_json(JSON_DB, orient='records')
+    ##
     return os.path.dirname(first_hit), first_hit
     
 def find_files(text, verbose=False):
