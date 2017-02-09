@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-"""Search for [ff:..]  with (g)locate make a link. """
+"""Search for [ff:..]  with (g)locate make a link.
+
+To remove the db, you can simply run ``rm geekbook/engine/plugins/find_file.json``"""
 
 import sys
 import re
@@ -41,7 +43,7 @@ def file_search(filename, verbose):
     if platform.system() == "Darwin":
         out = commands.getoutput('glocate ' + filename)
     first_hit = out.split('\n')[0]
-    logger.info('out:', out)
+    logger.info('# of hits ' + str(len(out.split('\n'))) + " " + out.replace('\n',', '))
     if not first_hit:
         logger.info('not found')
     else:
@@ -67,17 +69,14 @@ def find_files(text, verbose=False):
             if folderpath:
                 if verbose: print '# file_finder.search()', output
                 output += l.replace('[ff:' + filename + ']',' <a href="' + folderpath + '"><code>[+]</code></a> ' + '<a href="' + filepath + '"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
-
-                #output += l.replace('[file:' + filename + ']',' <a href="' + folderpath + '"><img class="manicon" src="' + PATH_TO_BASE_IMG + 'folder.png"></a> ' + '<a href="' + filepath + '"> <span class="mantext"> ' + os.path.basename(filepath) + '</span></a>')
             else:
                 if verbose: print 'problem: can not find ' + filename
                 output += l.replace('[ff:' + filename + ']', '<span style="color:red">' + filename + '</span>')
-                #output += l.replace('[ff:' + filename + ']','<img class="manicon" src="' + PATH_TO_BASE_IMG + 'error.png"> <span style="color:red"><b>' + filename + '</b></span>')
                 msg_listofnotfoundfiles += filename + '\n'
         else:
             output += l + '\n'
     ##
-    output = output.replace('..MSGNOTFOUNDFILES..', msg_listofnotfoundfiles)
+    output = output.replace('[files-not-found]', msg_listofnotfoundfiles)
     return output
 
 if __name__ == '__main__':
