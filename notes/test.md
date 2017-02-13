@@ -126,12 +126,11 @@ console.log(foo(5));
 
 Right aligned columns
 
-| Option | Description |
-| ------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
-
+ Option | Description |
+ ------:| -----------:|
+ data   | path to data files to supply the data that will be passed into templates. |
+ engine | engine to be used for processing templates. Handlebars is the default. |
+ ext    | extension to be used for dest files. |
 
 ## Links
 
@@ -141,13 +140,16 @@ Right aligned columns
 
 Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
 
-
 ## Checklists
 
 - [ ] test test test
 - [X] go go go
 
 ## Images
+
+Left|Right
+----|-----
+ ![Minion](https://octodex.github.com/images/minion.png) | ![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat") |
 
 ![Minion](https://octodex.github.com/images/minion.png)
 ![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
@@ -160,6 +162,10 @@ With a reference later in the document defining the URL location:
 
 [id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
 
+# Geekbook Only
+## Locate
+
+[ff:XQxIC1CrCP.gif]
 
 ## Youtube
 
@@ -178,3 +184,4 @@ With a reference later in the document defining the URL location:
 ### task2 @progress
 
 test @todo small task
+

@@ -2,6 +2,8 @@
 
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
+G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
+
 (under heavy development)
 
 [![Twitter Follow](http://img.shields.io/twitter/follow/geekbookx.svg?style=social&label=Follow)](https://twitter.com/geekbookx)
@@ -107,7 +109,3 @@ Or Draft (http://lifehacker.com/draft-is-a-clean-note-taking-app-with-markdown-s
 # Install
 
 See http://geekbook.readthedocs.io/en/latest/install.html
-
-# Food for thought
-## Long notes vs short notes
-@todo

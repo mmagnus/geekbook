@@ -47,6 +47,13 @@ GitHub Flavored Markdown is a version of the Markdown syntax that provides an ad
 - https://guides.github.com/features/mastering-markdown/
 - https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
+Images
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: ../imgs/images_left_right.png
+
+Read more: http://stackoverflow.com/questions/14675913/how-to-change-image-size-markdown
+
 Syntax highlighting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -62,10 +69,27 @@ Type::
 
 .. image:: ../imgs/syntax_hh.png
 
-Geekbook extensions
+Geekbook Only
 ------------------------------------------
 This a set of extensions developed by the Geekbook community.
 
+Find Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Type ``[ff:<name_of_the_file>]`` to trigger ``locate`` (on Linux) or ``glocate`` (on macOS, install ``brew install findutils``) to find a full path to your file and insert it in the given place in a generated html.
+
+.. warning:: You have to keep you locate database up to date, use ``sudo updatedb`` (on Linux) or ``sudo gupdatedb`` regularly.
+
+Example:
+
+.. image:: ../imgs/ff.png
+
+to get this:
+
+.. image:: ../imgs/s111XHLEZF.gif
+
+.. warning:: For many links in one note, this might be slow to re-generate (geekbook has to locate all files). We might want to develop some cache system to speed this up at some point. Yeah, there is a cache system now implemented. All paths are save to ``find_file.json``, and if your file has been seen before, the path to that file will be recover from the db. @todo: Now we need a script that will update this database from time to time.
+	     
 Table of Content
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -74,7 +98,7 @@ Type ``[tableofcontent]`` to get the table of content of a given note.
 Date
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Type ``[date]`` to get the current date ```2017-01-13``.
+Type ``[date]`` to get the current date ``2017-01-13``.
 
 Insert Image
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,10 +134,26 @@ DANGER! : This function changes your markdown file! You need a good text editor 
 Abstract
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Start a line with ``|`` to mark the fragment as an abstract.
+Start a line with ```! ```(mind the space after !) to mark the fragment as an abstract.
 
-.. image:: ../imgs/abstract.png
+You can collect all lines marked as an abstract, use tag ``[abstract]``::
 
+   ! ble ble ble
+   [abstract]
+   # task
+   ! summary of task
+
+it will give you::
+
+  Ble Ble ble
+  Summary of task.
+
+.. image:: ../imgs/abstract1.png
+
+The last sentence is collected along a note.
+
+.. image:: ../imgs/abstract2.png
+   
 Youtube
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Make you notes look more fun! You can insert a youtube video by typing  ```[yt:video id]```:

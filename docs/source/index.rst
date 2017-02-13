@@ -62,6 +62,7 @@ Information about development is also available:
    view
    book
    geekbook
+   thoughts
    misc
    rna
       
