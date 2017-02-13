@@ -1376,7 +1376,7 @@ code,kbd,pre,samp {
 code {
 	padding:2px 4px;
 	font-size:95%;
-	background-color:#f9f2f4;
+	background-color:rgba(32, 185, 107, 0.29);
 	border-radius:4px
 }
 kbd {
@@ -1409,7 +1409,7 @@ pre {
 pre code {
 	padding:0;
 	font-size:inherit;
-	color:inherit;
+	color:#3c763d;
 	white-space:pre-wrap;
 	background-color:transparent;
 	border-radius:0
