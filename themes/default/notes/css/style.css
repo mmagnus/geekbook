@@ -231,6 +231,9 @@ img {
     max-width: 100%;
     display: block;
     max-height: 500px;
+    /* center imgs http://stackoverflow.com/questions/18153234/center-a-column-using-twitter-bootstrap-3 */
+    /* margin-left: auto;
+    margin-right: auto; */
 }
 
 .index_date {

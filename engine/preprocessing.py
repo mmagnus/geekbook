@@ -46,29 +46,63 @@ def get_abstract(text):
     return ntext
 
 
+
+def get_image_path_in_line(l):
+    """Update: work also with more than one link per line and with tables.
+    Update (2): you can also define width and height of your images.
+
+    Only width, e.g.::
+
+      ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =500x)
+
+    only height::
+
+      ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =x400)
+
+    and both::
+
+      ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =400x400)
+
+    You can use internal variable log to switch on and off logging.
+    """
+    #The details of parsing, i'm using a loop over zipped lists::
+    #
+    # rall = ['![](imgs/ss_gab.png)', '![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =500x)']
+    # r = ('', 'imgs/ss_gab.png')
+    log = False
+    rx = re.findall('\!\[(?P<alt>.*?)\]\((?P<filename>.+?)\)', l)
+    rall = re.findall('(?P<all>\!\[.*?\]\(.+?\))', l)
+    for r, ra in zip(rx, rall):
+        alt, name = r # ('', 'imgs/ss_gab.png')
+        width_html = ''
+        height_html = ''
+        if name.find('=') > -1:
+            name, dim = name.replace(')','').split('=')
+            name = name.strip()
+            width,height = dim.split('x') # =500x
+            if width:
+                    width_html = "width:" + width + "px;"
+            if height:
+                    height_html = "height:" + height + "px;"
+
+        # if this is an external link then name is href
+        if name.startswith('http'):
+            if log: logger.info('http image link %s', name)
+            path_new = '<a data-lightbox="note" href="' + name +'"><img style="' + width_html + height_html + '" src="' + name +'"></a>'
+        else: # if local then name is a part of full href (PATH_TO_IMG / name)
+            if log: logger.info('image %s', name)
+            path_new = '<a data-lightbox="note" href="' + PATH_TO_IMG + '/' + name +'"><img style="' + width_html + height_html + '" src="' + PATH_TO_IMG + '/' + name +'"></a>'
+        l = l.replace(ra, path_new)
+    return l
+
 def get_image_path(text):
-    """Get image path for l(ine)."""
-
-    def get_image_path(l):
-        """Get image path for l(ine).
-
-        :rtype: string, line
-        """
-        rx = re.compile('\!\[\]\((?P<filename>.+)\)').search(l)
-
-        if rx:
-            path_new = '<a data-lightbox="note" href="' + PATH_TO_IMG + '/' + rx.group('filename') +'"><img src="' + PATH_TO_IMG + '/' + rx.group('filename') +'"></a> \n'
-            return path_new
-        else:
-            return l
-
+    """Get image path for text. See get_image_path_in_line (to get links per line) to learn more."""
     ntext = ''
     for l in text.split('\n'):
-        l = get_image_path(l)
+        l = get_image_path_in_line(l)
         ntext += l + '\n'
     ntext = change_todo_square_chainbox_or_icon(ntext)
     return ntext
-
 
 def get_youtube_embeds(text):
     ntext = ''

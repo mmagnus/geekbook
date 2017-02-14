@@ -47,13 +47,6 @@ GitHub Flavored Markdown is a version of the Markdown syntax that provides an ad
 - https://guides.github.com/features/mastering-markdown/
 - https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
-Images
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. image:: ../imgs/images_left_right.png
-
-Read more: http://stackoverflow.com/questions/14675913/how-to-change-image-size-markdown
-
 Syntax highlighting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -99,6 +92,28 @@ Date
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Type ``[date]`` to get the current date ``2017-01-13``.
+
+Images
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can define width and height for your images as follows:
+
+.. image:: ../imgs/imgs_links_size.png
+
+**Read more in the function documentation**:
+
+.. autofunction:: engine.preprocessing.get_image_path_in_line
+
+**If you want to position more images next to each other, you can use tables. They will be autoscaled for you!**::
+
+ Fig. gab | gab+pk | gab+pk (2)
+ ----|------------------|--------
+ ![](imgs/ss_gab.png) | ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png) | ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png)
+ ![](imgs/ss_gab.png) | ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png) | ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png)
+
+which will give you:
+
+.. image:: ../imgs/image_table.png
 
 Insert Image
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

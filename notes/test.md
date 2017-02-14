@@ -184,4 +184,17 @@ With a reference later in the document defining the URL location:
 ### task2 @progress
 
 test @todo small task
+## Images - set size
+
+``!\[Minion](https://octodex.github.com/images/minion.png =100x)``
+
+![Minion](https://octodex.github.com/images/minion.png =100x)
+
+``!\[Minion](https://octodex.github.com/images/minion.png =200x100)``
+
+![Minion](https://octodex.github.com/images/minion.png =200x100)
+
+``!\[Minion](https://octodex.github.com/images/minion.png =x150)``
+
+![Minion](https://octodex.github.com/images/minion.png =x150)
 
