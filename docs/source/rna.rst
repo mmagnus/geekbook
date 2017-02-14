@@ -13,16 +13,25 @@ Type::
   ((.(((((...((((((.........))))))........(((((((.......)))))))..))))).))
   </pre>
 
-.. warning :: Keep exactly the same syntax as above.::
+.. warning :: Keep exactly the same syntax as in the example above and below.
 
-  <pre>[ss:/name of your seq/]
-  /seq/
-  /ss/
-  </pre>
-  # ^ not <pre/> nor <pre>. Keep a new line after this syntax.
-  So don't do:
-  </pre>
-  <pre>
+The syntax::
+
+     <pre>
+     [ss:/name of your seq/]
+     /seq/
+     /ss/
+     </pre>
+     # ^ not <pre/> nor <pre>. Keep a new line after this syntax. So don't do:
+     </pre>
+     <pre>
+
+     but
+
+     </pre>
+
+     <pre>
+     # ^ this could be fixed at some point
 
 .. warning :: This plugin will change your Markdown file, so make sure that your editor will detect this change and ask you to reload the file!
 
