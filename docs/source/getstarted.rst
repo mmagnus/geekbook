@@ -30,4 +30,4 @@ To make a new note, create a file in ```<path to your geekbook>/notes/<notes her
 
 Remember to keep geekbookapp.py running all the time, it will detect a new note and compile it for you.
 
-To force your browser to refresh html files whenevery there is a change on you drive (when geekbook compiles something new) please use something like this Auto-load (https://addons.mozilla.org/en-US/firefox/addon/auto-reload/?src=api) (this works for me in Firefox). 
+**To force your browser to refresh html files whenevery there is a change on you drive (when geekbook compiles something new) please use something like this Auto-load (https://addons.mozilla.org/en-US/firefox/addon/auto-reload/?src=api) (this works for me in Firefox).**
