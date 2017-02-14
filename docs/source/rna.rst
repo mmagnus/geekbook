@@ -13,6 +13,17 @@ Type::
   ((.(((((...((((((.........))))))........(((((((.......)))))))..))))).))
   </pre>
 
+.. warning :: Keep exactly the same syntax as above.::
+
+  <pre>[ss:/name of your seq/]
+  /seq/
+  /ss/
+  </pre>
+  # ^ not <pre/> nor <pre>. Keep a new line after this syntax.
+  So don't do:
+  </pre>
+  <pre>
+
 .. warning :: This plugin will change your Markdown file, so make sure that your editor will detect this change and ask you to reload the file!
 
 .. automodule:: engine.plugins.draw_secondary_structure
