@@ -78,6 +78,8 @@ Kinda similar projects:
     [date] # give you date when a note was compiled
     [yt:EKyirtVHsK0] # it must be the only text in the line !!!
     
+and more <http://geekbook.readthedocs.io/en/latest/edit.html#geekbook-only>.
+
 # EMACS-powered
 ## Focus on your notes
 
