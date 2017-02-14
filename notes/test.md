@@ -185,6 +185,7 @@ With a reference later in the document defining the URL location:
 
 test @todo small task
 ## Images - set size
+(without the first ``\``)
 
 ``!\[Minion](https://octodex.github.com/images/minion.png =100x)``
 
@@ -197,4 +198,10 @@ test @todo small task
 ``!\[Minion](https://octodex.github.com/images/minion.png =x150)``
 
 ![Minion](https://octodex.github.com/images/minion.png =x150)
+
+and local images:
+
+``!\[geekbook](imgs/geekbook.png =x50)``
+
+![geekbook](imgs/geekbook.png =x50)
 
