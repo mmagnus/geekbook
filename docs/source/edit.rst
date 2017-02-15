@@ -44,6 +44,7 @@ Write your notes using Github-Flavored Markdown! Markdown is a way to style text
 
 GitHub Flavored Markdown is a version of the Markdown syntax that provides an additional set of useful features, many of which make it easier to work with your notes.
 
+- the basics https://help.github.com/articles/basic-writing-and-formatting-syntax/
 - https://guides.github.com/features/mastering-markdown/
 - https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
@@ -61,6 +62,8 @@ Type::
     ```
 
 .. image:: ../imgs/syntax_hh.png
+
+Read more https://help.github.com/articles/creating-and-highlighting-code-blocks/
 
 Geekbook Only
 ------------------------------------------
