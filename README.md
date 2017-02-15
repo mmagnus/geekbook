@@ -108,6 +108,10 @@ On your phone: (in this case using Dropbox & Byword on my iPhone).
 
 Or Draft (http://lifehacker.com/draft-is-a-clean-note-taking-app-with-markdown-support-844836670) for Android (not tested by me).
 
+![](docs/imgs/iphone_search_byword.png)
+
+Search on your Iphone to get to the note.
+
 # Install
 
 See http://geekbook.readthedocs.io/en/latest/install.html
