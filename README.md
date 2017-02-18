@@ -23,7 +23,6 @@ G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking sys
   * [On your phone](#on-your-phone)
   * [Install & Get Started!](#install)
   * [Food for thought](#food-for-thought)
-    * [Long notes vs short notes](#long-notes-vs-short-notes)
 
 A neat way how to combine **Emacs/Atom/Sublime editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
 
@@ -115,3 +114,7 @@ Search on your Iphone to get to the note.
 # Install
 
 See http://geekbook.readthedocs.io/en/latest/install.html
+
+# Food for thought
+ 
+ http://geekbook.readthedocs.io/en/latest/thoughts.html
