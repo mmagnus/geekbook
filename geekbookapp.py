@@ -7,8 +7,11 @@ import time
 import os
 import sys
 import argparse
-
+import filecmp
+from os import sep
 import logging
+import subprocess
+
 logging.basicConfig(format='%(asctime)s - %(filename)s - %(message)s')
 logger = logging.getLogger('geekbook')
 logger.setLevel('INFO')
@@ -18,12 +21,14 @@ sys.path.append(PATH)
 
 import platform
 
-from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG
+
+from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG, PATH_TO_ORIG
 from engine.page import Page
 from engine.md_update import Md_update
 from engine.make_index import Index
 from engine.colors import bcolors
 
+#import yappi
 
 class MdFiles(object):
     """MdFiles manages the index of your md files (notes)"""
@@ -79,30 +84,38 @@ class App(object):
         mf = MdFiles()
         logger.info('You have %i notes! Congrats, keep noting!' % len(mf.get_files()))
 
-        while 1:
-
+        #yappi.start()
+        c = 0
+        while c < 10:
+            
             mf = MdFiles()
 
             for f in mf.get_files():
                 if f == 'imgs':
                     pass
                 else:
-                    m = Md_update(f)
-                    p = Page(f)
-                    if p.is_changed():
-                        changed = m.compile()
-                        if changed: # only if something is changed in md
-                            m.save()
-
-                        p.compile()
-                        p.save()
-
-                        index = Index()
-                        index.update(mf.get_files())
-
                     if UPDATE:
                         p.compile()
                         p.save()
+                    else:
+                        # if different then do anything
+                        # we could use this at some point
+                        # http://stackoverflow.com/questions/977491/comparing-two-txt-files-using-difflib-in-python
+                        pipe = subprocess.Popen(['diff', PATH_TO_ORIG + sep + f, PATH_TO_MD + sep + f], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=None)
+                        stdout, stderr = pipe.communicate() # it seems that diff if not equal gives stderr non-zero
+                        if stdout:
+                            m = Md_update(f)
+                            p = Page(f)
+                            if p.is_changed():
+                                changed = m.compile()
+                                if changed: # only if something is changed in md
+                                    m.save()
+
+                                p.compile()
+                                p.save()
+
+                                index = Index()
+                                index.update(mf.get_files())
 
             # update -u option
             if UPDATE:
@@ -127,6 +140,12 @@ class App(object):
 
                 sys.exit(0)
 
+            time.sleep(1)
+            # off c += 1
+            
+        #yappi.stop()
+        #stats = yappi.get_func_stats()
+        #stats.save('yappi.callgrind', type="callgrind")
 
 def start_gitweb():
     """Start git instaweb"""
