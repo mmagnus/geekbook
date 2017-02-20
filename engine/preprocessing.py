@@ -93,6 +93,10 @@ def get_image_path_in_line(l):
             if log: logger.info('image %s', name)
             path_new = '<a data-lightbox="note" href="' + PATH_TO_IMG + '/' + name +'"><img style="' + width_html + height_html + '" src="' + PATH_TO_IMG + '/' + name +'"></a>'
         l = l.replace(ra, path_new)
+
+        # if || side by side
+        if l.find('||') > -1:
+            l = '<table class="table table-hover"><tbody><tr><td>' + l.replace('||', '</td><td>') + '</td></tr></tbody></table>'
     return l
 
 def get_image_path(text):
