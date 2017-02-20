@@ -29,7 +29,11 @@ def get_todo(text):
     return ntext
 
 def get_abstract(text):
-    """``! ``"""
+    """Collect all lines starting with ``! `` and insert it as in abstract in a place tagged as [abstract].
+
+    Now you can use ** to bold some text.
+    You can use \\ to introduce a break (</br>).
+    """
     ntext = ''
     abstract = []
 
@@ -38,9 +42,17 @@ def get_abstract(text):
         if l.strip() == '[abstract]':
             abstract_flag = True
         if l.startswith('! '):
-            if abstract_flag: abstract.append(l[1:])
+            if abstract_flag:
+                # my own converter from **XX** to <b>XX</b>
+                rx = re.findall('\*\*(?P<tobold>.+?)\*\*', l) 
+                for r in rx:
+                    print r
+                    l = l.replace('**' + r + '**', '<b>' + r + '</b>')
+                #
+                # \\ -> </br>
+                abstract.append(l[1:].replace('\\\\','</br>'))
             l = '<div class="abstract"> ' + l[1:] + '</div>'
-        ntext += l + '\n'
+        ntext += l.replace('\\\\','') + '\n' # this is conversion of lines along the note, remove \\ but don't convert into br/
     abstract = '<div class="abstract">' + ' '.join(abstract) + '</div><br />\n\n'
     ntext = ntext.replace('[abstract]', abstract)
     return ntext
