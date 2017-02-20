@@ -76,8 +76,8 @@ def get_image_path_in_line(l):
         alt, name = r # ('', 'imgs/ss_gab.png')
         width_html = ''
         height_html = ''
-        if name.find('=') > -1:
-            name, dim = name.replace(')','').split('=')
+        if name.find(' =') > -1:
+            name, dim = name.replace(')','').split(' =')
             name = name.strip()
             width,height = dim.split('x') # =500x
             if width:
