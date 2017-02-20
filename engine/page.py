@@ -78,7 +78,7 @@ class Page(object):
         self.html = change_data_tag_into_actual_data(self.html)
         self.html = add_path_to_img(self.html)
         self.html = change_html_tags_bootstrap(self.html)
-        self.html = pigmentize(self.html)
+        self.html = unhighlight(self.html)
         self.html = personal_tags_to_html(self.html)
         self.html = find_files(self.html)
         
@@ -118,7 +118,7 @@ class Page(object):
         with codecs.open(PATH_TO_HTML + self.fn.replace('.md', '.html'), "w", "utf-8") as outfn:
             outfn.write(self.html)
 
-
+# start
 if __name__ == '__main__':
     fin = 'test.md'
 

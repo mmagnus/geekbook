@@ -94,7 +94,8 @@ Inline `code`
 
 Indented code
 
-    // Some comments
+    python
+	// Some comments
     line 1 of code
     line 2 of code
     line 3 of code
@@ -106,14 +107,47 @@ Block code "fences"
 Sample text here...
 ```
 
+or 
+
+```
+gCCCGgAUAgCUCAGuCGgAGAGCAuCAGACUuUUaAuCUGAGGguccAGGGuuCAaGUCCCUGUUCGGGCGCCA
+(((((((..((((.....[.))))..(((.........)))......(((((..]....)))))))))))).... # pdbee default
+(((((.(...(((.....[.)))...(((.........))).......((((..]....)))).).))))).... # mc-annotate
+```
+
 Syntax highlighting
 
-``` js
+```js
 var foo = function (bar) {
   return bar++;
 };
 
 console.log(foo(5));
+```
+
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
+
+```python
+#!/usr/bin/env python3
+
+import codecs
+import sys
+import argparse
+
+def get_parser():
+    """Get parser of arguments"""
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--file', required=True)
+    return parser
+
+if __name__ == '__main__':
+    parser = get_parser()
+	args = parser.parse_args() 
+
 ```
 
 ## Tables
@@ -205,3 +239,10 @@ and local images:
 
 ![geekbook](imgs/geekbook.png =x50)
 
+## RNA seq
+
+```
+gCCCGgAUAgCUCAGuCGgAGAGCAuCAGACUuUUaAuCUGAGGguccAGGGuuCAaGUCCCUGUUCGGGCGCCA
+(((((((..((((.....[.))))..(((.........)))......(((((..]....)))))))))))).... # pdbee default
+(((((.(...(((.....[.)))...(((.........))).......((((..]....)))).).))))).... # mc-annotate
+```

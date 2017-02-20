@@ -80,28 +80,22 @@ def change_html_tags_bootstrap(text):
     return(text)
 
 
-def pigmentize(text):
-    """searches for <span></span> and replace with HTML pigmented code
-    supported languages: python ; html ; css ; emacs ; bash ; hexdump ;
-     DjangoLexer"""
-    start_code = text.find('<pre>') + 5
-    end_code = text.find('</pre')
-    code = text[start_code:end_code]
-    if code[0:5] == 'python':
-        text.replace('<div class="highlight"><pre>' + highlight(code, PythonLexer(), HtmlFormatter()) + '</pre></div>')
-    if code[0:4] == 'html':
-        text.replace('<div class="highlight"><pre>' + highlight(code, HtmlLexer(), HtmlFormatter()) + '</pre></div>')
-    if code[0:3] == 'css':
-        text.replace('<div class="highlight"><pre>' + highlight(code, CssLexer(), HtmlFormatter()) + '</pre></div>')
-    if code[0:5] == 'emac':
-        text.replace('<div class="highlight"><pre>' + highlight(code, EmacsLispLexer(), HtmlFormatter()) + '</pre></div>')
-    if code[0:4] == 'bash':
-        text.replace('<div class="highlight"><pre>' + highlight(code, BashLexer(), HtmlFormatter()) + '</pre></div>')
-    if code[0:7] == 'hexdump':
-        text.replace('<div class="highlight"><pre>' + highlight(code, HexdumpLexer(), HtmlFormatter()) + '</pre></div>')
-    if code[0:6] == 'django':
-        text.replace('<div class="highlight"><pre>' + highlight(code, DjangoLexer(), HtmlFormatter()) + '</pre></div>')
-    return(text)
+def unhighlight(text):
+    hits = re.findall('<div class="highlight"><pre><span></span>(?P<text>.+?)</pre></div>', text, re.M|re.S)
+    for h in hits:
+        print 'h',h.strip()
+        if h.strip():
+            if h.find('<span') == -1: # it's note
+                print 'no span'
+                h_and_context = re.findall(r'<div class="highlight"><pre><span></span>' + re.escape(h) + '</pre></div>', text, re.M|re.S)
+                if h_and_context:
+                    h_and_context = h_and_context[0]
+                    h_and_context_unhigh = h_and_context.replace('<div class="highlight">','').replace('</pre></div>', '</pre>')
+                    text = text.replace(h_and_context, h_and_context_unhigh)
+            else:
+                h_and_context = re.findall(r'<div class="highlight"><pre><span></span>' + re.escape(h) + '</pre></div>', text, re.M|re.S)
+                #print h_and_context
+    return text
 
 
 def add_path_to_img(text):
