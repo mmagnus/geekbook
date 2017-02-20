@@ -83,10 +83,10 @@ def change_html_tags_bootstrap(text):
 def unhighlight(text):
     hits = re.findall('<div class="highlight"><pre><span></span>(?P<text>.+?)</pre></div>', text, re.M|re.S)
     for h in hits:
-        print 'h',h.strip()
+        #print 'h',h.strip()
         if h.strip():
             if h.find('<span') == -1: # it's note
-                print 'no span'
+                #print 'no span'
                 h_and_context = re.findall(r'<div class="highlight"><pre><span></span>' + re.escape(h) + '</pre></div>', text, re.M|re.S)
                 if h_and_context:
                     h_and_context = h_and_context[0]
