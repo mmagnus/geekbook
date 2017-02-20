@@ -101,9 +101,16 @@ class App(object):
                         # if different then do anything
                         # we could use this at some point
                         # http://stackoverflow.com/questions/977491/comparing-two-txt-files-using-difflib-in-python
-                        pipe = subprocess.Popen(['diff', PATH_TO_ORIG + sep + f, PATH_TO_MD + sep + f], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=None)
+                        pipe = subprocess.Popen(['diff', PATH_TO_ORIG + sep + f, PATH_TO_MD + sep + f], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                        #cmd = "diff -r ~/Dropbox/geekbook/engine/data/orig/ notes/ | grep 'in notes' | grep -v 'org' | grep -v '~' | grep -v '#' | grep '.md'"
+                        #pipe = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=None)
                         stdout, stderr = pipe.communicate() # it seems that diff if not equal gives stderr non-zero
-                        if stdout:
+                        #stdout = commands.getoutput(cmd).strip()
+                        # Only in notes/: rna-SimRNAweb.md
+                        #stdout = stdout.replace('Only in notes/: ', '')
+                        #for f in stdout.strip().split('\n'):
+                        # ^^^ this should be moved from here any way, this is in f
+                        if stdout or stderr:
                             m = Md_update(f)
                             p = Page(f)
                             if p.is_changed():
