@@ -28,8 +28,11 @@ class Md_update(object):
     def __init__(self, fn):
         """Init a Page and load the content of MD file into self.md"""
         self.fn = fn
-        with codecs.open(PATH_TO_MD + sep + fn, "r", "utf-8") as f:
-            self.md = f.read()
+        try:
+            with codecs.open(PATH_TO_MD + sep + fn, "r", "utf-8") as f:
+                self.md = f.read()
+        except IOError:
+            logging.error('file removed ' + self.fn)
 
     def compile(self):
         """Preprocess, compile, postprocess.
@@ -49,8 +52,8 @@ class Md_update(object):
     def save(self):
         with codecs.open(PATH_TO_MD + sep + self.fn, "w", "utf-8") as outfn:
             outfn.write(self.md)
-
-
+                
+                
 if __name__ == '__main__':
     fin = 'test.md'
 

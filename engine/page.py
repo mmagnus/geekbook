@@ -37,10 +37,15 @@ class Page(object):
     def __init__(self, fn):
         """Init a Page and load the content of MD file into self.md"""
         self.fn = fn
-        with codecs.open(PATH_TO_MD + sep + fn, "r", "utf-8") as f:
-            self.md = f.read()
-        self.html = ''
-
+        # it catches errors if the file is removed
+        try:
+            with codecs.open(PATH_TO_MD + sep + fn, "r", "utf-8") as f:
+                self.md = f.read()
+            self.html = ''
+        except IOError:
+            logging.error('file removed ' + self.fn)            
+            self.md = None
+            
     def get_html(self):
         """Compile md to get html"""
         self.html = markdown.markdown(self.md, extensions=[GithubFlavoredMarkdownExtension()])#(linenums=False)'])
@@ -85,22 +90,25 @@ class Page(object):
         Return:
           boolean
         """
-        if not os.path.exists(PATH_TO_ORIG):
-            os.makedirs(PATH_TO_ORIG)
+        # check if self.md exits, it does not exist if __ini__ failed (and it fails when the
+        # file is removed
+        if self.md:
+            if not os.path.exists(PATH_TO_ORIG):
+                os.makedirs(PATH_TO_ORIG)
 
-        try:
-            with codecs.open(PATH_TO_ORIG + sep + self.fn, "r", "utf-8") as f:
-                orig_md = f.read()
-        except IOError:
-            logging.error('file not detected. Create it: ' + self.fn)
-            orig_md = ''
-            pass
+            try:
+                with codecs.open(PATH_TO_ORIG + sep + self.fn, "r", "utf-8") as f:
+                    orig_md = f.read()
+            except IOError:
+                logging.error('file not detected. Create it: ' + self.fn)
+                orig_md = ''
+                pass
 
-        if self.md != orig_md:
-            copy(PATH_TO_MD + sep + self.fn, PATH_TO_ORIG + sep + self.fn)
-            return True
-        else:
-            return False
+            if self.md != orig_md:
+                copy(PATH_TO_MD + sep + self.fn, PATH_TO_ORIG + sep + self.fn)
+                return True
+            else:
+                return False
 
     def save(self):
         """Save html file to the drive"""
