@@ -176,7 +176,7 @@ def get_parser():
     parser = argparse.ArgumentParser('geekbookapp.py')
     parser.add_argument('-d', '--debug', help='debug mode, run only for file')
     parser.add_argument('-u', '--update', help='updates all the pages', action='store_true')
-    parser.add_argument('-s', '--silent', help='dont bring up the Internet Browser', action='store_false')
+    parser.add_argument('-s', '--silent', help='dont bring up the Internet Browser', action='store_true')
     return parser
 
 
@@ -194,7 +194,7 @@ if __name__ == '__main__':
     else:
         DEV = False
         UPDATE = False
-        if args.silent:
+        if not args.silent:
             start_gitweb()
             start_browser_with_index()
     a.start()
