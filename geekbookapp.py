@@ -16,7 +16,7 @@ logging.basicConfig(format='%(asctime)s - %(filename)s - %(message)s')
 logger = logging.getLogger('geekbook')
 logger.setLevel('INFO')
 
-PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PATH = os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))) #__file__)))
 sys.path.append(PATH)
 
 import platform
