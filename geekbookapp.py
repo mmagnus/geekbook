@@ -11,6 +11,8 @@ import filecmp
 from os import sep
 import logging
 import subprocess
+import commands
+import gc
 
 logging.basicConfig(format='%(asctime)s - %(filename)s - %(message)s')
 logger = logging.getLogger('geekbook')
@@ -86,56 +88,53 @@ class App(object):
 
         #yappi.start()
         c = 0
-        while c < 10:
-            
-            mf = MdFiles()
+        while c < 10: # for debugging
 
-            for f in mf.get_files():
-                if f == 'imgs':
-                    pass
-                else:
-                    if UPDATE:
+            # see what's new - diff between to folders your notes and orig files that keep copy of our notes
+            # grep -v removes things from your list, ~, # (and in mmagnus case org mode files)
+            cmd = "diff -u -r " + PATH_TO_MD + " " + PATH_TO_ORIG + " | grep -v 'org' | grep -v '~' | grep -v '#' | grep '.md'".strip()
+            out = commands.getoutput(cmd)
+            files_changed = []
+
+            # pick all file names that are changed
+            for l in out.split('\n'):
+                if l.startswith('diff -u -r'):
+                    files_changed.append(os.path.basename(l.split()[-1]))
+
+            # if there are files change compile them
+            for f in files_changed:
+                m = Md_update(f)
+                p = Page(f)
+                if p.is_changed():
+                    # if m is changed then (by using any of plugins working on markdown, run this
+                    changed = m.compile()
+                    if changed: # only if something is changed in md
+                        m.save()
+                        
+                    p.compile()
+                    p.save()
+                        
+                    index = Index()
+                    index.update(mf.get_files())
+
+            if UPDATE:
+                for f in mf.get_files():
+                    if f == 'imgs':
+                        pass
+                    else:
+                        p = Page(f)
                         p.compile()
                         p.save()
-                    else:
-                        # if different then do anything
-                        # we could use this at some point
-                        # http://stackoverflow.com/questions/977491/comparing-two-txt-files-using-difflib-in-python
-                        pipe = subprocess.Popen(['diff', PATH_TO_ORIG + sep + f, PATH_TO_MD + sep + f], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                        #cmd = "diff -r ~/Dropbox/geekbook/engine/data/orig/ notes/ | grep 'in notes' | grep -v 'org' | grep -v '~' | grep -v '#' | grep '.md'"
-                        #pipe = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=None)
-                        stdout, stderr = pipe.communicate() # it seems that diff if not equal gives stderr non-zero
-                        #stdout = commands.getoutput(cmd).strip()
-                        # Only in notes/: rna-SimRNAweb.md
-                        #stdout = stdout.replace('Only in notes/: ', '')
-                        #for f in stdout.strip().split('\n'):
-                        # ^^^ this should be moved from here any way, this is in f
-                        if stdout or stderr:
-                            m = Md_update(f)
-                            p = Page(f)
-                            if p.is_changed():
-                                changed = m.compile()
-                                if changed: # only if something is changed in md
-                                    m.save()
-
-                                p.compile()
-                                p.save()
-
-                                index = Index()
-                                index.update(mf.get_files())
-
-            # update -u option
-            if UPDATE:
-                index = Index()
-                index.update(mf.get_files())
 
                 sys.exit(0)
 
             # dev -d <file>
             if DEV:
+                # update index
                 index = Index()
                 index.update(mf.get_files())
 
+                # update this one picked note
                 m = Md_update(args.debug)
                 changed = m.compile() # if changed MD
                 if changed:
@@ -147,7 +146,8 @@ class App(object):
 
                 sys.exit(0)
 
-            time.sleep(1)
+            gc.collect()
+            time.sleep(1) # if this is too big you have too wait for ii too long (!)
             # off c += 1
             
         #yappi.stop()
@@ -181,8 +181,13 @@ def get_parser():
 
 
 if __name__ == '__main__':
-    args = get_parser().parse_args()
+    parser = get_parser()
+    args = parser.parse_args()
 
+    # emacs & python debugging
+    #args = parser.parse_args(['--debug', 'test.md', '-s'])
+    #args = parser.parse_args(['-u'])
+    
     a = App(args)
 
     if args.debug:
