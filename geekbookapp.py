@@ -60,7 +60,10 @@ class MdFiles(object):
         self.md_files.reverse()
 
     def get_files(self):
-        """Get a list of your MD files"""
+        """Get a list of your MD files. 
+        Update: alwasy get an updated list!"""
+        self.get_filelist()
+        self.sort_by_mtime()
         return self.md_files
 
 
@@ -89,7 +92,7 @@ class App(object):
         #yappi.start()
         c = 0
         while c < 10: # for debugging
-
+            
             # see what's new - diff between to folders your notes and orig files that keep copy of our notes
             # grep -v removes things from your list, ~, # (and in mmagnus case org mode files)
             cmd = "diff -u -r " + PATH_TO_MD + " " + PATH_TO_ORIG + " | grep -v 'org' | grep -v '~' | grep -v '#' | grep '.md'".strip()
