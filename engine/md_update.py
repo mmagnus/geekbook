@@ -47,7 +47,7 @@ class Md_update(object):
         if any([is_get_ss, is_ii, is_right_MD]):
             return True
         else:
-            False
+            return False
 
     def save(self):
         with codecs.open(PATH_TO_MD + sep + self.fn, "w", "utf-8") as outfn:
