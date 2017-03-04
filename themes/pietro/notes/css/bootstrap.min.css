@@ -63,7 +63,8 @@ sub {
 	bottom:-.25em
 }
 img {
-	border:0
+	border:0,
+    margin:auto
 }
 svg:not(:root) {
 	overflow:hidden

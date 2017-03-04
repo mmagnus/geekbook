@@ -34,7 +34,7 @@ class Index(object):
         ##
 
         html += open(PATH_HOMEPAGE).read()
-        html += '<table class="table table-hover"><tr><th>Title</th><th><center>Last Update</center></th></tr>'
+        html += '<table class="table table-hover"><tr><th>Title</th><th>Description</th><th><center>Last Update</center></th></tr>'
 
         for l in list_md:
             if l == 'imgs':
@@ -47,7 +47,7 @@ class Index(object):
                     #if l.find('::')>=0:
                     #    html += '<li class="table_of_content_h2"><a style="" href="' + path + '.html">' + l + '</a></li>'
                     #else:
-                    html += '<tr><td><a class="index_list_a" href="' + path + '.html">' + l + '</a>' \
+                    html += '<tr><td><a class="index_list_a" href="' + path + '.html">' + l + '</a>' + '<td> .... </td>' \
                             + '<td><small><center class="index_date">' + time.ctime(os.stat(os.path.join(PATH_TO_MD, l + '.md')).st_mtime) + '</center></small></td></tr>'
 
         html += '</p>'
