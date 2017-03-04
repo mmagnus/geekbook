@@ -18,16 +18,6 @@ def change_todo_square_chainbox_or_icon(text, verbose=False):
     text = text.replace('[X]','<input type="checkbox" checked="checked" />')
     return text
 
-
-def get_todo(text):
-    ntext = ''
-    for l in text.split('\n'):
-        if not l.startswith('#'):
-            l = l.replace('@todo', '<span class="label label-danger">@todo</span>')
-        ntext += l + '\n'
-    ntext = change_todo_square_chainbox_or_icon(ntext)
-    return ntext
-
 def get_abstract(text):
     """Collect all lines starting with ``! `` and insert it as in abstract in a place tagged as [abstract].
 
