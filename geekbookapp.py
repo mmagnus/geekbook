@@ -87,6 +87,10 @@ class App(object):
         logger.info("G33kB00k is Running... [ok]")
 
         logger.info("root path: %s" % PATH)
+        try:
+            os.makedirs(PATH_TO_HTML)
+        except OSError:
+            pass
         logger.info("html path: <file://" + PATH_TO_HTML + 'index.html>')
         logger.info("imgs path: " + PATH_TO_IMG)
 
@@ -95,6 +99,8 @@ class App(object):
         mf = MdFiles()
         logger.info('You have %i notes! Congrats, keep noting!' % len(mf.get_files()))
 
+        
+        
         #yappi.start()
         c = 0
         while c < 10: # for debugging
