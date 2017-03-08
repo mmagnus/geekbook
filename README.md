@@ -122,5 +122,5 @@ See http://geekbook.readthedocs.io/en/latest/install.html
 
 # History
 
-- 170308 fix `RNApuzzles @done">rp01 @done #50`
+- 170308 fix `RNApuzzles @done">rp01 @done` #50
 - 1205XX lb_v2 was born at the conference of the Polish Bioinformatics Society
