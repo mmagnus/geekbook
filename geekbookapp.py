@@ -32,6 +32,10 @@ from engine.colors import bcolors
 
 #import yappi
 
+class GeekbookError(Exception):
+    pass
+
+
 class MdFiles(object):
     """MdFiles manages the index of your md files (notes)"""
     path_to_watch = PATH_TO_MD
@@ -46,6 +50,8 @@ class MdFiles(object):
         self.md_files = os.listdir(self.path_to_watch)
         nfiles = []
         for f in self.md_files:
+            if ' ' in f:
+                raise GeekbookError("We don't handle names of you notes with spaces, please use `-`. e.g. geekbook-is-the-best.md Please rename your note and start this app again.")
             if f.find('#') > -1 or f.find('~') > -1 \
                or f.startswith('.') or f.endswith('.org'):
                 continue
@@ -81,6 +87,10 @@ class App(object):
         logger.info("G33kB00k is Running... [ok]")
 
         logger.info("root path: %s" % PATH)
+        try:
+            os.makedirs(PATH_TO_HTML)
+        except OSError:
+            pass
         logger.info("html path: <file://" + PATH_TO_HTML + 'index.html>')
         logger.info("imgs path: " + PATH_TO_IMG)
 
@@ -89,6 +99,8 @@ class App(object):
         mf = MdFiles()
         logger.info('You have %i notes! Congrats, keep noting!' % len(mf.get_files()))
 
+        
+        
         #yappi.start()
         c = 0
         while c < 10: # for debugging

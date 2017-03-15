@@ -23,7 +23,8 @@ G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking sys
   * [On your phone](#on-your-phone)
   * [Install & Get Started!](#install)
   * [Food for thought](#food-for-thought)
-
+  * [History](#history)
+  
 A neat way how to combine **Emacs/Atom/Sublime editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
 
 **The preview of the default template:**
@@ -118,3 +119,10 @@ See http://geekbook.readthedocs.io/en/latest/install.html
 # Food for thought
  
  http://geekbook.readthedocs.io/en/latest/thoughts.html
+
+# History
+
+- 170308 fix `RNApuzzles @done">rp01 @done` #50
+- 170104 Pietro Boccaletto (akaped) joined the team!
+- 161223 Add the main engine to GitHub!
+- 1205XX lb_v2 was born at the conference of the Polish Bioinformatics Society

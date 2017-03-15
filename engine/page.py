@@ -16,7 +16,7 @@ from colors import bcolors
 
 from engine.postprocessing import *
 from engine.preprocessing import *
-from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG
+from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN
 from engine.make_tableofcontent import make_table_of_content
 from engine.plugins.find_files import find_files
 
@@ -79,7 +79,8 @@ class Page(object):
         self.html = change_html_tags_bootstrap(self.html)
         self.html = unhighlight(self.html)
         self.html = personal_tags_to_html(self.html)
-        self.html = find_files(self.html)
+        if FIND_FILES_PLUGIN:
+            self.html = find_files(self.html)
         self.html = get_todo(self.html)
         
     def is_changed(self):
