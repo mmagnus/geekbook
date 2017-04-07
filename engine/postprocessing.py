@@ -121,6 +121,7 @@ def get_todo(text):
             if not l.startswith('<li class="table_of_content'): # header
                 l = l.replace('@todo', '<span class="label label-danger">@todo</span>')
                 l = l.replace('@inprogress', '<span class="label label-warning">@inprogress</span>')
+                l = l.replace('@progress', '<span class="label label-warning"><h1>Adriana, this is God. Do not waste devs time. COde it yourself!</h1></span> ')
                 l = l.replace('@done', '<span class="label label-success">@done</span>')
         ntext += l + '\n'
     ntext = change_todo_square_chainbox_or_icon(ntext)
