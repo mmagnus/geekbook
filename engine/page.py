@@ -82,6 +82,7 @@ class Page(object):
         if FIND_FILES_PLUGIN:
             self.html = find_files(self.html)
         self.html = get_todo(self.html)
+        self.html = add_title(self.html, self.fn)
         
     def is_changed(self):
         """Check if the file on disc is different than `md`.

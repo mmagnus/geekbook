@@ -98,6 +98,11 @@ def unhighlight(text):
     return text
 
 
+def add_title(text, title):
+    """title is self.md, remove .md"""
+    text = text.replace('<head>', '<head>\n  <title>' + title.replace('.md', '') + '</title>')
+    return(text)
+
 def add_path_to_img(text):
     text = text.replace('src="img/', 'src="' + PATH_TO_TEMPLATE + '/img/')
     return(text)
