@@ -121,7 +121,7 @@ See http://geekbook.readthedocs.io/en/latest/install.html
  http://geekbook.readthedocs.io/en/latest/thoughts.html
 
 # History
-
+- 170415 Process jupiter notebooks
 - 170308 fix `RNApuzzles @done">rp01 @done` #50
 - 170104 Pietro Boccaletto (akaped) joined the team!
 - 161223 Add the main engine to GitHub!
