@@ -121,6 +121,13 @@ See http://geekbook.readthedocs.io/en/latest/install.html
  http://geekbook.readthedocs.io/en/latest/thoughts.html
 
 # History
+
+- 170420 include_file. Open a given file and include the content of it.
+
+        ```
+        [if:/home/magnus/Dropbox/workspace/backupx/backup-peyote.sh]
+        ```
+
 - 170415 Process jupiter notebooks
 - 170308 fix `RNApuzzles @done">rp01 @done` #50
 - 170104 Pietro Boccaletto (akaped) joined the team!
