@@ -46,12 +46,14 @@ class MdFiles(object):
         self.sort_by_mtime()
 
     def get_filelist(self):
-        """Get a raw index of all files in your notes folder, clean it and save the list as self.md_files"""
+        """Get a raw index of all files in your notes folder, clean it and save the list as
+        self.md_files"""
         self.md_files = os.listdir(self.path_to_watch)
         nfiles = []
         for f in self.md_files:
             if ' ' in f:
-                raise GeekbookError("We don't handle names of you notes with spaces, please use `-`. e.g. geekbook-is-the-best.md Please rename your note and start this app again.")
+                raise GeekbookError("""We don't handle names of you notes with spaces, please \
+use `-`. e.g. geekbook-is-the-best.md Please rename your note and start this app again. Fix: """ % f)
             if f.find('#') > -1 or f.find('~') > -1 \
                or f.startswith('.') or f.endswith('.org'):
                 continue
@@ -227,7 +229,7 @@ def get_parser():
     parser.add_argument('-n', '--notebook', help='updates all jupiter notebooks!', action='store_true')
     return parser
 
-
+#main
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
