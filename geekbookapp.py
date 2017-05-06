@@ -79,6 +79,11 @@ class App(object):
     """App class"""
     def __init__(self, args):
         self.args = args
+        # fix #
+        try:
+            os.mkdir(PATH_TO_ORIG)
+        except OSError:
+            pass
 
     def start(self):
         """Start the App.
