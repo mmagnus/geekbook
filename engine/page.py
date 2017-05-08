@@ -74,7 +74,7 @@ class Page(object):
 
     def post_process(self):
         """Do postprocessing"""
-        self.html = add_head(self.html)
+        self.html = add_head_for_flask(self.html)
         self.html = make_table_of_content(self.html)
         self.html = change_data_tag_into_actual_data(self.html)
         self.html = add_path_to_img(self.html)

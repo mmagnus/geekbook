@@ -217,9 +217,9 @@ def start_browser_with_index():
     """Detect the operative system in use and open the html file using the default browser. 
     Works with Linux and macOS."""
     if platform.system() == "Linux":
-        os.system('xdg-open file://' + PATH_TO_HTML + 'index.html')
+        os.system('xdg-open http://127.0.0.1:5000/view/index.html')#
     if platform.system() == "Darwin":
-        os.system('open file://' + PATH_TO_HTML + 'index.html')
+        os.system('open http://127.0.0.1:5000/view/index.html')
     else:
         logger.info("Sorry, I cannot detect your system, you will have to open the file manually @")
 
@@ -242,6 +242,8 @@ if __name__ == '__main__':
     #args = parser.parse_args(['-u'])
     
     a = App(args)
+
+    start_flask()
 
     if args.notebook:
         notebook_files = os.listdir(PATH_TO_MD)
@@ -270,5 +272,4 @@ if __name__ == '__main__':
             start_gitweb()
             start_browser_with_index()
 
-    start_flask()
     a.start()

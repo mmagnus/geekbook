@@ -46,6 +46,18 @@ def personal_tags_to_html(text):
     return text
 
 
+def add_head_for_flask(text):
+    head = open(PATH_TO_TEMPLATE_HTML).read()
+    head = head.replace('{{ url_index }}', PATH_TO_HTML + '/' + 'index.html')
+    head = head.replace('href="img/', 'href="' + '/img/')
+    head = head.replace('="lib/', '="' + '/lib/')
+    head = head.replace('="css/', '="'+ '/css/')
+    head = head.replace('="js/', '="' + '/js/')
+
+    # remove demo content
+    head = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->', r'', head, flags=re.M | re.DOTALL)
+    return head + text
+    
 def add_head(text):
     """Add head html from template  """
     head = open(PATH_TO_TEMPLATE_HTML).read()
@@ -59,7 +71,6 @@ def add_head(text):
     # remove demo content
     head = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->', r'', head, flags=re.M | re.DOTALL)
     return head + text
-
 
     #head_new = ''
     #for l in head.split('\n'):
@@ -132,6 +143,7 @@ def get_todo(text):
     ntext = change_todo_square_chainbox_or_icon(ntext)
     return ntext
 
+#main
 if __name__ == '__main__':
     content = sys.stdin.read()
     # output = change_infotags_into_icon(content)

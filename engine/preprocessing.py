@@ -8,6 +8,7 @@ import logging
 logger = logging.getLogger('geekbook')
 logger.setLevel(logging.INFO)
 
+FLASK_BASED = True
 def change_todo_square_chainbox_or_icon(text, verbose=False):
     """Set of rules to replace [i] etc with <img ... >  [ OK ]"""
     ## of list
@@ -71,7 +72,7 @@ def get_image_path_in_line(l):
     #
     # rall = ['![](imgs/ss_gab.png)', '![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =500x)']
     # r = ('', 'imgs/ss_gab.png')
-    log = False
+    log = True
     rx = re.findall('\!\[(?P<alt>.*?)\]\((?P<filename>.+?)\)', l)
     rall = re.findall('(?P<all>\!\[.*?\]\(.+?\))', l)
     for r, ra in zip(rx, rall):
@@ -93,7 +94,11 @@ def get_image_path_in_line(l):
             path_new = '<a data-lightbox="note" href="' + name +'"><img style="' + width_html + height_html + '" src="' + name +'"></a>'
         else: # if local then name is a part of full href (PATH_TO_IMG / name)
             if log: logger.info('image %s', name)
-            path_new = '<a data-lightbox="note" href="' + PATH_TO_IMG + '/' + name +'"><img style="' + width_html + height_html + '" src="' + PATH_TO_IMG + '/' + name +'"></a>'
+            if FLASK_BASED:
+                path_new = '<a data-lightbox="note" href="/' + name +'"><img style="' + width_html + height_html + \
+                  '" src="/' + name +'"></a>'
+            else:
+                path_new = '<a data-lightbox="note" href="' + PATH_TO_IMG + '/' + name +'"><img style="' + width_html + height_html + '" src="' + PATH_TO_IMG + '/' + name +'"></a>'
         l = l.replace(ra, path_new)
 
         # if || side by side
