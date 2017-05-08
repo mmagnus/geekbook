@@ -9,7 +9,7 @@ print PATH
 sys.path.append(PATH)
 from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE_HTML, PATH_TO_MD
 print PATH_TO_TEMPLATE_HTML
-from engine.searcher import Search
+from engine import searcher
 from engine.postprocessing import add_head
 from flask import Flask, redirect, url_for, send_from_directory
 
@@ -52,7 +52,7 @@ def view(note_title):
     
 @app.route('/search/<text>')
 def search(text):
-    results = Search(text)
+    results = searcher.search(text)
 
     head = open(PATH_TO_TEMPLATE_HTML).read()
     head = head.replace('{{ url_index }}', PATH_TO_HTML + '/' + 'index.html')

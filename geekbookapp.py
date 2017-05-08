@@ -29,7 +29,7 @@ from engine.page import Page
 from engine.md_update import Md_update
 from engine.make_index import Index
 from engine.colors import bcolors
-
+from engine.searcher import make_db
 #import yappi
 
 class GeekbookError(Exception):
@@ -245,6 +245,8 @@ if __name__ == '__main__':
 
     start_flask()
 
+    make_db()
+    
     if args.notebook:
         notebook_files = os.listdir(PATH_TO_MD)
         for n in [n for n in notebook_files if n.endswith('.ipynb')]:
