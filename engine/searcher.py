@@ -190,8 +190,8 @@ class Db():
         ## hack end ##
 
         all_headers = []
-        print '<head><meta content="text/html; charset=UTF-8" http-equiv="content-type">'
-        print "<link rel='stylesheet' href='/home/magnus/Dropbox/Public/lb/css/style.css' /></head>"
+        #print '<head><meta content="text/html; charset=UTF-8" http-equiv="content-type">'
+        #print "<link rel='stylesheet' href='/home/magnus/Dropbox/Public/lb/css/style.css' /></head>"
         for o in out:
             if v: print o
             all_headers.extend(make_headers_objects_for_md(o))
@@ -223,12 +223,12 @@ def make_db():
     db.collect_data()
     pickle.dump(db, open( "searchdb.pickle", "wb" ))
 
-def search(term):
+def search_term(term):
     db = pickle.load(open( "searchdb.pickle", "rb"))
     return db.search(term)
 
 #main
 if __name__ == '__main__':
     term = '@test'
-    #print make_db()
-    search('@test')
+    print make_db()
+    search_term('@test')
