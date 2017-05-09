@@ -42,7 +42,7 @@ Features | Geekbook | Word Office | Apple Notes
 **Search** | Super easy to search with built-in search or just grep your files | More difficult to search over a set of files. Slow! | OK
 **Version control** | Yes, if you use Git etc | Kind of. Hard to use (compared to Git) | Nope.
 **Style customizable** | Yes, it's HTML. Do what ever you want | To some extend | Nope.
-**Edit on your phone** | Yes, use XXX | Not really | Yes, works very well!
+**Edit on your phone** | Yes, use Byword | Not really | Yes, works very well!
 **Open & Free** | YES | Nope, closed and pricey | Close, no extra charge if you have an Apple device
 **Super easy to use** | Rather for geek/nerds/hackers | Easy but who cares ;-) | Easy but who cares. ;-)
 
