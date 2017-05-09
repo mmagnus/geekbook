@@ -27,6 +27,14 @@ G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking sys
   
 A neat way how to combine **Emacs/Atom/Sublime editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
 
+Features | Geekbook | Word Office | Apple Notes
+-------- | -------- | ----------- | -----------
+**Edits with Emacs** | Oh, boy, yes! | Nope. | Nope.
+**Long notes - easier to browse** | Long notes with great speed and table of contet | Very slow for long notes. Alwasy problems with formatting long notes with images. | Very good for short notes.
+**Syntax highlighting** | Oh, boy, yes! | Hmm.. nope. | Hmm.. nope.
+**Write your own plugins in Python** | Oh, boy, yes! | Nope. | Nope.
+**Super easy to use** | Rather for nerds | Easy but who cares | Easy but who cares.
+**Export as a pdf** | Yes | Yes | Yes
 **The preview of the default template:**
 
 ![](themes/default/qubCXZcWHl.gif)
