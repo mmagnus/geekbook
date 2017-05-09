@@ -28,18 +28,17 @@ def change_data_tag_into_actual_data(text):
 
 def personal_tags_to_html(text):
     """ insert here your personal tags!"""
-
-# Change text background depending on text contest.
-## warning text
+    # Change text background depending on text contest.
+    ## warning text
     text = text.replace('[!warning]','<p class="bg-warning">')
     text = text.replace('[warning!]','<br></p>')
-# danger text
+    # danger text
     text = text.replace('[!danger]','<p class="bg-danger">')
     text = text.replace('[danger!]','<br></p>')
-# succes text
+    # succes text
     text = text.replace('[!success]','<p class="bg-success">')
     text = text.replace('[success!]','<br></p>')
-# info text
+    # info text
     text = text.replace('[!info]','<p class="bg-info">')
     text = text.replace('[info!]','<br></p>')
 
