@@ -46,12 +46,14 @@ class MdFiles(object):
         self.sort_by_mtime()
 
     def get_filelist(self):
-        """Get a raw index of all files in your notes folder, clean it and save the list as self.md_files"""
+        """Get a raw index of all files in your notes folder, clean it and save the list as
+        self.md_files"""
         self.md_files = os.listdir(self.path_to_watch)
         nfiles = []
         for f in self.md_files:
             if ' ' in f:
-                raise GeekbookError("We don't handle names of you notes with spaces, please use `-`. e.g. geekbook-is-the-best.md Please rename your note and start this app again.")
+                raise GeekbookError("""We don't handle names of you notes with spaces, please \
+use `-`. e.g. geekbook-is-the-best.md Please rename your note and start this app again. Fix: """ % f)
             if f.find('#') > -1 or f.find('~') > -1 \
                or f.startswith('.') or f.endswith('.org'):
                 continue
@@ -108,7 +110,35 @@ class App(object):
         
         #yappi.start()
         c = 0
+
+        ipynb_mtime = {}
         while c < 10: # for debugging
+            # check for ipython
+
+            ## if not ipynb_mtime:
+            ##     notebook_files = os.listdir(PATH_TO_MD)
+            ##     for n in [n for n in notebook_files if n.endswith('.ipynb') and n.startswith('jupyter')]:
+            ##         cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
+            ##         print cmd
+            ##         os.system(cmd)
+            ##         ipynb_mtime[n] = os.path.getmtime(PATH_TO_MD + os.sep + n)
+            ## else:
+            ##     notebook_files = os.listdir(PATH_TO_MD)
+            ##     for n in [n for n in notebook_files if n.endswith('.ipynb')]:
+            ##         if n in ipynb_mtime.keys():
+            ##             mt = os.path.getmtime(PATH_TO_MD + os.sep + n)
+            ##             if ipynb_mtime[n] < mt:
+            ##                 cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
+            ##                 print cmd
+            ##                 os.system(cmd)
+            ##                 ipynb_mtime[n] = mt
+            ##         else:
+            ##             mt = os.path.getmtime(PATH_TO_MD + os.sep + n)
+            ##             cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
+            ##             print cmd
+            ##             os.system(cmd)
+            ##             ipynb_mtime[n] = mt
+                            
             # see what's new - diff between to folders your notes and orig files that keep copy of our notes
             # grep -v removes things from your list, ~, # (and in mmagnus case org mode files)
             cmd = "diff -u -r " + PATH_TO_MD + " " + PATH_TO_ORIG + " | grep -v '.org' | grep -v '~' | grep -v '#' | grep '.md'".strip()
@@ -201,9 +231,10 @@ def get_parser():
     parser.add_argument('-d', '--debug', help='debug mode, run only for file')
     parser.add_argument('-u', '--update', help='updates all the pages', action='store_true')
     parser.add_argument('-s', '--silent', help='dont bring up the Internet Browser', action='store_true')
+    parser.add_argument('-n', '--notebook', help='updates all jupiter notebooks!', action='store_true')
     return parser
 
-
+#main
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
@@ -213,6 +244,20 @@ if __name__ == '__main__':
     #args = parser.parse_args(['-u'])
     
     a = App(args)
+
+    if args.notebook:
+        notebook_files = os.listdir(PATH_TO_MD)
+        for n in [n for n in notebook_files if n.endswith('.ipynb')]:
+            cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
+            print cmd
+            os.system(cmd)
+        sys.exit(1)
+    #[mm] notes git:(master) ✗ 
+    #    [NbConvertApp] Converting notebook testA.ipynb to markdown
+    #[NbConvertApp] Support files will be in testA_files/
+    #[NbConvertApp] Making directory testA_files
+    #[NbConvertApp] Writing 2960 bytes to testA.md
+
 
     if args.debug:
         DEV = True

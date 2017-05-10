@@ -10,6 +10,8 @@ G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking sys
 [![Documentation Status](https://readthedocs.org/projects/geekbook/badge/?version=latest)](http://geekbook.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/mmagnus/geekbook.svg?branch=master)](https://travis-ci.org/mmagnus/geekbook)
 ![http://www.gnu.org/licenses/gpl-3.0.html](http://img.shields.io/:license-gpl3-blue.svg)
+<span class="badge-paypal"><a href="https://www.paypal.me/MarcinMagnus" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span> 
+<span class="badge-flattr"><a href="https://flattr.com/profile/mmagnus" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
 
   * [Features](#features)
     * [Index](#index)
@@ -122,6 +124,13 @@ See http://geekbook.readthedocs.io/en/latest/install.html
 
 # History
 
+- 170420 include_file. Open a given file and include the content of it.
+
+        ```
+        [if:/home/magnus/Dropbox/workspace/backupx/backup-peyote.sh]
+        ```
+
+- 170415 Process jupiter notebooks
 - 170308 fix `RNApuzzles @done">rp01 @done` #50
 - 170104 Pietro Boccaletto (akaped) joined the team!
 - 161223 Add the main engine to GitHub!

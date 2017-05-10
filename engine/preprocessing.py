@@ -141,3 +141,19 @@ def right_MD_from_webservices(text):
             logger.info('Recordit link detected')
             changed = True
     return text, changed
+
+def include_file(text):
+    ntext = ''
+    
+    for l in text.split('\n'):
+        if l.strip().startswith('[if:'):
+            file_fn = l.replace('[if:','').replace(']','').strip()
+            try:
+                with open(file_fn) as f:
+                    ntext += f.read()
+            except IOError:
+                logger.info('include file -- file not found -- %s', file_fn)
+            else:
+                logger.info('include file detected: %s', file_fn)
+        ntext += l + '\n'
+    return ntext
