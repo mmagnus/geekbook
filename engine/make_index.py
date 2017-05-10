@@ -53,7 +53,7 @@ class Index(object):
                     #if l.find('::')>=0:
                     #    html += '<li class="table_of_content_h2"><a style="" href="' + path + '.html">' + l + '</a></li>'
                     #else:
-                    html += '<tr><td><a class="index_list_a" href="' + path + '.html">' + mdfn + '</a>' + '<td>' + desc + '</td>' \
+                    html += '<tr><td><a class="index_list_a" href="' + path + '.html">' + mdfn + '</a></td>' + '<td>' + desc + '</td>' \
                             + '<td><small><center class="index_date">' + time.ctime(os.stat(os.path.join(PATH_TO_MD, mdfn + '.md')).st_mtime) + '</center></small></td></tr>'
 
         html += '</p>'
