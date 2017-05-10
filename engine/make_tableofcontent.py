@@ -45,7 +45,7 @@ def replace_space_with_minus(text):
     return replace
 
 
-def make_table_of_content(text, version2=True):
+def make_table_of_content(fn, text, version2=True):
     output = ''
 
     list_type_start = '<div id="tableofcontent"><ul class="table_of_content" id="tableofcontent_">'
@@ -62,13 +62,14 @@ def make_table_of_content(text, version2=True):
             if VERBOSE: print 'h1', h1
             id_of_div = replace_space_with_minus(h1)
             # '</div>'
+            #+ '<a class="nondecoration" href="#' + id_of_div + '">' \
             l = '<div id="' + id_of_div + '"><h1>' \
-                + '<a class="nondecoration" href="#' + id_of_div + '">' \
+                + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md','') + '/%23 ' + h1 + '">' \
                 + tag_heading(h1) \
                 + '</a></h1>'
             if VERBOSE: print "# l", l
             collect_headings += '<li class="table_of_content_h1">'\
-                                + '<a href="#' + id_of_div + '">'\
+              + '<a href="#' + id_of_div + '">'\
                                 + tag_heading(h1) + ' </a></li>\n'
             tableofcontent_in_pure_text += h1 + '\n'
 
@@ -78,8 +79,9 @@ def make_table_of_content(text, version2=True):
             h2 = rx.group('h2')
             id_of_div = replace_space_with_minus(h2)
             # '</div>
+            #+ '<a class="nondecoration" href="#' + id_of_div + '">' \
             l = '<div id="' + id_of_div + '"><h2>' \
-                + '<a class="nondecoration" href="#' + id_of_div + '">' \
+                + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md','') + '/%23%23 ' + h2 + '">' \
                 + tag_heading(h2) \
                 + '</a></h2>'
             if VERBOSE: print "# l", l
@@ -95,7 +97,7 @@ def make_table_of_content(text, version2=True):
             id_of_div = replace_space_with_minus(h3)
             # '</div>
             l = '<div id="' + id_of_div + '"><h3>' \
-                          + '<a class="nondecoration" href="#' + id_of_div + '">' \
+                          + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md','') + '/%23%23%23 ' + h3 + '">' \
                           + tag_heading(h3) \
                           + '</a></h3>'
             if VERBOSE: print "# l", l

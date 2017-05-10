@@ -29,7 +29,7 @@ from engine.page import Page
 from engine.md_update import Md_update
 from engine.make_index import Index
 from engine.colors import bcolors
-
+from engine.searcher import make_db
 #import yappi
 
 class GeekbookError(Exception):
@@ -208,22 +208,25 @@ class App(object):
         #stats = yappi.get_func_stats()
         #stats.save('yappi.callgrind', type="callgrind")
 
+
+def start_flask():
+    logger.info("Start off flask!")
+    os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py &')
+
 def start_gitweb():
     """Start git instaweb"""
     os.chdir(PATH_TO_MD)
     os.system('git instaweb')
 
-
 def start_browser_with_index():
     """Detect the operative system in use and open the html file using the default browser. 
     Works with Linux and macOS."""
     if platform.system() == "Linux":
-        os.system('xdg-open file://' + PATH_TO_HTML + 'index.html')
+        os.system('xdg-open http://127.0.0.1:5000/view/index.html')#
     if platform.system() == "Darwin":
-        os.system('open file://' + PATH_TO_HTML + 'index.html')
+        os.system('open http://127.0.0.1:5000/view/index.html')
     else:
         logger.info("Sorry, I cannot detect your system, you will have to open the file manually @")
-
 
 def get_parser():
     """Get parser of arguments"""
@@ -245,6 +248,10 @@ if __name__ == '__main__':
     
     a = App(args)
 
+    start_flask()
+
+    make_db()
+    
     if args.notebook:
         notebook_files = os.listdir(PATH_TO_MD)
         for n in [n for n in notebook_files if n.endswith('.ipynb')]:
@@ -271,4 +278,5 @@ if __name__ == '__main__':
         if not args.silent:
             start_gitweb()
             start_browser_with_index()
+
     a.start()

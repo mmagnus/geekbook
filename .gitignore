@@ -100,3 +100,4 @@ doc/_build
 ___*
 
 find_file.json
+searchdb.pickle

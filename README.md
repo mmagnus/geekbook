@@ -29,7 +29,30 @@ G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking sys
   
 A neat way how to combine **Emacs/Atom/Sublime editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
 
+Motto: **Notes are like your code**.
+
+Features | Geekbook | Word Office | Apple Notes
+-------- | -------- | ----------- | -----------
+**Edits with Emacs** | Oh, boy, yes! | Nope. | Nope.
+**Outline (collapse to headers)** | With Emacs yes. Works great! | Nope. | Nope.
+**Long notes - easier to browse** | Long notes with great speed and table of contet | Very slow for long notes. Alwasy problems with formatting long notes with images. | Very good for short notes.
+**Syntax highlighting** | Oh, boy, yes! | Hmm.. nope. | Hmm.. nope.
+**Write your own plugins in Python** | Oh, boy, yes! | Nope. | Nope.
+**Export as a pdf** | Yes | Yes | Yes
+**Edit with ...** | Any text editor (with Markdown support for better UX) | Word | Apple Notes (Closed)
+**Flexible** | Super flexible. You can find your own why how to make your notes | Medium | Medium
+**Search** | Super easy to search with built-in search or just grep your files | More difficult to search over a set of files. Slow! | OK
+**Version control** | Yes, if you use Git etc | Kind of. Hard to use (compared to Git) | Nope.
+**Style customizable** | Yes, it's HTML. Do what ever you want | To some extend | Nope.
+**Edit on your phone** | Yes, use Byword | Not really | Yes, works very well!
+**Open & Free** | YES | Nope, closed and pricey | Close, no extra charge if you have an Apple device
+**Super easy to use** | Rather for geek/nerds/hackers | Easy but who cares ;-) | Easy but who cares. ;-)
+
+@todo Compare to Evernote.
+
 **The preview of the default template:**
+
+Similar projects: it's kind of like Sphinx for your documentation, or Mkdocs (http://www.mkdocs.org/).
 
 ![](themes/default/qubCXZcWHl.gif)
 
