@@ -85,6 +85,7 @@ pre {
     word-break: normal ;
     word-wrap: normal ;
     white-space: pre ;
+    background-color: black;
 }
 code,kbd,pre,samp {
 	font-family:monospace,monospace;
