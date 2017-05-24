@@ -223,7 +223,7 @@ def start_browser_with_index():
     Works with Linux and macOS."""
     if platform.system() == "Linux":
         os.system('xdg-open http://127.0.0.1:5000/view/index.html')#
-    if platform.system() == "Darwin":
+    elif platform.system() == "Darwin":
         os.system('open http://127.0.0.1:5000/view/index.html')
     else:
         logger.info("Sorry, I cannot detect your system, you will have to open the file manually @")
