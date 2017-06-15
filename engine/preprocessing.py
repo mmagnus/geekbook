@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 """This is a set of functions that work on Markdown file, before compiling them to html."""
 
 from engine.conf import PATH_TO_IMG
