@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 """This is a set of functions that work on HTML file, after compiling them based on Markdown."""
 
