@@ -218,13 +218,13 @@ class Db():
 
 
 def make_db():
-    db = Db()
+    db = Db()                             
     print 'searcher::making the db'
     db.collect_data()
-    pickle.dump(db, open( "searchdb.pickle", "wb" ))
+    pickle.dump(db, open(PATH + os.sep + "engine/searchdb.pickle", "wb" ))
 
 def search_term(term):
-    db = pickle.load(open( "searchdb.pickle", "rb"))
+    db = pickle.load(open(PATH + os.sep + "engine/searchdb.pickle", "rb"))
     return db.search(term)
 
 #main
