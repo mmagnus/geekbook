@@ -55,7 +55,7 @@ def get_ss(text):
             isfile = os.path.isfile(out)
             changed = True
             if isfile and not overwrite:
-                err = 'imgs is already thare, change a name or force to overwrite [ss:/file/:t]'
+                err = 'imgs is already there, change a name or force to overwrite [ss:/file/:t]'
                 logger.info(err)
                 ltext[c+4] = '[!danger]' + err + '[danger!]'
                 return '\n'.join(ltext), changed
