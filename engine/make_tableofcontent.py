@@ -64,7 +64,7 @@ def make_table_of_content(fn, text, version2=True):
             # '</div>'
             #+ '<a class="nondecoration" href="#' + id_of_div + '">' \
             l = '<div id="' + id_of_div + '"><h1>' \
-                + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md','') + '/%23 ' + h1 + '">' \
+                + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md','') + '/%23 ' + h1.replace('#', '%23').replace('/', '%2F') + '">' \
                 + tag_heading(h1) \
                 + '</a></h1>'
             if VERBOSE: print "# l", l
@@ -81,7 +81,7 @@ def make_table_of_content(fn, text, version2=True):
             # '</div>
             #+ '<a class="nondecoration" href="#' + id_of_div + '">' \
             l = '<div id="' + id_of_div + '"><h2>' \
-                + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md','') + '/%23%23 ' + h2 + '">' \
+                + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md','') + '/%23%23 ' + h2.replace('#', '%23').replace('/', '&#47') + '">' \
                 + tag_heading(h2) \
                 + '</a></h2>'
             if VERBOSE: print "# l", l
@@ -97,7 +97,7 @@ def make_table_of_content(fn, text, version2=True):
             id_of_div = replace_space_with_minus(h3)
             # '</div>
             l = '<div id="' + id_of_div + '"><h3>' \
-                          + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md','') + '/%23%23%23 ' + h3 + '">' \
+                          + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md','') + '/%23%23%23 ' + h3.replace('#', '%23').replace('/', '&#47') + '">' \
                           + tag_heading(h3) \
                           + '</a></h3>'
             if VERBOSE: print "# l", l
