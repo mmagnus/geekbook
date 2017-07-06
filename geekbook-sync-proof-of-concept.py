@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Push a geekbook note to VM as readme and commit.
+TODO:
+
+- sync images
 
 if now change:
 
