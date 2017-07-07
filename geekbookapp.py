@@ -235,6 +235,7 @@ def get_parser():
     parser.add_argument('-u', '--update', help='updates all the pages', action='store_true')
     parser.add_argument('-s', '--silent', help='dont bring up the Internet Browser', action='store_true')
     parser.add_argument('-n', '--notebook', help='updates all jupiter notebooks!', action='store_true')
+    parser.add_argument('--noflask', help='dont run flask', action='store_true')
     return parser
 
 #main
@@ -248,7 +249,8 @@ if __name__ == '__main__':
     
     a = App(args)
 
-    start_flask()
+    if not args.noflask:
+        start_flask()
 
     make_db()
     
