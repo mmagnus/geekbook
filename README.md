@@ -150,6 +150,8 @@ See http://geekbook.readthedocs.io/en/latest/install.html
 
 # History
 
+- 170707 Add DataTables for the Index (Home)
+- 170707 Add `geekbooksync.py`
 - 170705 geekbook 2.0 **flask-based geekbook**
 - 170420 include_file. Open a given file and include the content of it.
 
