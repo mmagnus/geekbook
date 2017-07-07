@@ -13,7 +13,8 @@ import logging
 import subprocess
 import commands
 import gc
-
+import signal
+    
 logging.basicConfig(format='%(asctime)s - %(filename)s - %(message)s')
 logger = logging.getLogger('geekbook')
 logger.setLevel('INFO')
@@ -106,8 +107,9 @@ class App(object):
         mf = MdFiles()
         logger.info('You have %i notes! Congrats, keep noting!' % len(mf.get_files()))
 
-        
-        
+        index = Index()
+        index.update(mf.get_files())
+
         #yappi.start()
         c = 0
 
@@ -266,7 +268,6 @@ if __name__ == '__main__':
     #[NbConvertApp] Support files will be in testA_files/
     #[NbConvertApp] Making directory testA_files
     #[NbConvertApp] Writing 2960 bytes to testA.md
-
 
     if args.debug:
         DEV = True
