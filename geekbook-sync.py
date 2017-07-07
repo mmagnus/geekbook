@@ -2,6 +2,21 @@
 
 """Push/pull a geekbook note to VM as readme and commit.
 
+Usage::
+
+    ./geekbook-sync.py --push npdock.conf
+    # NPDock
+
+    **NPDock** (Nucleic acid-Protein Dock) is a web server for modeling of RNA-protein and DNA-protein complex structures.
+    It combines (1) GRAMM for global macromolecular docking, (2) scoring with a statistical potential, (3) clustering of best-scored structures, and (4) local refinement.
+
+    to pull:
+
+    ./geekbook-sync.py --pull npdock.conf
+    scp rpdock-vm:/home/rpdock/web/README.md npdock-readme.md.remote
+    README.md
+
+
 if now change:
 
     [mm] geekbook$ git:(master) ✗ ./gk-sync.py
