@@ -107,8 +107,9 @@ class App(object):
         mf = MdFiles()
         logger.info('You have %i notes! Congrats, keep noting!' % len(mf.get_files()))
 
-        
-        
+        index = Index()
+        index.update(mf.get_files())
+
         #yappi.start()
         c = 0
 
