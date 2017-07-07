@@ -47,7 +47,6 @@ class Index(object):
             ##
 
         html += open(PATH_HOMEPAGE).read()
-        html += '<table class="table table-hover"><tr><th>Title</th><th>Description</th><th><center>Last Update</center></th></tr>'
 
         for mdfn in list_md:
             if mdfn == 'imgs':
@@ -76,6 +75,8 @@ class Index(object):
                             + '<td><small><center class="index_date">' + time.ctime(os.stat(os.path.join(PATH_TO_MD, mdfn + '.md')).st_mtime) + '</center></small></td></tr>'
 
         html += '</p>'
+
+        html += "</tbody></table>"
 
         f = open(PATH_TO_HTML + 'index.html', 'w')
         f.write(html)

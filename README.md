@@ -14,6 +14,13 @@ G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking sys
 <span class="badge-flattr"><a href="https://flattr.com/profile/mmagnus" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
 <span class="badge-gratipay"><a href="https://www.gratipay.com/mmagnus" title="Donate weekly to this project using Gratipay"><img src="https://img.shields.io/badge/gratipay-donate-yellow.svg" alt="Gratipay donate button" /></a></span>
 
+![](themes/default/qubCXZcWHl.gif)
+
+![](docs/imgs/56HcDqXllz.gif)
+
+A neat way how to combine **Emacs/Atom/Sublime editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
+
+Motto: **Notes are like your code**.
 
   * [Features](#features)
     * [Index](#index)
@@ -28,10 +35,6 @@ G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking sys
   * [Install & Get Started!](#install)
   * [Food for thought](#food-for-thought)
   * [History](#history)
-  
-A neat way how to combine **Emacs/Atom/Sublime editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
-
-Motto: **Notes are like your code**.
 
 Features | Geekbook | Word Office | Apple Notes
 -------- | -------- | ----------- | -----------
@@ -55,8 +58,6 @@ Features | Geekbook | Word Office | Apple Notes
 **The preview of the default template:**
 
 Similar projects: it's kind of like Sphinx for your documentation, or Mkdocs (http://www.mkdocs.org/).
-
-![](themes/default/qubCXZcWHl.gif)
 
 Freatures:
 

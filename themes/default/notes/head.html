@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="css/github.min.css">
     <!--<link rel="stylesheet" href="https://afeld.github.io/bootstrap-toc/bootstrap-toc/assets/screen.css" media="screen" charset="utf-8">-->
     <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/jquery_3.2.1/jquery.min.js"></script>
+    <script src="js/jquery.dataTables_1.10.15/jquery.dataTables.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap-toc.js"></script>
     <script src="js/highlight.min.js"></script>
@@ -20,7 +22,8 @@
     <link rel="stylesheet" href="lib/lightbox2/src/css/lightbox.css" type="text/css">
 
     <link rel="icon" type="image/x-icon" href="img/favicon.png">
-    
+
+    <link rel="stylesheet" href="css/jquery.dataTables_1.10.15/jquery.dataTables.css">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/monokai.css" type="text/css">
@@ -54,6 +57,26 @@
 	return false;
     });
 </script>
+
+<script type="text/javascript">
+  $(document).ready( function () {
+  $('#table_id').DataTable( {
+      "bSort": false,
+      "paging": false,
+  } );
+  })  
+</script>
+
+<table id="table_id" class="display">
+    <thead>
+        <tr>
+          <th>Title</th>
+	  <th>Description</th>
+          <th>Last update</th>
+        </tr>
+    </thead>
+    <tbody>
+
 
 <!-- start of demo -->
 <title>demo -- will be replaced!</title>
