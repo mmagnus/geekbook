@@ -4,22 +4,34 @@
 
 Usage::
 
+    $ cat npdock.conf
+    [Profile]
+    RemoteFile = rpdock-vm:/home/rpdock/web/README.md
+    # where git repository sits
+    RemoteDir = /home/rpdock/web/
+    LocalFile = notes/npdock-readme.md
+    LocalTmpFile = npdock-readme.md.remote
+    DiffTool = open -a diffmerge
+    HeaderToStop = '# Misc' % # this can be used to break the coping, after this tag all informations stays on your computer
+                              # test first with --dry --verbose to make sure that you are not going to push
+                              # your private notes 
+
+push (works with images)::
+
     ./geekbook-sync.py --push npdock.conf
     # NPDock
 
     **NPDock** (Nucleic acid-Protein Dock) is a web server for modeling of RNA-protein and DNA-protein complex structures.
     It combines (1) GRAMM for global macromolecular docking, (2) scoring with a statistical potential, (3) clustering of best-scored structures, and (4) local refinement.
 
-    to pull:
+pull::
 
     ./geekbook-sync.py --pull npdock.conf
     scp rpdock-vm:/home/rpdock/web/README.md npdock-readme.md.remote
     README.md
 
+if no change, no push will be made.
 
-if now change:
-
-    [mm] geekbook$ git:(master) ✗ ./gk-sync.py
     npdock-readme.md.tosync                                                                                            100% 481     1.4MB/s   00:00
     On branch master
     Your branch is up-to-date with 'origin/master'.
@@ -33,8 +45,8 @@ if now change:
 
 required
 
-   https://github.com/ekalinin/github-markdown-toc.go 
-   https://docs.python.org/3/library/configparser.html
+- https://github.com/ekalinin/github-markdown-toc.go 
+- https://docs.python.org/3/library/configparser.html
 """
 
 import subprocess
@@ -50,12 +62,13 @@ def get_parser():
     parser.add_argument('profile_file', help='profile_file')
     parser.add_argument('--pull', help='push to the server', action='store_true')
     parser.add_argument('--push', help='push to the server', action='store_true')
+    parser.add_argument('-d', '--dry', help="dry, don't push to the server", action='store_true')
     parser.add_argument('-v', '--verbose', help='push to the server', action='store_true')
     return parser
     
-def get_file(fn):
+def get_file(fn, header_to_stop, verbose):
     def get_imgs(f):
-        """imgs/Screen_Shot_2017-07-07_at_7.57.34_PM.png"""
+        """e.g. imgs/Screen_Shot_2017-07-07_at_7.57.34_PM.png"""
         imgs = []
         for l in open(f):
             hit = re.search('\!\[.?\]\((?P<path>.+)\)', l)
@@ -76,11 +89,21 @@ def get_file(fn):
     txt = open(fn).read()
     txt = txt.replace('[tableofcontent]', toc)
 
+    if header_to_stop:
+        ntxt = ''
+        for l in txt.split('\n'):
+            if l.startswith(header_to_stop.replace("'",'')):
+                print("break!")
+                break
+            ntxt += l + '\n'
+    else:
+        ntxt = txt
+
     outf = '/tmp/' + os.path.basename(fn) + '.tosync'
     f = open(outf, 'w')
-    f.write(txt)
+    f.write(ntxt)
     f.close()
-    #print(txt)
+    if verbose: print(ntxt)
     return imgs, outf
     
 def fetch(remote_file, local_tmp_file, local_file, diff_tool):
@@ -117,12 +140,17 @@ if __name__ == '__main__':
     local_file = cfg.get('Profile', 'LocalFile')
     diff_tool = cfg.get('Profile', 'DiffTool')
     remote_dir = cfg.get('Profile', 'RemoteDir')
+    try:
+        header_to_stop = cfg.get('Profile', 'HeaderToStop')
+    except configparser.NoOptionError:
+        header_to_stop = None
+
     v = args.verbose
     
     if args.pull:
         fetch(remote_file, local_tmp_file, local_file, diff_tool)
     if args.push:
-        imgs, outf = get_file(local_file)
+        imgs, outf = get_file(local_file, header_to_stop, args.verbose)
         if imgs:
             cmd = "ssh " + remote_file.split(':')[0] + " 'mkdir " + remote_dir + "/imgs/'"
             if v: print(cmd)
@@ -134,6 +162,13 @@ if __name__ == '__main__':
             
         cmd = 'scp %s %s ' % (outf, remote_file)
         print(cmd)
-        os.system(cmd)
+        if not args.dry:
+            os.system(cmd)
+
         cmd = "ssh " + remote_file.split(':')[0] + " 'cd " + remote_dir + " ; git add imgs/* ; git add " + remote_file.split('/')[-1] + " ; git -c color.status=always status ; git commit -m \"readme update\" ; git push'"
-        os.system(cmd)
+        print(cmd)
+        if not args.dry:
+            os.system(cmd)
+
+        if args.dry:
+            print("\n!!!!!!!! DRY RUN don't pushed !!!!!!!!")
