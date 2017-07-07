@@ -50,9 +50,19 @@ def get_parser():
     parser.add_argument('profile_file', help='profile_file')
     parser.add_argument('--pull', help='push to the server', action='store_true')
     parser.add_argument('--push', help='push to the server', action='store_true')
+    parser.add_argument('-v', '--verbose', help='push to the server', action='store_true')
     return parser
     
 def get_file(fn):
+    def get_imgs(f):
+        """imgs/Screen_Shot_2017-07-07_at_7.57.34_PM.png"""
+        imgs = []
+        for l in open(f):
+            hit = re.search('\!\[.?\]\((?P<path>.+)\)', l)
+            if hit:
+                imgs.append(hit.group('path'))
+        return imgs
+    
     def get_toc(f):
         cmd = "gh-md-toc " + f
         o = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -60,17 +70,18 @@ def get_file(fn):
         err = o.stderr.read().strip()
         return out.decode('utf-8')
 
+    imgs = get_imgs(fn)
     toc = get_toc(fn)
 
     txt = open(fn).read()
     txt = txt.replace('[tableofcontent]', toc)
 
-    outf = os.path.basename(fn) + '.tosync'
-    f = open(fn,'w')
+    outf = '/tmp/' + os.path.basename(fn) + '.tosync'
+    f = open(outf, 'w')
     f.write(txt)
     f.close()
-    print(txt)
-    return outf
+    #print(txt)
+    return imgs, outf
     
 def fetch(remote_file, local_tmp_file, local_file, diff_tool):
     cmd = 'scp %s %s' % (remote_file, local_tmp_file)
@@ -106,12 +117,23 @@ if __name__ == '__main__':
     local_file = cfg.get('Profile', 'LocalFile')
     diff_tool = cfg.get('Profile', 'DiffTool')
     remote_dir = cfg.get('Profile', 'RemoteDir')
-
+    v = args.verbose
+    
     if args.pull:
         fetch(remote_file, local_tmp_file, local_file, diff_tool)
     if args.push:
-        outf = get_file(local_file)
+        imgs, outf = get_file(local_file)
+        if imgs:
+            cmd = "ssh " + remote_file.split(':')[0] + " 'mkdir " + remote_dir + "/imgs/'"
+            if v: print(cmd)
+            os.system(cmd)
+            for i in imgs:
+                cmd = 'scp %s %s ' % (os.path.dirname(local_file) + os.sep + i, remote_file.split(':')[0] + ':' + remote_dir + i)                
+                if v: print(cmd)
+                os.system(cmd)
+            
         cmd = 'scp %s %s ' % (outf, remote_file)
+        print(cmd)
         os.system(cmd)
-        cmd = "ssh " + remote_file.split(':')[0] + " 'cd " + remote_dir + " ; git add " + remote_file.split('/')[-1] + " ; git commit -m \"readme update\" ; git push'"
+        cmd = "ssh " + remote_file.split(':')[0] + " 'cd " + remote_dir + " ; git add imgs/* ; git add " + remote_file.split('/')[-1] + " ; git -c color.status=always status ; git commit -m \"readme update\" ; git push'"
         os.system(cmd)
