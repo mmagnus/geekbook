@@ -61,13 +61,14 @@
 <script type="text/javascript">
   $(document).ready( function () {
   $('#table_id').DataTable( {
-      "bSort": false,
-      "paging": false,
+  "bSort": false,
+  "lengthMenu": [[20, 50, -1], [20, 50, "All"]]
   } );
   })  
 </script>
+<!--      "paging": false,-->
 
-<table id="table_id" class="display">
+<table id="table_id" class="display compact hover">
     <thead>
         <tr>
           <th>Title</th>
