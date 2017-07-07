@@ -1,5 +1,7 @@
-# geekbook - note taking system for nerds/geeks!
-
+<h1 align="center">
+geekbook - note taking system for nerds/geeks!
+</h1>
+<p align="center">
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
 G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
@@ -17,6 +19,7 @@ G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking sys
 ![](themes/default/qubCXZcWHl.gif)
 
 ![](docs/imgs/56HcDqXllz.gif)
+</p>
 
 A neat way how to combine **Emacs/Atom/Sublime editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
 
