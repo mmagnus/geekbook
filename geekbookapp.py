@@ -233,7 +233,8 @@ def start_browser_with_index():
 def get_parser():
     """Get parser of arguments"""
     parser = argparse.ArgumentParser('geekbookapp.py')
-    parser.add_argument('-d', '--debug', help='debug mode, run only for file')
+    parser.add_argument('-d', '--debug', help='debug mode, run only for file,' + \
+                            'WARNING: use only name of the note, e.g. test.md, NOT notes/test.md')
     parser.add_argument('-u', '--update', help='updates all the pages', action='store_true')
     parser.add_argument('-s', '--silent', help='dont bring up the Internet Browser', action='store_true')
     parser.add_argument('-n', '--notebook', help='updates all jupiter notebooks!', action='store_true')
@@ -251,7 +252,7 @@ if __name__ == '__main__':
     
     a = App(args)
 
-    if not args.noflask:
+    if not args.noflask and not args.debug:
         start_flask()
 
     make_db()
