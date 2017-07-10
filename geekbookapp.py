@@ -252,7 +252,7 @@ if __name__ == '__main__':
     
     a = App(args)
 
-    if not args.noflask and not args.debug:
+    if not args.noflask and not args.debug and not args.update:
         start_flask()
 
     make_db()
@@ -264,6 +264,7 @@ if __name__ == '__main__':
             print cmd
             os.system(cmd)
         sys.exit(1)
+
     #[mm] notes git:(master) ✗ 
     #    [NbConvertApp] Converting notebook testA.ipynb to markdown
     #[NbConvertApp] Support files will be in testA_files/
