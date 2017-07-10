@@ -8,6 +8,7 @@ import re
 import datetime
 import os
 
+import time
 import logging
 logger = logging.getLogger('geekbook')
 formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -17,13 +18,12 @@ from pygments import highlight
 from pygments.lexers import PythonLexer, HtmlLexer, CssLexer, EmacsLispLexer, BashLexer, HexdumpLexer, DjangoLexer
 from pygments.formatters import HtmlFormatter
 
-from engine.conf import PATH_TO_BASE_IMG, PATH_TO_TEMPLATE, PATH_TO_TEMPLATE_HTML, PATH_TO_HTML
+from engine.conf import PATH_TO_BASE_IMG, PATH_TO_TEMPLATE, PATH_TO_TEMPLATE_HTML, PATH_TO_HTML, PATH_TO_MD
 
-
-def change_data_tag_into_actual_data(text):
+def change_data_tag_into_actual_data(mdfn, text):
     """change [date] into actual date"""
-    today = datetime.date.today()
-    text = text.replace('[date]', str(today))
+    date = time.strftime("%Y-%m-%d", time.localtime(os.path.getctime(PATH_TO_MD + mdfn)))
+    text = text.replace('[date]', date)
     return text
 
 
