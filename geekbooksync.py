@@ -77,8 +77,9 @@ def get_file(fn, header_to_stop, verbose):
                 imgs.append(hit.group('path'))
         return imgs
     
-    def get_toc(f):
+    def get_toc(f, verbose):
         cmd = "gh-md-toc " + f
+        if verbose: print('gh-md-toc:', cmd)
         o = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out = o.stdout.read().strip()
         err = o.stderr.read().strip()
@@ -95,15 +96,15 @@ def get_file(fn, header_to_stop, verbose):
     else:
         ntxt = txt
 
-    tmpfile = 'sync.tmp'
+    tmpfile = 'sync_tmp.md'
     with open(tmpfile, 'w') as f:
         f.write(ntxt)
         
     imgs = get_imgs(tmpfile)
-    toc = get_toc(tmpfile)
 
+    toc = get_toc(tmpfile, verbose)
     txt = open(tmpfile).read()
-    txt = txt.replace('[tableofcontent]', toc)
+    txt = txt.replace('[table_of_content]', toc)
 
     outf = '/tmp/' + os.path.basename(fn) + '.tosync'
     f = open(outf, 'w')
