@@ -25,7 +25,6 @@ huge improv: 2012/11/08
 """
 debug = False
 
-import myutils
 import sys
 import re
 import os
@@ -35,9 +34,66 @@ import pickle
 import os
 import sys
 PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print PATH
+print(PATH)
 sys.path.append(PATH)
 from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE_HTML, PATH_TO_MD
+
+def hightlight_text_in_html(phrase, text):
+    """
+    Replace NO_PUBKEY with a highlighted text '<span style="background-color:yellow">NO_PUBKEY</span>'
+
+    Normal phrase is used and .upper()
+    """
+    text = text.replace(phrase, '<span style="background-color:yellow">' + phrase + '</span>')
+    text = text.replace(phrase.upper(), '<span style="background-color:yellow">' + phrase.upper() + '</span>')
+    text = text.replace(phrase.title(), '<span style="background-color:yellow">' + phrase.title() + '</span>')
+    return text
+
+def lsdir(directory = '/home/magnus/Desktop/', exclude_files_starting_with_dot=True, verbose=False):
+    """
+    magnus@maximus:~/workspace/myutil$ python test.py
+    /home/magnus/Desktop/bookmarks-2010-10-15-present-bookmarks-nice.json
+    /home/magnus/Desktop/Untitled 2.odt
+    /home/magnus/Desktop/logo.jpg
+
+    GET:
+    - directory e.g. /home/magnus/Desktop/
+
+    DO:
+    - walk and collect a list of all files -> f
+    RETURN:
+    - f = list of all files under given directory, [/home/magnus/Desktop/temp/beta.png, ... ,/home/magnus/Desktop/temp/temp~]
+
+    http://snippets.dzone.com/posts/show/644
+
+    """
+    def walktree (top = ".", depthfirst = True):
+        import stat
+        names = os.listdir(top)
+        if not depthfirst:
+            yield top, names
+        for name in names:
+            try:
+                st = os.lstat(os.path.join(top, name))
+            except os.error:
+                continue
+            if stat.S_ISDIR(st.st_mode):
+                for (newtop, children) in walktree (os.path.join(top, name), depthfirst):
+                    yield newtop, children
+        if depthfirst:
+            yield top, names
+
+    f = []
+    for (basepath, children) in walktree(directory,False):
+        for child in children:
+            if exclude_files_starting_with_dot:
+                if child.startswith('.'):
+                    continue
+                else:
+                    if verbose:
+                        print os.path.join(basepath, child)
+                    f.append( os.path.join(basepath, child))
+    return f
 
 class Header:
     """
@@ -75,7 +131,7 @@ class Header:
         out += '<h1 style="font-size:20px;color:black><a href="/view/' + self.md + '.html#' + self.name_dashed + '">' + self.name + '</a></h1>\n'
         out += '<small style="color: #009933;">' + '<a href="/view/' + self.md + '.html#' + self.name_dashed + '">' + self.md + '</a>' + '</small>\n'
         #        out += '<p>...' + myutilspy.hightlight_text_in_html(term, self.note).replace('\n','<br/>') + '...<p>\n'
-        out += '<pre>' + myutils.hightlight_text_in_html(term, self.note).replace('\n','<br/>') + '</pre>\n'
+        out += '<pre>' + hightlight_text_in_html(term, self.note).replace('\n','<br/>') + '</pre>\n'
         out += '<div style="width:100%" class="hrDotted"></div>'
         return out
 
@@ -151,11 +207,11 @@ def make_headers_objects_for_md(filename, verbose=False,version2=True):
                 except NameError:
                     pass
                 note = ''  ## reset the note variable
-    if verbose: print 'root has following headers of # type: '.ljust(40), root
+    if verbose: print('root has following headers of # type: '.ljust(40), root)
     #tb = PrettyTable(["r.name", "r.note", "r.level", "r.get_child()", "h3"])
     for r in root:
         row = [r.name, r.note[:50], r.level, r.get_child(), [x.get_child() for x in r.get_child()]]
-        if verbose: print row
+        if verbose: print(row)
         #tb.add_row(row)
     ## collect all h1
     all_h = []
@@ -176,7 +232,7 @@ class Db():
         self.all_headers = ''
 
     def collect_data(self, v=0):
-        out = myutils.lsdir(PATH_TO_MD)
+        out = lsdir(PATH_TO_MD)
         ## hack start ##
         out2 = []
         #'/home/magnus/Dropbox/lb_v2/md/.#bash.md'
@@ -193,7 +249,7 @@ class Db():
         #print '<head><meta content="text/html; charset=UTF-8" http-equiv="content-type">'
         #print "<link rel='stylesheet' href='/home/magnus/Dropbox/Public/lb/css/style.css' /></head>"
         for o in out:
-            if v: print o
+            if v: print(o)
             all_headers.extend(make_headers_objects_for_md(o))
         self.all_headers = all_headers
 
@@ -204,13 +260,12 @@ class Db():
     def _search_over_headers_objects(self, term, v=0):
         hits = []
         for h in self.all_headers:
-            #print h.level, h.name, ' -->', h.note
             if re.search(term, h.name + h.note, re.I):
                 hits.append(h)
         hits_output = ''
         for hit in hits:
-            if v:print hit.name
-            if v:print hit.note
+            if v:print(hit.name)
+            if v:print(hit.note)
             h = hit.get_format(term)
             hits_output += h
             if v:print
@@ -219,7 +274,7 @@ class Db():
 
 def make_db():
     db = Db()                             
-    print 'searcher::making the db'
+    print('searcher::making the db')
     db.collect_data()
     pickle.dump(db, open(PATH + os.sep + "engine/searchdb.pickle", "wb" ))
 
@@ -230,5 +285,5 @@ def search_term(term):
 #main
 if __name__ == '__main__':
     term = '@test'
-    print make_db()
+    print(make_db())
     search_term('@test')
