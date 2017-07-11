@@ -1,14 +1,7 @@
-<h1 align="center">
-geekbook - note taking system for nerds/geeks!
-</h1>
-<p align="center">
+# geekbook - note taking system for nerds/geeks!
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
-</p>
-<p align="center">
-G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
-</p>
 
-<p align="center">
+G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
 
 [![Twitter Follow](http://img.shields.io/twitter/follow/geekbookx.svg?style=social&label=Follow)](https://twitter.com/geekbookx)
 [![Documentation Status](https://readthedocs.org/projects/geekbook/badge/?version=latest)](http://geekbook.readthedocs.io/en/latest/?badge=latest)
