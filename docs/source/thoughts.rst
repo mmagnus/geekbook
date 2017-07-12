@@ -1,6 +1,20 @@
 Food for thoughts
 =================================================================
 
+Simple plain text writing
+-----------------------------------------------------------------
+
+> It's easy to obsess more about your writing setup than your actual writing, but when inspiration strikes and you actually want to—you know—write something, nothing should stand between you and putting your thoughts on paper, digital or otherwise. Distraction-free writing environments are all the rage, but here's the thing: You can set up a writing environment so free from distractions it's the writing equivalent of a sensory deprivation tank, but if all that fiddling places any barrier between you and your goal—to actually write—it's not worth it.
+
+http://lifehacker.com/5684804/set-up-a-writing-system-that-stays-out-of-your-way
+
+What Is Markdown, and Why Is It Better for My To-Do Lists and Notes?
+-----------------------------------------------------------------
+
+> Markdown uses a very simple formatting syntax to accomplish the same thing that HTML or Rich Text Formatting does. The difference is that it's simpler than HTML and you don't have to worry about opening and closing tags. It also doesn't have all of the menus associated with most text editing programs. To format text, Markdown uses punctuation and characters you're already familiar with.
+
+http://lifehacker.com/5943320/what-is-markdown-and-why-is-it-better-for-my-to-do-lists-and-notes
+
 Long notes vs short notes
 -----------------------------------------------------------------
 It seems that if it make sense try to make long notes. One project should be a long note. You have everything in one place, and you can just scroll up or down and use the table of content sidebar to get where you want, it's a really time saver! Not having to click and go to a different note, it's really fun and help you focus on your work. That's why Word doc files don't work for me, it's to hard to find yourself easily and for very big files, Word is just super slow!
