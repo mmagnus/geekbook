@@ -160,7 +160,8 @@ def make_headers_objects_for_md(filename, verbose=False,version2=True):
     filename = '/home/magnus/Dropbox/lb_v2/md/bioinfo::threading.md'
     """
     text = codecs.open(filename, mode="r", encoding="utf8").read()
-    md = filename.replace(PATH_TO_MD, '').replace('.md','') ## md = bioinfo::threading
+    md = filename.replace(PATH_TO_MD, '')
+    md = re.sub('.md$', '', md)  # replace only .md at the very end    #.replace('.md','') ## md = bioinfo::threading
     root = []  ## starting point of the structure
     lines = text.split('\n')
     no_lines = len(lines)

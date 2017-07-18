@@ -60,7 +60,7 @@ class Index(object):
                         if l.strip().startswith('[desc:'):
                             desc = l.replace('[desc:','').replace(']','').strip()
 
-                    mdfn = mdfn.replace('.md', '')
+                    mdfn = re.sub('.md$', '', mdfn)  # replace only .md at the very end
                     path = PATH_TO_HTML + '/' + mdfn
                     #if l.find('::')>=0:
                     #    html += '<li class="table_of_content_h2"><a style="" href="' + path + '.html">' + l + '</a></li>'
