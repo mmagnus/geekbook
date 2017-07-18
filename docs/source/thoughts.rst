@@ -19,6 +19,8 @@ Long notes vs short notes
 -----------------------------------------------------------------
 It seems that if it make sense try to make long notes. One project should be a long note. You have everything in one place, and you can just scroll up or down and use the table of content sidebar to get where you want, it's a really time saver! Not having to click and go to a different note, it's really fun and help you focus on your work. That's why Word doc files don't work for me, it's to hard to find yourself easily and for very big files, Word is just super slow!
 
+However, if you have a note that is clearly self-containing, separate from everything else, use a new note. It will be faster to read or/and edit on mobile devices, easier to print.
+
 Git/Github your notes
 -----------------------------------------------------------------
 We develop a plugin to automatically git your notes. The script can be added to your crontab. 
