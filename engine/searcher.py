@@ -26,6 +26,8 @@ huge improv: 2012/11/08
 debug = False
 
 import sys
+sys.tracebacklimit = 0
+
 import re
 import os
 import codecs
@@ -181,7 +183,10 @@ def make_headers_objects_for_md(filename, verbose=False,version2=True):
             try:
                 current_h1.add_child(current_h2)
             except UnboundLocalError:
-                raise Exception(filename)
+                raise Exception("""Exception: Error: This is stupid, sorry for this. But to get searcher running
+you have to have headers structured in a way that first you have # (H1 header) and then ## etc. You can not
+start your note with ##. Moreover, you can not have # and then ###. You have to keep #, and ##, and ### etc. It should
+be fixed at some point. The problem is in the file: %s""" % filename)
             last_h = current_h2
         elif l.startswith('### '):
             l = l.replace('### ', '')
