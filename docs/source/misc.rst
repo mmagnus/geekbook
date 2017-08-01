@@ -42,6 +42,9 @@ Use something like this::
   
    export BORG_PASSPHRASE='<you secret password>'
    export BORG_REPO="malibu:~/notes" # where malibu is a remove machine
+   
+   borg init malibu:~/notes
+   
    borg create -v --stats  malibu:~/notes::{now} ~/geekbook/notes
    # remove your old backups notes 
    borg prune --list -v $BORG_REPO --keep-daily=7 --keep-weekly=4 --keep-monthly=6
