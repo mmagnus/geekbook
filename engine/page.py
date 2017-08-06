@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-"""page module
-"""
-
+"""Page - one note is a page."""
 import markdown
 import codecs
 from mdx_gfm import GithubFlavoredMarkdownExtension
@@ -34,6 +32,7 @@ class Page(object):
       html - html content of the note
 
     """
+
     def __init__(self, fn):
         """Init a Page and load the content of MD file into self.md"""
         self.fn = fn
@@ -43,12 +42,13 @@ class Page(object):
                 self.md = f.read()
             self.html = ''
         except IOError:
-            logging.error('file removed ' + self.fn)            
+            logging.error('file removed ' + self.fn)
             self.md = None
-            
+
     def get_html(self):
         """Compile md to get html"""
-        self.html = markdown.markdown(self.md, extensions=[GithubFlavoredMarkdownExtension()])#(linenums=False)'])
+        self.html = markdown.markdown(
+            self.md, extensions=[GithubFlavoredMarkdownExtension()])  # (linenums=False)'])
         #html = '<link rel="stylesheet" href="/home/magnus/Dropbox/lb_v2/templates/Pygments/css/pygments.css" type="text/css">' + html
 
     def compile(self):
@@ -70,7 +70,6 @@ class Page(object):
         self.md = get_abstract(self.md)
         self.md = include_file(self.md)
         # self.md = right_link_from_dropbox_screenshot(self.md)
-        
 
     def post_process(self):
         """Do postprocessing"""
@@ -85,7 +84,7 @@ class Page(object):
             self.html = find_files(self.html)
         self.html = get_todo(self.html)
         self.html = add_title(self.html, self.fn)
-        
+
     def is_changed(self):
         """Check if the file on disc is different than `md`.
 
@@ -121,6 +120,7 @@ class Page(object):
 
         with codecs.open(PATH_TO_HTML + self.fn.replace('.md', '.html'), "w", "utf-8") as outfn:
             outfn.write(self.html)
+
 
 # start
 if __name__ == '__main__':

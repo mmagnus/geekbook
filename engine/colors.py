@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+"""CLI Colors module"""
 
-''' CLI Colors module '''
 
 class bcolors:
     HEADER = '\033[95m'

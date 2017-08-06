@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# I'm working on this.Trying to cope with the pre processing of the MD file.
+"""I'm working on this.Trying to cope with the pre processing of the MD file."""
 
 import codecs
 from engine.conf import PATH_TO_MD, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX
@@ -52,8 +52,8 @@ class Md_update(object):
     def save(self):
         with codecs.open(PATH_TO_MD + sep + self.fn, "w", "utf-8") as outfn:
             outfn.write(self.md)
-                
-                
+
+
 if __name__ == '__main__':
     fin = 'test.md'
 

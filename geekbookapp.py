@@ -14,12 +14,12 @@ import subprocess
 import commands
 import gc
 import signal
-    
+
 logging.basicConfig(format='%(asctime)s - %(filename)s - %(message)s')
 logger = logging.getLogger('geekbook')
 logger.setLevel('INFO')
 
-PATH = os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0]))) #__file__)))
+PATH = os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))  # __file__)))
 sys.path.append(PATH)
 
 import platform
@@ -32,6 +32,7 @@ from engine.make_index import Index
 from engine.colors import bcolors
 from engine.searcher import make_db
 #import yappi
+
 
 class GeekbookError(Exception):
     pass
@@ -69,7 +70,7 @@ use `-`. e.g. geekbook-is-the-best.md Please rename your note and start this app
         self.md_files.reverse()
 
     def get_files(self):
-        """Get a list of your MD files. 
+        """Get a list of your MD files.
         Update: alwasy get an updated list!"""
         self.get_filelist()
         self.sort_by_mtime()
@@ -78,6 +79,7 @@ use `-`. e.g. geekbook-is-the-best.md Please rename your note and start this app
 
 class App(object):
     """App class"""
+
     def __init__(self, args):
         self.args = args
         # fix #
@@ -103,49 +105,50 @@ class App(object):
         logger.info("imgs path: " + PATH_TO_IMG)
 
         logger.info('Ready to go! Please edit me: notes/')
-        
+
         mf = MdFiles()
         logger.info('You have %i notes! Congrats, keep noting!' % len(mf.get_files()))
 
         index = Index()
         index.update(mf.get_files())
 
-        #yappi.start()
+        # yappi.start()
         c = 0
 
         ipynb_mtime = {}
-        while c < 10: # for debugging
+        while c < 10:  # for debugging
             # check for ipython
 
-            ## if not ipynb_mtime:
+            # if not ipynb_mtime:
             ##     notebook_files = os.listdir(PATH_TO_MD)
-            ##     for n in [n for n in notebook_files if n.endswith('.ipynb') and n.startswith('jupyter')]:
+            # for n in [n for n in notebook_files if n.endswith('.ipynb') and n.startswith('jupyter')]:
             ##         cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
-            ##         print cmd
-            ##         os.system(cmd)
+            # print cmd
+            # os.system(cmd)
             ##         ipynb_mtime[n] = os.path.getmtime(PATH_TO_MD + os.sep + n)
-            ## else:
+            # else:
             ##     notebook_files = os.listdir(PATH_TO_MD)
-            ##     for n in [n for n in notebook_files if n.endswith('.ipynb')]:
-            ##         if n in ipynb_mtime.keys():
+            # for n in [n for n in notebook_files if n.endswith('.ipynb')]:
+            # if n in ipynb_mtime.keys():
             ##             mt = os.path.getmtime(PATH_TO_MD + os.sep + n)
-            ##             if ipynb_mtime[n] < mt:
+            # if ipynb_mtime[n] < mt:
             ##                 cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
-            ##                 print cmd
-            ##                 os.system(cmd)
+            # print cmd
+            # os.system(cmd)
             ##                 ipynb_mtime[n] = mt
-            ##         else:
+            # else:
             ##             mt = os.path.getmtime(PATH_TO_MD + os.sep + n)
             ##             cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
-            ##             print cmd
-            ##             os.system(cmd)
+            # print cmd
+            # os.system(cmd)
             ##             ipynb_mtime[n] = mt
-                            
+
             # see what's new - diff between to folders your notes and orig files that keep copy of our notes
             # grep -v removes things from your list, ~, # (and in mmagnus case org mode files)
-            cmd = "diff -u -r " + PATH_TO_MD + " " + PATH_TO_ORIG + " | grep -v '.org' | grep -v '~' | grep -v '#' | grep '.md'".strip()
+            cmd = "diff -u -r " + PATH_TO_MD + " " + PATH_TO_ORIG + \
+                " | grep -v '.org' | grep -v '~' | grep -v '#' | grep '.md'".strip()
             out = commands.getoutput(cmd)
-            #print out
+            # print out
             files_changed = []
 
             # pick all file names that are changed
@@ -164,12 +167,12 @@ class App(object):
                 if p.is_changed():
                     # if m is changed then (by using any of plugins working on markdown, run this
                     changed = m.compile()
-                    if changed: # only if something is changed in md
+                    if changed:  # only if something is changed in md
                         m.save()
-                        
+
                     p.compile()
                     p.save()
-                        
+
                     index = Index()
                     index.update(mf.get_files())
 
@@ -192,7 +195,7 @@ class App(object):
 
                 # update this one picked note
                 m = Md_update(args.debug)
-                changed = m.compile() # if changed MD
+                changed = m.compile()  # if changed MD
                 if changed:
                     m.save()
 
@@ -203,10 +206,10 @@ class App(object):
                 sys.exit(0)
 
             gc.collect()
-            time.sleep(1) # if this is too big you have too wait for ii too long (!)
+            time.sleep(1)  # if this is too big you have too wait for ii too long (!)
             # off c += 1
-            
-        #yappi.stop()
+
+        # yappi.stop()
         #stats = yappi.get_func_stats()
         #stats.save('yappi.callgrind', type="callgrind")
 
@@ -215,33 +218,39 @@ def start_flask():
     logger.info("Start off flask!")
     os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py &')
 
+
 def start_gitweb():
     """Start git instaweb"""
     os.chdir(PATH_TO_MD)
     os.system('git instaweb')
 
+
 def start_browser_with_index():
-    """Detect the operative system in use and open the html file using the default browser. 
+    """Detect the operative system in use and open the html file using the default browser.
     Works with Linux and macOS."""
     if platform.system() == "Linux":
-        os.system('xdg-open http://127.0.0.1:5000/view/index.html')#
+        os.system('xdg-open http://127.0.0.1:5000/view/index.html')
     elif platform.system() == "Darwin":
         os.system('open http://127.0.0.1:5000/view/index.html')
     else:
         logger.info("Sorry, I cannot detect your system, you will have to open the file manually @")
 
+
 def get_parser():
     """Get parser of arguments"""
     parser = argparse.ArgumentParser('geekbookapp.py')
-    parser.add_argument('-d', '--debug', help='debug mode, run only for file,' + \
-                            'WARNING: use only name of the note, e.g. test.md, NOT notes/test.md')
+    parser.add_argument('-d', '--debug', help='debug mode, run only for file,' +
+                        'WARNING: use only name of the note, e.g. test.md, NOT notes/test.md')
     parser.add_argument('-u', '--update', help='updates all the pages', action='store_true')
-    parser.add_argument('-s', '--silent', help='dont bring up the Internet Browser', action='store_true')
-    parser.add_argument('-n', '--notebook', help='updates all jupiter notebooks!', action='store_true')
+    parser.add_argument(
+        '-s', '--silent', help='dont bring up the Internet Browser', action='store_true')
+    parser.add_argument('-n', '--notebook',
+                        help='updates all jupiter notebooks!', action='store_true')
     parser.add_argument('--noflask', help='dont run flask', action='store_true')
     return parser
 
-#main
+
+# main
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
@@ -249,14 +258,14 @@ if __name__ == '__main__':
     # emacs & python debugging
     #args = parser.parse_args(['--debug', 'test.md', '-s'])
     #args = parser.parse_args(['-u'])
-    
+
     a = App(args)
 
     if not args.noflask and not args.debug and not args.update:
         start_flask()
 
     make_db()
-    
+
     if args.notebook:
         notebook_files = os.listdir(PATH_TO_MD)
         for n in [n for n in notebook_files if n.endswith('.ipynb')]:
@@ -265,7 +274,7 @@ if __name__ == '__main__':
             os.system(cmd)
         sys.exit(1)
 
-    #[mm] notes git:(master) ✗ 
+    #[mm] notes git:(master) ✗
     #    [NbConvertApp] Converting notebook testA.ipynb to markdown
     #[NbConvertApp] Support files will be in testA_files/
     #[NbConvertApp] Making directory testA_files
