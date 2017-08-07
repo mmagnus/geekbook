@@ -25,6 +25,7 @@ sys.path.append(PATH)
 import platform
 
 
+from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG, PATH_TO_ORIG, AI_WRITER
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG, PATH_TO_ORIG
 from engine.page import Page
 from engine.md_update import Md_update
@@ -116,7 +117,11 @@ class App(object):
         c = 0
 
         ipynb_mtime = {}
+
         while c < 10:  # for debugging
+            if AI_WRITER:
+                ia_writer.ia_writer_movie_imgs_from_root_folder()
+
             # check for ipython
 
             # if not ipynb_mtime:
@@ -248,6 +253,8 @@ def get_parser():
                         help='updates all jupiter notebooks!', action='store_true')
     parser.add_argument('--noflask', help='dont run flask', action='store_true')
     return parser
+
+
 
 
 # main
