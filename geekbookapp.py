@@ -244,6 +244,7 @@ def get_parser():
     parser.add_argument('-n', '--notebook',
                         help='updates all jupiter notebooks!', action='store_true')
     parser.add_argument('--noflask', help='dont run flask', action='store_true')
+    parser.add_argument('--noupdatedb', help='dont update the db', action='store_true')
     return parser
 
 
@@ -267,7 +268,8 @@ if __name__ == '__main__':
     # args = parser.parse_args(['-u'])
 
     app = App(args)
-    make_db()
+    if not args.noupdatedb:
+        make_db()
     convert_jupyter_notebook_to_markdown()
     start_flask(args)
 
