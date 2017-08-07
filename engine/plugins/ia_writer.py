@@ -49,8 +49,11 @@ def edit_syntax_from_ai_writer_to_geekbook(text, IMG_PREFIX):
             logger.info("mv %s %s" % (PATH_TO_MD + os.sep + pfile,
                                       os.sep + IMG_PREFIX + os.sep + targetfn))
 
-            shutil.move(PATH_TO_MD + os.sep + pfile, PATH_TO_IMG +
-                        os.sep + IMG_PREFIX + os.sep + targetfn)
+            try:
+                shutil.move(PATH_TO_MD + pfile, PATH_TO_IMG +
+                            IMG_PREFIX + os.sep + targetfn)
+            except:
+                logger.info("error: moving the file")
 
             line = line.replace('/', '![](' + IMG_PREFIX).strip().replace(pfile, targetfn) + ')'
             changed = True
