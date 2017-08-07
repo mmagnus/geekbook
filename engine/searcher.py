@@ -25,8 +25,6 @@ huge improv: 2012/11/08
 """
 debug = False
 
-import sys
-sys.tracebacklimit = 0
 
 import re
 import os
