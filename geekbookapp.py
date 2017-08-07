@@ -1,19 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """geekbookapp - the main program. The magic starts here!"""
 
 import time
 import os
 import sys
 import argparse
-import filecmp
-from os import sep
 import logging
-import subprocess
 import commands
 import gc
-import signal
+import platform
 
 logging.basicConfig(format='%(asctime)s - %(filename)s - %(message)s')
 logger = logging.getLogger('geekbook')
@@ -22,17 +18,15 @@ logger.setLevel('INFO')
 PATH = os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))  # __file__)))
 sys.path.append(PATH)
 
-import platform
-
 
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG, PATH_TO_ORIG, AI_WRITER
-from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG, PATH_TO_ORIG
 from engine.page import Page
 from engine.md_update import Md_update
 from engine.make_index import Index
 from engine.colors import bcolors
 from engine.searcher import make_db
-#import yappi
+from engine.plugins import ia_writer
+# import yappi
 
 
 class GeekbookError(Exception):
@@ -125,28 +119,28 @@ class App(object):
             # check for ipython
 
             # if not ipynb_mtime:
-            ##     notebook_files = os.listdir(PATH_TO_MD)
+            # notebook_files = os.listdir(PATH_TO_MD)
             # for n in [n for n in notebook_files if n.endswith('.ipynb') and n.startswith('jupyter')]:
-            ##         cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
+            # cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
             # print cmd
             # os.system(cmd)
-            ##         ipynb_mtime[n] = os.path.getmtime(PATH_TO_MD + os.sep + n)
+            # ipynb_mtime[n] = os.path.getmtime(PATH_TO_MD + os.sep + n)
             # else:
-            ##     notebook_files = os.listdir(PATH_TO_MD)
+            # notebook_files = os.listdir(PATH_TO_MD)
             # for n in [n for n in notebook_files if n.endswith('.ipynb')]:
             # if n in ipynb_mtime.keys():
-            ##             mt = os.path.getmtime(PATH_TO_MD + os.sep + n)
+            # mt = os.path.getmtime(PATH_TO_MD + os.sep + n)
             # if ipynb_mtime[n] < mt:
-            ##                 cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
+            # cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
             # print cmd
             # os.system(cmd)
-            ##                 ipynb_mtime[n] = mt
+            # ipynb_mtime[n] = mt
             # else:
-            ##             mt = os.path.getmtime(PATH_TO_MD + os.sep + n)
-            ##             cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
+            # mt = os.path.getmtime(PATH_TO_MD + os.sep + n)
+            # cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
             # print cmd
             # os.system(cmd)
-            ##             ipynb_mtime[n] = mt
+            # ipynb_mtime[n] = mt
 
             # see what's new - diff between to folders your notes and orig files that keep copy of our notes
             # grep -v removes things from your list, ~, # (and in mmagnus case org mode files)
@@ -215,13 +209,14 @@ class App(object):
             # off c += 1
 
         # yappi.stop()
-        #stats = yappi.get_func_stats()
-        #stats.save('yappi.callgrind', type="callgrind")
+        # stats = yappi.get_func_stats()
+        # stats.save('yappi.callgrind', type="callgrind")
 
 
-def start_flask():
-    logger.info("Start off flask!")
-    os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py &')
+def start_flask(args):
+    if not args.noflask and not args.debug and not args.update:
+        logger.info("Start off flask!")
+        os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py &')
 
 
 def start_gitweb():
@@ -255,6 +250,14 @@ def get_parser():
     return parser
 
 
+def convert_jupyter_notebook_to_markdown():
+    if args.notebook:
+        notebook_files = os.listdir(PATH_TO_MD)
+        for n in [n for n in notebook_files if n.endswith('.ipynb')]:
+            cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
+            print cmd
+            os.system(cmd)
+        sys.exit(1)
 
 
 # main
@@ -263,23 +266,13 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # emacs & python debugging
-    #args = parser.parse_args(['--debug', 'test.md', '-s'])
-    #args = parser.parse_args(['-u'])
+    # args = parser.parse_args(['--debug', 'test.md', '-s'])
+    # args = parser.parse_args(['-u'])
 
-    a = App(args)
-
-    if not args.noflask and not args.debug and not args.update:
-        start_flask()
-
+    app = App(args)
     make_db()
-
-    if args.notebook:
-        notebook_files = os.listdir(PATH_TO_MD)
-        for n in [n for n in notebook_files if n.endswith('.ipynb')]:
-            cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
-            print cmd
-            os.system(cmd)
-        sys.exit(1)
+    convert_jupyter_notebook_to_markdown()
+    start_flask(args)
 
     #[mm] notes git:(master) ✗
     #    [NbConvertApp] Converting notebook testA.ipynb to markdown
@@ -300,4 +293,4 @@ if __name__ == '__main__':
             start_gitweb()
             start_browser_with_index()
 
-    a.start()
+    app.start()
