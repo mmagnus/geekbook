@@ -1,8 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-"""iA writer plugin
+"""iA writer plugin.
 
-/emacs.jpeg -> ![](imgs/emacs.jpeg)
+Detect an image inserted vie iA writer and convert to Geekbook syntax, and move the image to
+proper Geekbook images storage folder.
+
+Example::
+
+       /emacs.jpeg -> ![](imgs/emacs.jpeg)
 
 """
 import shutil
@@ -17,6 +22,8 @@ logger.setLevel('INFO')
 
 
 def add_timestamp_to_image(file):
+    """This function is used if there is already a file with the same name in your
+    images storage folder."""
     filename, ext = os.path.splitext(file)
     return filename + '-' + (str(datetime.datetime.now()).replace(' ', '')) + ext
 
