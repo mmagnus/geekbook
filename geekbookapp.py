@@ -113,9 +113,6 @@ class App(object):
         ipynb_mtime = {}
 
         while c < 10:  # for debugging
-            if AI_WRITER:
-                ia_writer.ia_writer_movie_imgs_from_root_folder()
-
             # check for ipython
 
             # if not ipynb_mtime:
