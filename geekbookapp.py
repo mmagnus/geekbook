@@ -245,6 +245,15 @@ def get_parser():
 
 
 def convert_jupyter_notebook_to_markdown():
+    """
+    
+    #[mm] notes git:(master) ✗
+    #    [NbConvertApp] Converting notebook testA.ipynb to markdown
+    #[NbConvertApp] Support files will be in testA_files/
+    #[NbConvertApp] Making directory testA_files
+    #[NbConvertApp] Writing 2960 bytes to testA.md
+
+    """
     if args.notebook:
         notebook_files = os.listdir(PATH_TO_MD)
         for n in [n for n in notebook_files if n.endswith('.ipynb')]:
@@ -268,12 +277,6 @@ if __name__ == '__main__':
         make_db()
     convert_jupyter_notebook_to_markdown()
     start_flask(args)
-
-    #[mm] notes git:(master) ✗
-    #    [NbConvertApp] Converting notebook testA.ipynb to markdown
-    #[NbConvertApp] Support files will be in testA_files/
-    #[NbConvertApp] Making directory testA_files
-    #[NbConvertApp] Writing 2960 bytes to testA.md
 
     if args.debug:
         DEV = True

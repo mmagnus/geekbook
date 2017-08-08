@@ -148,7 +148,6 @@ See http://geekbook.readthedocs.io/en/latest/install.html
 
 # History
 
-- v2.0.1 (170806) Add iA-plugin
 - 170707 Add DataTables for the Index (Home)
 - 170707 Add `geekbooksync.py`
 - 170705 geekbook 2.0 **flask-based geekbook**
