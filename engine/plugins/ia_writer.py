@@ -43,9 +43,7 @@ def edit_syntax_from_ai_writer_to_geekbook(text, IMG_PREFIX):
     changed = False
     ntextlist = []
     for line in textlist:
-        line = line.strip()
         if line.startswith('/') and (line.endswith('.png') or line.endswith('.jpeg')):
-
             pfile = line.replace('/', '')
             pfile_fullpath = PATH_TO_IMG + os.sep + IMG_PREFIX + os.sep + pfile
 
