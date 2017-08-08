@@ -29,13 +29,17 @@ def add_timestamp_to_image(file):
 
 
 def edit_syntax_from_ai_writer_to_geekbook(text, IMG_PREFIX):
-    """Go over each line and check if there is /foo.png. If yes, then edit it
-    from AI Writer syntax to Geekbook.
+    """Go over each line and check if there is /foo.png (or /foo.jpeg). If yes, then edit it
+    from iA Writer syntax to Geekbook.
 
     Example::
 
         >>> edit_syntax_from_ai_writer_to_geekbook('/foo.png', 'imgs')
         ('!()(imgs/foo.png]', True)
+
+    Returns:
+
+        (str, bool): text, changed is True if any of iA syntax detected
 
     .. warning:: works with .png and .jpeg
     """
