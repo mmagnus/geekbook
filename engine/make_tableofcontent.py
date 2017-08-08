@@ -18,6 +18,7 @@ import re
 
 
 TAG = '[tableofcontent]'
+TAG2 = '{{TOC}}'  # iA TOC tag
 VERBOSE = False
 
 
@@ -128,6 +129,7 @@ def make_table_of_content(fn, text, version2=True):
 
     if version2:
         output = output.replace(TAG, collect_headings)
+        output = output.replace(TAG2, collect_headings)
     else:
         # out of order
         sys.stdout.write('<!-- TABLE -->' + '\n')
