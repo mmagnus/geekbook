@@ -38,7 +38,7 @@ Features | Geekbook | Word Office | Apple Notes
 -------- | -------- | ----------- | -----------
 **Edits with Emacs** | Oh, boy, yes! | Nope. | Nope.
 **Outline (collapse to headers)** | With Emacs yes. Works great! | Nope. | Nope.
-**Long notes - easier to browse** | Long notes with great speed and table of contet | Very slow for long notes. Alwasy problems with formatting long notes with images. | Very good for short notes.
+**Long notes - easier to browse** | Long notes with great speed and table of content | Very slow for long notes. Always problems with formatting long notes with images. | Very good for short notes.
 **Syntax highlighting** | Oh, boy, yes! | Hmm.. nope. | Hmm.. nope.
 **Write your own plugins in Python** | Oh, boy, yes! | Nope. | Nope.
 **Export as a pdf** | Yes | Yes | Yes
@@ -70,7 +70,7 @@ Freatures:
 - Pandoc markdown files to anything you want!
 - Use 3rd party editors, if you wish, on your computer or on your phone.
 
-I recommend to use **Emacs** (or VIM or other super-powerfull editor) to:
+I recommend to use **Emacs** (or VIM or other super-powerful editor) to:
 
 - run git on your notes in your editor,
 - grep them in the editor,
