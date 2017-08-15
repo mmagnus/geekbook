@@ -103,3 +103,4 @@ find_file.json
 searchdb.pickle
 
 notes-jupyter/*
+*_flymake.py
