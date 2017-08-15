@@ -10,9 +10,9 @@ Example::
        /emacs.jpeg -> ![](imgs/emacs.jpeg)
 
 """
-import shutil
 import os
-import sys; sys.path.append("/Users/magnus/Dropbox/geekbook/")
+import shutil
+
 from engine.conf import PATH_TO_IMG, PATH_TO_MD, IMG_PREFIX
 import datetime
 import logging
@@ -36,7 +36,7 @@ def edit_syntax_from_ai_writer_to_geekbook(text, img_prefix):
     Example::
 
         >>> edit_syntax_from_ai_writer_to_geekbook('/foo x.png', 'imgs')
-        ('![](imgs/foo_x.png)', True_)
+        ('![](imgs/foo_x.png)', True)
 
     Returns:
 
@@ -57,9 +57,9 @@ def edit_syntax_from_ai_writer_to_geekbook(text, img_prefix):
             pfile_fullpath = PATH_TO_IMG + os.sep + IMG_PREFIX + os.sep + pfile
 
             if os.path.exists(pfile_fullpath):
-                targetfn = add_timestamp_to_image(pfile.replace(' ','_'))
+                targetfn = add_timestamp_to_image(pfile.replace(' ', '_'))
             else:
-                targetfn = pfile.replace(' ','_')
+                targetfn = pfile.replace(' ', '_')
 
             logger.info("mv %s %s" % (PATH_TO_MD + os.sep + pfile,
                                       os.sep + IMG_PREFIX + os.sep + targetfn))
