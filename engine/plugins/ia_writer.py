@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """iA writer plugin.
 
@@ -12,7 +12,8 @@ Example::
 """
 import shutil
 import os
-from engine.conf import PATH_TO_IMG, PATH_TO_MD
+import sys; sys.path.append("/Users/magnus/Dropbox/geekbook/")
+from engine.conf import PATH_TO_IMG, PATH_TO_MD, IMG_PREFIX
 import datetime
 import logging
 
@@ -28,14 +29,14 @@ def add_timestamp_to_image(file):
     return filename + '-' + (str(datetime.datetime.now()).replace(' ', '')) + ext
 
 
-def edit_syntax_from_ai_writer_to_geekbook(text, IMG_PREFIX):
+def edit_syntax_from_ai_writer_to_geekbook(text, img_prefix):
     """Go over each line and check if there is /foo.png (or /foo.jpeg). If yes, then edit it
     from iA Writer syntax to Geekbook.
 
     Example::
 
-        >>> edit_syntax_from_ai_writer_to_geekbook('/foo.png', 'imgs')
-        ('!()(imgs/foo.png]', True)
+        >>> edit_syntax_from_ai_writer_to_geekbook('/foo x.png', 'imgs')
+        ('![](imgs/foo_x.png)', True_)
 
     Returns:
 
@@ -46,15 +47,19 @@ def edit_syntax_from_ai_writer_to_geekbook(text, IMG_PREFIX):
     textlist = text.split('\n')
     changed = False
     ntextlist = []
+
+    if not img_prefix.endswith('/'):
+        img_prefix += '/'
+
     for line in textlist:
         if line.startswith('/') and (line.endswith('.png') or line.endswith('.jpeg')):
             pfile = line.replace('/', '')
             pfile_fullpath = PATH_TO_IMG + os.sep + IMG_PREFIX + os.sep + pfile
 
             if os.path.exists(pfile_fullpath):
-                targetfn = add_timestamp_to_image(pfile)
+                targetfn = add_timestamp_to_image(pfile.replace(' ','_'))
             else:
-                targetfn = pfile
+                targetfn = pfile.replace(' ','_')
 
             logger.info("mv %s %s" % (PATH_TO_MD + os.sep + pfile,
                                       os.sep + IMG_PREFIX + os.sep + targetfn))
@@ -62,10 +67,11 @@ def edit_syntax_from_ai_writer_to_geekbook(text, IMG_PREFIX):
             try:
                 shutil.move(PATH_TO_MD + pfile, PATH_TO_IMG +
                             IMG_PREFIX + os.sep + targetfn)
+                pass
             except:
                 logger.info("error: moving the file")
 
-            line = line.replace('/', '![](' + IMG_PREFIX).strip().replace(pfile, targetfn) + ')'
+            line = '![](' + IMG_PREFIX + targetfn + ')'
             changed = True
 
         ntextlist.append(line)
