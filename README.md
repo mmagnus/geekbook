@@ -137,7 +137,19 @@ Or Draft (http://lifehacker.com/draft-is-a-clean-note-taking-app-with-markdown-s
 
 Search on your Iphone to get to the note.
 
-Update: Now I'm using iA Writer for iPhone (https://itunes.apple.com/pl/app/ia-writer/id775737590?l=pl&mt=12). It has sync with iCloud (works with sync also images (!)) and Dropbox. Geekbook has a nice plugin to be able to work with iA Writer seemingless. If you insert an image on your phone, the syntax for it will be iA Writer-like. However if Geekbook detects this syntax it converts it to markdown syntax for images (which works as well in iA Writer). Morover, you can use now syntax `/<file.md>` to join chapters into books. 
+Update: Now I'm using iA Writer for iPhone (https://itunes.apple.com/pl/app/ia-writer/id775737590?l=pl&mt=12). It has sync with iCloud (works with sync also images (!)) and Dropbox. Geekbook has a nice plugin to be able to work with iA Writer seamlessly. 
+
+![](docs/imgs/ia_writer_iphone.PNG)
+
+If you insert an image on your phone, the syntax for it will be iA Writer-like. However if Geekbook detects this syntax it converts it to markdown syntax for images (which works as well in iA Writer). 
+
+![](docs/imgs/screen800x500-0.jpeg)
+
+Moreover, you can use in Geekbook also syntax `/<file.md>` to join chapters into books. 
+
+![](docs/imgs/screen800x500-1.jpeg)
+
+There is also a nice app for Mac (https://ia.net/writer/).
 
 # Install
 
