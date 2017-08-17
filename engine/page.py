@@ -65,6 +65,7 @@ class Page(object):
         E.g.::
 
            self.md = get_image_path(self.md) """
+        self.md = include_md_files(self.md)
         self.md = get_image_path(self.md)
         self.md = get_youtube_embeds(self.md)
         self.md = get_abstract(self.md)
