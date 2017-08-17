@@ -178,7 +178,7 @@ def include_md_files(md):
     """
     nmd = ''
     for l in md.split('\n'):
-        if l.startswith('/') and l.endswith('.md'):  # /shell.md
+        if l.startswith('/') and l.endswith('.md') and l.count('/') == 1:  # /shell.md
             ffullpath = PATH_TO_MD + os.sep + l.replace('/', '').strip()
             with codecs.open(ffullpath, "r", "utf-8") as f:
                 nmd += '\n' + f.read() + '\n'
