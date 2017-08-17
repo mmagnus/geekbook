@@ -54,8 +54,6 @@ Features | Geekbook | Word Office | Apple Notes
 
 @todo Compare to Evernote.
 
-**The preview of the default template:**
-
 Similar projects: it's kind of like Sphinx for your documentation, or Mkdocs (http://www.mkdocs.org/).
 
 Freatures:
