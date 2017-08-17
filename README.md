@@ -32,7 +32,6 @@ Motto: **Notes are like your code**.
   * [On your phone](#on-your-phone)
   * [Install & Get Started!](#install)
   * [Food for thought](#food-for-thought)
-  * [History](#history)
 
 Features | Geekbook | Word Office | Apple Notes
 -------- | -------- | ----------- | -----------
@@ -137,6 +136,8 @@ Or Draft (http://lifehacker.com/draft-is-a-clean-note-taking-app-with-markdown-s
 ![](docs/imgs/iphone_search_byword.png)
 
 Search on your Iphone to get to the note.
+
+Update: Now I'm using iA Writer for iPhone (https://itunes.apple.com/pl/app/ia-writer/id775737590?l=pl&mt=12). It has sync with iCloud (works with sync also images (!)) and Dropbox. Geekbook has a nice plugin to be able to work with iA Writer seemingless. If you insert an image on your phone, the syntax for it will be iA Writer-like. However if Geekbook detects this syntax it converts it to markdown syntax for images (which works as well in iA Writer). Morover, you can use now syntax `/<file.md>` to join chapters into books. 
 
 # Install
 
