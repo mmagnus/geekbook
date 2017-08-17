@@ -37,20 +37,20 @@ Motto: **Notes are like your code**.
 
 Features | Geekbook | Word Office | Apple Notes
 -------- | -------- | ----------- | -----------
-**Edits with Emacs** | Oh, boy, yes! | Nope. | Nope.
-**Outline (collapse to headers)** | With Emacs yes. Works great! | Nope. | Nope.
+**Edits with Emacs** | Oh, boy, yes! | Nope | Nope
+**Outline (collapse to headers)** | With Emacs yes. Works great! | Nope | Nope
 **Long notes - easier to browse** | Long notes with great speed and table of content | Very slow for long notes. Always problems with formatting long notes with images. | Very good for short notes.
-**Syntax highlighting** | Oh, boy, yes! | Hmm.. nope. | Hmm.. nope.
-**Write your own plugins in Python** | Oh, boy, yes! | Nope. | Nope.
+**Syntax highlighting** | Oh, boy, yes! | Hmm.. nope | Hmm.. nope
+**Write your own plugins in Python** | Oh, boy, yes! | Nope | Nope
 **Export as a pdf** | Yes | Yes | Yes
 **Edit with ...** | Any text editor (with Markdown support for better UX) | Word | Apple Notes (Closed)
 **Flexible** | Super flexible. You can find your own why how to make your notes | Medium | Medium
 **Search** | Super easy to search with built-in search or just grep your files | More difficult to search over a set of files. Slow! | OK
-**Version control** | Yes, if you use Git etc | Kind of. Hard to use (compared to Git) | Nope.
-**Style customizable** | Yes, it's HTML. Do what ever you want | To some extend | Nope.
+**Version control** | Yes, if you use Git etc | Kind of. Hard to use (compared to Git) | Nope
+**Style customizable** | Yes, it's HTML. Do what ever you want | To some extend | Nope
 **Edit on your phone** | Yes, use Byword | Not really | Yes, works very well!
 **Open & Free** | YES | Nope, closed and pricey | Close, no extra charge if you have an Apple device
-**Super easy to use** | Rather for geek/nerds/hackers | Easy but who cares ;-) | Easy but who cares. ;-)
+**Super easy to use** | Rather for geek/nerds/hackers | Easy but who cares ;-) | Easy but who cares ;-)
 
 @todo Compare to Evernote.
 
