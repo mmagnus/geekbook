@@ -145,20 +145,3 @@ See http://geekbook.readthedocs.io/en/latest/install.html
 # Food for thought
  
  http://geekbook.readthedocs.io/en/latest/thoughts.html
-
-# History
-
-- 170707 Add DataTables for the Index (Home)
-- 170707 Add `geekbooksync.py`
-- 170705 geekbook 2.0 **flask-based geekbook**
-- 170420 include_file. Open a given file and include the content of it.
-
-        ```
-        [if:/home/magnus/Dropbox/workspace/backupx/backup-peyote.sh]
-        ```
-
-- 170415 Process jupiter notebooks
-- 170308 fix `RNApuzzles @done">rp01 @done` #50
-- 170104 Pietro Boccaletto (akaped) joined the team!
-- 161223 Add the main engine to GitHub!
-- 1205XX lb_v2 was born at the conference of the Polish Bioinformatics Society
