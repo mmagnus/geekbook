@@ -4,6 +4,7 @@
 """This is a set of functions that work on Markdown file, before compiling them to html."""
 
 from engine.conf import PATH_TO_IMG
+from engine.conf import PATH_TO_IMG, PATH_TO_MD
 import re
 import os
 
@@ -149,6 +150,30 @@ def right_MD_from_webservices(text):
             logger.info('Recordit link detected')
             changed = True
     return text, changed
+
+
+def include_md_files(md):
+    """Whenever you see /<file.md> include content of this file in here.
+
+    Args:
+
+       md (str): context of a md file
+
+    Returns:
+
+       str: new md (nmd)
+
+    """
+    nmd = ''
+    for l in md.split('\n'):
+        if l.startswith('/') and l.endswith('.md'):  # /shell.md
+            ffullpath = PATH_TO_MD + os.sep + l.replace('/', '').strip()
+            with codecs.open(ffullpath, "r", "utf-8") as f:
+                nmd += f.read()
+        else:
+            nmd += l
+    return nmd
+
 
 def include_file(text):
     ntext = ''
