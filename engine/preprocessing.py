@@ -183,7 +183,7 @@ def include_md_files(md):
             with codecs.open(ffullpath, "r", "utf-8") as f:
                 nmd += '\n' + f.read() + '\n'
         else:
-            nmd += l
+            nmd += l + '\n'
     return nmd
 
 
