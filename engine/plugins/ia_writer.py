@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 """iA writer plugin.
 
-Detect an image inserted vie iA writer and convert to Geekbook syntax, and move the image to
+Detect an image inserted vie iA writer and convert to Geekbook syntax,
+and move the image to
 proper Geekbook images storage folder.
 
 Example::
@@ -13,7 +14,7 @@ Example::
 import os
 import shutil
 
-from engine.conf import PATH_TO_IMG, PATH_TO_MD, IMG_PREFIX
+from geekbook.engine.conf import PATH_TO_IMG, PATH_TO_MD, IMG_PREFIX
 import datetime
 import logging
 
