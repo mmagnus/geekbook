@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """Webserver"""
 
 import os
@@ -58,6 +57,10 @@ def send_js(path):
 @app.route('/css/<path:path>')
 def send_css(path):
     return send_from_directory(PATH_TO_TEMPLATE + os.sep + 'css/' , path)
+
+@app.route('/img/<path:path>')
+def send_flav(path):
+    return send_from_directory(PATH_TO_TEMPLATE + os.sep + 'img/', path)
 
 @app.route('/imgs/<path:path>')
 def send_img(path):
