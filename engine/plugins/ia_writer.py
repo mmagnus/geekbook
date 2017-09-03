@@ -11,12 +11,12 @@ Example::
        /emacs.jpeg -> ![](imgs/emacs.jpeg)
 
 """
+import datetime
+import logging
 import os
 import shutil
 
-from geekbook.engine.conf import PATH_TO_IMG, PATH_TO_MD, IMG_PREFIX
-import datetime
-import logging
+from geekbook.engine.conf import IMG_PREFIX, PATH_TO_IMG, PATH_TO_MD
 
 
 logger = logging.getLogger('geekbook')
@@ -27,7 +27,8 @@ def add_timestamp_to_image(file):
     """This function is used if there is already a file with the same name in your
     images storage folder."""
     filename, ext = os.path.splitext(file)
-    return filename + '-' + (str(datetime.datetime.now()).replace(' ', '')) + ext
+    return filename + '-' + (str(datetime.datetime.now()).replace(' ',
+                                                                  '')) + ext
 
 
 def edit_syntax_from_ai_writer_to_geekbook(text, img_prefix):
@@ -53,7 +54,9 @@ def edit_syntax_from_ai_writer_to_geekbook(text, img_prefix):
         img_prefix += '/'
 
     for line in textlist:
-        if line.startswith('/') and (line.endswith('.png') or line.endswith('.jpeg') or line.endswith('.gif')):
+        if line.startswith('/') and (line.endswith('.png')
+                                     or line.endswith('.jpeg')
+                                     or line.endswith('.gif')):
             pfile = line.replace('/', '')
             pfile_fullpath = PATH_TO_IMG + os.sep + IMG_PREFIX + os.sep + pfile
 
@@ -66,8 +69,8 @@ def edit_syntax_from_ai_writer_to_geekbook(text, img_prefix):
                                       os.sep + IMG_PREFIX + os.sep + targetfn))
 
             try:
-                shutil.move(PATH_TO_MD + pfile, PATH_TO_IMG +
-                            IMG_PREFIX + os.sep + targetfn)
+                shutil.move(PATH_TO_MD + pfile,
+                            PATH_TO_IMG + IMG_PREFIX + os.sep + targetfn)
                 pass
             except:
                 logger.info("error: moving the file")
