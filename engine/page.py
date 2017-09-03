@@ -8,12 +8,13 @@ from mdx_gfm import GithubFlavoredMarkdownExtension
 import os
 from os import sep
 from shutil import copy
-from sys import stdout
-from time import sleep, gmtime, strftime
-from colors import bcolors
 
-from engine.postprocessing import *
-from engine.preprocessing import *
+from engine.postprocessing import (add_title,
+                                   add_head_for_flask, change_data_tag_into_actual_data,
+                                   add_path_to_img, change_html_tags_bootstrap,
+                                   unhighlight, personal_tags_to_html, get_todo)
+
+from engine.preprocessing import include_md_files, get_image_path, get_youtube_embeds, get_abstract, include_file
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN
 from engine.make_tableofcontent import make_table_of_content
 from engine.plugins.find_files import find_files
@@ -49,7 +50,7 @@ class Page(object):
         """Compile md to get html"""
         self.html = markdown.markdown(
             self.md, extensions=[GithubFlavoredMarkdownExtension()])  # (linenums=False)'])
-        #html = '<link rel="stylesheet" href="/home/magnus/Dropbox/lb_v2/templates/Pygments/css/pygments.css" type="text/css">' + html
+        # html = '<link rel="stylesheet" href="/home/magnus/Dropbox/lb_v2/templates/Pygments/css/pygments.css" type="text/css">' + html
 
     def compile(self):
         """Preprocess, compile, postprocess.
