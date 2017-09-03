@@ -48,6 +48,8 @@ class MdFiles(object):
         self.md_files = os.listdir(self.path_to_watch)
         nfiles = []
         for f in self.md_files:
+            if f.startswith('flycheck_') and f.endswith('.md'):
+                continue
             if f.endswith('.md') and not f.startswith('.#'):
                 if ' ' in f:
                     raise GeekbookError("""We don't handle names of you notes with spaces, please \
@@ -138,7 +140,7 @@ class App(object):
             # see what's new - diff between to folders your notes and orig files that keep copy of our notes
             # grep -v removes things from your list, ~, # (and in mmagnus case org mode files)
             cmd = "diff -u -r " + PATH_TO_MD + " " + PATH_TO_ORIG + \
-                " | grep -v '.org' | grep -v '~' | grep -v '#' | grep '.md'".strip()
+                " | grep -v '.org' | grep -v 'flycheck_' | grep -v '~' | grep -v '#' | grep '.md'".strip()
             out = commands.getoutput(cmd)
             # print out
             files_changed = []
@@ -246,7 +248,7 @@ def get_parser():
 
 def convert_jupyter_notebook_to_markdown():
     """
-    
+
     #[mm] notes git:(master) ✗
     #    [NbConvertApp] Converting notebook testA.ipynb to markdown
     #[NbConvertApp] Support files will be in testA_files/
