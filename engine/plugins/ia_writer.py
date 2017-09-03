@@ -54,9 +54,7 @@ def edit_syntax_from_ai_writer_to_geekbook(text, img_prefix):
         img_prefix += '/'
 
     for line in textlist:
-        if line.startswith('/') and (line.endswith('.png')
-                                     or line.endswith('.jpeg')
-                                     or line.endswith('.gif')):
+        if line.startswith('/') and (line.endswith('.png') or line.endswith('.jpeg') or line.endswith('.gif')):
             pfile = line.replace('/', '')
             pfile_fullpath = PATH_TO_IMG + os.sep + IMG_PREFIX + os.sep + pfile
 
