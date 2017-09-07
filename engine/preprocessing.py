@@ -181,6 +181,7 @@ def include_md_files(md):
         if l.startswith('/') and l.endswith('.md') and l.count('/') == 1:  # /shell.md
             ffullpath = PATH_TO_MD + os.sep + l.replace('/', '').strip()
             with codecs.open(ffullpath, "r", "utf-8") as f:
+                next(f)
                 nmd += '\n' + f.read() + '\n'
                 # remove {{TOC}}
                 nmd = nmd.replace('{{TOC}}', '')
