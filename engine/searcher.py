@@ -90,6 +90,8 @@ def lsdir(directory='/home/magnus/Desktop/', exclude_files_starting_with_dot=Tru
     for (basepath, children) in walktree(directory, False):
         for child in children:
             if exclude_files_starting_with_dot:
+                if not child.endswith('.md'):
+                    continue
                 if child.startswith('.'):
                     continue
                 else:
