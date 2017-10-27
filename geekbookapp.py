@@ -53,7 +53,7 @@ class MdFiles(object):
             if f.endswith('.md') and not f.startswith('.#'):
                 if ' ' in f:
                     raise GeekbookError("""We don't handle names of you notes with spaces, please \
-    use `-`. e.g. geekbook-is-the-best.md Please rename your note and start this app again. Fix: """ % f)
+    use `-`. e.g. geekbook-is-the-best.md Please rename your note and start this app again. Fix: %s """ % f)
                 nfiles.append(f)
         self.md_files = nfiles
 
