@@ -69,3 +69,8 @@ To add new function, build on this simple example::
 	
 .. automodule:: engine.webserverflask
    :members:
+
+DataTables
+======================================
+
+Html code to be inserted dataTables for index can be found in `engine/make_index.py`.

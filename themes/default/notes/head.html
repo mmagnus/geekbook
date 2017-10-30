@@ -49,37 +49,26 @@
         <div class="col-sm-9">
 	  <div>
 
-<script>
-    $( "form" ).submit(function( event ) {
-	var search = $('#search').val();
-	/*alert( search );*/
-	window.location.href = "http://127.0.0.1:5000/search/" + search;
-	return false;
-    });
-</script>
+              <script>
+               $( "form" ).submit(function( event ) {
+	           var search = $('#search').val();
+	           /*alert( search );*/
+	           window.location.href = "http://127.0.0.1:5000/search/" + search;
+	           return false;
+               });
+              </script>
 
-<script type="text/javascript">
-  $(document).ready( function () {
-  $('#table_id').DataTable( {
-  "bSort": false,
-  "lengthMenu": [[20, 50, -1], [20, 50, "All"]]
-  } );
-  })  
-</script>
-<!--      "paging": false,-->
-
-<table id="table_id" class="display compact hover">
-    <thead>
-        <tr>
-          <th>Title</th>
-	  <th>Description</th>
-          <th>Last update</th>
-        </tr>
-    </thead>
-    <tbody>
+              <script type="text/javascript">
+               $(document).ready( function () {
+                   $('#table_id').DataTable( {
+                       "bSort": false,
+                       "lengthMenu": [[20, 50, -1], [20, 50, "All"]]
+                   } );
+               })
+              </script>
 
 
-<!-- start of demo -->
+              <!-- start of demo -->
 <title>demo -- will be replaced!</title>
 
 <p><div id="tableofcontent"></div><ul class="table_of_content" id="tableofcontent_"><li class="table_of_content_h1"><a href="#README">README </a></li>
