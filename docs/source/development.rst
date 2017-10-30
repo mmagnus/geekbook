@@ -73,4 +73,6 @@ To add new function, build on this simple example::
 DataTables
 ======================================
 
-Html code to be inserted dataTables for index can be found in ``engine/make_index.py``.
+Html code to be inserted dataTables [1] for index can be found in ``engine/make_index.py``.
+
+[1] https://datatables.net/
