@@ -35,7 +35,7 @@ Preprocessing
 
 Postprocessing
 ======================================
-.. automodule:: engine.postprocessing      
+.. automodule:: engine.postprocessing
    :members:
 
 Plugins
@@ -56,7 +56,7 @@ Run the server::
     [mm] geekbook git:(master) ✗ python engine/webserverflask.py
     * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 
-and open in your browser http://127.0.0.1:5000/edit/test.md (you can add this to your notes 
+and open in your browser http://127.0.0.1:5000/edit/test.md (you can add this to your notes
 ``<a href="http://127.0.0.1:5000/edit/test.md">edit</a>``.
 
 To add new function, build on this simple example::
@@ -66,7 +66,7 @@ To add new function, build on this simple example::
 		"""Open a note with your edit"""
 		os.system('open ../notes/' + note_title)
 		return 'edit note: %s' % note_title
-	
+
 .. automodule:: engine.webserverflask
    :members:
 
