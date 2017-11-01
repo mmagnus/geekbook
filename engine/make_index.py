@@ -35,6 +35,20 @@ class Index(object):
             # remove demo content
             head = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->',
                           r'', head, flags=re.M | re.DOTALL)
+
+            # insert dataTables
+            head += """
+              <!--      "paging": false,-->
+              <table id="table_id" class="display compact hover">
+                  <thead>
+                      <tr>
+                          <th>Title</th>
+	                  <th>Description</th>
+                          <th>Last update</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+            """
             html = head
         else:
             html = open(PATH_TO_TEMPLATE + '/head.html').read()
