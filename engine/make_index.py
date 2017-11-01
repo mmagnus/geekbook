@@ -25,7 +25,7 @@ class Index(object):
         :param list_md: is a list of your md files"""
 
         if FLASK_BASED:  # flask mode
-            head = open(PATH_TO_TEMPLATE_HTML).read()
+            head = '<title>geekbook - homepage</title>'
             head = head.replace('{{ url_index }}', PATH_TO_HTML + '/' + 'index.html')
             head = head.replace('href="img/', 'href="' + '/img/')
             head = head.replace('="lib/', '="' + '/lib/')
