@@ -3,35 +3,92 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/gh-fork-ribbon.min.css" />
+    <link rel="stylesheet" href="/css/gh-fork-ribbon.min.css" />
     <!--[if lt IE 9]>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
     <![endif]-->
    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">-->
-<link rel="stylesheet" href="css/bootstrap-toc.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="css/github.min.css">
+<link rel="stylesheet" href="/css/bootstrap-toc.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="/css/github.min.css">
     <!--<link rel="stylesheet" href="https://afeld.github.io/bootstrap-toc/bootstrap-toc/assets/screen.css" media="screen" charset="utf-8">-->
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/jquery_3.2.1/jquery.min.js"></script>
-    <script src="js/jquery.dataTables_1.10.15/jquery.dataTables.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-toc.js"></script>
-    <script src="js/highlight.min.js"></script>
+    <script src="/js/jquery-2.1.4.min.js"></script>
+    <script src="/js/jquery_3.2.1/jquery.min.js"></script>
+    <script src="/js/jquery.dataTables_1.10.15/jquery.dataTables.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap-toc.js"></script>
+    <script src="/js/highlight.min.js"></script>
 
-    <script type="text/javascript" src="lib/lightbox2/src/js/lightbox.js"></script>
-    <link rel="stylesheet" href="lib/lightbox2/src/css/lightbox.css" type="text/css">
+    <script type="text/javascript" src="/lib/lightbox2/src/js/lightbox.js"></script>
+    <link rel="stylesheet" href="/lib/lightbox2/src/css/lightbox.css" type="text/css">
 
-    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
 
-    <link rel="stylesheet" href="css/jquery.dataTables_1.10.15/jquery.dataTables.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/monokai.css" type="text/css">
+    <link rel="stylesheet" href="/css/jquery.dataTables_1.10.15/jquery.dataTables.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/monokai.css" type="text/css">
 
   </head>
 
-  <body data-spy="scroll" data-target="#toc" style="margin:50px;max-width:800px">
+  <body data-spy="scroll" data-target="#toc" style="margin:50px;padding-top:100px;">
+    
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://geekbook.readthedocs.io/en/latest/"><img src="/img/logo.png" alt=""></a>
+    </div>
 
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tools<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="https://github.com/mmagnus/geekbook">GitHub - geekbook</a></li>
+            <li><a href="http://geekbook.readthedocs.io/en/latest/">Documentation</a></li>
+            <li><a href="http://geekbook.readthedocs.io/en/latest/edit.html">Taking notes</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="http://geekbook.readthedocs.io/en/latest/thoughts.html">Food for Thoughts</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="http://geekbook.readthedocs.io/en/latest/misc.html">Miscellaneous</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+    
    <!-- <a class="github-fork-ribbon" href="https://github.com/mmagnus/geekbook" title="Geekbook @GitHub">Geekbook @GitHub</a> -->
 
     <div class="container">
