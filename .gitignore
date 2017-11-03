@@ -104,3 +104,5 @@ searchdb.pickle
 
 notes-jupyter/*
 *_flymake.py
+
+.idea/*
