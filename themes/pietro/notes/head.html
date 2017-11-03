@@ -3,81 +3,48 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/gh-fork-ribbon.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
     <!--[if lt IE 9]>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
     <![endif]-->
-   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">-->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous"> -->
 <link rel="stylesheet" href="css/bootstrap-toc.css" type="text/css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="css/github.min.css">
-    <!--<link rel="stylesheet" href="https://afeld.github.io/bootstrap-toc/bootstrap-toc/assets/screen.css" media="screen" charset="utf-8">-->
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="js/jquery_3.2.1/jquery.min.js"></script>
-    <script src="js/jquery.dataTables_1.10.15/jquery.dataTables.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-toc.js"></script>
-    <script src="js/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
+    <link rel="stylesheet" href="https://afeld.github.io/bootstrap-toc/bootstrap-toc/assets/screen.css" media="screen" charset="utf-8">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://afeld.github.io/bootstrap-toc/bootstrap-toc.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
 
-    <script type="text/javascript" src="lib/lightbox2/src/js/lightbox.js"></script>
-    <link rel="stylesheet" href="lib/lightbox2/src/css/lightbox.css" type="text/css">
+    <script type="text/javascript" src="lib/jquery-lightbox-0.5/js/jquery.js"></script>
+    <script type="text/javascript" src="lib/jquery-lightbox-0.5/js/jquery.lightbox-0.5.js"></script>
 
     <link rel="icon" type="image/x-icon" href="img/favicon.png">
 
-    <link rel="stylesheet" href="css/jquery.dataTables_1.10.15/jquery.dataTables.css">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="css/monokai.css" type="text/css">
 
   </head>
 
   <body data-spy="scroll" data-target="#toc" style="margin:50px;max-width:800px">
-
-   <!-- <a class="github-fork-ribbon" href="https://github.com/mmagnus/geekbook" title="Geekbook @GitHub">Geekbook @GitHub</a> -->
-
+    <div class="github-fork-ribbon-wrapper right">
+      <div class="github-fork-ribbon">
+        <a href="https://github.com/mmagnus/geekbook">Fork me on GitHub</a>
+      </div>
+    </div>
     <div class="container">
       <div class="row">
-        <div class="col-sm-3">
+        <div class="col-md-3">
+
           <nav id="toc" data-spy="affix" data-toggle="toc">
-    <ul class="nav" />
-    <!--border-bottom: thin dotted #990000-->
-            <li><form action=""><input style="margin-left:15px;padding-left:5px;font-:15px;border:none;color:#990000;font-weight: bold; ;
-" type="" name="search" id="search" value=""><br></form></li>
-	    <li><a href="/view/index.html" style="font-weight: bold;">Home</a></li>
-  <!--|<a target="_blank" href="http://127.0.0.1:1234/?p=.git;a=summary">Git</a>|<a target="_blank" href="http://127.0.0.1:1234/?p=.git;a=summary">GitHub</a>--></li>
-	  </nav>
+        <a href="index.html""><img alt="GeekBook" class="img-responsive" src="img/geekbook.png"></a>
+    </br>
+	    <ul class="nav" /><li><a href="index.html" style="font-weight: bold;">Home</a>
+	      <!--|<a target="_blank" href="http://127.0.0.1:1234/?p=.git;a=summary">Git</a>|<a target="_blank" href="http://127.0.0.1:1234/?p=.git;a=summary">GitHub</a>--></li>
+    </nav>
         </div>
-        <div class="col-sm-9">
+        <div class="col-md-9">
 	  <div>
-
-<script>
-    $( "form" ).submit(function( event ) {
-	var search = $('#search').val();
-	/*alert( search );*/
-	window.location.href = "http://127.0.0.1:5000/search/" + search;
-	return false;
-    });
-</script>
-
-<script type="text/javascript">
-  $(document).ready( function () {
-  $('#table_id').DataTable( {
-  "bSort": false,
-  "lengthMenu": [[20, 50, -1], [20, 50, "All"]]
-  } );
-  })  
-</script>
-<!--      "paging": false,-->
-
-<table id="table_id" class="display compact hover">
-    <thead>
-        <tr>
-          <th>Title</th>
-	  <th>Description</th>
-          <th>Last update</th>
-        </tr>
-    </thead>
-    <tbody>
-
 
 <!-- start of demo -->
 <title>demo -- will be replaced!</title>
