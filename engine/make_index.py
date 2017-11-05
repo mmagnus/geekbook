@@ -66,8 +66,6 @@ class Index(object):
                           r'', html, flags=re.M | re.DOTALL)
             ##
 
-        html += open(PATH_HOMEPAGE).read()
-
         for mdfn in list_md:
             if mdfn == 'imgs':
                 pass

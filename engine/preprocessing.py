@@ -180,12 +180,16 @@ def include_md_files(md):
     for l in md.split('\n'):
         if l.startswith('/') and l.endswith('.md') and l.count('/') == 1:  # /shell.md
             ffullpath = PATH_TO_MD + os.sep + l.replace('/', '').strip()
-            with codecs.open(ffullpath, "r", "utf-8") as f:
-                next(f)
-                nmd += '\n' + f.read() + '\n'
-                # remove {{TOC}}
-                nmd = nmd.replace('{{TOC}}', '')
-                nmd = nmd.replace('[tableofcontent]', '')
+            # check if exists
+            if os.path.isfile(ffullpath):
+                with codecs.open(ffullpath, "r", "utf-8") as f:
+                    next(f)
+                    nmd += '\n' + f.read() + '\n'
+                    # remove {{TOC}}
+                    nmd = nmd.replace('{{TOC}}', '')
+                    nmd = nmd.replace('[tableofcontent]', '')
+            else:
+                nmd += 'The file can not be found: ' + l + '\n'
         else:
             nmd += l + '\n'
     return nmd
