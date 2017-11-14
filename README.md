@@ -158,3 +158,18 @@ See http://geekbook.readthedocs.io/en/latest/install.html
 # Food for thought
  
  http://geekbook.readthedocs.io/en/latest/thoughts.html
+ 
+ # Markdown Editors
+ 
+Linux:
+
+- http://www.omgubuntu.co.uk/2017/11/notes-up-markdown-editor-for-linux 
+
+macOS:
+
+- Bear http://www.bear-writer.com/
+- iA Writer https://ia.net/writer/
+
+iOS:
+
+- https://ia.net/writer/
