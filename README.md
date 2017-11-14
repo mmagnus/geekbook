@@ -164,6 +164,7 @@ See http://geekbook.readthedocs.io/en/latest/install.html
 Linux:
 
 - http://www.omgubuntu.co.uk/2017/11/notes-up-markdown-editor-for-linux 
+- https://remarkableapp.github.io/
 
 macOS:
 
