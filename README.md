@@ -160,7 +160,9 @@ See http://geekbook.readthedocs.io/en/latest/install.html
  http://geekbook.readthedocs.io/en/latest/thoughts.html
  
  # Markdown Editors
- 
+
+PyCharm - Python IDE and Markdown editor https://www.jetbrains.com/pycharm/
+
 Linux:
 
 - http://www.omgubuntu.co.uk/2017/11/notes-up-markdown-editor-for-linux 
