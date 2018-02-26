@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Thanks to Pietro
+
+# Start a new session with name 
+tmux new-session -d -s geekbook
+
+# Start VirtualEnvironment in a new window named venv
+tmux new-window -t geekbook:1 -n 'app'
+
+# Run server
+tmux send-keys -t geekbook:1 '/home/magnus/Dropbox/geekbook/geekbookapp.py -s ' C-m
