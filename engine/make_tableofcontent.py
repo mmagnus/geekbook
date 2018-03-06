@@ -39,6 +39,9 @@ def tag_heading(heading):
         elif t == '@progress':
             heading = heading.replace(
                 t, '<span style="font-family:"  class="label label-warning">' + t + '</span>')
+        elif t == '@inprogress':
+            heading = heading.replace(
+                t, '<span style="font-family:"  class="label label-warning">' + t + '</span>')
         elif t == '@todo':
             heading = heading.replace(
                 t, '<span style="font-family:"  class="label label-danger">' + t + '</span>')
