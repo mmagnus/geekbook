@@ -102,6 +102,7 @@ def search(text):
 
 #main
 if __name__ == "__main__":
-    app.run(debug=True)#
+    app.run(debug=True)
     # if you want your geekbook to be seen in the network uncomment this line, and comment the line above
     # app.run(debug=True, host= '0.0.0.0')
+    # of course be vere careful with this. EVERYONE within network can read ALL your notes! (if they know your IP)
