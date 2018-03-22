@@ -278,7 +278,13 @@ if __name__ == '__main__':
     if not args.noupdatedb:
         make_db()
     convert_jupyter_notebook_to_markdown()
+
+    # kill old flask
+    print('Kill old flask')
+    os.system('kill -9 $(lsof -ti:5000)')
+
     start_flask(args)
+
 
     if args.debug:
         DEV = True
