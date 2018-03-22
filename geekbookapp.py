@@ -279,12 +279,11 @@ if __name__ == '__main__':
         make_db()
     convert_jupyter_notebook_to_markdown()
 
-    # kill old flask
-    print('Kill old flask')
-    os.system('kill -9 $(lsof -ti:5000)')
-
+    if not args.debug and not args.update:
+        # kill old flask
+        print('Kill old flask')
+        os.system('kill -9 $(lsof -ti:5000)')
     start_flask(args)
-
 
     if args.debug:
         DEV = True
