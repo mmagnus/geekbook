@@ -211,7 +211,10 @@ class App(object):
 def start_flask(args):
     if not args.noflask and not args.debug and not args.update:
         logger.info("Start off flask!")
-        os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py &')
+        if args.public:
+            os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py --public &')
+        else:
+            os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py --public &')
 
 
 def start_gitweb():
@@ -243,6 +246,7 @@ def get_parser():
                         help='updates all jupiter notebooks!', action='store_true')
     parser.add_argument('--noflask', help='dont run flask', action='store_true')
     parser.add_argument('--noupdatedb', help='dont update the db', action='store_true')
+    parser.add_argument('--public', help='run as public server, edit engine.open_access to configure', action='store_true')
     return parser
 
 
