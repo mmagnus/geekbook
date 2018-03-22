@@ -5,6 +5,7 @@ __pycache__/
 *.pyc
 
 notes/*
+notes-dx/*
 engine/data/*
 
 #config
