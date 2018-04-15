@@ -49,9 +49,12 @@ def parse_note(fn, keywords):
         if collecting is True:  # empty line
             if not lstrip.startswith('-'):
                 collecting = False
-                txt += curr_week #+ '\n'
+                if curr_week not in txt:
+                    txt += curr_week #+ '\n'
+
                 txt += curr_date #+ '\n'
                 txt += curr_list
+                txt += '\n'
                 curr_list = ''
 
         if collecting:
