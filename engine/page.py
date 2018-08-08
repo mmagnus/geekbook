@@ -12,7 +12,7 @@ from shutil import copy
 from engine.postprocessing import (add_title,
                                    add_head_for_flask, change_data_tag_into_actual_data,
                                    add_path_to_img, change_html_tags_bootstrap,
-                                   unhighlight, personal_tags_to_html, get_todo)
+                                   unhighlight, personal_tags_to_html, get_todo, get_captions)
 
 from engine.preprocessing import include_md_files, get_image_path, get_youtube_embeds, get_abstract, include_file
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN
@@ -71,6 +71,7 @@ class Page(object):
         self.md = get_image_path(self.md)
         self.md = get_youtube_embeds(self.md)
         self.md = get_abstract(self.md)
+        self.md = get_captions(self.md)
         # self.md = right_link_from_dropbox_screenshot(self.md)
 
     def post_process(self):

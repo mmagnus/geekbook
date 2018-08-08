@@ -159,6 +159,19 @@ def get_todo(text):
     return ntext
 
 
+def get_captions(text):
+    """Replace *in text* @todo, @inprogress and @done with `<span class="label label-danger">@todo</span>` and so on.
+    """
+    ntext = ''
+    print('Caption detected')
+    for l in text.split('\n'):
+        if l.startswith('Fig.') or if l.startswith('Figure.'):
+            l = l.replace('Fig.', '<small><b>Figure.</b>')
+            l = l.replace('Figure.', '<small><b>Figure.</b>')
+            l += '</small>'
+        ntext += l + '\n'
+    return ntext
+
 # main
 if __name__ == '__main__':
     content = sys.stdin.read()
