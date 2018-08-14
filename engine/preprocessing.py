@@ -95,6 +95,9 @@ def get_image_path_in_line(l):
         if '#mini' in alt:
             style += "width:200px;"
 
+        if '#full' in alt:
+            style += "max-height:100%;"
+
         width_html = ''
         height_html = ''
         if name.find(' =') > -1:
