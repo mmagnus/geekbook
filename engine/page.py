@@ -12,7 +12,8 @@ from shutil import copy
 from engine.postprocessing import (add_title,
                                    add_head_for_flask, change_data_tag_into_actual_data,
                                    add_path_to_img, change_html_tags_bootstrap,
-                                   unhighlight, personal_tags_to_html, get_todo, get_captions)
+                                   unhighlight, personal_tags_to_html, get_todo, get_captions,
+                                   get_divhr)
 
 from engine.preprocessing import include_md_files, get_image_path, get_youtube_embeds, get_abstract, include_file
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN
@@ -87,6 +88,7 @@ class Page(object):
             self.html = find_files(self.html)
         self.html = get_todo(self.html)
         self.html = add_title(self.html, self.fn)
+        self.html = get_divhr(self.html)
 
     def is_changed(self):
         """Check if the file on disc is different than `md`.

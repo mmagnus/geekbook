@@ -171,6 +171,27 @@ def get_captions(text):
         ntext += l + '\n'
     return ntext
 
+def get_divhr(text):
+    """"""
+    ntext = ''
+    for l in text.split('\n'):
+        if l.startswith('<hr />'):
+            l = l.replace('<hr />', '<div style="clear:both"></div><hr>')
+        # ok, this is super ugly ;( but works!
+        if '<h1' in l:
+            l = l.replace('<h1', '<div style="clear:both"></div><h1')
+        if '<h2' in l:
+            l = l.replace('<h2', '<div style="clear:both"></div><h2')
+        if '<h3' in l:
+            l = l.replace('<h3', '<div style="clear:both"></div><h3')
+        if '<h4' in l:
+            l = l.replace('<h4', '<div style="clear:both"></div><h4')
+        if '<h5' in l:
+            l = l.replace('<h5', '<div style="clear:both"></div><h5')
+        ntext += l + '\n'
+    return ntext
+
+
 # main
 if __name__ == '__main__':
     content = sys.stdin.read()

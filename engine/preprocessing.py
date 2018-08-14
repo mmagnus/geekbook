@@ -5,7 +5,7 @@
 
 Go to page.py (Page) pre_process to add a new function from here."""
 
-from engine.conf import PATH_TO_IMG, PATH_TO_MD
+from conf import PATH_TO_IMG, PATH_TO_MD
 import re
 import os
 import codecs
@@ -86,6 +86,15 @@ def get_image_path_in_line(l):
     rall = re.findall('(?P<all>\!\[.*?\]\(.+?\))', l)
     for r, ra in zip(rx, rall):
         alt, name = r  # ('', 'imgs/ss_gab.png')
+
+        # options in []
+        style = ''
+        if '#left' in alt:
+            style = "float: left;  margin: 0 15px 0 0;"
+
+        if '#mini' in alt:
+            style += "width:200px;"
+
         width_html = ''
         height_html = ''
         if name.find(' =') > -1:
@@ -107,8 +116,7 @@ def get_image_path_in_line(l):
             if log:
                 logger.info('image %s', name)
             if FLASK_BASED:
-                path_new = '<a data-lightbox="note" href="/' + name + '"><img style="' + width_html + height_html + \
-                    '" src="/' + name + '"></a>'
+                path_new = '<a data-lightbox="note" href="/' + name + '"><img style="' + width_html + height_html + style + '" src="/' + name + '"></a>'
             else:
                 path_new = '<a data-lightbox="note" href="' + PATH_TO_IMG + '/' + name + '"><img style="' + \
                     width_html + height_html + '" src="' + PATH_TO_IMG + '/' + name + '"></a>'
@@ -118,6 +126,8 @@ def get_image_path_in_line(l):
         if l.find('||') > -1:
             l = '<table class="table table-hover"><tbody><tr><td>' + \
                 l.replace('||', '</td><td>') + '</td></tr></tbody></table>'
+
+        #
     return l
 
 
@@ -210,3 +220,12 @@ def include_file(text):
                 logger.info('include file detected: %s', file_fn)
         ntext += l + '\n'
     return ntext
+
+
+# main
+if __name__ == "__main__":
+    l = "![](imgs/Screen_Shot_2018-08-14_at_11.29.30_AM.png)"
+    print(get_image_path_in_line(l))
+
+    l = "![#left](imgs/Screen_Shot_2018-08-14_at_11.29.30_AM.png)"
+    print(get_image_path_in_line(l))
