@@ -93,7 +93,10 @@ def get_image_path_in_line(l):
             style = "float: left;  margin: 0 15px 0 0;"
 
         if '#mini' in alt:
-            style += "width:200px;"
+            style += "width:25%;"
+
+        if '#half' in alt:
+            style += "width:50%;"
 
         if '#full' in alt:
             style += "max-height:100%;"
