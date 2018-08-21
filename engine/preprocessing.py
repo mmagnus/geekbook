@@ -205,7 +205,7 @@ def include_md_files(md):
                     nmd = nmd.replace('{{TOC}}', '')
                     nmd = nmd.replace('[tableofcontent]', '')
             else:
-                nmd += 'The file can not be found: ' + l + '\n'
+                nmd = '@error The file can not be found: ' + l + '\n' + nmd  # at this info at the beginning of the file
         else:
             nmd += l + '\n'
     return nmd
