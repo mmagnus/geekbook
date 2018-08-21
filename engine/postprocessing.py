@@ -151,6 +151,8 @@ def get_todo(text):
                 l = l.replace('@done', '<span class="label label-success">@done</span>')
                 l = l.replace('@fixed', '<span class="label label-info">@fixed</span>')
 
+                l = l.replace('@error', '<span class="label label-danger">@error</span>')
+
                 l = l.replace('True', '<span class="label label-success">True</span>')
                 l = l.replace('False', '<span class="label label-danger">False</span>')
 
