@@ -71,6 +71,14 @@ def edit_header(note_title, note_header):
 
     return redirect('/view/' + note_title + '.md#' + note_header.lstrip('#').strip().replace(' ', '-'))
 
+
+@app.route('/open/<path:path>')
+def open_file(path):
+    cmd = 'open /' + path + ' &'
+    os.system(cmd)
+    return cmd
+
+
 @app.route('/js/<path:path>')
 def send_js(path):
     return send_from_directory(PATH_TO_TEMPLATE + os.sep + 'js/' , path)

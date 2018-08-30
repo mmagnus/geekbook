@@ -16,10 +16,11 @@ logger = logging.getLogger('geekbook')
 
 JSON_DB = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'find_file.json'
 
+
 def file_search(filename, verbose):
     """Search for filename. Returns dirname of the filename's path, and the full path.
-    
-    170107 add cache. If the db is not found, create an empty pandas df 
+
+    170107 add cache. If the db is not found, create an empty pandas df
     and populate this df with append later. If the filename is not in the db
     run g/locate. Then, save the found path to the db (using pandas, via df, to json)"""
 
@@ -41,7 +42,8 @@ def file_search(filename, verbose):
     if platform.system() == "Linux":
         out = commands.getoutput('locate ' + filename)
     if platform.system() == "Darwin":
-        out = commands.getoutput('glocate ' + filename)
+        # out = commands.getoutput('glocate ' + filename)
+        out = commands.getoutput('mdfind ' + filename)
     first_hit = out.split('\n')[0]
     logger.info('# of hits ' + str(len(out.split('\n'))) + " " + out.replace('\n',', '))
     if not first_hit:
@@ -56,7 +58,8 @@ def file_search(filename, verbose):
     df.to_json(JSON_DB, orient='records')
     ##
     return os.path.dirname(first_hit), first_hit
-    
+
+
 def find_files(text, verbose=False):
     output = ''
     msg_listofnotfoundfiles = ''
@@ -68,7 +71,7 @@ def find_files(text, verbose=False):
             folderpath, filepath = file_search(filename, False)
             if folderpath:
                 if verbose: print '# file_finder.search()', output
-                output += l.replace('[ff:' + filename + ']',' <a href="' + folderpath + '"><code>[+]</code></a> ' + '<a href="' + filepath + '"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
+                output += l.replace('[ff:' + filename + ']',' <a href="' + folderpath + '"><code>[+]</code></a> ' + '<a target="_blank" href="/open' + filepath + '"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
             else:
                 if verbose: print 'problem: can not find ' + filename
                 output += l.replace('[ff:' + filename + ']', '<span style="color:red">' + filename + '</span>')
