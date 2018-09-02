@@ -199,11 +199,12 @@ def include_md_files(md):
             # check if exists
             if os.path.isfile(ffullpath):
                 with codecs.open(ffullpath, "r", "utf-8") as f:
-                    next(f)
-                    nmd += '\n' + f.read() + '\n'
-                    # remove {{TOC}}
-                    nmd = nmd.replace('{{TOC}}', '')
-                    nmd = nmd.replace('[tableofcontent]', '')
+                    next(f)  # skip first line? hack to get rid of # Title of the note
+                    txt = f.read()
+                    # remove table of content for this included note
+                    txt = txt.replace('{{TOC}}', '')
+                    txt = txt.replace('[tableofcontent]', '')
+                    nmd += '\n' + txt + '\n'
             else:
                 nmd = '@error The file can not be found: ' + l + '\n' + nmd  # at this info at the beginning of the file
         else:
