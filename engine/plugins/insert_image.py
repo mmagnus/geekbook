@@ -10,9 +10,10 @@ def insert_image_in_md(text, d, td, IMG_PREFIX):
     for c in range(0, len(ltext)):
         if ltext[c].strip() == 'ii':
             ltext[c] = insert_image(d, td, IMG_PREFIX)
+            os.system('trash ' + d)
             changed = True
     return '\n'.join(ltext), changed # trigger compiles
-        
+
 def insert_image(d = '/home/magnus/Desktop/*png', td = '/home/magnus/Dropbox/geekbook/notes/imgs/', IMG_PREFIX='imgs/'):
     """Check the latest file in d-rectory and copy it to t-arget d-rectory"""
     # make folder with imgs
