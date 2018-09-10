@@ -10,7 +10,6 @@ def insert_image_in_md(text, d, td, IMG_PREFIX):
     for c in range(0, len(ltext)):
         if ltext[c].strip() == 'ii':
             ltext[c] = insert_image(d, td, IMG_PREFIX)
-            os.system('trash ' + d)
             changed = True
     return '\n'.join(ltext), changed # trigger compiles
 
@@ -25,7 +24,7 @@ def insert_image(d = '/home/magnus/Desktop/*png', td = '/home/magnus/Dropbox/gee
     newest = max(glob.iglob(d), key=os.path.getctime)
     # copy to img
     t = os.path.basename(newest.replace(' ','_'))
-    shutil.copy(newest, td + IMG_PREFIX + t)
+    shutil.move(newest, td + IMG_PREFIX + t)
     return '![](' + IMG_PREFIX  + t + ')'
 
 if __name__ == '__main__':
