@@ -47,6 +47,24 @@ def tag_heading(heading):
                 t, '<span style="font-family:"  class="label label-danger">' + t + '</span>')
         else:
             heading = heading.replace(t, '<span class="label label-info">' + t + '</span>')
+
+    # also work with #<tag> not only @<tag.
+    tags = re.findall('\#\w+', heading)
+    for t in tags:
+        if t == '#done':
+            heading = heading.replace(
+                t, '<span style="font-family:"  class="label label-success">' + t + '</span>')
+        elif t == '#progress':
+            heading = heading.replace(
+                t, '<span style="font-family:"  class="label label-warning">' + t + '</span>')
+        elif t == '#inprogress':
+            heading = heading.replace(
+                t, '<span style="font-family:"  class="label label-warning">' + t + '</span>')
+        elif t == '#todo':
+            heading = heading.replace(
+                t, '<span style="font-family:"  class="label label-danger">' + t + '</span>')
+        else:
+            heading = heading.replace(t, '<span class="label label-info">' + t + '</span>')
     return heading
 
 
