@@ -14,3 +14,7 @@ Search your notes, and grep the results:
 this can be aliased to:
 
     alias geeksearch="geekbooksearch2.py for "
+
+Also:
+
+    geekbooksearch2.py for @wifi 'pass*
