@@ -10,3 +10,7 @@ Search your notes, and grep the results:
     docker.md:47:    8888/tcp -> 0.0.0.0:8888
     docker.md:53:    docker cp test:<path> <to-where>
     docker.md:54:    docker cp <file> test:<path>
+
+this can be aliased to:
+
+    alias geeksearch="geekbooksearch2.py for "
