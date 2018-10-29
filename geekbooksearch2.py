@@ -50,7 +50,7 @@ if __name__ == '__main__':
         if v:
             print (bcolors.OKGREEN + '\_ in: ' + searchin[:200] + bcolors.ENDC)
 
-        cmd = "grep --color=auto " + f + " " + searchin + " -n "
+        cmd = "grep --color=auto -i '" + f + "' " + searchin + " -n "
         if n:
             cmd += "-A " + n
         if v:
