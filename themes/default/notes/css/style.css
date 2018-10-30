@@ -219,6 +219,8 @@ body{
 */
 /* priting end */
 
+pre{
+    word-wrap:normal;
 p {
     font: 400 16px/1.5 Georgia;
 }
