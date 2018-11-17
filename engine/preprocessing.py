@@ -59,6 +59,20 @@ def get_abstract(text):
     return ntext
 
 
+def make_interna_links(text, verbose=True):
+    ntext = ''
+    for l in text.split('\n'):
+        # [file:xxxx.md]
+        print(l)
+        rx = re.findall('\[file\:(?P<filename>.+?)\]', l)
+        for r in rx:
+            l = l.replace('[file:' + r + ']', '<a href="http://127.0.0.1:5000/view/' + r.replace('.md', '.html') + '">' + \
+                          r.replace('.md','') + '</a>')
+            if verbose: print(l)
+        ntext += l + '\n'
+    return ntext
+
+
 def get_image_path_in_line(l):
     """Update: work also with more than one link per line and with tables.
     Update (2): you can also define width and height of your images.
