@@ -95,6 +95,9 @@ def get_image_path_in_line(l):
         if '#mini' in alt:
             style += "width:25%;"
 
+        if '#icon' in alt:
+            style += "width:5%;"
+
         if '#half' in alt:
             style += "width:50%;"
 
