@@ -59,11 +59,10 @@ def get_abstract(text):
     return ntext
 
 
-def make_interna_links(text, verbose=True):
+def make_interna_links(text, verbose=False):
     ntext = ''
     for l in text.split('\n'):
         # [file:xxxx.md]
-        print(l)
         rx = re.findall('\[file\:(?P<filename>.+?)\]', l)
         for r in rx:
             l = l.replace('[file:' + r + ']', '<a href="http://127.0.0.1:5000/view/' + r.replace('.md', '.html') + '">' + \
