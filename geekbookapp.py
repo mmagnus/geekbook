@@ -170,6 +170,10 @@ class App(object):
                     index = Index()
                     index.update(mf.get_files())
 
+                    # update search db if any of the files
+                    # is changed
+                    make_db()
+
             if UPDATE:
                 for f in mf.get_files():
                     if f == 'imgs':
