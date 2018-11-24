@@ -59,7 +59,7 @@ def get_abstract(text):
     return ntext
 
 
-def make_interna_links(text, verbose=True):
+def make_interna_links(text, verbose=False):
     ntext = ''
     for l in text.split('\n'):
         # [file:xxxx.md]
