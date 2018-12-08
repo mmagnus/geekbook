@@ -1,5 +1,8 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
 
+"""
 import engine.searcher as sx
 import argparse
 
@@ -8,6 +11,7 @@ def get_parser():
     parser = argparse.ArgumentParser(
         description=__doc__,
         formatter_class=argparse.RawDescriptionHelpFormatter)
+
     parser.add_argument('phrases')
     parser.add_argument('-v', '--verbose', help='push to the server', action='store_true')
     return parser

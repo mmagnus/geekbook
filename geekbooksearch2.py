@@ -17,7 +17,7 @@ if __name__ == '__main__':
     curr = os.getcwd()
     os.chdir(PATH_TO_MD)
 
-    v = True
+    v = False
     # if action == 'search':
     if 1:
         ################################################################################
