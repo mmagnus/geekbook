@@ -141,9 +141,11 @@ def change_todo_square_chainbox_or_icon(text, verbose=False):
     # of list
     text = text.replace('<li>[ ]', '<li><input type="checkbox" />')
     text = text.replace('<li>[X]', '<li><input type="checkbox" checked="checked" />')
+    text = text.replace('<li>[x]', '<li><input type="checkbox" checked="checked" />')
     # every [ ] is change
     text = text.replace('[ ]', '<input type="checkbox" />')
     text = text.replace('[X]', '<input type="checkbox" checked="checked" />')
+    text = text.replace('[x]', '<input type="checkbox" checked="checked" />')
     return text
 
 
