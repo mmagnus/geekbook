@@ -74,7 +74,7 @@ def edit_header(note_title, note_header):
 
 @app.route('/open/<path:path>')
 def open_file(path):
-    cmd = 'open /' + path + ' &'
+    cmd = 'open "/' + path + '" &'
     os.system(cmd)
     return cmd
 
