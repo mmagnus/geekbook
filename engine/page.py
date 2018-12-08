@@ -3,6 +3,7 @@
 """Page - one note is a page."""
 import markdown
 import codecs
+from mdx_gfm import GithubFlavoredMarkdownExtension
 
 import os
 from os import sep
