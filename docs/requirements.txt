@@ -1,5 +1,4 @@
 sphinx-argparse
 markdown
-py-gfm
 Flask
 pandas
