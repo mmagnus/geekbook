@@ -1,5 +1,5 @@
 sphinx-argparse
-markdown
+markdown==2.6.11
 py-gfm==0.1.3
 Flask
 pandas
