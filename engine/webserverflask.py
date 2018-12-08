@@ -91,7 +91,7 @@ def open_file(filename):
         print('hit ' + first_hit)
     cmd = 'open "/' + first_hit + '" &'
     os.system(cmd)
-    return msg + cmd
+    return cmd
 
 
 @app.route('/js/<path:path>')
