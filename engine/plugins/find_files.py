@@ -61,7 +61,10 @@ def file_search(filename, verbose):
     # update cache
     dffile = pd.DataFrame([[filename, first_hit],], columns=['fn', 'path'])
     if verbose: print(df)
-    df[df['fn'] == filename]['path']
+    try:
+        df[df['fn'] == filename]['path']
+    except KeyError:
+        pass
     df = df.append(dffile, ignore_index=True)
     # save to json
     df.to_json(JSON_DB, orient='records')
