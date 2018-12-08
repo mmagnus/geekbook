@@ -25,7 +25,8 @@ h4 {
     color: #333333;
 }
 li {
-    line-height: 15px;
+    line-height: 14px;
+    font: 400 16px/1.5 Georgia;
 }
 p  {
     text-align: justify;
@@ -45,7 +46,7 @@ li p{
    height: 100%;
    position: fixed;
    left: 1px;
-   top: 1px; 
+   top: 1px;
    border-radius: 3px 3px 3px 3px;*/
    padding-left: 25px; }
 
@@ -55,7 +56,7 @@ li p{
 }
 .table_of_content_h2 {
     list-style-type: none;
-    margin-left: 70px;    
+    margin-left: 70px;
 
 }
 .table_of_content_h3 {
@@ -112,6 +113,12 @@ li p{
 
 }
 
+em {
+    font-weight: bold;
+    font-style: normal;
+}
+
+
 .inputpanel{
 /*    border-bottom: 1px solid #CCCCCC;    */
 }
@@ -140,7 +147,7 @@ li p{
 }
 
 /*
-zielonkawy 
+zielonkawy
 yellow light #fdf9ba
 */
 ul strong{
@@ -175,7 +182,7 @@ ul strong{
 
 .index_list li{
     list-style-type: none;
-    margin-left: 50px;    
+    margin-left: 50px;
 }
 
 .index_list_a{
@@ -191,7 +198,7 @@ a {
 .abstract{
     background-color: #d8d8d8;
     padding: 10px;
-    font-weight:bold;    
+    font-weight:bold;
     font: 400 18px/1.5 Georgia;
     text-align: justify;
 }
@@ -214,28 +221,27 @@ p, ol, li, pre code {
 }
 
 body{
-    width: 100%; 
+    width: 100%;
 }
 */
 /* priting end */
 
 pre{
     word-wrap:normal;
-p {
-    font: 400 16px/1.5 Georgia;
 }
 
-li {
-    font-family: Georgia;
+p {
+    font: 400 16px/1.5 Georgia;
 }
 
 img {
     max-width: 100%;
     display: block;
     max-height: 500px;
+    border-radius: 10px;
     /* center imgs http://stackoverflow.com/questions/18153234/center-a-column-using-twitter-bootstrap-3 */
-    /* margin-left: auto;
-    margin-right: auto; */
+    /*margin-left: auto;
+    margin-right: auto;*/
 }
 
 .index_date {
@@ -246,7 +252,7 @@ img {
     .nav {
         display: none;
     }
-    
+
 }
 
 hr {
