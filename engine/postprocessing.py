@@ -86,6 +86,15 @@ def add_head(text):
     # return head + text
 
 
+def use_icons(text):
+    """
+    https://www.w3schools.com/bootstrap/bootstrap_badges_labels.asp
+    """
+    text = text.replace('!!!', '<span class="label label-danger">!</span>')
+    text = text.replace('!!', '<span class="label label-warning">!</span>')
+    return(text)
+
+
 def change_html_tags_bootstrap(text):
     """ searches for html tags and adds the proper bootstrap class"""
     text = text.replace('<table>', '<table class="table table-hover">')
