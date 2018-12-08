@@ -72,6 +72,25 @@ def make_interna_links(text, verbose=False):
     return ntext
 
 
+def make_sport_links(text, verbose=False):
+    ntext = ''
+    for l in text.split('\n'):
+        # [file:xxxx.md]
+        rx = re.findall('\[sport\:(?P<date>.+?)\]', l)
+        for r in rx:
+            # 181203
+            y = r[:2]
+            m = r[2:4]
+            d = r[4:]
+            print(rx, y, m, d)
+            l = '<a target="_top" href="http://www.myfitnesspal.com/food/diary?date=20%s-%s-%s">MFP</a> ' % (y, m, d)
+            print(l)
+            l += '<a target="_top" href="https://connect.garmin.com/modern/daily-summary/mmagnus/20%s-%s-%s">Garmin Connect</a>' % (y, m, d)
+            if verbose: print(l)
+        ntext += l + '\n'
+    return ntext
+
+
 def get_image_path_in_line(l):
     """Update: work also with more than one link per line and with tables.
     Update (2): you can also define width and height of your images.
