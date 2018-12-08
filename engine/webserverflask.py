@@ -30,6 +30,8 @@ try:
 except ImportError:
     OPEN_ACCESS = []
 
+import platform
+import commands
 
 app = Flask(__name__, static_url_path='')
 
@@ -72,11 +74,24 @@ def edit_header(note_title, note_header):
     return redirect('/view/' + note_title + '.md#' + note_header.lstrip('#').strip().replace(' ', '-'))
 
 
-@app.route('/open/<path:path>')
-def open_file(path):
-    cmd = 'open "/' + path + '" &'
+@app.route('/open/<filename>')
+def open_file(filename):
+    if platform.system() == "Linux":
+        out = commands.getoutput('locate ' + filename)
+    if platform.system() == "Darwin":
+        # out = commands.getoutput('glocate ' + filename)
+        out = commands.getoutput('mdfind -name ' + filename)
+
+    first_hit = out.split('\n')[0]
+    print('# of hits ' + str(len(out.split('\n'))) + " " + out.replace('\n',', '))
+    if not first_hit:
+        print('not found')
+        return ('Not found', '~~' + filename + '~~')
+    else:
+        print('hit ' + first_hit)
+    cmd = 'open "/' + first_hit + '" &'
     os.system(cmd)
-    return cmd
+    return msg + cmd
 
 
 @app.route('/js/<path:path>')
