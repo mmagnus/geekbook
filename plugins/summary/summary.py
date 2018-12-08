@@ -21,6 +21,7 @@ Evo:
 - task1
 - task2
 
+Example: python summary.py evo 'rna evolution-based modeling' / shell alias evosum
 """
 
 from __future__ import print_function
@@ -37,6 +38,7 @@ def parse_note(fn, keywords):
     collecting = False
     curr_date = ''
     curr_list = ''
+    curr_week = ''
     for l in open(fn):
         lstrip = l.strip()
         #print(l)
@@ -75,11 +77,13 @@ def keywords_in_line(l, keywords):
 
 
 if __name__ == '__main__':
-    # parser = get_parser()
-    # args = parser.parse_args()
+    parser = get_parser()
+    args = parser.parse_args()
 
     # fn = "/home/magnus/Dropbox/geekbook/notes/test-project.md" #  workbook.md" # test-project.md" #
     fn = "/home/magnus/Dropbox/geekbook/notes/workbook.md" # test-project.md" #
-    keywords = ['evo', 'rna evolution-based modeling']
+    # keywords = ['evo', 'rna evolution-based modeling']
+    keywords = args.keywords
+
     txt = parse_note(fn, keywords)
     print(txt)
