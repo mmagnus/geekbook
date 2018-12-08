@@ -35,4 +35,4 @@ PATH_TO_CSS = PATH_TO_TEMPLATE + "/css/"
 PATH_TO_BASE_IMG = PATH_TO_TEMPLATE + "/img/"
 
 # find files plugin off/on
-FIND_FILES_PLUGIN = False
+FIND_FILES_PLUGIN = True
