@@ -130,6 +130,10 @@ def get_image_path_in_line(l):
         if '#icon' in alt:
             style += "width:5%;"
 
+        if '#center' in alt:
+            print('center...')
+            style += "margin-left: auto; margin-right: auto;"
+
         if '#half' in alt:
             style += "width:50%;"
 
