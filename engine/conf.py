@@ -18,6 +18,10 @@ AI_WRITER = False
 
 SCREENSHOT_INBOX = None
 
+
+# find files plugin off/on
+FIND_FILES_PLUGIN = False
+
 # to use it, create conf_local.py with e.g. TEMPLATE='pietro'
 try:
     from conf_local import *
@@ -33,6 +37,3 @@ PATH_TO_TEMPLATE_HTML = PATH_TO_TEMPLATE + 'head.html'
 
 PATH_TO_CSS = PATH_TO_TEMPLATE + "/css/"
 PATH_TO_BASE_IMG = PATH_TO_TEMPLATE + "/img/"
-
-# find files plugin off/on
-FIND_FILES_PLUGIN = False
