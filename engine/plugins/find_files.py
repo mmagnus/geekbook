@@ -71,6 +71,8 @@ def file_search(filename, verbose):
     return os.path.dirname(first_hit), first_hit
 
 
+
+
 def find_files(text, verbose=False):
     output = ''
     msg_listofnotfoundfiles = ''
@@ -79,21 +81,17 @@ def find_files(text, verbose=False):
         if rx:
             filename = rx.group('file')
             if verbose: print '# filename: ', filename
-            folderpath, filepath = file_search(filename, False)
-            if folderpath:
-                if verbose: print '# file_finder.search()', output
-                # remove for now folder link, it does not work @todo
-                #output += l.replace('[ff:' + filename + ']',' <a href="' + folderpath + '"><code>[+]</code></a> ' + '<a target="_blank" href="/open' + filepath + '"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
-                output += l.replace('[ff:' + filename + ']', '<a target="_blank" href="/open' + filepath + '"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
-            else:
-                if verbose: print 'problem: can not find ' + filename
-                output += l.replace('[ff:' + filename + ']', '<span style="color:red">' + filename + '</span>')
-                msg_listofnotfoundfiles += filename + '\n'
+            folderpath, filepath = '', filename # file_search(filename, False)
+
+            if verbose: print '# file_finder.search()', output
+            # remove for now folder link, it does not work @todo
+            #output += l.replace('[ff:' + filename + ']',' <a href="' + folderpath + '"><code>[+]</code></a> ' + '<a target="_blank" href="/open' + filepath + '"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
+            output += l.replace('[ff:' + filename + ']', '<a target="_blank" href="/open/' + filepath + '"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
         else:
             output += l + '\n'
-    ##
     output = output.replace('[files-not-found]', msg_listofnotfoundfiles)
     return output
+
 
 if __name__ == '__main__':
     #text = sys.stdin.read()
