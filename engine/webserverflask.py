@@ -61,7 +61,7 @@ def open_file():
         print('hit ' + first_hit)
         cmd = 'open "/' + first_hit + '" &'
         os.system(cmd)
-        return jsonify(result=" ")
+        return jsonify(result="")
 
 
 
