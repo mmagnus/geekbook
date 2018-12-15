@@ -76,7 +76,7 @@
                         var file_path = $(this).attr("address");
                         //alert(file_path);
                         $.getJSON('/open_file/', {'file_path':file_path}, function(data) {
-                            if (data != " ") {alert(data.result);}
+                            if (data.result != "") {alert(data.result);}
                         });
                         return false;
                                  

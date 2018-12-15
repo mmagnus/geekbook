@@ -84,7 +84,7 @@ def find_files(text, verbose=False):
             if verbose: print '# file_finder.search()', output
             # remove for now folder link, it does not work @todo
             #output += l.replace('[ff:' + filename + ']',' <a href="' + folderpath + '"><code>[+]</code></a> ' + '<a target="_blank" href="/open' + filepath + '"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
-            output += l.replace('[ff:' + filename + ']', '<a  href="#" address="' + filepath + '" id="openfile"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>   <span id=result></span>')
+            output += l.replace('[ff:' + filename + ']', '<a  href="#" address="' + filepath + '" id="openfile"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
         else:
             output += l + '\n'
     output = output.replace('[files-not-found]', msg_listofnotfoundfiles)
