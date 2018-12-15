@@ -13,7 +13,7 @@ sys.path.append(PATH)
 from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE_HTML, PATH_TO_TEMPLATE, PATH_TO_MD
 print PATH_TO_TEMPLATE_HTML
 from engine.postprocessing import add_head
-from flask import Flask, redirect, url_for, send_from_directory
+from flask import Flask, redirect, url_for, send_from_directory, request
 
 import subprocess
 import re
@@ -44,6 +44,28 @@ def edit(note_title):
     os.system('open ' + PATH_TO_MD + ' ' + note_title)
     return 'edit note: %s' % note_title
 
+@app.route('/open_file/')
+def open_file():
+    filename = request.args.get('file_path')
+    if platform.system() == "Linux":
+        out = commands.getoutput('locate ' + filename)
+    if platform.system() == "Darwin":
+        # out = commands.getoutput('glocate ' + filename)
+        out = commands.getoutput('mdfind -name ' + filename)
+    first_hit = out.split('\n')[0]
+    print('# of hits ' + str(len(out.split('\n'))) + " " + out.replace('\n',', '))
+    if not first_hit:
+        print('not found')
+        return jsonify(result='Not found ' + filename)
+    else:
+        print('hit ' + first_hit)
+        cmd = 'open "/' + first_hit + '" &'
+        os.system(cmd)
+        return jsonify(result=" ")
+
+
+
+
 @app.route('/edit_header/<note_title>/<note_header>')
 def edit_header(note_title, note_header):
     """
@@ -73,7 +95,7 @@ def edit_header(note_title, note_header):
 
     return redirect('/view/' + note_title + '.md#' + note_header.lstrip('#').strip().replace(' ', '-'))
 
-
+"""
 @app.route('/open/<filename>')
 def open_file(filename):
     if platform.system() == "Linux":
@@ -92,7 +114,7 @@ def open_file(filename):
     cmd = 'open "/' + first_hit + '" &'
     os.system(cmd)
     return cmd
-
+"""
 
 @app.route('/js/<path:path>')
 def send_js(path):
