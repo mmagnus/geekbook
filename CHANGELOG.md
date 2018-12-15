@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Pre-release]
 ### Added
 - Insert files (drag and drop) from Apple Photos
-- A draft of slides
+- A draft of slides <https://mmagnus.github.io/geekbook/#/>
 
 ### Changed
 - Round corners of images
