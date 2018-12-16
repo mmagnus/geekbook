@@ -8,10 +8,8 @@
 import os
 import sys
 PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print PATH
 sys.path.append(PATH)
 from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE_HTML, PATH_TO_TEMPLATE, PATH_TO_MD
-print PATH_TO_TEMPLATE_HTML
 from engine.postprocessing import add_head
 from flask import Flask, redirect, url_for, send_from_directory, request
 
@@ -62,8 +60,6 @@ def open_file():
         cmd = 'open "/' + first_hit + '" &'
         os.system(cmd)
         return jsonify(result="")
-
-
 
 
 @app.route('/edit_header/<note_title>/<note_header>')
@@ -135,7 +131,6 @@ def send_img(path):
 @app.route('/view/<note_title>')
 def view(note_title):
     """Open a note with your edit"""
-    print(note_title)
     if request.remote_addr not in ['127.0.0.1', '0.0.0.0']:
         if note_title not in OPEN_ACCESS:
             return 'Hmm...'
