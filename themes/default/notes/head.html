@@ -29,6 +29,8 @@
     <link rel="stylesheet" href="css/monokai.css" type="text/css">
 
     <title>geekbook</title>
+
+
   </head>
 
   <body data-spy="scroll" data-target="#toc" style="margin:50px;max-width:800px">
@@ -68,6 +70,19 @@
                })
               </script>
 
+              <script type="text/javascript">
+                $(document).ready(function() {
+                    $("a#openfile").click(function(event) {
+                        var file_path = $(this).attr("address");
+                        //alert(file_path);
+                        $.getJSON('/open_file/', {'file_path':file_path}, function(data) {
+                            if (data.result != "") {alert(data.result);}
+                        });
+                        return false;
+                                 
+                    });
+                    });
+</script>
 
               <!-- start of demo -->
 <title>demo -- will be replaced!</title>
