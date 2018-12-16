@@ -218,7 +218,7 @@ def start_flask(args):
         if args.public:
             os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py --public &')
         else:
-            os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py --public &')
+            os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py &')
 
 
 def start_gitweb():
