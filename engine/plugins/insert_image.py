@@ -17,6 +17,7 @@ def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
     Returns:
         Text
     """
+    text = text.replace('.jpg/Users/', '.jpg\n/Users/')
     ltext = text.split('\n')
     changed = False
     for c in range(0, len(ltext)):
@@ -27,7 +28,7 @@ def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
         if '/Pictures/Photos Library.photoslibrary/resources/proxies/' in ltext[c].strip():
             source_path = ltext[c]
             t = os.path.basename(source_path) # target
-            t = datetime.datetime.today().strftime('%y%m%d') + '_' + t
+            t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW', '')
             shutil.copy(source_path, td + IMG_PREFIX + t)
             if verbose:
                 print('Coping', source_path, td + IMG_PREFIX + t)
