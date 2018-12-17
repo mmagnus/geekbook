@@ -29,6 +29,9 @@ def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
             source_path = ltext[c]
             t = os.path.basename(source_path) # target
             t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW', '')
+            # clean % from the names
+            t = t.replace('%', '')
+            # copy
             shutil.copy(source_path, td + IMG_PREFIX + t)
             if verbose:
                 print('Coping', source_path, td + IMG_PREFIX + t)
