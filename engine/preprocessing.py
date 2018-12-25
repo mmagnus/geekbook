@@ -91,6 +91,35 @@ def make_sport_links(text, verbose=False):
     return ntext
 
 
+def tablify_images(text):
+    """Introduce || between images that are in the same line, hereby making images be presented
+    in a table, side by side.
+
+    So this::
+
+          .png) ![](imgs/39387.jpg)
+
+    will be processed into::
+
+          png) || [](imgs/39387.jpg)
+
+    and this will be tablified by Geekbook.
+
+      Args:
+         text (str): the whole note in Markdown, easy to be split with .split('\n')
+
+      Returns:
+         ntext (str): processed note in Markdown
+
+    """
+    ntext = ''
+    for l in text.split('\n'):
+        l = l.replace(')![', ') || ![')
+        l = l.replace(') ![', ') || ![')
+        ntext += l + '\n'
+    return ntext
+
+
 def get_image_path_in_line(l):
     """Update: work also with more than one link per line and with tables.
     Update (2): you can also define width and height of your images.
