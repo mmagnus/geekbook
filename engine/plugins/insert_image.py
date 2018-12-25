@@ -28,7 +28,7 @@ def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
         if '/Pictures/Photos Library.photoslibrary/resources/proxies/' in ltext[c].strip():
             source_path = ltext[c]
             t = os.path.basename(source_path) # target
-            t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW', '')
+            t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             # clean % from the names
             t = t.replace('%', '')
             # copy
