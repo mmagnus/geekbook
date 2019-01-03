@@ -3,6 +3,9 @@ import os
 import shutil
 import sys
 import datetime
+from PIL import ImageGrab
+import random
+import string
 
 
 def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
@@ -21,6 +24,18 @@ def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
     ltext = text.split('\n')
     changed = False
     for c in range(0, len(ltext)):
+        ### Clipboard ####################
+        if ltext[c].strip() == 'ip':
+            im = ImageGrab.grabclipboard()
+            N = 10
+            t = datetime.datetime.today().strftime('%y%m%d') + '_' + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(N))
+            fullpath = td + IMG_PREFIX + t
+            if verbose:
+                print('Create an image from clipboard', source_path, td + IMG_PREFIX + t)
+            im.save(fullpath, 'PNG')
+            ltext[c] = '![](' + IMG_PREFIX + t + ')' #  + t + ')'
+            changed = True
+
         if ltext[c].strip() == 'ii':
             ltext[c] = insert_image(sd, td, IMG_PREFIX)
             changed = True
