@@ -47,11 +47,16 @@ def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
             # clean % from the names
             t = t.replace('%', '')
             # copy
-            shutil.copy(source_path, td + IMG_PREFIX + t)
-            if verbose:
-                print('Coping', source_path, td + IMG_PREFIX + t)
-            ltext[c] = '![](' + IMG_PREFIX + t + ')' #  + t + ')'
-            changed = True
+            try:
+                shutil.copy(source_path, td + IMG_PREFIX + t)
+            except IOError:
+                ltext[c] = 'Error in ' + source_path
+                changed = True
+            else:
+                if verbose:
+                    print('Coping', source_path, td + IMG_PREFIX + t)
+                ltext[c] = '![](' + IMG_PREFIX + t + ')' #  + t + ')'
+                changed = True
         ############################
     return '\n'.join(ltext), changed # trigger compiles
 
