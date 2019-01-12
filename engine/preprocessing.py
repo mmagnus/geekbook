@@ -10,6 +10,7 @@ import re
 import os
 import codecs
 import logging
+import glob
 
 logger = logging.getLogger('geekbook')
 logger.setLevel(logging.INFO)
@@ -263,6 +264,24 @@ def include_md_files(md, remove_first_line=False):
     """
     nmd = ''
     for l in md.split('\n'):
+        if l.startswith('/') and l.endswith('*') and l.count('/') == 1:  # /wet*
+            mdname = l.replace('/', '').strip()
+            files = glob.glob(PATH_TO_MD + os.sep + mdname)
+            print(files)
+            for f in files:
+                ffullpath = f
+                if os.path.isfile(ffullpath):
+                    with codecs.open(ffullpath, "r", "utf-8") as f:
+                        if remove_first_line:
+                            next(f)  # skip first line? hack to get rid of # Title of the note
+                        txt = f.read()
+                        # remove table of content for this included note
+                        txt = txt.replace('{{TOC}}', '')
+                        txt = txt.replace('[tableofcontent]', '')
+                        nmd += '<p><div class="alert alert-info">Imported <a href="http://127.0.0.1:5000/view/' + mdname + '">' + mdname + '</a></div></p>'
+                        nmd += '\n' + txt + '\n'
+
+
         if l.startswith('/') and l.endswith('.md') and l.count('/') == 1:  # /shell.md
             ffullpath = PATH_TO_MD + os.sep + l.replace('/', '').strip()
             mdname = l.replace('/', '').strip()
