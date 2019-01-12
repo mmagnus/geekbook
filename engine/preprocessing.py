@@ -267,7 +267,6 @@ def include_md_files(md, remove_first_line=False):
         if l.startswith('/') and l.endswith('*') and l.count('/') == 1:  # /wet*
             mdname = l.replace('/', '').strip()
             files = glob.glob(PATH_TO_MD + os.sep + mdname)
-            print(files)
             for f in files:
                 ffullpath = f
                 if os.path.isfile(ffullpath):
@@ -278,7 +277,8 @@ def include_md_files(md, remove_first_line=False):
                         # remove table of content for this included note
                         txt = txt.replace('{{TOC}}', '')
                         txt = txt.replace('[tableofcontent]', '')
-                        nmd += '<p><div class="alert alert-info">Imported <a href="http://127.0.0.1:5000/view/' + mdname + '">' + mdname + '</a></div></p>'
+                        nmd += '<p><div class="alert alert-info">Imported <a href="http://127.0.0.1:5000/view/' + os.path.basename(ffullpath) + \
+                               '">' +  os.path.basename(ffullpath) + '</a></div></p>'
                         nmd += '\n' + txt + '\n'
 
 
