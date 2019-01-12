@@ -248,13 +248,14 @@ def right_MD_from_webservices(text):
     return text, changed
 
 
-def include_md_files(md):
+def include_md_files(md, remove_first_line=False):
     """Whenever you see /<file.md> include content of this file in here.
 
     Args:
 
        md (str): context of a md file
-
+       remove_first_line (bool): True if you want to skip the first line of included file
+                                 usually to remove the file's top header, e.g. `# Noting`
     Returns:
 
        str: new md (nmd)
@@ -264,14 +265,17 @@ def include_md_files(md):
     for l in md.split('\n'):
         if l.startswith('/') and l.endswith('.md') and l.count('/') == 1:  # /shell.md
             ffullpath = PATH_TO_MD + os.sep + l.replace('/', '').strip()
+            mdname = l.replace('/', '').strip()
             # check if exists
             if os.path.isfile(ffullpath):
                 with codecs.open(ffullpath, "r", "utf-8") as f:
-                    next(f)  # skip first line? hack to get rid of # Title of the note
+                    if remove_first_line:
+                        next(f)  # skip first line? hack to get rid of # Title of the note
                     txt = f.read()
                     # remove table of content for this included note
                     txt = txt.replace('{{TOC}}', '')
                     txt = txt.replace('[tableofcontent]', '')
+                    nmd += '<p><div class="alert alert-info">Imported <a href="http://127.0.0.1:5000/view/' + mdname + '">' + mdname + '</a></div></p>'
                     nmd += '\n' + txt + '\n'
             else:
                 nmd = '@error The file can not be found: ' + l + '\n' + nmd  # at this info at the beginning of the file
