@@ -5,7 +5,7 @@
 
 Go to page.py (Page) pre_process to add a new function from here."""
 
-from conf import PATH_TO_IMG, PATH_TO_MD
+from conf import PATH_TO_IMG, PATH_TO_MD, PATH_TO_ORIG
 import re
 import os
 import codecs
@@ -202,7 +202,6 @@ def get_image_path_in_line(l):
             l = '<table class="table table-hover"><tbody><tr><td>' + \
                 l.replace('||', '</td><td>') + '</td></tr></tbody></table>'
 
-        #
     return l
 
 
@@ -320,6 +319,16 @@ def include_file(text):
         ntext += l + '\n'
     return ntext
 
+
+def update_upper_note(text):
+    ntext = ''
+    for l in text.split('\n'):
+        if l.strip().startswith('^[file:'):
+            filename = l.replace('^[file:', '').replace(']', '').strip()
+            os.remove(PATH_TO_ORIG + os.sep + filename)
+            logger.info('Remove %s to force updating the page', filename)
+        ntext += l + '\n'
+    return ntext
 
 # main
 if __name__ == "__main__":

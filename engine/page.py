@@ -16,7 +16,7 @@ from engine.postprocessing import (add_title,
                                    get_divhr, use_icons)
 
 from engine.preprocessing import (include_md_files, get_image_path, get_youtube_embeds, get_abstract,
-                                  include_file, make_interna_links, make_sport_links, tablify_images)
+                                  include_file, make_interna_links, make_sport_links, tablify_images, update_upper_note)
 
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN
 from engine.make_tableofcontent import make_table_of_content
@@ -69,6 +69,7 @@ class Page(object):
         E.g.::
 
            self.md = get_image_path(self.md) """
+        self.md = update_upper_note(self.md)
         self.md = tablify_images(self.md)
         self.md = include_file(self.md)
         self.md = include_md_files(self.md)
