@@ -310,7 +310,7 @@ def include_file(text):
             file_fn = l.replace('[if:', '').replace(']', '').strip()
             ntext += '<kbd> Imported file: %s </kbd>\n' % file_fn
             try:
-                with codecs.open(file_fn, "r", "utf-8") as f:
+                with codecs.open(PATH_TO_MD + os.sep + file_fn, "r", "utf-8") as f:
                     ntext += f.read()
             except IOError:
                 logger.info('include file -- file not found -- %s', file_fn)
