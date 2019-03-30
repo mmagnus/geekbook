@@ -324,13 +324,35 @@ def include_file(text):
             if '=del1' in l:
                 l = l.replace('=del1', '')
                 del1 = True
+
+            shift1 = False
+            if '=shift1' in l:
+                l = l.replace('=shift1', '')
+                shift1 = True
+
+            shift2 = False
+            if '=shift2' in l:
+                l = l.replace('=shift2', '')
+                shift2 = True
+
             file_fn = l.replace('/[file:', '').replace(']', '').strip()
             ntext += '<kbd> Imported file: %s </kbd>\n' % file_fn
             try:
                 with codecs.open(PATH_TO_MD + os.sep + file_fn, "r", "utf-8") as f:
                     if del1:
                         f.readline()
-                    ntext += f.read()
+                    f = f.read()
+                    if shift1:
+                        f = f.replace('#### ', '##### ')
+                        f = f.replace('### ', '#### ')
+                        f = f.replace('## ', '### ')
+                        f = f.replace('# ', '## ')
+                    if shift2:
+                        f = f.replace('#### ', '###### ')
+                        f = f.replace('### ', '##### ')
+                        f = f.replace('## ', '#### ')
+                        f = f.replace('# ', '### ')
+                    ntext += f
             except IOError:
                 logger.info('include file -- file not found -- %s', file_fn)
             else:
