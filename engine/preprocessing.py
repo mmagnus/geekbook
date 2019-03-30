@@ -316,6 +316,19 @@ def include_file(text):
                 logger.info('include file -- file not found -- %s', file_fn)
             else:
                 logger.info('include file detected: %s', file_fn)
+
+        # /[file:XXX.md]
+        if l.strip().startswith('/[file:'):
+            file_fn = l.replace('/[file:', '').replace(']', '').strip()
+            ntext += '<kbd> Imported file: %s </kbd>\n' % file_fn
+            try:
+                with codecs.open(PATH_TO_MD + os.sep + file_fn, "r", "utf-8") as f:
+                    ntext += f.read()
+            except IOError:
+                logger.info('include file -- file not found -- %s', file_fn)
+            else:
+                logger.info('include file detected: %s', file_fn)
+
         ntext += l + '\n'
     return ntext
 
