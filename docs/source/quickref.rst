@@ -23,6 +23,7 @@ Quick Reference
      [date] to get the current date 2017-01-13
      
 :: 
+
      define only width for a image:
      ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =500x)
      
