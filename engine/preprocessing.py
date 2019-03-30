@@ -319,10 +319,17 @@ def include_file(text):
 
         # /[file:XXX.md]
         if l.strip().startswith('/[file:'):
+            # skip the first line
+            del1 = False
+            if '=del1' in l:
+                l = l.replace('=del1', '')
+                del1 = True
             file_fn = l.replace('/[file:', '').replace(']', '').strip()
             ntext += '<kbd> Imported file: %s </kbd>\n' % file_fn
             try:
                 with codecs.open(PATH_TO_MD + os.sep + file_fn, "r", "utf-8") as f:
+                    if del1:
+                        f.readline()
                     ntext += f.read()
             except IOError:
                 logger.info('include file -- file not found -- %s', file_fn)
