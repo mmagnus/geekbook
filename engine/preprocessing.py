@@ -325,8 +325,12 @@ def update_upper_note(text):
     for l in text.split('\n'):
         if l.strip().startswith('^[file:'):
             filename = l.replace('^[file:', '').replace(']', '').strip()
-            os.remove(PATH_TO_ORIG + os.sep + filename)
-            logger.info('Remove %s to force updating the page', filename)
+            try:
+                os.remove(PATH_TO_ORIG + os.sep + filename)
+                logger.info('Remove %s to force updating the page... OK', filename)
+            except OSError:
+                l = l + ' <span class="label label-danger"> The file not found</span>'
+                logger.info('Remove %s to force updating the page... The file not found', filename)
         ntext += l + '\n'
     return ntext
 
