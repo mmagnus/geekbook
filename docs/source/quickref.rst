@@ -32,3 +32,10 @@ Quick Reference
 
      and both:
      ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =400x400)
+
+::
+
+     you can put to images next to each other and sqeeze them to the left 
+     <div style="width:300px">
+     ![](imgs/190409_L4yjm119T5aONVO9BVeCTQ_thumb_7a17.jpg)![](imgs/190409_thumb_7a18.jpg)
+     </div>
