@@ -3,27 +3,20 @@ Quick Reference
 
 ::
 
-     [ff:<file>]
+     find a full path to your file and insert it in the given place in a generated html
+     [ff:<file>] 
      [ff:uniq-name.pse]
-        find a full path to your file and insert it in the given place in a generated html
-
-::
-
+     
+     insert an external file
      [if:<file>]
      [if:/Users/magnus/work-src/fenzymes/examples/readme.txt]
-        insert an external file
-
-::
-
+        
+     insert the table of content in here
      [tableofcontent] or {{TOC}}
-        insert the table of content in here
 
-::
-
-     [date] to get the current date 2017-01-13
+     to get the current date 2017-01-13
+     [date] 
      
-:: 
-
      define only width for a image:
      ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =500x)
      
@@ -32,8 +25,6 @@ Quick Reference
 
      and both:
      ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =400x400)
-
-::
 
      you can put to images next to each other and sqeeze them to the left 
      <div style="width:300px">
