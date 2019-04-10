@@ -1,7 +1,7 @@
-RNA-pdb-tools
+mmagnus/rna-tools
 ============================================================
 
-You need to install rna-pdb-tools (http://rna-pdb-tools.readthedocs.io/en/latest/) first.
+You need to install rna-tools (http://rna-tools.readthedocs.io/en/latest/) first.
 
 Draw VARNA-based image of RNA secondary structure
 ------------------------------------------------------------
