@@ -29,6 +29,17 @@ def change_todo_square_chainbox_or_icon(text, verbose=False):
     return text
 
 
+def misc_on_text(text, verbose=False):
+    """Set of rules to replace [i] etc with <img ... >  [ OK ]"""
+    # of list
+    ntext = ''
+    for l in text.split('\n'):
+        if l == '<summary>':
+            ntext += l # + '<b>SUMMARY</b>'
+        else:
+            ntext += l + '\n'
+    return ntext
+
 def get_abstract(text):
     """Collect all lines starting with ``! `` and insert it as in abstract in a place tagged as [abstract].
 
