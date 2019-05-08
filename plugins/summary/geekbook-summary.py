@@ -21,7 +21,15 @@ Evo:
 - task1
 - task2
 
-Example: python summary.py evo 'rna evolution-based modeling' / shell alias evosum
+Example::
+
+     $ ./geekbook-summary.py evo 'rna evolution-based modeling' # shell alias evosum
+     $ ./geekbook-summary.py cwc15
+
+    # fn = "/home/magnus/Dropbox/geekbook/notes/test-project.md" #  workbook.md" # test-project.md" #
+    # test-project.md" #
+    # keywords = ['evo', 'rna evolution-based modeling']
+
 """
 
 from __future__ import print_function
@@ -31,6 +39,7 @@ def get_parser():
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("keywords", nargs='+')
+    parser.add_argument("--file", default="/home/magnus/Dropbox/geekbook/notes/workbook.md")
     return parser
 
 def parse_note(fn, keywords):
@@ -80,10 +89,5 @@ if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
 
-    # fn = "/home/magnus/Dropbox/geekbook/notes/test-project.md" #  workbook.md" # test-project.md" #
-    fn = "/home/magnus/Dropbox/geekbook/notes/workbook.md" # test-project.md" #
-    # keywords = ['evo', 'rna evolution-based modeling']
-    keywords = args.keywords
-
-    txt = parse_note(fn, keywords)
+    txt = parse_note(args.file, args.keywords)
     print(txt)
