@@ -30,3 +30,7 @@ Quick Reference
      <div style="width:300px">
      ![](imgs/190409_L4yjm119T5aONVO9BVeCTQ_thumb_7a17.jpg)![](imgs/190409_thumb_7a18.jpg)
      </div>
+     
+     add description of a note in the Index page
+     [desc:info on TN]
+     
