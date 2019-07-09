@@ -43,8 +43,8 @@ class Index(object):
                   <thead>
                       <tr>
                           <th>Title</th>
-	                  <th>Description</th>
                           <th>Last update</th>
+                          <th style="text-align:center">#</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -73,10 +73,14 @@ class Index(object):
                 if mdfn.strip():
                     # Insert the description in the index
                     f = open(PATH_TO_MD + os.sep + mdfn)
-                    desc = "..."
+                    lines = f.readlines()
+                    f.seek(0)
+                    desc = lines[0].replace("#", '').strip() # first line is desc "..."
                     for l in f:
+                        # the tag will overwrite this before
                         if l.strip().startswith('[desc:'):
                             desc = l.replace('[desc:', '').replace(']', '').strip()
+
 
                     mdfn = re.sub('.md$', '', mdfn)  # replace only .md at the very end
                     path = PATH_TO_HTML + '/' + mdfn
@@ -84,13 +88,15 @@ class Index(object):
                     #    html += '<li class="table_of_content_h2">
                     # <a style="" href="' + path + '.html">' + l + '</a></li>'
                     # else:
-
                     if FLASK_BASED:
-                        html += '<tr><td><a class="index_list_a" href="/view/' + mdfn + '.html">' \
-                                + mdfn + '</a>' + '<td>' + desc + '</td>' \
-                                + '<td><small><center class="index_date">' + \
-                                time.ctime(os.stat(os.path.join(PATH_TO_MD, mdfn + '.md')
-                                                   ).st_mtime) + '</center></small></td></tr>'
+                        html += '<tr><td style=""><a class="index_list_a" href="/view/' + mdfn + '.html">' \
+                                 + mdfn + '</a>' + '</br><span style="font-size:10px;color:gray">' + desc + '</td>' \
+                                 + '<td style="white-space: nowrap;"><small><center class="index_date">' \
+                                 + time.ctime(os.stat(os.path.join(PATH_TO_MD, mdfn + '.md')).st_mtime) \
+                                            + '</center></small></td>' \
+                                 + '<td><small><center class="index_date">' + str(len(lines)) + '</center>' \
+                                 + '</small></td></tr>'
+
 
                     else:
                         html += '<tr><td><a class="index_list_a" href="' + path + '.html">' \
