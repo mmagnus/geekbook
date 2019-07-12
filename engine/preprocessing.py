@@ -314,7 +314,8 @@ def include_md_files(md, remove_first_line=False):
         else:
             nmd += l + '\n'
 
-    nmd = '```\n' + imported_files_list + '```\n' + nmd # add list pre
+    if imported_files_list:
+        nmd = '```\n' + imported_files_list + '```\n' + nmd # add list pre
     return nmd
 
 
