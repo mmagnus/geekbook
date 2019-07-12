@@ -272,6 +272,7 @@ def include_md_files(md, remove_first_line=False):
        str: new md (nmd)
 
     """
+    imported_files_list = ''
     nmd = ''
     for l in md.split('\n'):
         if l.startswith('/') and l.endswith('*') and l.count('/') == 1:  # /wet*
@@ -290,7 +291,7 @@ def include_md_files(md, remove_first_line=False):
                         nmd += '<p><div class="alert alert-info">Imported <a href="http://127.0.0.1:5000/view/' + os.path.basename(ffullpath) + \
                                '">' +  os.path.basename(ffullpath) + '</a></div></p>'
                         nmd += '\n' + txt + '\n'
-
+                        imported_files_list += '/' + os.path.basename(f.name) + '\n'
 
         if l.startswith('/') and l.endswith('.md') and l.count('/') == 1:  # /shell.md
             ffullpath = PATH_TO_MD + os.sep + l.replace('/', '').strip()
@@ -308,8 +309,12 @@ def include_md_files(md, remove_first_line=False):
                     nmd += '\n' + txt + '\n'
             else:
                 nmd = '@error The file can not be found: ' + l + '\n' + nmd  # at this info at the beginning of the file
+
+
         else:
             nmd += l + '\n'
+
+    nmd = '```\n' + imported_files_list + '```\n' + nmd # add list pre
     return nmd
 
 
