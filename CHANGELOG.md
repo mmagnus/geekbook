@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Pre-release]
 (TODO)
+- Introduce ``#short`` to make it shorter 190719
+
 ## 2.1
 ### Added
 - Insert files (drag and drop) from Apple Photos

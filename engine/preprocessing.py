@@ -181,6 +181,9 @@ def get_image_path_in_line(l):
         if '#full' in alt:
             style += "max-height:100%;"
 
+        if '#short' in alt:
+            style += "max-height:400px;"
+
         width_html = ''
         height_html = ''
         if name.find(' =') > -1:
@@ -234,7 +237,8 @@ def get_youtube_embeds(text):
             video_id = l.replace('[yt:', '').replace(']', '').strip()
             logger.info('youtube video detected: %s', video_id)
             l = '<iframe width="800" height="441" src="https://www.youtube.com/embed/' + \
-                video_id + '" frameborder="0" allowfullscreen></iframe>'
+                video_id + '" frameborder="0" allowfullscreen></iframe>\n' + \
+                '<https://www.youtube.com/watch?v=' + video_id + '>'
         ntext += l + '\n'
     return ntext
 

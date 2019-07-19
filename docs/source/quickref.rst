@@ -17,3 +17,7 @@ Quick Reference
 
      [tableofcontent] or {{TOC}}
         insert the table of content in here
+
+Images::
+
+     #short - set for image (``max-height:400px``) to make it shorter
