@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Pre-release]
 
-## 3.0 Python3 version 190824
+## 3.0 Python3 version 
+190824
 
 ## 2.2 Last Python2 version!
 - Introduce ``#short`` to make it shorter 190719
