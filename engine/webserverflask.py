@@ -142,7 +142,6 @@ def view(note_title):
     """Open a note with your edit
     http://flask.pocoo.org/snippets/76/
     """
-    print(note_title)
     if request.remote_addr not in ['127.0.0.1', '0.0.0.0']:
         if note_title not in OPEN_ACCESS:
             return 'Hmm...'

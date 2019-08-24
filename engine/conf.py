@@ -18,7 +18,6 @@ AI_WRITER = False
 
 SCREENSHOT_INBOX = None
 
-
 # find files plugin off/on
 FIND_FILES_PLUGIN = False
 
