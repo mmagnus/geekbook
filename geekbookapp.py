@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """geekbookapp - the main program. The magic starts here!"""
 
@@ -7,9 +7,9 @@ import os
 import sys
 import argparse
 import logging
-import commands
 import gc
 import platform
+import subprocess
 
 logging.basicConfig(format='%(asctime)s - %(filename)s - %(message)s')
 logger = logging.getLogger('geekbook')
@@ -70,6 +70,14 @@ class MdFiles(object):
         return self.md_files
 
 
+def exe(cmd):
+    o = subprocess.Popen(
+        cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out = o.stdout.read().strip().decode()
+    err = o.stderr.read().strip().decode()
+    return out, err
+
+
 class App(object):
     """App class"""
 
@@ -87,7 +95,7 @@ class App(object):
         if not self.args.debug:
             os.system('clear')
             print (bcolors.OKGREEN + "\n                 ________               __   __________               __    \n                /  _____/  ____   ____ |  | _\______   \ ____   ____ |  | __\n               /   \  ____/ __ \_/ __ \|  |/ /|    |  _//  _ \ /  _ \|  |/ /\n               \    \_\  \  ___/\  ___/|    < |    |   (  <_> |  <_> )    < \n                \______  /\___  >\___  >__|_ \|______  /\____/ \____/|__|_ \ \n                       \/     \/     \/     \/       \/                   \/ \n" + bcolors.ENDC)
-        logger.info("G33kB00k is Running... [ok]")
+        logger.info("G33kB00k3 is Running... [ok]")
 
         logger.info("root path: %s" % PATH)
         try:
@@ -141,7 +149,7 @@ class App(object):
             # grep -v removes things from your list, ~, # (and in mmagnus case org mode files)
             cmd = "diff -u -r " + PATH_TO_MD + " " + PATH_TO_ORIG + \
                 " | grep -v '\.org' | grep -v 'flycheck_' | grep -v '~' | grep -v '#' | grep '\.md'".strip()
-            out = commands.getoutput(cmd)
+            out, err  = exe(cmd)
             # print out
             files_changed = []
 
@@ -267,7 +275,7 @@ def convert_jupyter_notebook_to_markdown():
         notebook_files = os.listdir(PATH_TO_MD)
         for n in [n for n in notebook_files if n.endswith('.ipynb')]:
             cmd = "jupyter nbconvert " + PATH_TO_MD + os.sep + n + " --to markdown"
-            print cmd
+            print(cmd)
             os.system(cmd)
         sys.exit(1)
 

@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 """Search for [ff:..]  with (g)locate make a link.
 
@@ -6,12 +7,9 @@ To remove the db, you can simply run ``rm geekbook/engine/plugins/find_file.json
 
 import sys
 import re
-import platform
-import os
-import commands
+import logging
 import os
 
-import logging
 logger = logging.getLogger('geekbook')
 
 JSON_DB = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'find_file.json'
@@ -32,10 +30,10 @@ def find_files(text, verbose=False):
         rx = re.compile('\[ff:(?P<file>.+?)\]').search(l)
         if rx:
             filename = rx.group('file')
-            if verbose: print '# filename: ', filename
+            if verbose: print('# filename: ', filename)
             folderpath, filepath = '', filename # file_search(filename, False)
 
-            if verbose: print '# file_finder.search()', output
+            if verbose: print('# file_finder.search()', output)
             # remove for now folder link, it does not work @todo
             #output += l.replace('[ff:' + filename + ']',' <a href="' + folderpath + '"><code>[+]</code></a> ' + '<a target="_blank" href="/open' + filepath + '"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
             output += l.replace('[ff:' + filename + ']', '<a  href="#" address="' + filepath + '" id="openfile"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>\n') # or without '\n

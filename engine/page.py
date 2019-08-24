@@ -142,5 +142,5 @@ if __name__ == '__main__':
 
     p = Page(fin)
     p.compile()
-    print p.is_changed()
+    print(p.is_changed())
     p.save()

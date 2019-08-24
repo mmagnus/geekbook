@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
 """
@@ -8,16 +8,18 @@
  - dont replace ## because it breaks '## @tag ## text'
  - if md has no # at start you get error! and if you have # and then ### !!!
 
-####################################################################################################
-/home/magnus/Dropbox/lb_v2/md/RNApuzzle05.md
-Traceback (most recent call last):
-  File "make-everything-in-one-line.py", line 157, in <module>
-    main()
-  File "make-everything-in-one-line.py", line 140, in main
-    all_headers.extend(make_headers_objects_for_md(o))
-  File "make-everything-in-one-line.py", line 85, in make_headers_objects_for_md
-    current_h1.add_child(current_h2)
-UnboundLocalError: local variable 'current_h1' referenced before assignment
+Error::
+
+        ####################################################################################################
+        /home/magnus/Dropbox/lb_v2/md/RNApuzzle05.md
+        Traceback (most recent call last):
+          File "make-everything-in-one-line.py", line 157, in <module>
+            main()
+          File "make-everything-in-one-line.py", line 140, in main
+            all_headers.extend(make_headers_objects_for_md(o))
+          File "make-everything-in-one-line.py", line 85, in make_headers_objects_for_md
+            current_h1.add_child(current_h2)
+        UnboundLocalError: local variable 'current_h1' referenced before assignment
 
 Marcin Magnus
 init: 2012/10/05
@@ -96,7 +98,7 @@ def lsdir(directory='/home/magnus/Desktop/', exclude_files_starting_with_dot=Tru
                     continue
                 else:
                     if verbose:
-                        print os.path.join(basepath, child)
+                        print(os.path.join(basepath, child))
                     f.append(os.path.join(basepath, child))
     return f
 

@@ -4,3 +4,4 @@ py-gfm==0.1.3
 Flask
 pandas
 pygments
+Pillow

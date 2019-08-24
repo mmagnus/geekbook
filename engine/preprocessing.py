@@ -1,11 +1,11 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
 """This is a set of functions that work on Markdown file, before compiling them to html.
 
 Go to page.py (Page) pre_process to add a new function from here."""
 
-from conf import PATH_TO_IMG, PATH_TO_MD, PATH_TO_ORIG
+from geekbook.engine.conf import PATH_TO_IMG, PATH_TO_MD, PATH_TO_ORIG
 import re
 import os
 import codecs
@@ -58,7 +58,7 @@ def get_abstract(text):
                 # my own converter from **XX** to <b>XX</b>
                 rx = re.findall('\*\*(?P<tobold>.+?)\*\*', l)
                 for r in rx:
-                    print r
+                    print(r)
                     l = l.replace('**' + r + '**', '<b>' + r + '</b>')
                 #
                 # \\ -> </br>

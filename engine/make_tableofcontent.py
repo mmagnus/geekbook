@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """geekbook - table of content
 
 Get markdown output and make a table of content!
@@ -91,7 +91,7 @@ def make_table_of_content(fn, text, version2=True):
         if rx:
             h1 = rx.group('h1')
             if VERBOSE:
-                print 'h1', h1
+                print('h1', h1)
             id_of_div = replace_space_with_minus(h1)
             # '</div>'
             # + '<a class="nondecoration" href="#' + id_of_div + '">' \
@@ -100,7 +100,7 @@ def make_table_of_content(fn, text, version2=True):
                 + tag_heading(h1) \
                 + '</a></h1>'
             if VERBOSE:
-                print "# l", l
+                print("# l", l)
             collect_headings += '<li class="table_of_content_h1">'\
                 + '<a href="#' + id_of_div + '">'\
                                 + tag_heading(h1) + ' </a></li>\n'
@@ -118,7 +118,7 @@ def make_table_of_content(fn, text, version2=True):
                 + tag_heading(h2) \
                 + '</a></h2>'
             if VERBOSE:
-                print "# l", l
+                print("# l", l)
             collect_headings += '<li class="table_of_content_h2">'\
                                 + '<a href="#' + id_of_div + '">' \
                                 + tag_heading(h2) + ' </a></li>\n'
@@ -135,7 +135,7 @@ def make_table_of_content(fn, text, version2=True):
                 + tag_heading(h3) \
                 + '</a></h3>'
             if VERBOSE:
-                print "# l", l
+                print("# l", l)
             collect_headings += '<li class="table_of_content_h3">'\
                                 + '<a href="#' + id_of_div + '">' \
                                 + tag_heading(h3) + ' </a></li>\n'
