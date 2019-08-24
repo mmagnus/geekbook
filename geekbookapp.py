@@ -311,7 +311,7 @@ if __name__ == '__main__':
         UPDATE = False
         if not args.silent:
             start_gitweb()
-            time.sleep(3)  # so it's time for the Flask to be opened in the browser
+            time.sleep(1)  # so it's time for the Flask to be opened in the browser
             start_browser_with_index()
 
     app.start()
