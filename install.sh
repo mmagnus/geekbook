@@ -1,1 +1,1 @@
-pip install -r docs/requirements_user.txt
+pip install --user -r docs/requirements_user.txt
