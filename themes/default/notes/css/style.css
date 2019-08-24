@@ -1,5 +1,24 @@
+/*
+https://stackoverflow.com/questions/3200249/html-list-style-type-dash
+*/
+
+ul {
+  margin: 0;
+}
+ul.dashed {
+  list-style-type: square;
+}
+
+ul.dashed > li {
+  text-indent: -5px;
+}
+ul.dashed > li:before {
+  content: "-";
+  text-indent: -5px;
+}
+
 h1 {
-    font: 400 21px/1.5 Georgia;
+    font: 400 21px/1.5 Helvetica;
     font-size: 40px;
     color:#333333;
     color: #000000;
@@ -7,31 +26,31 @@ h1 {
 }
 
 h2 {
-    font: 400 23px/1.5 Georgia;
+    font: 400 20px/1.5 Helvetica;
     font-weight: bold;
     color: #333333;
 }
 
 h3 {
-    font: 400 18px/1.5 Georgia;
+    font: 400 18px/1.5 Helvetica;
     font-weight: bold;
     color: #333333;
 }
 
 h4 {
-    font: 400 16px/1.5 Georgia;
-    padding-top: 2px;
-    padding-bottom: 2px;
+    font: 400 17px/1.5 Helvetica;
+    font-weight: bold;
     color: #333333;
 }
+
 li {
     line-height: 14px;
-    font: 400 16px/1.5 Georgia;
+    font: 400 16px/1.5 Helvetica;
 }
 p  {
     text-align: justify;
+    width:100%;
 }
-
 
 .text {
     font-family: monospace;
@@ -113,10 +132,12 @@ li p{
 
 }
 
+/*
 em {
     font-weight: bold;
     font-style: normal;
 }
+*/
 
 
 .inputpanel{
@@ -145,6 +166,8 @@ em {
     padding-left: 2px;
     padding-right: 2px;
 }
+
+
 
 /*
 zielonkawy
@@ -199,12 +222,29 @@ a {
     background-color: #d8d8d8;
     padding: 10px;
     font-weight:bold;
+    font: 400 18px/1.5 Helvetica;
+    text-align: justify;
+}
+
+summary{
+    background-color: #d8d8d8;
+    padding: 10px;
+    font-weight:bold;
     font: 400 18px/1.5 Georgia;
     text-align: justify;
 }
 
+big{
+    background-color: #d8d8d8;
+    padding: 10px;
+    font-weight:bold;
+    font: 400 18px/1.5 Georgia;
+    text-align: justify;
+}
+
+
 .xtitle {
-   font: 400 21px/1.5 Georgia;
+    font: 400 21px/1.5 Georgia;
     font-size:40px;
     font-weight:bold;
     text-align:center;
@@ -230,8 +270,11 @@ pre{
     word-wrap:normal;
 }
 
+/* narrow the whole note page 190410 */
+.col-sm-9{ width: 60%;}
+
 p {
-    font: 400 16px/1.5 Georgia;
+    font: 400 16px/1.5 Helvetica; /*#Georgia;*/
 }
 
 img {
@@ -258,3 +301,25 @@ img {
 hr {
     clear: both;
 }
+
+b, strong, mark, em {
+}
+
+/*
+em {
+    font-weight: bold;
+    font-style: normal;
+}
+    /*background-color: #cc33ff;*/
+    /* #22E4AC; */
+*/
+
+blockquote p {
+    font: 400 14px/1.5 Georgia;
+}
+
+/*
+li {
+  list-style-type: square;
+}
+*/

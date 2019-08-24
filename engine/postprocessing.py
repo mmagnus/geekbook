@@ -21,9 +21,10 @@ from engine.conf import PATH_TO_BASE_IMG, PATH_TO_TEMPLATE, PATH_TO_TEMPLATE_HTM
 
 
 def change_data_tag_into_actual_data(mdfn, text):
-    """change [date] into actual date"""
+    """change [date] OR {{date}} into actual date"""
     date = time.strftime("%Y-%m-%d", time.localtime(os.path.getctime(PATH_TO_MD + mdfn)))
     text = text.replace('[date]', date)
+    text = text.replace('{{date}}', date)
     return text
 
 
@@ -150,22 +151,40 @@ def change_todo_square_chainbox_or_icon(text, verbose=False):
 
 
 def get_todo(text):
-    """Replace *in text* @todo, @inprogress and @done with `<span class="label label-danger">@todo</span>` and so on.
+    """Replace *in text* @todo, @inprogress and @done with `<span class="label label-danger">@todo</span>`
+    and so on.
+
+    It's not changed in headers! See `make_tableofcontent.py` to change headers
     """
     ntext = ''
     for l in text.split('\n'):
         if not l.startswith('<div id='):
             if not l.startswith('<li class="table_of_content'):  # header
+
+                l = l.replace('#failure', '<span class="label label-danger">#failure</span>')
+                #l = l.replace('#fail', '<span class="label label-danger">#fail</span>')
+                #l = l.replace('@fail', '<span class="label label-danger">@fail</span>')
+
                 l = l.replace('@todo', '<span class="label label-danger">@todo</span>')
+                l = l.replace('#today', '<span class="label label-danger">#today</span>')
+                l = l.replace('#tomorrow', '<span class="label label-danger">#tomorrow</span>')
+                l = l.replace('#todo', '<span class="label label-danger">#todo</span>')
                 l = l.replace('@inprogress', '<span class="label label-warning">@inprogress</span>')
                 l = l.replace('@progress', '<span class="label label-warning">@progress</span> ')
+                l = l.replace('#progress', '<span class="label label-warning">#progress</span> ')
                 l = l.replace('@done', '<span class="label label-success">@done</span>')
+                l = l.replace('#done', '<span class="label label-success">#done</span>')
+                l = l.replace('#@k', '<span class="label label-success">@ok</span>')
+                l = l.replace('#ok', '<span class="label label-success">#ok</span>')
+                l = l.replace('#success', '<span class="label label-success">#success</span>')
                 l = l.replace('@fixed', '<span class="label label-info">@fixed</span>')
+
+                l = l.replace('#waiting', '<span class="label label-info">#waiting</span>')
 
                 l = l.replace('@error', '<span class="label label-danger">@error</span>')
 
-                l = l.replace('True', '<span class="label label-success">True</span>')
-                l = l.replace('False', '<span class="label label-danger">False</span>')
+                l = l.replace('#True', '<span class="label label-success">True</span>')
+                l = l.replace('#False', '<span class="label label-danger">False</span>')
 
         ntext += l + '\n'
     ntext = change_todo_square_chainbox_or_icon(ntext)
@@ -178,8 +197,9 @@ def get_captions(text):
     ntext = ''
     for l in text.split('\n'):
         if l.startswith('Fig.') or l.startswith('Figure.'):
-            l = l.replace('Figure.', '<small><b>Figure.</b>')
-            l = l.replace('Fig.', '<small><b>Figure.</b>')
+            style = '<small><b style="background-color: white;">Figure.</b>'
+            l = l.replace('Figure.', style)
+            l = l.replace('Fig.', style)
             l += '</small>'
         ntext += l + '\n'
     return ntext

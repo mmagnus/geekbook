@@ -75,7 +75,10 @@ class Index(object):
                     f = open(PATH_TO_MD + os.sep + mdfn)
                     lines = f.readlines()
                     f.seek(0)
-                    desc = lines[0].replace("#", '').strip() # first line is desc "..."
+                    if lines:  # if the file is empty
+                        desc = lines[0].replace("#", '').strip() # first line is desc "..."
+                    else:
+                        desc = ''
                     for l in f:
                         # the tag will overwrite this before
                         if l.strip().startswith('[desc:'):

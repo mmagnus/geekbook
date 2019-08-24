@@ -216,9 +216,9 @@ def start_flask(args):
     if not args.noflask and not args.debug and not args.update:
         logger.info("Start off flask!")
         if args.public:
-            os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py --public &')
+            os.system('python "' + PATH + os.sep + 'geekbook/engine/webserverflask.py" --public &')
         else:
-            os.system('python ' + PATH + os.sep + 'geekbook/engine/webserverflask.py &')
+            os.system('python "' + PATH + os.sep + 'geekbook/engine/webserverflask.py" &')
 
 
 def start_gitweb():

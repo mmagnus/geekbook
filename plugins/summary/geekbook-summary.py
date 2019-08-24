@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+Keywords: u6, u5, postdoc, cwc15, evo, read
+
 ## Sat 180414
 Work at home on my Mac.
 

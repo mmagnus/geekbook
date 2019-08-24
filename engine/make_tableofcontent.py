@@ -63,6 +63,9 @@ def tag_heading(heading):
         elif t == '#todo':
             heading = heading.replace(
                 t, '<span style="font-family:"  class="label label-danger">' + t + '</span>')
+        elif t == '#vip':
+            heading = heading.replace(
+                t, '<span style="font-family:"  class="label label-danger">' + t + '</span>')
         else:
             heading = heading.replace(t, '<span class="label label-info">' + t + '</span>')
     return heading

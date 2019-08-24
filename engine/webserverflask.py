@@ -44,12 +44,22 @@ def edit(note_title):
 
 @app.route('/open_file/')
 def open_file():
-    filename = request.args.get('file_path')
+    import urllib
+    filename  = urllib.unquote(request.args.get('file_path')).decode('utf8')
+
+    # for folder paths
+    if '/' in filename: # so this is path
+        cmd = 'open "' + filename + '" &'
+        os.system(cmd)
+        return jsonify(result="")
+
     if platform.system() == "Linux":
         out = commands.getoutput('locate ' + filename)
     if platform.system() == "Darwin":
         # out = commands.getoutput('glocate ' + filename)
-        out = commands.getoutput('mdfind -name ' + filename)
+        cmd = 'mdfind -name "' + filename + '"'
+        print('\_ flask search with ', cmd)
+        out = commands.getoutput(cmd)
     first_hit = out.split('\n')[0]
     print('# of hits ' + str(len(out.split('\n'))) + " " + out.replace('\n',', '))
     if not first_hit:
@@ -57,7 +67,8 @@ def open_file():
         return jsonify(result='Not found ' + filename)
     else:
         print('hit ' + first_hit)
-        cmd = 'open "/' + first_hit + '" &'
+        #cmd = 'open "/' + first_hit + '" &'
+        cmd = 'open "' + first_hit + '" &'
         os.system(cmd)
         return jsonify(result="")
 
@@ -91,26 +102,24 @@ def edit_header(note_title, note_header):
 
     return redirect('/view/' + note_title + '.md#' + note_header.lstrip('#').strip().replace(' ', '-'))
 
-"""
-@app.route('/open/<filename>')
-def open_file(filename):
-    if platform.system() == "Linux":
-        out = commands.getoutput('locate ' + filename)
-    if platform.system() == "Darwin":
-        # out = commands.getoutput('glocate ' + filename)
-        out = commands.getoutput('mdfind -name ' + filename)
+## @app.route('/open/<filename>')
+## def open_file(filename):
+##     if platform.system() == "Linux":
+##         out = commands.getoutput('locate ' + filename)
+##     if platform.system() == "Darwin":
+##         # out = commands.getoutput('glocate ' + filename)
+##         out = commands.getoutput('mdfind -name ' + filename)
 
-    first_hit = out.split('\n')[0]
-    print('# of hits ' + str(len(out.split('\n'))) + " " + out.replace('\n',', '))
-    if not first_hit:
-        print('not found')
-        return ('Not found', '~~' + filename + '~~')
-    else:
-        print('hit ' + first_hit)
-    cmd = 'open "/' + first_hit + '" &'
-    os.system(cmd)
-    return cmd
-"""
+##     first_hit = out.split('\n')[0]
+##     print('# of hits ' + str(len(out.split('\n'))) + " " + out.replace('\n',', '))
+##     if not first_hit:
+##         print('not found')
+##         return ('Not found', '~~' + filename + '~~')
+##     else:
+##         print('hit ' + first_hit)
+##     cmd = 'open "/' + first_hit + '" &'
+##     os.system(cmd)
+##     return cmd
 
 @app.route('/js/<path:path>')
 def send_js(path):
@@ -128,12 +137,22 @@ def send_flav(path):
 def send_img(path):
     return send_from_directory(PATH_TO_MD + os.sep + 'imgs', path)
 
-@app.route('/view/<note_title>')
+@app.route('/view/<path:note_title>')
 def view(note_title):
-    """Open a note with your edit"""
+    """Open a note with your edit
+    http://flask.pocoo.org/snippets/76/
+    """
+    print(note_title)
     if request.remote_addr not in ['127.0.0.1', '0.0.0.0']:
         if note_title not in OPEN_ACCESS:
             return 'Hmm...'
+
+    if 'Users/' in note_title:
+        cmd = 'open "/' + note_title + '" &'
+        print(cmd)
+        os.system(cmd)
+        return jsonify(result="")
+
 
     head = open(PATH_TO_TEMPLATE_HTML).read()
     head = head.replace('{{ url_index }}', PATH_TO_HTML + '/' + 'index.html')

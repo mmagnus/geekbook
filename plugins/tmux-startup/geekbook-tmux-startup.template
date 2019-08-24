@@ -9,4 +9,5 @@ source /home/magnus/.zshrc
 /usr/local/bin/tmux new-window -t geekbook:1 -n 'app'
 
 # Run server
-/usr/local/bin/tmux send-keys -t geekbook:1 'python /Users/magnus/Dropbox/geekbook/geekbookapp.py -s' C-m
+/usr/local/bin/tmux send-keys -t geekbook:1 'python /Users/magnus/iCloud/geekbook/geekbookapp.py -s' C-m
+

@@ -178,7 +178,13 @@ def make_headers_objects_for_md(filename, verbose=False, version2=True):
     """
     filename = '/home/magnus/Dropbox/lb_v2/md/bioinfo::threading.md'
     """
-    text = codecs.open(filename, mode="r", encoding="utf8").read()
+    # fix for flycheck_*.md
+    try:
+        text = codecs.open(filename, mode="r", encoding="utf8").read()
+    except IOError:
+        all_h = []
+        return []
+
     md = filename.replace(PATH_TO_MD, '')
     # replace only .md at the very end    #.replace('.md','') ## md = bioinfo::threading
     md = re.sub('.md$', '', md)
@@ -265,7 +271,7 @@ class Db():
         out2 = []
         #'/home/magnus/Dropbox/lb_v2/md/.#bash.md'
         for i in out:
-            if i.find('#') > -1 or i.find('~') > -1 or i.find('.org') > -1 or i.find('.git') > -1:
+            if i.find('#') > -1 or i.find('~') > -1 or i.startswith('flycheck_') or i.find('.org') > -1 or i.find('.git') > -1:
                 pass
             else:
                 if i.endswith('.md'):

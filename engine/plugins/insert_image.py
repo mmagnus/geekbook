@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+insert_image is executed in md_update.py
+
+"""
+from __future__ import print_function
 import glob
 import os
 import shutil

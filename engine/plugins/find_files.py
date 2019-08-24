@@ -72,6 +72,14 @@ JSON_DB = os.path.dirname(os.path.abspath(__file__)) + os.sep + 'find_file.json'
 
 
 def find_files(text, verbose=False):
+    """
+    The search was completely re-written in a way that now the files
+    are search at the level of Flask.
+
+    So go to Flask to see how this is done.
+
+    ``geekbook/engine/webserverflask.py``
+    """
     output = ''
     msg_listofnotfoundfiles = ''
     for l in text.split('\n'):
@@ -84,7 +92,7 @@ def find_files(text, verbose=False):
             if verbose: print '# file_finder.search()', output
             # remove for now folder link, it does not work @todo
             #output += l.replace('[ff:' + filename + ']',' <a href="' + folderpath + '"><code>[+]</code></a> ' + '<a target="_blank" href="/open' + filepath + '"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
-            output += l.replace('[ff:' + filename + ']', '<a  href="#" address="' + filepath + '" id="openfile"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>')
+            output += l.replace('[ff:' + filename + ']', '<a  href="#" address="' + filepath + '" id="openfile"> <span class="mantext">' + os.path.basename(filepath) + '</span></a>\n')
         else:
             output += l + '\n'
     output = output.replace('[files-not-found]', msg_listofnotfoundfiles)
