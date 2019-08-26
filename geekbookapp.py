@@ -147,10 +147,12 @@ class App(object):
 
             # see what's new - diff between to folders your notes and orig files that keep copy of our notes
             # grep -v removes things from your list, ~, # (and in mmagnus case org mode files)
-            cmd = "diff -u -r " + PATH_TO_MD + " " + PATH_TO_ORIG + \
-                " | grep -v '\.org' | grep -v 'flycheck_' | grep -v '~' | grep -v '#' | grep '\.md'".strip()
+            cmd = "diff -u -r \"" + PATH_TO_MD + "\" \"" + PATH_TO_ORIG + "\" " + \
+                " | grep -v '\.org' | grep -v 'flycheck_' | grep -v '~$' | grep -v '#' | grep '\.md'".strip()
             out, err  = exe(cmd)
-            # print out
+            if err:
+                print(err)
+                raise Exception("Geekbook3 diff can't be completed")
             files_changed = []
 
             # pick all file names that are changed
