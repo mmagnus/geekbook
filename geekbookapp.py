@@ -298,7 +298,7 @@ if __name__ == '__main__':
 
     if not args.debug and not args.update:
         # kill old flask
-        print('Kill old flask')
+        logger.info("Kill old flask... [ok]")
         os.system('kill -9 $(lsof -ti:5000)')
     start_flask(args)
 
