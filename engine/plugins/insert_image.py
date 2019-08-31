@@ -1,10 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 insert_image is executed in md_update.py
 
 """
-from __future__ import print_function
 import glob
 import os
 import shutil
@@ -103,6 +102,7 @@ def insert_image(d = '/home/magnus/Desktop/{*png,*jpg,*jpeg}', td = '/home/magnu
     # add date
     t = datetime.datetime.today().strftime('%y%m%d') + '_' + t
     shutil.move(newest, td + IMG_PREFIX + t)
+
     return '![](' + IMG_PREFIX  + t + ')'
 
 
