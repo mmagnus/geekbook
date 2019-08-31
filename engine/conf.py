@@ -1,5 +1,6 @@
 """geekbook - config file"""
 import os
+import logging
 
 LOCAL = True
 
@@ -21,11 +22,16 @@ SCREENSHOT_INBOX = None
 # find files plugin off/on
 FIND_FILES_PLUGIN = False
 
+
+logging.basicConfig(format='%(asctime)s - %(filename)s - %(message)s')
+logger = logging.getLogger('geekbook')
+logger.setLevel('INFO')
+
 # to use it, create conf_local.py with e.g. TEMPLATE='pietro'
 try:
-    from conf_local import *
+    from geekbook.engine.conf_local import *
 except:
-    pass
+    logger.info('Config local [not found], use default settings [ok]')
 
 # homepage
 PATH_HOMEPAGE = PATH + "/themes/" + TEMPLATE + "/homepage/head_index.html"
