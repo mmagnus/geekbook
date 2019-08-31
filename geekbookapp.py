@@ -26,7 +26,6 @@ from engine.make_index import Index
 from engine.colors import bcolors
 from engine.searcher import make_db
 from engine.plugins import ia_writer
-# import yappi
 
 
 class GeekbookError(Exception):
@@ -73,8 +72,8 @@ class MdFiles(object):
 def exe(cmd):
     o = subprocess.Popen(
         cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out = o.stdout.read().strip().decode()
-    err = o.stderr.read().strip().decode()
+    out = o.stdout.read().decode()
+    err = o.stderr.read().decode()
     return out, err
 
 
