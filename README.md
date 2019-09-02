@@ -1,7 +1,9 @@
-# geekbook - note taking system for nerds/geeks!
+# geekbook3 - note taking system for nerds/geeks!
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
-G33KB00K - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
+(geekbook3 since finally Geekbook uses Python 3)
+
+G33KB00K3 - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
 
 [![Twitter Follow](http://img.shields.io/twitter/follow/geekbookx.svg?style=social&label=Follow)](https://twitter.com/geekbookx)
 [![tag](https://img.shields.io/github/release/mmagnus/geekbook.svg)](https://github.com/mmagnus/geekbook/releases)
