@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#-*- coding: utf-8 -*-
 
 """
 
@@ -32,8 +31,15 @@ import pickle
 
 import os
 import sys
-PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(PATH)
+import argparse
+
+
+debug = False
+if not debug:
+    PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+else:
+    from engine_path import path
+
 sys.path.append(PATH)
 from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE_HTML, PATH_TO_MD
 
@@ -181,11 +187,9 @@ def make_headers_objects_for_md(filename, verbose=False, version2=True):
     filename = '/home/magnus/Dropbox/lb_v2/md/bioinfo::threading.md'
     """
     # fix for flycheck_*.md
-    try:
-        text = codecs.open(filename, mode="r", encoding="utf8").read()
-    except IOError:
-        all_h = []
-        return []
+    text = open(filename, mode="r").read()
+    #all_h = []
+    #    return []
 
     md = filename.replace(PATH_TO_MD, '')
     # replace only .md at the very end    #.replace('.md','') ## md = bioinfo::threading
@@ -209,10 +213,9 @@ def make_headers_objects_for_md(filename, verbose=False, version2=True):
             try:
                 current_h1.add_child(current_h2)
             except UnboundLocalError:
-                raise Exception("""Exception: Error: This is stupid, sorry for this. But to get searcher running
-you have to have headers structured in a way that first you have # (H1 header) and then ## etc. You can not
-start your note with ##. Moreover, you can not have # and then ###. You have to keep #, and ##, and ### etc. It should
-be fixed at some point. The problem is in the file: %s""" % filename)
+                current_h1 = Header('', 1, md)
+                current_h1.add_child(current_h2)
+
             last_h = current_h2
         elif l.startswith('### '):
             l = l.replace('### ', '')
@@ -220,7 +223,8 @@ be fixed at some point. The problem is in the file: %s""" % filename)
             try:
                 current_h2.add_child(current_h3)  # if not current2 then current1
             except UnboundLocalError:
-                raise Exception(filename)
+                current_h2 = Header('', 2, md)
+                current_h2.add_child(current_h3)
 
             last_h = current_h3
         elif l.startswith('#### '):
@@ -229,7 +233,8 @@ be fixed at some point. The problem is in the file: %s""" % filename)
             try:
                 current_h3.add_child(current_h4)
             except UnboundLocalError:
-                raise Exception(filename)
+                current_h3 = Header('', 3, md)
+                current_h3.add_child(current_h4)
             last_h = current_h4
         else:
             note += ' ' + l + '\n'  # \n = not in one line!
@@ -267,31 +272,31 @@ class Db():
         """
         self.all_headers = ''
 
-    def collect_data(self, v=0):
+    def collect_data(self, verbose=False):
         out = lsdir(PATH_TO_MD)
         ## hack start ##
-        out2 = []
+        out2 = []  # list of files to process
         #'/home/magnus/Dropbox/lb_v2/md/.#bash.md'
         for i in out:
-            if i.find('#') > -1 or i.find('~') > -1 or i.startswith('flycheck_') or i.find('.org') > -1 or i.find('.git') > -1:
+            if i.find('#') > -1 or i.endswith('~') or i.startswith('flycheck_') or i.find('.org') > -1 or i.find('.git') > -1:
                 pass
             else:
                 if i.endswith('.md'):
                     out2.append(i)
-        out = out2
+
+        files = out2
         ## hack end ##
 
         all_headers = []
         # print '<head><meta content="text/html; charset=UTF-8" http-equiv="content-type">'
         # print "<link rel='stylesheet' href='/home/magnus/Dropbox/Public/lb/css/style.css' /></head>"
-        for o in out:
-            if v:
-                print(o)
-            all_headers.extend(make_headers_objects_for_md(o))
+        for f in files:
+            all_headers.extend(make_headers_objects_for_md(f))
         self.all_headers = all_headers
 
-    def search(self, term):
+    def search(self, term, verbose):
         hits_output = self._search_over_headers_objects(term, self.all_headers)
+        if verbose: hits_output
         return hits_output
 
     def _search_over_headers_objects(self, term, v=0):
@@ -311,21 +316,35 @@ class Db():
                 print
         return hits_output
 
-
-def make_db():
+def make_db(verbose=False):
     db = Db()
-    print('searcher::making the db')
-    db.collect_data()
-    pickle.dump(db, open(PATH + os.sep + "engine/searchdb.pickle", "wb"))
+    print('searcher.py::making the db')
+    db.collect_data(verbose)
+    pickle.dump(db, open(PATH + os.sep + "engine/searchdb.pickle", "wb"), protocol=3)
 
 
-def search_term(term):
+def search_term(term, verbose=False):
     db = pickle.load(open(PATH + os.sep + "engine/searchdb.pickle", "rb"))
-    return db.search(term)
+    return db.search(term, verbose)
+
+
+
+def get_parser():
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+
+    parser.add_argument("-v", "--verbose",
+                        action="store_true", help="be verbose")
+    parser.add_argument("term", help="", default="")
+    return parser
 
 
 # main
 if __name__ == '__main__':
-    term = '@test'
-    print(make_db())
-    search_term('@test')
+    parser = get_parser()
+    if debug:
+        args = parser.parse_args(['Elia for Journal', '--verbose'])
+    args = parser.parse_args()
+
+    print(make_db(args.verbose))
+    print(search_term(args.term, args.verbose))
