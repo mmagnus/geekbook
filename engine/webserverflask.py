@@ -29,7 +29,6 @@ except ImportError:
     OPEN_ACCESS = []
 
 import platform
-import commands
 
 app = Flask(__name__, static_url_path='')
 
@@ -45,7 +44,9 @@ def edit(note_title):
 @app.route('/open_file/')
 def open_file():
     import urllib
-    filename  = urllib.unquote(request.args.get('file_path')).decode('utf8')
+    import urllib.parse
+
+    filename  = urllib.parse.unquote(request.args.get('file_path'))
 
     # for folder paths
     if '/' in filename: # so this is path
@@ -54,12 +55,15 @@ def open_file():
         return jsonify(result="")
 
     if platform.system() == "Linux":
-        out = commands.getoutput('locate ' + filename)
+        cmd = 'locate ' + filename
+        out = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).stdout.read().decode()
+
     if platform.system() == "Darwin":
         # out = commands.getoutput('glocate ' + filename)
         cmd = 'mdfind -name "' + filename + '"'
         print('\_ flask search with ', cmd)
-        out = commands.getoutput(cmd)
+        out = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).stdout.read().decode()
+
     first_hit = out.split('\n')[0]
     print('# of hits ' + str(len(out.split('\n'))) + " " + out.replace('\n',', '))
     if not first_hit:
@@ -94,9 +98,9 @@ def edit_header(note_title, note_header):
         return 'Hmm...'
 
     cmd = "cd " + PATH_TO_MD + " && /usr/bin/grep -n '" + note_header + "' " + note_title + ".md"
-    print 'edit_header::cmd:', cmd
-    out = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).stdout.read()
-    print 'edit_header::out:', out
+    print('edit_header::cmd:', cmd)
+    out = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).stdout.read().decode()
+    print('edit_header::out:', out)
     note_line = out.split(':')[0]
     os.system('emacsclient +' + note_line + ' ' + PATH_TO_MD + '/' + note_title + '.md &')
 
