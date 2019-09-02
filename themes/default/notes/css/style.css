@@ -4,7 +4,9 @@ https://stackoverflow.com/questions/3200249/html-list-style-type-dash
 
 ul {
   margin: 0;
+ line-hight: 1.42857143;
 }
+
 ul.dashed {
   list-style-type: square;
 }
@@ -19,38 +21,46 @@ ul.dashed > li:before {
 
 h1 {
     font: 400 21px/1.5 Helvetica;
-    font-size: 40px;
+    font-size: 150%;
     color:#333333;
     color: #000000;
     font-weight: 800;
 }
 
 h2 {
-    font: 400 20px/1.5 Helvetica;
+    font-family: Helvetica;
+    font-size: 130%;
     font-weight: bold;
     color: #333333;
 }
 
 h3 {
-    font: 400 18px/1.5 Helvetica;
+    font-family: Helvetica;
+    font-size: 120%;
     font-weight: bold;
     color: #333333;
 }
 
 h4 {
-    font: 400 17px/1.5 Helvetica;
+    font-family: Helvetica;
+    font-size: 110%;
     font-weight: bold;
     color: #333333;
 }
 
 li {
-    line-height: 14px;
-    font: 400 16px/1.5 Helvetica;
+    font-family: Helvetica;
+    font-size: 100%;
+    /* less dense */
+    margin-top: 0%;
 }
+
 p  {
     text-align: justify;
     width:100%;
+    margin-top: 2%;
 }
+
 
 .text {
     font-family: monospace;
@@ -59,19 +69,27 @@ p  {
 li p{
     margin-left: 0px;
 }
-.caution {color:red; font-size: 17px; font-weight: bold;}
+
+.caution {
+    color:red;
+    font-size: 17px;
+    font-weight: bold;
+}
+
 .sidebar {
    width: 13%;
    height: 100%;
    position: fixed;
    left: 1px;
    top: 1px;
-   border-radius: 3px 3px 3px 3px;*/
-   padding-left: 25px; }
+   border-radius: 3px 3px 3px 3px;
+   padding-left: 25px;
+}
 
 .table_of_content_h1 {
     list-style-type: square;
     margin-left: 50px;
+
 }
 .table_of_content_h2 {
     list-style-type: none;
@@ -245,7 +263,7 @@ big{
 
 .xtitle {
     font: 400 21px/1.5 Georgia;
-    font-size:40px;
+    font-size: 40px;
     font-weight:bold;
     text-align:center;
 }
@@ -273,10 +291,6 @@ pre{
 /* narrow the whole note page 190410 */
 .col-sm-9{ width: 60%;}
 
-p {
-    font: 400 16px/1.5 Helvetica; /*#Georgia;*/
-}
-
 img {
     max-width: 100%;
     display: block;
@@ -296,8 +310,22 @@ img {
         display: none;
     }
 
+    body {
+        width:100%;
+        margin-right:0px;
+        margin-left:0px;
+        font-size:3em !important;
+    }
+
+    .col-sm-9{ width: 90%;}
+
+
+    /** {
+       font-size: 170%;
+    }*/
 }
 
+/*p,ul,h1,h2,h3,h4,h5,li */
 hr {
     clear: both;
 }
@@ -312,14 +340,20 @@ em {
 }
     /*background-color: #cc33ff;*/
     /* #22E4AC; */
-*/
 
-blockquote p {
+/*blockquote p {
     font: 400 14px/1.5 Georgia;
-}
+}*/
 
 /*
 li {
   list-style-type: square;
 }
 */
+
+.nav { color: red; }
+.nav>li {
+     padding:0px;
+     color:red;
+     }
+     
