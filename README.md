@@ -5,6 +5,8 @@ Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
 G33KB00K3 - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
 
+The project converged pretty much to tools like http://jekyllrb.com and https://www.mkdocs.org.
+
 [![Twitter Follow](http://img.shields.io/twitter/follow/geekbookx.svg?style=social&label=Follow)](https://twitter.com/geekbookx)
 [![tag](https://img.shields.io/github/release/mmagnus/geekbook.svg)](https://github.com/mmagnus/geekbook/releases)
 [![Build Status](https://travis-ci.org/mmagnus/geekbook.svg?branch=master)](https://travis-ci.org/mmagnus/geekbook)
