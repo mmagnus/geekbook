@@ -39,3 +39,8 @@ Quick Reference
 
      add description of a note in the Index page
      [desc:info on TN]
+
+     insert a file and remove the first line and shift all headers by one to fit the structure of the file where you import to
+     /[file:hacking-convert-pdf-to-images.md =del1 =shift1]
+
+
