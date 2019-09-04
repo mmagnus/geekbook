@@ -42,5 +42,7 @@ Quick Reference
 
      insert a file and remove the first line and shift all headers by one to fit the structure of the file where you import to
      /[file:hacking-convert-pdf-to-images.md =del1 =shift1]
-
+     
+     recompile master note with a give note when the note is changed
+     ^[file:master-notes-for-this-one.md]
 
