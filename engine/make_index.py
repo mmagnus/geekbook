@@ -76,7 +76,10 @@ class Index(object):
                     lines = f.readlines()
                     f.seek(0)
                     if lines:  # if the file is empty
-                        desc = lines[0].replace("#", '').strip() # first line is desc "..."
+                        if lines[0][0] == '#':
+                            desc = lines[0][1].strip() # if '# blelbe' -> 'bleble'
+                        else:
+                            desc = lines[0]
                     else:
                         desc = ''
                     for l in f:
