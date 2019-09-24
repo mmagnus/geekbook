@@ -78,7 +78,7 @@ def open_file():
 
 
 @app.route('/edit_header/<note_title>/<note_header>')
-def edit_header(note_title, note_header):
+def edit_header(note_title, note_header, verbose=False):
     """
     edit_header::cmd: cd /Users/magnus/Dropbox/geekbook/notes/ && /usr/bin/grep -n '# h1 Heading' test.md
     edit_header::out: 11:# h1 Heading
@@ -98,14 +98,13 @@ def edit_header(note_title, note_header):
         return 'Hmm...'
 
     cmd = "cd '" + PATH_TO_MD + "' && /usr/bin/grep -n '" + note_header + "' '" + note_title + ".md'"
-    print('edit_header::cmd:', cmd)
+    if verbose: print('edit_header::cmd:', cmd)
     out = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).stdout.read().decode()
-    print('edit_header::out:', out)
+    if verbose: print('edit_header::out:', out)
     note_line = out.split(':')[0]
     cmd = 'emacsclient +' + note_line + ' "' + PATH_TO_MD + '/' + note_title + '.md" &'
-    print('Emacs cmd', cmd)
+    if verbose: print('Emacs cmd', cmd)
     os.system(cmd)
-
     return redirect('/view/' + note_title + '.md#' + note_header.lstrip('#').strip().replace(' ', '-'))
 
 ## @app.route('/open/<filename>')
