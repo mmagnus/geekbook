@@ -1,7 +1,12 @@
-#TEMPLATE='pietro'
-import os
-PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-IMG_PREFIX = ''
-PATH_TO_IMG = PATH + '/imgs/'
+# TEMPLATE='pietro'
+# import os
+# PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+# PATH_TO_IMG = PATH + '/imgs/'
+SCREENSHOT_INBOX = '/Users/magnus/Desktop/'
+SCREENSHOT_INBOX2 = '/Users/magnus/Dropbox/'
+INSERT_IMAGE_TAG = 'ii' # 'ii'
+INSERT_IMAGE_TAG2 = 'id' # 'id'
 
-SCREENSHOT_INBOX='/home/magnus/Desktop/*png'
+FIND_FILES_PLUGIN = True
+
+AI_WRITER = True

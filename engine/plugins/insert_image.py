@@ -13,8 +13,9 @@ from PIL import ImageGrab
 import random
 import string
 
+from geekbook.engine.conf import INSERT_IMAGE_TAG, INSERT_IMAGE_TAG2, SCREENSHOT_INBOX, SCREENSHOT_INBOX2
 
-def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
+def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
     """Go over each line and check if there is `ii`. If yes, then run insert_image function.
 
     Args:
@@ -26,6 +27,7 @@ def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
     Returns:
         Text
     """
+    verbose = True
     text = text.replace('.jpg/Users/', '.jpg\n/Users/')
     ltext = text.split('\n')
     changed = False
@@ -42,9 +44,16 @@ def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
             ltext[c] = '![](' + IMG_PREFIX + t + ')' #  + t + ')'
             changed = True
 
-        if ltext[c].strip() == 'ii':
-            ltext[c] = insert_image(sd, td, IMG_PREFIX)
+        # desktop, but can be configure
+        if ltext[c].strip() == INSERT_IMAGE_TAG:
+            ltext[c] = insert_image(SCREENSHOT_INBOX, td, IMG_PREFIX)
             changed = True
+
+        # dropbox, but can be configure
+        if ltext[c].strip() == INSERT_IMAGE_TAG2:
+            ltext[c] = insert_image(SCREENSHOT_INBOX2, td, IMG_PREFIX)
+            changed = True
+
         ### Apple Photos ###########
         if '/Pictures/Photos Library.photoslibrary/resources/proxies/' in ltext[c].strip():
             source_path = ltext[c]
@@ -88,23 +97,27 @@ def insert_image_in_md(text, sd, td, IMG_PREFIX, verbose=False):
 ##     return '\n'.join(ltext), changed # trigger compiles
 
 
-def insert_image(d = '/home/magnus/Desktop/{*png,*jpg,*jpeg}', td = '/home/magnus/Dropbox/geekbook/notes/imgs/', IMG_PREFIX='imgs/'):
+def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbook/notes/imgs/', IMG_PREFIX='imgs/'):
     """Check the latest file in d-rectory and copy it to t-arget d-rectory"""
     # make folder with imgs
     try:
         os.mkdir(td)
     except OSError:
         pass
-
-    newest = max(glob.iglob(d), key=os.path.getctime)
-    # copy to img
-    t = os.path.basename(newest.replace(' ','_'))
-    # add date
-    t = datetime.datetime.today().strftime('%y%m%d') + '_' + t
-    shutil.move(newest, td + IMG_PREFIX + t)
-
-    return '![](' + IMG_PREFIX  + t + ')'
-
+    files = []
+    for ftype in ['*.jpg', '*.png', '*.jpeg']:
+        p = glob.glob(d + ftype)
+        files.extend(p)
+    if files:
+        newest = max(files, key=os.path.getctime)
+        # copy to img
+        t = os.path.basename(newest.replace(' ','_'))
+        # add date
+        t = datetime.datetime.today().strftime('%y%m%d') + '_' + t
+        shutil.move(newest, td + IMG_PREFIX + t)
+        return '![](' + IMG_PREFIX  + t + ')'
+    else:
+        return 'error of import, any file not found'
 
 if __name__ == '__main__':
     # insert_image()

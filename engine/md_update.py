@@ -43,7 +43,7 @@ class Md_update(object):
         # insert_image_in_md
         is_ii = False
         if SCREENSHOT_INBOX:
-            self.md, is_ii = insert_image_in_md(self.md, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX)
+            self.md, is_ii = insert_image_in_md(self.md, PATH_TO_IMG, IMG_PREFIX)
         self.md, is_right_MD = right_MD_from_webservices(self.md)
 
         self.md, yti = get_youtube_embeds_insert(self.md)
