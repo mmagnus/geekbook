@@ -55,7 +55,8 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             changed = True
 
         ### Apple Photos ###########
-        if '/Pictures/Photos Library.photoslibrary/resources/proxies/' in ltext[c].strip():
+        # /Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/F/FE0782F9-B144-4B2F-889A-3F4961E6E3E0_1_105_c.jpeg
+        if '/Pictures/Photos Library.photoslibrary/resources/' in ltext[c].strip():
             source_path = ltext[c]
             t = os.path.basename(source_path) # target
             t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
