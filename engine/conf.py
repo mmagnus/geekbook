@@ -20,7 +20,7 @@ AI_WRITER = False
 SCREENSHOT_INBOX = None
 SCREENSHOT_INBOX2 = None
 INSERT_IMAGE_TAG = '' # 'ii'
-INSERT_IMAGE_TAG = '' # 'id'
+INSERT_IMAGE_TAG2 = '' # 'id'
 
 # find files plugin off/on
 FIND_FILES_PLUGIN = False
