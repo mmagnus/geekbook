@@ -33,7 +33,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
     changed = False
     for c in range(0, len(ltext)):
         ### Clipboard ####################
-        if ltext[c].strip() == 'ip':
+        if ltext[c].strip() == '\ip':
             im = ImageGrab.grabclipboard()
             N = 10
             t = datetime.datetime.today().strftime('%y%m%d') + '_' + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(N))

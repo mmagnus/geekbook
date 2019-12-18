@@ -4,8 +4,8 @@
 # PATH_TO_IMG = PATH + '/imgs/'
 SCREENSHOT_INBOX = '/Users/magnus/Desktop/'
 SCREENSHOT_INBOX2 = '/Users/magnus/Dropbox/'
-INSERT_IMAGE_TAG = 'ii' # 'ii'
-INSERT_IMAGE_TAG2 = 'id' # 'id'
+INSERT_IMAGE_TAG = '\ii' # 'ii'
+INSERT_IMAGE_TAG2 = '\id' # 'id'
 
 FIND_FILES_PLUGIN = True
 

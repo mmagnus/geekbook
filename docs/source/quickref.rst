@@ -46,5 +46,6 @@ Quick Reference
      recompile master note with a give note when the note is changed
      ^[file:master-notes-for-this-one.md]
 
-     ii - copy an image file from Desktop to Geekbook and insert a link in a Markdown file
-     ip - copy a clipboard an image file and insert a link in a Markdown file
+     \ii - copy an image file from Desktop to Geekbook and insert a link in a Markdown file
+     \ip - copy a clipboard an image file and insert a link in a Markdown file
+     \id - copy an image file from Dropbox to Geekbook and insert a link in a Markdown file
