@@ -29,6 +29,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
     """
     verbose = True
     text = text.replace('.jpg/Users/', '.jpg\n/Users/')
+    text = text.replace('.jpeg/Users/', '.jpeg\n/Users/')
     ltext = text.split('\n')
     changed = False
     for c in range(0, len(ltext)):
