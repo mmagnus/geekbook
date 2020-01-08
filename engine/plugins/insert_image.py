@@ -38,12 +38,16 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             im = ImageGrab.grabclipboard()
             N = 10
             t = datetime.datetime.today().strftime('%y%m%d') + '_' + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(N))
-            fullpath = td + IMG_PREFIX + t
+            fullpath = td + IMG_PREFIX + t + '.jpeg'
             if verbose:
-                print('Create an image from clipboard', source_path, td + IMG_PREFIX + t)
-            im.save(fullpath, 'PNG')
-            ltext[c] = '![](' + IMG_PREFIX + t + ')' #  + t + ')'
-            changed = True
+                print('Create an image from clipboard', fullpath)
+            if im:
+                im.save(fullpath, 'JPEG', quality=80, optimize=True, progressive=True)
+                ltext[c] = '![](' + IMG_PREFIX + t + '.jpeg)'
+                changed = True
+            else:
+                ltext[c] = '\ip error'
+                changed = True
 
         # desktop, but can be configure
         if ltext[c].strip() == INSERT_IMAGE_TAG:
