@@ -28,4 +28,4 @@ open your browser and copy-paste the ```html path``` (in my case is ```file:///p
 
 To make a new note, create a file in ```<path to your geekbook>/notes/<notes here>```.
 
-Remember to keep geekbookapp.py running all the time, it will detect a new note and compile it for you.
+Remember to keep ``geekbookapp.py`` running all the time, it will detect a new note and compile it for you.
