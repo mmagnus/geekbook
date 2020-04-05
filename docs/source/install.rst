@@ -9,7 +9,7 @@ or download https://github.com/mmagnus/geekbook/archive/master.zip and unzip.
 
 To install, type::
 
-    sudo ./install.sh
+    pip3 install --user -r docs/requirements_user.txt
 
 and go to Get Started! :-)
     
