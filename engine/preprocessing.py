@@ -153,6 +153,20 @@ def get_image_path_in_line(l):
       ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =400x400)
 
     You can use internal variable log to switch on and off logging.
+
+    You can also position your images using the following syntax::
+
+       ![#left](imgs/fig1.png)
+
+    where ``#left`` can be replaced with::
+
+       #mini = width:25%;
+       #icon = width:5%;
+       #half = width:50%
+       #full = max-height:100%;
+       #scan = max-height:100%;
+       #short =  max-height:400px;
+
     """
     # The details of parsing, i'm using a loop over zipped lists::
     #
@@ -176,13 +190,15 @@ def get_image_path_in_line(l):
             style += "width:5%;"
 
         if '#center' in alt:
-            print('center...')
             style += "margin-left: auto; margin-right: auto;"
 
         if '#half' in alt:
             style += "width:50%;"
 
         if '#full' in alt:
+            style += "max-height:100%;"
+
+        if '#scan' in alt:
             style += "max-height:100%;"
 
         if '#short' in alt:

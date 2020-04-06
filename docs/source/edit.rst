@@ -99,7 +99,7 @@ and the file will be included in your Markdown content. The file can be written 
 Table of Content
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Type ``[tableofcontent]`` to get the table of content of a given note.
+Type ``[tableofcontent]`` or ``{{TOC}}`` to get the table of content of a given note.
 
 Date
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,7 +108,39 @@ Type ``[date]`` to get the current date ``2017-01-13`` with::
 
     with time.strftime("%Y-%m-%d", time.localtime(os.path.getctime(<md file>)))
 
-Images
+Insert Image
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Type ``\ii`` (and only this in a line) to ask geekbook to copy the last image from the folder when you keep you screenshots to
+the folder with your images::
+
+Before in your markdown file::
+
+   \ii
+
+save the file, reload the file to get::
+
+   ![](imgs/Screen_Shot_2017-01-14_at_1.25.21_PM.png)
+
+To turn on this plugin in your ``~/.geekbook.py`` set the path, e.g. ::
+
+     SCREENSHOT_INBOX = '/Users/magnus/Desktop/'
+
+In similar way you can define the second location that you want to use for Inserting Images, such as::
+
+    SCREENSHOT_INBOX = '/Users/magnus/Desktop/'
+    INSERT_IMAGE_TAG = '\ii' # 'ii'
+    
+    SCREENSHOT_INBOX2 = '/Users/magnus/Dropbox/'
+    INSERT_IMAGE_TAG2 = '\id' # 'id'
+
+Paste Image
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Type ``\ip`` (and only this in a line) to ask Geekbook to paste an image from your clipboard. A new file will be created with the contact taken from our clipboard, for example::
+
+    ![](imgs/200406_R9AWZA6WOY.jpeg)
+  
+Images: formatting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can define width and height for your images as follows:
@@ -119,7 +151,7 @@ You can define width and height for your images as follows:
 
 .. autofunction:: engine.preprocessing.get_image_path_in_line
 
-**If you want to position more images next to each other, you can use tables. They will be autoscaled for you!**::
+If you want to position more images next to each other, you can use tables. They will be autoscaled for you!::
 
  Fig. gab | gab+pk | gab+pk (2)
  ----|------------------|--------
@@ -130,24 +162,10 @@ which will give you:
 
 .. image:: ../imgs/image_table.png
 
-Insert Image
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Type ``ii`` (and only this in a line) to ask geekbook to copy the last image from the folder when you keep you screenshots to
-the folder with your images::
+Or just simply put pictures next to each other::
 
-Before in your markdown file::
-
-   ii
-
-save the file, reload the file to get::
-
-   ![](imgs/Screen_Shot_2017-01-14_at_1.25.21_PM.png)
-
-To turn on this plugin in your ``engine.conf_local`` set the path, e.g. ::
-
-   SCREENSHOT_INBOX='/home/magnus/Desktop/*png' 
-   
-   
+  ![](imgs/fig1.png) ![](imgs/fig2.png) 
+           
 Insert Image from DropBox link
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 If you use a Mac and you like to store your images in Dropbox this is the function for you! 
