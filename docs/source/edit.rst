@@ -143,6 +143,8 @@ Type ``\ip`` (and only this in a line) to ask Geekbook to paste an image from yo
 Images: formatting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. warning:: The syntax ``=100x)`` does not work at the moment. Please use ``![#mini]`` (see below)
+             
 You can define width and height for your images as follows:
 
 .. image:: ../imgs/imgs_links_size.png
