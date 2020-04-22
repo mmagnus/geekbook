@@ -1,0 +1,15 @@
+#
+
+% My Book
+% Sam Smith
+
+---
+title: Pro Git
+author: Scott Chacon
+rights:  Creative Commons Non-Commercial Share Alike 3.0
+language: en-US
+...
+
+https://pandoc.org/epub.html
+
+pandoc read-kindle.md -o ~/d/tmp.epub --toc -N --epub-cover-image=/Users/magnus/d/gkconver.png
