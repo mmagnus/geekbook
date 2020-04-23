@@ -17,6 +17,8 @@ def get_parser():
                         action="store_true", help="be verbose")
     parser.add_argument("-a", "--author",
                         default="Marcin Magnus")
+    parser.add_argument("-o", "--output-dir",
+                        default="/Users/magnus/Desktop/")
     parser.add_argument("file", help="", default="") # nargs='+')
     return parser
 
@@ -48,7 +50,7 @@ if __name__ == '__main__':
     ##     with open(meta_file, 'w') as f:
     ##         f.write(meta)
 
-    cmd = "cd " + dir + " && pandoc " + file + " -o ~/Desktop/" + outfn + \
+    cmd = "cd " + dir + " && pandoc " + file + " -o '" + args.output_dir + "/" + outfn + "'" + \
     " --toc -N --epub-cover-image='" + cover_file_tmp + "'" + \
     " --metadata=title:'" + full_title + "'  --metadata=author:'" +  args.author + "'" #+ \
     #" --data-dir='" + dir + "'"
