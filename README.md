@@ -111,7 +111,7 @@ Kinda similar projects:
     
 and more <http://geekbook.readthedocs.io/en/latest/edit.html#geekbook-only>.
 
-# EMACS-powered
+# Emacs powered
 ## Focus on your notes
 
 ![](docs/imgs/emacs_focus_mode.png)
@@ -126,6 +126,9 @@ and more <http://geekbook.readthedocs.io/en/latest/edit.html#geekbook-only>.
 
 [https://www.emacswiki.org/emacs/Magit](https://www.emacswiki.org/emacs/Magit)
 
+# Python-markdown powered
+## Footnotes
+- https://python-markdown.github.io/extensions/footnotes/
 # On your OSX
 
 Spotlight your notes:
