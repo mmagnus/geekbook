@@ -1,8 +1,15 @@
 # Geekbook Bookify
 
+This script uses `pandoc` [1] to convert your Markdown notes into ebooks and send them to whatever e-reader you use, in my case Kindle. I just finished a pretty cool and very simple program to take your Geekbook notes, give them a nice cover (with the added title of your note on that cover), that you can send to your e-book. I love it :-)
+
     ./geekbook-bookify.py ../../notes/read-kindle.md
 
+[1] <https://pandoc.org>
+
+![](docs/geekbook-on-kindle.jpeg)
+
 # Kindle
+
 
 ![](docs/kindle_browser.png)
 The book in the Browser.
