@@ -3,9 +3,9 @@
 """
 pandoc -s -o doc.pdf part01.md part02.md
 """
-from __future__ import print_function
 import os
 import argparse
+from datetime import datetime
 
 def get_parser():
     parser = argparse.ArgumentParser(
@@ -50,9 +50,12 @@ if __name__ == '__main__':
     ##     with open(meta_file, 'w') as f:
     ##         f.write(meta)
 
+    date = datetime.today().strftime('%Y-%m-%d')
+    
     cmd = "cd " + dir + " && pandoc " + file + " -o '" + args.output_dir + "/" + outfn + "'" + \
     " --toc -N --epub-cover-image='" + cover_file_tmp + "'" + \
-    " --metadata=title:'" + full_title + "'  --metadata=author:'" +  args.author + "'" #+ \
+    " --metadata=title:'" + full_title + " (geekboook)' --metadata='subtitle:geekbook' --metadata='date:" + date + \
+    "' --metadata=author:'" +  args.author + "'" #+ \
     #" --data-dir='" + dir + "'"
     #"' --epub-metadata='" + meta_file + "'"
     print(cmd)
