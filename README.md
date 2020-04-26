@@ -5,6 +5,10 @@ Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
 G33KB00K3 - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
 
+**THE LATEST**
+
+[Geekbook Bookify]( https://github.com/mmagnus/geekbook/tree/master/plugins/bookify) - a plugin to process your notes into e-books
+
 **MOTIVATION**
 
 I started using MoinMoin for my personal notes in 2008, but something was missing... I started then playing with simple notes in Markdown written in my Emacs. The next step was to write a system to convert this notes into HTML. The system was drafted in Gdańsk, at the PTBI conference (2012) when I decided to write a tool to process a folder with notes written in Markdown. I wanted to use my CSS style and then more, and more some unique features that I found very useful for myself. I think, at the moment, the project converged pretty much to tools like http://jekyllrb.com and https://www.mkdocs.org.
