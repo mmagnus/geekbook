@@ -104,12 +104,9 @@ Kinda similar projects:
 ![dashboard](docs/imgs/dashboard.png)
 
 ## Extensions
+Geekbook includes also many plugins that build on top of Markdow to give even more fun.
 
-    [tableofcontent] # give you table of content in a given place of your note
-    [date] # give you date when a note was compiled
-    [yt:EKyirtVHsK0] # it must be the only text in the line !!!
-    
-and more <http://geekbook.readthedocs.io/en/latest/edit.html#geekbook-only>.
+See for more <http://geekbook.readthedocs.io/en/latest/edit.html#geekbook-only> and <https://geekbook.readthedocs.io/en/latest/quickref.html>
 
 # Emacs powered
 ## Focus on your notes

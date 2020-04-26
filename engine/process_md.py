@@ -33,13 +33,20 @@ def right_MD_from_webservices(text):
 
 
 def get_youtube_embeds_insert(text):
+    from bs4 import BeautifulSoup as bs
+    import requests
+
     ntext = ''
     changed = False
     for l in text.split('\n'):
         if l.strip().startswith('[yti:'):
             video_id = l.replace('[yti:', '').replace(']', '').strip()
+            video_url =  "https://www.youtube.com/watch?v=" + video_id
+            content = requests.get(video_url)
+            soup = bs(content.content, "html.parser")
+            title = soup.find("title").text.replace('- YouTube', '').strip()
             logger.info('youtube video detected: %s', video_id)
-            l = '<iframe width="800" height="441" src="https://www.youtube.com/embed/' + \
+            l = '**' + title + '**\n<iframe width="800" height="441" src="https://www.youtube.com/embed/' + \
                 video_id + '" frameborder="0" allowfullscreen></iframe>' + \
                            '<https://www.youtube.com/watch?v=' + video_id + '>'
             changed = True

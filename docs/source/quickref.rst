@@ -49,3 +49,6 @@ Quick Reference
      \ii - copy an image file from Desktop to Geekbook and insert a link in a Markdown file
      \ip - copy a clipboard an image file and insert a link in a Markdown file
      \id - copy an image file from Dropbox to Geekbook and insert a link in a Markdown file
+
+     [yt:<youtube video id] - this will insert the HTML code for YouTube video in the output html page
+     [yti:<youtube video id] - this will insert the HTML code for YouTube video in the markdown note !
