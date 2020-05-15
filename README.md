@@ -1,6 +1,8 @@
 # geekbook3 - note taking system for nerds/geeks!
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
+<i>Motto: **Notes are like your code**.</i>
+
 (geekbook3 since finally Geekbook uses Python 3)
 
 G33KB00K3 - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
@@ -29,8 +31,6 @@ Figure. From an (old) homepage to a note.
 Figure. A new Homepage.
 
 A neat way how to combine **Emacs/Atom/Sublime/iA Writer editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
-
-Motto: **Notes are like your code**.
 
   * [Features](#features)
     * [Index](#index)
