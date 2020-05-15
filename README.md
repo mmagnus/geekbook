@@ -1,6 +1,17 @@
 # geekbook3 - note taking system for nerds/geeks!
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
+[![Twitter Follow](http://img.shields.io/twitter/follow/geekbookx.svg?style=social&label=Follow)](https://twitter.com/geekbookx)
+[![tag](https://img.shields.io/github/release/mmagnus/geekbook.svg)](https://github.com/mmagnus/geekbook/releases)
+[![Build Status](https://travis-ci.org/mmagnus/geekbook.svg?branch=master)](https://travis-ci.org/mmagnus/geekbook)
+[![Documentation Status](https://readthedocs.org/projects/geekbook/badge/?version=latest)](http://geekbook.readthedocs.io/en/latest/?badge=latest)
+![http://www.gnu.org/licenses/gpl-3.0.html](http://img.shields.io/:license-gpl3-blue.svg)
+<span class="badge-paypal"><a href="https://www.paypal.me/MarcinMagnus" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span> 
+<span class="badge-flattr"><a href="https://flattr.com/profile/mmagnus" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
+</p>
+
+<i>Motto: **Notes are like your code**.</i>
+
 (geekbook3 since finally Geekbook uses Python 3)
 
 G33KB00K3 - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
@@ -13,14 +24,6 @@ G33KB00K3 - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking sy
 
 I started using MoinMoin for my personal notes in 2008, but something was missing... I started then playing with simple notes in Markdown written in my Emacs. The next step was to write a system to convert this notes into HTML. The system was drafted in Gdańsk, at the PTBI conference (2012) when I decided to write a tool to process a folder with notes written in Markdown. I wanted to use my CSS style and then more, and more some unique features that I found very useful for myself. I think, at the moment, the project converged pretty much to tools like http://jekyllrb.com and https://www.mkdocs.org.
 
-[![Twitter Follow](http://img.shields.io/twitter/follow/geekbookx.svg?style=social&label=Follow)](https://twitter.com/geekbookx)
-[![tag](https://img.shields.io/github/release/mmagnus/geekbook.svg)](https://github.com/mmagnus/geekbook/releases)
-[![Build Status](https://travis-ci.org/mmagnus/geekbook.svg?branch=master)](https://travis-ci.org/mmagnus/geekbook)
-[![Documentation Status](https://readthedocs.org/projects/geekbook/badge/?version=latest)](http://geekbook.readthedocs.io/en/latest/?badge=latest)
-![http://www.gnu.org/licenses/gpl-3.0.html](http://img.shields.io/:license-gpl3-blue.svg)
-<span class="badge-paypal"><a href="https://www.paypal.me/MarcinMagnus" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-yellow.svg" alt="PayPal donate button" /></a></span> 
-<span class="badge-flattr"><a href="https://flattr.com/profile/mmagnus" title="Donate to this project using Flattr"><img src="https://img.shields.io/badge/flattr-donate-yellow.svg" alt="Flattr donate button" /></a></span>
-</p>
 
 ![](themes/default/qubCXZcWHl.gif)
 Figure. From an (old) homepage to a note.
@@ -29,8 +32,6 @@ Figure. From an (old) homepage to a note.
 Figure. A new Homepage.
 
 A neat way how to combine **Emacs/Atom/Sublime/iA Writer editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
-
-Motto: **Notes are like your code**.
 
   * [Features](#features)
     * [Index](#index)
