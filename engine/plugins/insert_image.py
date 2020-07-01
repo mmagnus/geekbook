@@ -79,6 +79,28 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 ltext[c] = '![](' + IMG_PREFIX + t + ')' #  + t + ')'
                 changed = True
         ############################
+        ### Apple Photos [2] ###########
+        # file:///Users/magnus/Pictures/Photos%20Library.photoslibrary/resources/derivatives/B/BC0F463E-7D5E-4FC7-A105-7A56A1121DD9_1_105_c.jpeg
+        line = ltext[c].strip()
+        if 'Pictures/Photos%20Library' in line and 'Error' not in line:
+            verbose = True
+            f = ltext[c]
+            f = f.replace('%20', ' ').replace('file://', '')
+            source_path = f
+            t = os.path.basename(source_path) # target
+            t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+            # clean % from the names
+            try:
+                shutil.copy(source_path, td + IMG_PREFIX + t)
+            except IOError:
+                ltext[c] = 'Error in ' + source_path
+                changed = True
+            else:
+                if verbose:
+                    print('Coping', source_path, td + IMG_PREFIX + t)
+                ltext[c] = '![](' + IMG_PREFIX + t + ')' #  + t + ')'
+                changed = True
+        ############################
     return '\n'.join(ltext), changed # trigger compiles
 
 
