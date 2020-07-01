@@ -5,3 +5,4 @@ Flask
 pandas
 pygments
 Pillow
+BeautifulSoup4
