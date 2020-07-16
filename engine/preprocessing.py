@@ -201,6 +201,9 @@ def get_image_path_in_line(l):
         if '#scan' in alt:
             style += "max-height:100%;"
 
+        if '#' in alt:
+            style += "max-height:100%;"
+
         if '#short' in alt:
             style += "max-height:400px;"
 
