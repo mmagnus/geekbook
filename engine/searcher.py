@@ -46,17 +46,24 @@ from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE_HTML, PATH_TO_MD
 debug = False
 
 
-def hightlight_text_in_html(phrase, text):
+def hightlight_text_in_html(phrase, text, mark_line_only=True):
     """
-    Replace NO_PUBKEY with a highlighted text '<span style="background-color:yellow">NO_PUBKEY</span>'
+    Replace <PHRASE> with a highlighted text '<span style="background-color:yellow">PHRASE</span>'
 
     Normal phrase is used and .upper()
     """
-    text = text.replace(phrase, '<span style="background-color:yellow">' + phrase + '</span>')
-    text = text.replace(
-        phrase.upper(), '<span style="background-color:yellow">' + phrase.upper() + '</span>')
-    text = text.replace(
-        phrase.title(), '<span style="background-color:yellow">' + phrase.title() + '</span>')
+    # ugly hack ;-)
+    if mark_line_only:
+        ntext = ''
+        for l in text.split('\n'):
+            if phrase.lower() in l.lower():
+                l += '<span style="background-color:red"><<<<<<<<<<<<<<<<<<<<<<<<</span>'
+            ntext += l + '\n'
+        text = ntext
+    else:
+        text = text.replace(phrase, '<span style="background-color:yellow">' + phrase + '</span>')
+        text = text.replace(phrase.upper(), '<span style="background-color:yellow">' + phrase.upper() + '</span>')
+        text = text.replace(phrase.title(), '<span style="background-color:yellow">' + phrase.title() + '</span>')
     return text
 
 
@@ -154,8 +161,8 @@ class Header:
         out += '<small style="color: #009933;">' + '<a href="/view/' + self.md + \
             '.html#' + self.name_dashed + '">' + self.md + '</a>' + '</small>\n'
         #        out += '<p>...' + myutilspy.hightlight_text_in_html(term, self.note).replace('\n','<br/>') + '...<p>\n'
-        out += '<pre>' + hightlight_text_in_html(term,
-                                                 self.note).replace('\n', '<br/>') + '</pre>\n'
+        if True: #highlight:
+            out += '' + hightlight_text_in_html(term, self.note).replace('\n', '<br/>') + '\n'
         out += '<div style="width:100%" class="hrDotted"></div>'
         return out
 

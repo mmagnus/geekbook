@@ -184,11 +184,18 @@ def search(text):
     head = head.replace('="css/', '="'+ '/css/')
     head = head.replace('="js/', '="' + '/js/')
 
-    os.system('open file://' + PATH_TO_HTML + '_search_geekbook_.html')
+    # os.system('open file://' + PATH_TO_HTML + '_search_geekbook_.html')
 
     # remove demo content
     head = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->', r'', head, flags=re.M | re.DOTALL)
-    return head + results
+
+    with open(PATH_TO_MD + '_search_.md', 'w') as f:
+        f.write(results)
+
+    time.sleep(1)
+
+    return redirect('/view/_search_.html')
+    return
     #return send_from_directory('', 'file:///' + PATH_TO_HTML + '/geekbook-search.html')
     #return redirect(url_for('static', filename='file:///' + PATH_TO_HTML + '/geekbook-search.html'))
 
