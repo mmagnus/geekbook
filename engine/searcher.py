@@ -131,6 +131,7 @@ class Header:
 
         self.name = name
         self.name_dashed = name.replace(' ', '-')
+        self.last_md = ''
         self.level = level
         self.child = []
         self.note = ''
@@ -154,17 +155,29 @@ class Header:
     def add_note(self, note):
         self.note = note
 
-    def get_format(self, term):
+    def get_format(self, term, prev_md):
+        """Get the format for the hit.
+
+        prev_md is to make grouping at the search page:
+
+        # file
+        ## hit1
+        ## hit2
+
+        """
         out = ''
-        out += '<h1 style="font-size:20px;color:black><a href="/view/' + \
-            self.md + '.html#' + self.name_dashed + '">' + self.name + '</a></h1>\n'
+        if prev_md == self.md:
+            pass
+        else:
+            out += '\n# ' + self.md + '\n'
+        out += '\n## ' + self.name + '\n'
+
         out += '<small style="color: #009933;">' + '<a href="/view/' + self.md + \
             '.html#' + self.name_dashed + '">' + self.md + '</a>' + '</small>\n'
         #        out += '<p>...' + myutilspy.hightlight_text_in_html(term, self.note).replace('\n','<br/>') + '...<p>\n'
-        if True: #highlight:
-            out += '' + hightlight_text_in_html(term, self.note).replace('\n', '<br/>') + '\n'
+        out += '' + hightlight_text_in_html(term, self.note).replace('\n', '<br/>') + '\n'
         out += '<div style="width:100%" class="hrDotted"></div>'
-        return out
+        return out, self.md
 
     def __repr__(self):
         return 'h' + str(self.level) + ': ' + self.name
@@ -285,7 +298,8 @@ class Db():
         out2 = []  # list of files to process
         #'/home/magnus/Dropbox/lb_v2/md/.#bash.md'
         for i in out:
-            if i.find('#') > -1 or i.endswith('~') or i.startswith('flycheck_') or i.find('.org') > -1 or i.find('.git') > -1:
+            if i.find('#') > -1 or i.endswith('~') or '_search_' in i or \
+              i.startswith('flycheck_') or i.find('.org') > -1 or i.find('.git') > -1:
                 pass
             else:
                 if i.endswith('.md'):
@@ -312,12 +326,13 @@ class Db():
             if re.search(term, h.name + h.note, re.I):
                 hits.append(h)
         hits_output = ''
+        last_md = ''
         for hit in hits:
             if v:
                 print(hit.name)
             if v:
                 print(hit.note)
-            h = hit.get_format(term)
+            h, last_md = hit.get_format(term, last_md)
             hits_output += h
             if v:
                 print

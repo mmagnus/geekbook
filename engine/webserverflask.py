@@ -9,6 +9,7 @@ import os
 import sys
 PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PATH)
+from engine.page import Page
 from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE_HTML, PATH_TO_TEMPLATE, PATH_TO_MD
 from engine.postprocessing import add_head
 from flask import Flask, redirect, url_for, send_from_directory, request
@@ -176,6 +177,10 @@ def search(text):
         return 'Hmm...'
 
     results = search_term(text)
+    if not results.strip():
+        results = 'NOT FOUND'
+    else:
+        results = '{{TOC}}\n\n' + results  # this does not work! the output is html h1 etc
 
     head = open(PATH_TO_TEMPLATE_HTML).read()
     head = head.replace('{{ url_index }}', PATH_TO_HTML + '/' + 'index.html')
@@ -192,8 +197,11 @@ def search(text):
     with open(PATH_TO_MD + '_search_.md', 'w') as f:
         f.write(results)
 
-    time.sleep(1)
-
+    p = Page('_search_.md')
+    print('compiling...')
+    p.compile()
+    p.save()
+    
     return redirect('/view/_search_.html')
     return
     #return send_from_directory('', 'file:///' + PATH_TO_HTML + '/geekbook-search.html')
