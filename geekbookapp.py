@@ -184,7 +184,8 @@ class App(object):
 
                     # update search db if any of the files
                     # is changed
-                    make_db()
+                    if f != '_search_.md':
+                        make_db()
 
             if UPDATE:
                 for f in mf.get_files():
