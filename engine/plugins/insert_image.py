@@ -7,13 +7,49 @@ insert_image is executed in md_update.py
 import glob
 import os
 import shutil
-import sys
 import datetime
 from PIL import ImageGrab
 import random
 import string
+import time
+import platform
 
 from geekbook.engine.conf import INSERT_IMAGE_TAG, INSERT_IMAGE_TAG2, SCREENSHOT_INBOX, SCREENSHOT_INBOX2
+
+
+def get_creation_time(fn):
+    from PIL import Image
+    im = Image.open(fn)
+    exif = im.getexif() 
+    creation_time = exif.get(36867)
+    if creation_time:
+        d, t = creation_time.split()
+        d = d.replace(':', '')[2:]
+        return d + ' ' + t
+    else:
+        return ''
+
+
+def get_creation_date(path_to_file):
+    """
+    Try to get the date that a file was created, falling back to when it was
+    last modified if that isn't possible.
+    See http://stackoverflow.com/a/39501288/1709587 for explanation.
+    """
+    try:
+        stat = os.stat(path_to_file)
+    except OSError:
+        return ''
+    try:
+
+        d = stat.st_birthtime
+        d = datetime.datetime.fromtimestamp(d)
+        return d.strftime('%Y%m%d')[2:]
+    except AttributeError:
+        # We're probably on Linux. No easy way to get creation dates here,
+        # so we'll settle for when its content was last modified.
+        return stat.st_mtime
+
 
 def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
     """Go over each line and check if there is `ii`. If yes, then run insert_image function.
@@ -63,8 +99,12 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
         # /Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/F/FE0782F9-B144-4B2F-889A-3F4961E6E3E0_1_105_c.jpeg
         if '/Pictures/Photos Library.photoslibrary/resources/' in ltext[c].strip():
             source_path = ltext[c]
+            creation_date = get_creation_date(source_path)
             t = os.path.basename(source_path) # target
-            t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+            if creation_date:
+                t = creation_date + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+            else:
+                t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             # clean % from the names
             t = t.replace('%', '')
             # copy
@@ -76,19 +116,23 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             else:
                 if verbose:
                     print('Coping', source_path, td + IMG_PREFIX + t)
-                ltext[c] = '![](' + IMG_PREFIX + t + ')' #  + t + ')'
+                ltext[c] = '![](' + IMG_PREFIX + t + ') ' + creation_date #  + t + ')'
                 changed = True
         ############################
         ### Apple Photos [2] ###########
         # file:///Users/magnus/Pictures/Photos%20Library.photoslibrary/resources/derivatives/B/BC0F463E-7D5E-4FC7-A105-7A56A1121DD9_1_105_c.jpeg
         line = ltext[c].strip()
-        if 'Pictures/Photos%20Library' in line and 'Error' not in line:
-            verbose = True
+        if 'file://' in line and 'Error' not in line:
+            print(line)
             f = ltext[c]
             f = f.replace('%20', ' ').replace('file://', '')
             source_path = f
             t = os.path.basename(source_path) # target
-            t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+            creation_date = get_creation_date(source_path)
+            if creation_date:
+                t = creation_date + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+            else:
+                t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             # clean % from the names
             try:
                 shutil.copy(source_path, td + IMG_PREFIX + t)
@@ -98,7 +142,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             else:
                 if verbose:
                     print('Coping', source_path, td + IMG_PREFIX + t)
-                ltext[c] = '![](' + IMG_PREFIX + t + ')' #  + t + ')'
+                ltext[c] = '![](' + IMG_PREFIX + t + ') ' + creation_date #  + t + ')'
                 changed = True
         ############################
     return '\n'.join(ltext), changed # trigger compiles
@@ -142,8 +186,9 @@ def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbo
         t = os.path.basename(newest.replace(' ','_'))
         # add date
         t = datetime.datetime.today().strftime('%y%m%d') + '_' + t
+        creation_time = get_creation_time(newest)
         shutil.move(newest, td + IMG_PREFIX + t)
-        return '![](' + IMG_PREFIX  + t + ')'
+        return '![](' + IMG_PREFIX  + t + ') ' + creation_time
     else:
         return 'error of import, any file not found'
 
