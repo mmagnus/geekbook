@@ -66,6 +66,10 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
     verbose = True
     text = text.replace('.jpg/Users/', '.jpg\n/Users/')
     text = text.replace('.jpeg/Users/', '.jpeg\n/Users/')
+
+    text = text.replace('.jpegfile:///Users/', '.jpeg\nfile:///Users/')
+    text = text.replace('.jpgfile:///Users/', '.jpg\nfile:///Users/')
+
     ltext = text.split('\n')
     changed = False
     for c in range(0, len(ltext)):
@@ -95,29 +99,6 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             ltext[c] = insert_image(SCREENSHOT_INBOX2, td, IMG_PREFIX)
             changed = True
 
-        ### Apple Photos ###########
-        # /Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/F/FE0782F9-B144-4B2F-889A-3F4961E6E3E0_1_105_c.jpeg
-        if '/Pictures/Photos Library.photoslibrary/resources/' in ltext[c].strip():
-            source_path = ltext[c]
-            creation_date = get_creation_date(source_path)
-            t = os.path.basename(source_path) # target
-            if creation_date:
-                t = creation_date + '_' + t.replace('UNADJUSTEDNONRAW_', '')
-            else:
-                t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
-            # clean % from the names
-            t = t.replace('%', '')
-            # copy
-            try:
-                shutil.copy(source_path, td + IMG_PREFIX + t)
-            except IOError:
-                ltext[c] = 'Error in ' + source_path
-                changed = True
-            else:
-                if verbose:
-                    print('Coping', source_path, td + IMG_PREFIX + t)
-                ltext[c] = '![](' + IMG_PREFIX + t + ') ' + creation_date #  + t + ')'
-                changed = True
         ############################
         ### Apple Photos [2] ###########
         # file:///Users/magnus/Pictures/Photos%20Library.photoslibrary/resources/derivatives/B/BC0F463E-7D5E-4FC7-A105-7A56A1121DD9_1_105_c.jpeg
@@ -145,6 +126,30 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 ltext[c] = '![](' + IMG_PREFIX + t + ') ' + creation_date #  + t + ')'
                 changed = True
         ############################
+
+        ### Apple Photos ###########
+        # /Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/F/FE0782F9-B144-4B2F-889A-3F4961E6E3E0_1_105_c.jpeg
+        if '/Pictures/Photos Library.photoslibrary/resources/' in ltext[c].strip() and 'Error' not in ltext[c].strip():
+            source_path = ltext[c]
+            creation_date = get_creation_date(source_path)
+            t = os.path.basename(source_path) # target
+            if creation_date:
+                t = creation_date + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+            else:
+                t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+            # clean % from the names
+            t = t.replace('%', '')
+            # copy
+            try:
+                shutil.copy(source_path, td + IMG_PREFIX + t)
+            except IOError:
+                ltext[c] = 'Error in ' + source_path
+                changed = True
+            else:
+                if verbose:
+                    print('Coping', source_path, td + IMG_PREFIX + t)
+                ltext[c] = '![](' + IMG_PREFIX + t + ') ' + creation_date #  + t + ')'
+                changed = True
     return '\n'.join(ltext), changed # trigger compiles
 
 
