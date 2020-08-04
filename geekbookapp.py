@@ -109,6 +109,9 @@ class App(object):
         mf = MdFiles()
         logger.info('You have %i notes! Congrats, keep noting!' % len(mf.get_files()))
 
+        logger.info('Lines of notes')
+        os.system('cd "' + PATH_TO_MD + '" && cat *md | wc -l')
+
         index = Index()
         index.update(mf.get_files())
 
