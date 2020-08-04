@@ -103,7 +103,12 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
         ### Apple Photos [2] ###########
         # file:///Users/magnus/Pictures/Photos%20Library.photoslibrary/resources/derivatives/B/BC0F463E-7D5E-4FC7-A105-7A56A1121DD9_1_105_c.jpeg
         line = ltext[c].strip()
-        if 'file://' in line and 'Error' not in line:
+
+        is_image = False
+        if '.jpeg' in line or '.jpg' in line or '.png':
+            is_image = True
+            
+        if 'file://' in line and is_image and 'Error' not in line:
             print(line)
             f = ltext[c]
             f = f.replace('%20', ' ').replace('file://', '')
