@@ -39,15 +39,15 @@ def get_youtube_embeds_insert(text):
     ntext = ''
     changed = False
     for l in text.split('\n'):
-        if l.strip().startswith('[yti:'):
-            video_id = l.replace('[yti:', '').replace(']', '').strip()
-            video_url =  "https://www.youtube.com/watch?v=" + video_id
+        if l.startswith('https://www.youtube.com'): #\yti'):
+            video_id = l.replace('\yti', '').replace(']', '').replace('https://www.youtube.com/watch?v=', '').strip()
+            video_url = "https://www.youtube.com/watch?v=" + video_id
             content = requests.get(video_url)
             soup = bs(content.content, "html.parser")
             title = soup.find("title").text.replace('- YouTube', '').strip()
             logger.info('youtube video detected: %s', video_id)
             l = '**' + title + '**\n<iframe width="800" height="441" src="https://www.youtube.com/embed/' + \
-                video_id + '" frameborder="0" allowfullscreen></iframe>' + \
+                video_id + '" frameborder="0" allowfullscreen></iframe>\n' + \
                            '<https://www.youtube.com/watch?v=' + video_id + '>'
             changed = True
         ntext += l + '\n'
