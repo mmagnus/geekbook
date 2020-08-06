@@ -107,9 +107,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
         is_image = False
         if '.jpeg' in line or '.jpg' in line or '.png' in line:
             is_image = True
-            
         if 'file://' in line and is_image and 'Error' not in line:
-            print(line)
             f = ltext[c]
             f = f.replace('%20', ' ').replace('file://', '')
             source_path = f
