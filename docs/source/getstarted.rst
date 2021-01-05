@@ -1,7 +1,7 @@
 Get Started
 ===========================================
 
-**Run geekbookapp.py and edit your notes in ```<path to your geekbook>/notes/```**::
+Run geekbookapp.py and edit your notes in ```<path to your geekbook>/notes/```::
 
   [mm] geekbook git:(master) ./geekbookapp.py
   2017-01-10 09:47:46: (network.c.410) can't bind to port:  1234 Address already in use
