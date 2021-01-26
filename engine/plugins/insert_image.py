@@ -68,6 +68,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
 
     text = text.replace('.jpegfile:///Users/', '.jpeg\nfile:///Users/')
     text = text.replace('.jpgfile:///Users/', '.jpg\nfile:///Users/')
+    text = text.replace('.pngfile:///Users/', '.png\nfile:///Users/')
 
     ltext = text.split('\n')
     changed = False
