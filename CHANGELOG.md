@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Pre-release]
 
+Fix:
+
+- 2021-01-26 insert_image.py: fix pngfiles:///
+- 2021-01-26 insert_image.py: fix getting dates, a new function with ifs, add #
+- 2021-01-05 fix: dont crash when there is space in name (but files are simply skipped)
+
 ## 3.0 Python3 version 
 190824
 
