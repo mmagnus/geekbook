@@ -17,7 +17,7 @@ import platform
 from geekbook.engine.conf import INSERT_IMAGE_TAG, INSERT_IMAGE_TAG2, SCREENSHOT_INBOX, SCREENSHOT_INBOX2
 
 
-def get_creation_time(fn):
+def get_creation_time_via_pil(fn):
     from PIL import Image
     im = Image.open(fn)
     exif = im.getexif() 
@@ -25,7 +25,7 @@ def get_creation_time(fn):
     if creation_time:
         d, t = creation_time.split()
         d = d.replace(':', '')[2:]
-        return d + ' ' + t
+        return d + '-' + t
     else:
         return ''
 
@@ -41,7 +41,6 @@ def get_creation_date(path_to_file):
     except OSError:
         return ''
     try:
-
         d = stat.st_birthtime
         d = datetime.datetime.fromtimestamp(d)
         return d.strftime('%Y%m%d')[2:]
@@ -83,7 +82,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 print('Create an image from clipboard', fullpath)
             if im:
                 im.save(fullpath, 'JPEG', quality=80, optimize=True, progressive=True)
-                ltext[c] = '![](' + IMG_PREFIX + t + '.jpeg)'
+                ltext[c] = '![#](' + IMG_PREFIX + t + '.jpeg)'
                 changed = True
             else:
                 ltext[c] = '\ip error'
@@ -111,8 +110,9 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             f = ltext[c]
             f = f.replace('%20', ' ').replace('file://', '')
             source_path = f
-            t = os.path.basename(source_path) # target
-            creation_date = get_creation_date(source_path)
+            creation_date = get_creation_time(source_path)
+            t = os.path.basename(source_path) # target # is only filename without path
+            #creation_date = get_creation_date(source_path)
             if creation_date:
                 t = creation_date + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             else:
@@ -126,7 +126,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             else:
                 if verbose:
                     print('Coping', source_path, td + IMG_PREFIX + t)
-                ltext[c] = '![](' + IMG_PREFIX + t + ') ' + creation_date #  + t + ')'
+                ltext[c] = '![#](' + IMG_PREFIX + t + ') '# + creation_date #  + t + ')'
                 changed = True
         ############################
 
@@ -136,6 +136,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             source_path = ltext[c]
             creation_date = get_creation_date(source_path)
             t = os.path.basename(source_path) # target
+            creation_date = get_creation_time(source_path)
             if creation_date:
                 t = creation_date + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             else:
@@ -151,7 +152,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             else:
                 if verbose:
                     print('Coping', source_path, td + IMG_PREFIX + t)
-                ltext[c] = '![](' + IMG_PREFIX + t + ') ' + creation_date #  + t + ')'
+                ltext[c] = '![#](' + IMG_PREFIX + t + ') '# + creation_date #  + t + ')'
                 changed = True
     return '\n'.join(ltext), changed # trigger compiles
 
@@ -178,7 +179,9 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
 
 
 def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbook/notes/imgs/', IMG_PREFIX='imgs/'):
-    """Check the latest file in d-rectory and copy it to t-arget d-rectory"""
+    """Check the latest file in d-rectory and copy it to t-arget d-rectory.
+
+    Put a time of creation into a filename."""
     # make folder with imgs
     try:
         os.mkdir(td)
@@ -193,16 +196,36 @@ def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbo
         # copy to img
         t = os.path.basename(newest.replace(' ','_'))
         # add date
-        t = datetime.datetime.today().strftime('%y%m%d') + '_' + t
+        # datetime.datetime.today().strftime('%y%m%d')
         creation_time = get_creation_time(newest)
+        t = creation_time + '_' + t
         shutil.move(newest, td + IMG_PREFIX + t)
-        return '![](' + IMG_PREFIX  + t + ') ' + creation_time
+        return '![#](' + IMG_PREFIX  + t + ')'
     else:
         return 'error of import, any file not found'
 
+    
+def get_creation_time_via_stat(fn):
+    import pathlib
+    fname = pathlib.Path(fn)
+    ctime = datetime.datetime.fromtimestamp(fname.stat().st_ctime)
+
+    # replaces to get to the format:
+    # 2021-01-26_09:28:54.834750 to 210126_09:28:54.834750
+    return str(ctime).replace('-', '').replace(' ', '-')[2:] # to remove year ;-) lame
+    
+def get_creation_time(fn):
+    dat = get_creation_time_via_pil(fn)
+    if not dat:
+        dat = get_creation_time_via_stat(fn)
+    return dat
+
 if __name__ == '__main__':
     # insert_image()
-    text = """bleblelbe
-/Users/magnus/Pictures/Photos Library.photoslibrary/resources/proxies/derivatives/6a/00/6acd/2sekD%FRSC2LkDAT44CGtA_thumb_6acd.jpg
-"""
-    insert_image_from_Apple_Photos(text, verbose=True)
+    fn = "/Users/magnus/Desktop/_Screenshot_2021-01-25_at_22.14.41.png"
+    dat = get_creation_time(fn)
+    print(dat)
+    fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/E/E412371D-8D5A-408C-845F-BCA826EB4F6A_1_105_c.jpeg"
+    #insert_image_file:file:///Users/magnus/Pictures/Photos%20Library.photoslibrary/resources/derivatives/E/E412371D-8D5A-408C-845F-BCA826EB4F6A_1_105_c.jpeg//from_Apple_Photos(text, verbose=True)
+    dat = get_creation_time(fn)
+    print(dat)
