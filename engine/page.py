@@ -4,7 +4,7 @@
 
 Example::
 
-     $ python page.py /Users/magnus/workspace/geekbook-export geekbook-export.md test.md --add-toc --push
+     $ python page.py /Users/magnus/workspace/geekbook-export geekbook-export.md test.md --readme test.md --add-toc --push
 
 """
 import markdown
@@ -106,12 +106,18 @@ class Page(object):
         self.html = use_icons(self.html)
         self.html = get_divhr(self.html)
 
-    def export(self, path, add_toc, push):
+    def export(self, path, add_toc, push, readme):
         import re
         import shutil
 
+        content = open(PATH_TO_MD + self.fn).read()
+                       
+        if self.fn == readme:
+             self.fn = 'README.md'
+        import ipdb; ipdb.set_trace()
+        
         with open(path + os.sep + self.fn, 'w') as f:
-            f.write(open(PATH_TO_MD + self.fn).read())
+            f.write(content)
         try:
             os.mkdir(path + os.sep + 'imgs')
         except:
@@ -121,7 +127,7 @@ class Page(object):
             f.write('__place_for_your_imgs__')
 
         # \!\[.*?\]\(imgs/.*?\)
-        hits = re.findall('\"/imgs/.*?\"', self.md, re.M|re.DOTALL)
+        hits = re.findall('\"/imgs/.*?\"', content, re.M|re.DOTALL)
         for h in hits:
             print('Copy ',h.strip())
             shutil.copy(PATH_TO_MD + h.replace('"',''), path + os.sep + 'imgs')
@@ -197,6 +203,8 @@ def get_parser():
     #parser.add_argument('-', "--", help="", default="")
     parser.add_argument("--add-toc", help="replace {{TOC}} of your note with TOC generated with https://github.com/ekalinin/github-markdown-toc.go, make sure that this tool is seen in your PATH", action="store_true")
     parser.add_argument("--push", help="run cd <path> && git add README.md; git add imgs/* && git commit -m 'update' && git push", action="store_true")
+    parser.add_argument("--readme", help="select this md file as README, .e.g., geekbook-export.md")
+
     parser.add_argument("exportto", help="a path to repo to export to", default="") # nargs='+')
     parser.add_argument("file", help="", default="a note to be pushed, with .md, e.g., geekbook-export.md", nargs='+')
     return parser
@@ -214,4 +222,5 @@ if __name__ == '__main__':
         p.compile()
         print(p.is_changed())
         p.save()
-        p.export(args.exportto, args.add_toc, args.push)
+
+        p.export(args.exportto, args.add_toc, args.push, args.readme)
