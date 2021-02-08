@@ -39,8 +39,7 @@ try:
     exec(open(user_path).read())  # python3
     logger.info('Config local loaded ' + user_path)    
 except FileNotFoundError:# noooot perfect! 
-    logger.info('Config local [not found], use default settings [ok]' + user_path)
-
+    logger.info('Config local [not found], use default settings [ok] ' + user_path)
 
 # homepage
 PATH_HOMEPAGE = PATH + "/themes/" + TEMPLATE + "/homepage/head_index.html"
