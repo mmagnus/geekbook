@@ -4,7 +4,7 @@
 
 Example::
 
-      (py37) [mx] engine$ git:(master) ✗ python page.py /Users/magnus/Desktop/geekbook-export geekbook-export.md --add-toc --push
+     $ python page.py /Users/magnus/workspace/geekbook-export geekbook-export.md test.md --add-toc --push
 
 """
 import markdown
@@ -110,7 +110,7 @@ class Page(object):
         import re
         import shutil
 
-        with open(path + os.sep + 'README.md', 'w') as f:
+        with open(path + os.sep + self.fn, 'w') as f:
             f.write(open(PATH_TO_MD + self.fn).read())
         try:
             os.mkdir(path + os.sep + 'imgs')
@@ -136,20 +136,20 @@ class Page(object):
             return out, err
 
         if add_toc:
-            out, err = exe('gh-md-toc ' + path + os.sep + 'README.md')
+            out, err = exe('gh-md-toc ' + path + os.sep + self.fn)
             print(out)
 
-            with open(path + os.sep + 'README.md') as f:
+            with open(path + os.sep + self.fn) as f:
                 content = f.read()
 
             ncontent = content.replace('{{TOC}}',out)
 
-            with open(path + os.sep + 'README.md', 'w') as f:
+            with open(path + os.sep + self.fn, 'w') as f:
                  f.write(ncontent)
 
         if push:
             print('Push ...')
-            out, err = exe("cd " + path + "&& git add README.md; git add imgs/* && git commit -m 'update' && git push")
+            out, err = exe("cd " + path + "&& git add *.md; git add imgs/* && git commit -m 'update' && git push")
             print(err)
 
     def is_changed(self):
@@ -195,20 +195,23 @@ def get_parser():
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
 
     #parser.add_argument('-', "--", help="", default="")
-
     parser.add_argument("--add-toc", help="replace {{TOC}} of your note with TOC generated with https://github.com/ekalinin/github-markdown-toc.go, make sure that this tool is seen in your PATH", action="store_true")
     parser.add_argument("--push", help="run cd <path> && git add README.md; git add imgs/* && git commit -m 'update' && git push", action="store_true")
     parser.add_argument("exportto", help="a path to repo to export to", default="") # nargs='+')
-    parser.add_argument("file", help="", default="a note to be pushed, with .md, e.g., geekbook-export.md") # nargs='+')
+    parser.add_argument("file", help="", default="a note to be pushed, with .md, e.g., geekbook-export.md", nargs='+')
     return parser
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
 
-    p = Page(args.file)
-    p.compile()
-    print(p.is_changed())
-    p.save()
-    p.export(args.exportto, args.add_toc, args.push)
+    if list != type(args.file):
+        args.file = [args.file]
+
+    for f in args.file:
+        p = Page(f)
+        p.compile()
+        print(p.is_changed())
+        p.save()
+        p.export(args.exportto, args.add_toc, args.push)
