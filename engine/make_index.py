@@ -11,7 +11,7 @@ import os
 import time
 import re
 
-from geekbook.engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE, PATH_HOMEPAGE, PATH_TO_MD, PATH_TO_TEMPLATE_HTML  # noqa
+from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE, PATH_HOMEPAGE, PATH_TO_MD, PATH_TO_TEMPLATE_HTML  # noqa
 FLASK_BASED = True
 
 

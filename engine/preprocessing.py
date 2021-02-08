@@ -5,7 +5,7 @@
 
 Go to page.py (Page) pre_process to add a new function from here."""
 
-from geekbook.engine.conf import PATH_TO_IMG, PATH_TO_MD, PATH_TO_ORIG
+from engine.conf import PATH_TO_IMG, PATH_TO_MD, PATH_TO_ORIG
 import re
 import os
 import codecs

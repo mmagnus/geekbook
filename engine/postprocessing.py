@@ -17,7 +17,7 @@ from pygments import highlight
 from pygments.lexers import PythonLexer, HtmlLexer, CssLexer, EmacsLispLexer, BashLexer, HexdumpLexer, DjangoLexer
 from pygments.formatters import HtmlFormatter
 
-from geekbook.engine.conf import PATH_TO_BASE_IMG, PATH_TO_TEMPLATE, PATH_TO_TEMPLATE_HTML, PATH_TO_HTML, PATH_TO_MD
+from engine.conf import PATH_TO_BASE_IMG, PATH_TO_TEMPLATE, PATH_TO_TEMPLATE_HTML, PATH_TO_HTML, PATH_TO_MD
 
 
 def change_data_tag_into_actual_data(mdfn, text):
