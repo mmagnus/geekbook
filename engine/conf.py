@@ -34,11 +34,12 @@ logger.setLevel('INFO')
 ##     from geekbook.engine.conf_local import *
 ## except:
 ##     logger.info('Config local [not found], use default settings [ok]')
-user_path = os.path.expanduser("~")
+user_path = os.path.expanduser("~") + '/.geekbook.py'
 try:
-    exec(open(user_path + '/.geekbook.py').read())  # python3
-except: # FileNotFoundError: noooot perfect! 
-    logger.info('Config local [not found], use default settings [ok]')
+    exec(open(user_path).read())  # python3
+    logger.info('Config local loaded ' + user_path)    
+except FileNotFoundError:# noooot perfect! 
+    logger.info('Config local [not found], use default settings [ok]' + user_path)
 
 
 # homepage
