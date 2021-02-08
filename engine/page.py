@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Page - one note is a page."""
+"""Page - one note is a page.
+
+Example::
+
+      (py37) [mx] engine$ git:(master) ✗ python page.py /Users/magnus/Desktop/geekbook-export geekbook-export.md --add-toc --push
+
+"""
 import markdown
 import codecs
 from mdx_gfm import GithubFlavoredMarkdownExtension
@@ -110,6 +116,9 @@ class Page(object):
         except:
             pass
 
+        with open(path + os.sep + 'imgs/__place_for_your_imgs__', 'w') as f:
+            f.write('__place_for_your_imgs__')
+
         # \!\[.*?\]\(imgs/.*?\)
         hits = re.findall('\"/imgs/.*?\"', self.md, re.M|re.DOTALL)
         for h in hits:
@@ -186,12 +195,10 @@ def get_parser():
 
     #parser.add_argument('-', "--", help="", default="")
 
-    parser.add_argument("--add-toc", 
-                        action="store_true")
-    parser.add_argument("--push",
-                        action="store_true")
-    parser.add_argument("exportto", help="", default="") # nargs='+')
-    parser.add_argument("file", help="", default="") # nargs='+')
+    parser.add_argument("--add-toc", help="replace {{TOC}} of your note with TOC generated with https://github.com/ekalinin/github-markdown-toc.go, make sure that this tool is seen in your PATH", action="store_true")
+    parser.add_argument("--push", help="run cd <path> && git add README.md; git add imgs/* && git commit -m 'update' && git push", action="store_true")
+    parser.add_argument("exportto", help="a path to repo to export to", default="") # nargs='+')
+    parser.add_argument("file", help="", default="a note to be pushed, with .md, e.g., geekbook-export.md") # nargs='+')
     return parser
 
 if __name__ == '__main__':
