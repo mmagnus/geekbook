@@ -83,7 +83,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 print('Create an image from clipboard', fullpath)
             if im:
                 im.save(fullpath, 'JPEG', quality=80, optimize=True, progressive=True)
-                ltext[c] = '![#](' + IMG_PREFIX + t + '.jpeg)'
+                ltext[c] = '![](' + IMG_PREFIX + t + '.jpeg)'
                 changed = True
             else:
                 ltext[c] = '\ip error'
@@ -127,7 +127,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             else:
                 if verbose:
                     print('Coping', source_path, td + IMG_PREFIX + t)
-                ltext[c] = '![#](' + IMG_PREFIX + t + ') '# + creation_date #  + t + ')'
+                ltext[c] = '![](' + IMG_PREFIX + t + ') '# + creation_date #  + t + ')'
                 changed = True
         ############################
 
@@ -153,7 +153,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             else:
                 if verbose:
                     print('Coping', source_path, td + IMG_PREFIX + t)
-                ltext[c] = '![#](' + IMG_PREFIX + t + ') '# + creation_date #  + t + ')'
+                ltext[c] = '![](' + IMG_PREFIX + t + ') '# + creation_date #  + t + ')'
                 changed = True
     return '\n'.join(ltext), changed # trigger compiles
 
@@ -201,7 +201,7 @@ def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbo
         creation_time = get_creation_time(newest)
         t = creation_time + '_' + t
         shutil.move(newest, td + IMG_PREFIX + t)
-        return '![#](' + IMG_PREFIX  + t + ')'
+        return '![](' + IMG_PREFIX  + t + ')'
     else:
         return 'error of import, any file not found'
 
