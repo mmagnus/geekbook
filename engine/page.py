@@ -15,19 +15,19 @@ import os
 from os import sep
 from shutil import copy
 
-from engine.postprocessing import (add_title,
+from geekbook.engine.postprocessing import (add_title,
                                    add_head_for_flask, change_data_tag_into_actual_data,
                                    add_path_to_img, change_html_tags_bootstrap,
                                    unhighlight, personal_tags_to_html, get_todo, get_captions,
                                    get_divhr, use_icons)
 
-from engine.preprocessing import (include_md_files, get_image_path, get_youtube_embeds, get_abstract,
+from geekbook.engine.preprocessing import (include_md_files, get_image_path, get_youtube_embeds, get_abstract,
                                   include_file, make_interna_links, make_sport_links, tablify_images, update_upper_note,
-                                  misc_on_text)
+                                  misc_on_text, color_dna)
 
-from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN
-from engine.make_tableofcontent import make_table_of_content
-from engine.plugins.find_files import find_files
+from geekbook.engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN
+from geekbook.engine.make_tableofcontent import make_table_of_content
+from geekbook.engine.plugins.find_files import find_files
 
 import logging
 logger = logging.getLogger('geekbook')

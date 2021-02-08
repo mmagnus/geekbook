@@ -7,11 +7,9 @@
 
 import os
 import sys
-PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(PATH)
-from engine.page import Page
-from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE_HTML, PATH_TO_TEMPLATE, PATH_TO_MD
-from engine.postprocessing import add_head
+from geekbook.engine.page import Page
+from geekbook.engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE_HTML, PATH_TO_TEMPLATE, PATH_TO_MD
+from geekbook.engine.postprocessing import add_head
 from flask import Flask, redirect, url_for, send_from_directory, request
 
 import subprocess
@@ -21,11 +19,11 @@ import argparse
 from flask import request
 from flask import jsonify
 
-from engine.searcher import search_term, Db, Header
+from geekbook.engine.searcher import search_term, Db, Header
 
 # Open Access mode
 try:
-    from engine.open_access import OPEN_ACCESS  # inside this file OPEN_ACCESS = ['work-fenzymes.html']
+    from geekbook.engine.open_access import OPEN_ACCESS  # inside this file OPEN_ACCESS = ['work-fenzymes.html']
 except ImportError:
     OPEN_ACCESS = []
 

@@ -3,11 +3,11 @@
 """I'm working on this.Trying to cope with the pre processing of the MD file."""
 
 import codecs
-from engine.conf import PATH_TO_MD, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX, AI_WRITER
-from engine.process_md import right_MD_from_webservices, get_youtube_embeds_insert
-from engine.plugins.insert_image import insert_image_in_md
-from engine.plugins.draw_secondary_structure import get_ss
-from engine.plugins.ia_writer import edit_syntax_from_ai_writer_to_geekbook
+from geekbook.engine.conf import PATH_TO_MD, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX, AI_WRITER
+from geekbook.engine.process_md import right_MD_from_webservices, get_youtube_embeds_insert
+from geekbook.engine.plugins.insert_image import insert_image_in_md
+from geekbook.engine.plugins.draw_secondary_structure import get_ss
+from geekbook.engine.plugins.ia_writer import edit_syntax_from_ai_writer_to_geekbook
 from os import sep
 
 
