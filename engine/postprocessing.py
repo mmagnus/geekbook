@@ -166,6 +166,7 @@ def get_todo(text):
                 #l = l.replace('@fail', '<span class="label label-danger">@fail</span>')
 
                 l = l.replace('@todo', '<span class="label label-danger">@todo</span>')
+                l = l.replace('TODO', '<span class="label label-danger">TODO</span>')
                 l = l.replace('#today', '<span class="label label-danger">#today</span>')
                 l = l.replace('#tomorrow', '<span class="label label-danger">#tomorrow</span>')
                 l = l.replace('#todo', '<span class="label label-danger">#todo</span>')
@@ -174,14 +175,18 @@ def get_todo(text):
                 l = l.replace('#progress', '<span class="label label-warning">#progress</span> ')
                 l = l.replace('@done', '<span class="label label-success">@done</span>')
                 l = l.replace('#done', '<span class="label label-success">#done</span>')
+                l = l.replace('#DONE', '<span class="label label-success">#DONE</span>')
                 l = l.replace('#@k', '<span class="label label-success">@ok</span>')
                 l = l.replace('#ok', '<span class="label label-success">#ok</span>')
                 l = l.replace('#success', '<span class="label label-success">#success</span>')
                 l = l.replace('@fixed', '<span class="label label-info">@fixed</span>')
 
+
                 l = l.replace('#waiting', '<span class="label label-info">#waiting</span>')
 
                 l = l.replace('@error', '<span class="label label-danger">@error</span>')
+
+                l = l.replace('#failed', '<span class="label label-danger">#failed</span>')
 
                 l = l.replace('#True', '<span class="label label-success">True</span>')
                 l = l.replace('#False', '<span class="label label-danger">False</span>')

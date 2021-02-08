@@ -33,7 +33,8 @@ class Md_update(object):
             with codecs.open(PATH_TO_MD + sep + fn, "r", "utf-8") as f:
                 self.md = f.read()
         except IOError:
-            logging.error('file removed ' + self.fn)
+            # logging.error('file removed ' + self.fn)
+            pass
 
     def compile(self):
         """Preprocess, compile, postprocess."""

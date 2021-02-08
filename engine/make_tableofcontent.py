@@ -36,6 +36,9 @@ def tag_heading(heading):
         if t == '@done':
             heading = heading.replace(
                 t, '<span style="font-family:"  class="label label-success">' + t + '</span>')
+        if t == 'DONE':
+            heading = heading.replace(
+                t, '<span style="font-family:"  class="label label-success">' + t + '</span>')
         elif t == '@progress':
             heading = heading.replace(
                 t, '<span style="font-family:"  class="label label-warning">' + t + '</span>')
@@ -52,6 +55,9 @@ def tag_heading(heading):
     tags = re.findall('\#\w+', heading)
     for t in tags:
         if t == '#done':
+            heading = heading.replace(
+                t, '<span style="font-family:"  class="label label-success">' + t + '</span>')
+        elif t == 'DONE':
             heading = heading.replace(
                 t, '<span style="font-family:"  class="label label-success">' + t + '</span>')
         elif t == '#progress':

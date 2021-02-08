@@ -53,7 +53,7 @@ class Page(object):
                 self.md = f.read()
             self.html = ''
         except IOError:
-            logging.error('file removed ' + self.fn)
+            # logging.error('file removed ' + self.fn)
             self.md = None
 
     def get_html(self):
@@ -100,6 +100,7 @@ class Page(object):
         self.html = personal_tags_to_html(self.html)
         if FIND_FILES_PLUGIN:
             self.html = find_files(self.html)
+        self.html = color_dna(self.html)
         self.html = get_todo(self.html)
         self.html = add_title(self.html, self.fn)
         self.html = use_icons(self.html)

@@ -17,6 +17,92 @@ logger.setLevel(logging.INFO)
 
 FLASK_BASED = True
 
+def color_seq_protein(seq):
+    seq_txt = ''
+    protein = True
+    print(seq)
+    raw_seq = seq.split('#')[0]
+    for s in seq:
+        if protein:
+            if s.lower() in ["k", "r", "h"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: DodgerBlue;">' + s + '</span>'
+            elif s.lower() in ["T", "t"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: green;">' + s + '</span>'
+            elif s.lower() in ["d", "e"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: red;">' + s + '</span>'
+            elif s.lower() in ["w", "y"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: yellow;">' + s + '</span>'
+            elif s.lower() in ["m"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: orange;">^</span>'
+            elif s.lower() in ["g", "a", "v", "l", "i", "f"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: LightGreen;">' + s + '</span>'
+            elif s.lower() in ["s", "t", "c", "n", "q"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: green;">' + s + '</span>'
+            elif s.lower() in ["p"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: pink;">' + s + '</span>'
+            elif s.lower() in ["-"]:
+                seq_txt += '-'
+            elif s.lower() in ["*"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: black;">' + s + '</span>'
+            elif s.lower() in ["\\", "/"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: lightgray;">' + s + '</span>'
+        if s is '#':
+            protein = False
+        if not protein:
+            seq_txt += s
+    return seq_txt
+
+
+def color_seq_dna(seq, translate=False):
+    seq_txt = ''
+    dna = True
+    raw_seq = seq.split('#')[0]
+    for s in seq:
+        if dna:
+            if s in ["A", "a"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: green;">' + s + '</span>'
+            elif s in ["T", "t"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: DodgerBlue;">' + s + '</span>'
+            elif s in ["U", "u"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: DodgerBlue;">' + s + '</span>'
+            elif s in ["G", "g"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: red;">' + s + '</span>'
+            elif s in ["C", "c"]:
+                seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: orange;">' + s + '</span>'
+            else:
+                seq_txt += s
+        if s is '#':
+            if translate:
+                from Bio.Seq import Seq
+                from Bio.Alphabet import generic_dna, generic_protein
+                seq = Seq(raw_seq)
+                protein = seq.translate()
+                protein_txt = ''
+                for p in str(protein):
+                     protein_txt += '\\' + p + '/'
+            dna = False
+        if not dna:
+            seq_txt += s
+
+    if translate:
+        return seq_txt + '\n' + color_seq_protein(protein_txt)
+    else:
+        return seq_txt
+
+
+def color_dna(text):
+    ntext = ''
+    for l in text.split('\n'):
+        if '#coldna' in l:
+            translate = False
+            if '+prot' in l:
+                translate = True
+            ntext += color_seq_dna(l, translate) + '\n' # + '<b>SUMMARY</b>'
+        if '#colprot' in l:
+            ntext += color_seq_protein(l) + '\n' # + '<b>SUMMARY</b>'            
+        else:
+            ntext += l + '\n'
+    return ntext
 
 def change_todo_square_chainbox_or_icon(text, verbose=False):
     """Set of rules to replace [i] etc with <img ... >  [ OK ]"""
