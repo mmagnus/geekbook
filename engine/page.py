@@ -99,6 +99,49 @@ class Page(object):
         self.html = use_icons(self.html)
         self.html = get_divhr(self.html)
 
+    def export(self, path, add_toc, push):
+        import re
+        import shutil
+
+        with open(path + os.sep + 'README.md', 'w') as f:
+            f.write(open(PATH_TO_MD + self.fn).read())
+        try:
+            os.mkdir(path + os.sep + 'imgs')
+        except:
+            pass
+
+        # \!\[.*?\]\(imgs/.*?\)
+        hits = re.findall('\"/imgs/.*?\"', self.md, re.M|re.DOTALL)
+        for h in hits:
+            print('Copy ',h.strip())
+            shutil.copy(PATH_TO_MD + h.replace('"',''), path + os.sep + 'imgs')
+
+        import subprocess
+
+        def exe(cmd):
+            o = subprocess.Popen(
+                cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            out = o.stdout.read().strip().decode()
+            err = o.stderr.read().strip().decode()
+            return out, err
+
+        if add_toc:
+            out, err = exe('gh-md-toc ' + path + os.sep + 'README.md')
+            print(out)
+
+            with open(path + os.sep + 'README.md') as f:
+                content = f.read()
+
+            ncontent = content.replace('{{TOC}}',out)
+
+            with open(path + os.sep + 'README.md', 'w') as f:
+                 f.write(ncontent)
+
+        if push:
+            print('Push ...')
+            out, err = exe("cd " + path + "&& git add README.md; git add imgs/* && git commit -m 'update' && git push")
+            print(err)
+
     def is_changed(self):
         """Check if the file on disc is different than `md`.
 
@@ -135,12 +178,29 @@ class Page(object):
         with codecs.open(PATH_TO_HTML + self.fn.replace('.md', '.html'), "w", "utf-8") as outfn:
             outfn.write(self.html)
 
+import argparse
 
-# start
+def get_parser():
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+
+    #parser.add_argument('-', "--", help="", default="")
+
+    parser.add_argument("--add-toc", 
+                        action="store_true")
+    parser.add_argument("--push",
+                        action="store_true")
+    parser.add_argument("exportto", help="", default="") # nargs='+')
+    parser.add_argument("file", help="", default="") # nargs='+')
+    return parser
+
 if __name__ == '__main__':
-    fin = 'test.md'
 
-    p = Page(fin)
+    parser = get_parser()
+    args = parser.parse_args()
+
+    p = Page(args.file)
     p.compile()
     print(p.is_changed())
     p.save()
+    p.export(args.exportto, args.add_toc, args.push)
