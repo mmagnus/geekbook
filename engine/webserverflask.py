@@ -40,6 +40,21 @@ def edit(note_title):
     os.system('open ' + PATH_TO_MD + ' ' + note_title)
     return 'edit note: %s' % note_title
 
+@app.route('/send/<note_title>')
+def send(note_title):
+    """Open a note with your edit"""
+    if request.remote_addr not in ['127.0.0.1', '0.0.0.0']:
+        return 'Hmm...'
+
+    code = """cd /Users/magnus/iCloud/geekbook/plugins/bookify;
+./geekbook-bookify.py ../../notes/%s -a 'Marcin Magnus' -o '/Users/magnus/Desktop/';
+open ~/Desktop/*epub""" % note_title.replace('.html', '.md')
+
+    with open('/tmp/gkb.sh', 'w') as f:
+        f.write(code)
+    os.system('bash /tmp/gkb.sh')
+    return 'send note: <pre>%s</pre>' % code
+
 @app.route('/open_file/')
 def open_file():
     import urllib
