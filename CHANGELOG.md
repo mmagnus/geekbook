@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Pre-release]
 
+Add:
+
+- 2021-02-08 page: export file (with images) with --add-toc --push --readme
+
 Fix:
 
 - 2021-01-26 insert_image.py: fix pngfiles:///
