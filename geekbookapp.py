@@ -107,11 +107,11 @@ class App(object):
 
         logger.info('Ready to go! Please edit me: notes/')
 
-        mf = MdFiles()
-        logger.info('You have %i notes! Congrats, keep noting!' % len(mf.get_files()))
+        o = subprocess.Popen('cd "' + PATH_TO_MD + '" && cat *md | wc -l', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out = o.stdout.read().strip().decode()
 
-        logger.info('Lines of notes')
-        os.system('cd "' + PATH_TO_MD + '" && cat *md | wc -l')
+        mf = MdFiles()
+        logger.info('You have %i notes' % len(mf.get_files()) + ' with ' + out + ' lines! Congrats, keep noting!')
 
         index = Index()
         index.update(mf.get_files())
