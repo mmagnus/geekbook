@@ -16,6 +16,14 @@ import platform
 
 from geekbook.engine.conf import INSERT_IMAGE_TAG, INSERT_IMAGE_TAG2, SCREENSHOT_INBOX, SCREENSHOT_INBOX2
 
+import subprocess
+def exe(cmd):
+    o = subprocess.Popen(
+        cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out = o.stdout.read().strip().decode()
+    err = o.stderr.read().strip().decode()
+    return out, err
+
 
 def get_creation_time_via_pil(fn):
     from PIL import Image
@@ -30,6 +38,11 @@ def get_creation_time_via_pil(fn):
         return ''
 
 
+def get_file_size(fn):
+    out,err = exe("ls -lh '" + fn + "'")
+    return out.split()[4]
+
+    
 def get_creation_date(path_to_file):
     """
     Try to get the date that a file was created, falling back to when it was
@@ -114,11 +127,13 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             creation_date = get_creation_time(source_path)
             t = os.path.basename(source_path) # target # is only filename without path
             #creation_date = get_creation_date(source_path)
+            size = get_file_size(source_path)
             if creation_date:
-                t = creation_date + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+                t = creation_date + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             else:
-                t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+                t = datetime.datetime.today().strftime('%y%m%d') + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             # clean % from the names
+
             try:
                 shutil.copy(source_path, td + IMG_PREFIX + t)
             except IOError:
@@ -138,10 +153,12 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             creation_date = get_creation_date(source_path)
             t = os.path.basename(source_path) # target
             creation_date = get_creation_time(source_path)
+
+            size = get_file_size(source_path)
             if creation_date:
-                t = creation_date + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+                t = creation_date + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             else:
-                t = datetime.datetime.today().strftime('%y%m%d') + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+                t = datetime.datetime.today().strftime('%y%m%d') + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             # clean % from the names
             t = t.replace('%', '')
             # copy
@@ -223,10 +240,11 @@ def get_creation_time(fn):
 
 if __name__ == '__main__':
     # insert_image()
-    fn = "/Users/magnus/Desktop/_Screenshot_2021-01-25_at_22.14.41.png"
-    dat = get_creation_time(fn)
-    print(dat)
-    fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/E/E412371D-8D5A-408C-845F-BCA826EB4F6A_1_105_c.jpeg"
+    fn = '/Users/magnus/Desktop/h5a_5foa/IMG_1888.jpeg'
+    #dat = get_creation_time(fn)
+    #print(dat)
+    #fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/E/E412371D-8D5A-408C-845F-BCA826EB4F6A_1_105_c.jpeg"
     #insert_image_file:file:///Users/magnus/Pictures/Photos%20Library.photoslibrary/resources/derivatives/E/E412371D-8D5A-408C-845F-BCA826EB4F6A_1_105_c.jpeg//from_Apple_Photos(text, verbose=True)
-    dat = get_creation_time(fn)
-    print(dat)
+    #dat = get_creation_time(fn)
+    #print(dat)
+    print(get_file_size(fn))
