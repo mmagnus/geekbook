@@ -12,6 +12,7 @@ PATH_TO_ORIG = PATH + "/engine/data/orig/"
 
 IMG_PREFIX = 'imgs/'  # keep / at the end  # ![](imgs/<file> this 'imgs' is IMG_PREFIX
 PATH_TO_IMG = PATH + '/notes/'
+USE_RM_TO_REMOVE_FIGURE = False
 
 TEMPLATE = 'default'
 

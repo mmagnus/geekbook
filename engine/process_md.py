@@ -6,6 +6,9 @@
 Go to page.py (Page) pre_process to add a new function from here."""
 
 import re
+import os
+
+from engine.conf import PATH_TO_IMG, PATH_TO_MD, PATH_TO_ORIG
 
 import logging
 logger = logging.getLogger('geekbook')
@@ -31,6 +34,21 @@ def right_MD_from_webservices(text):
             changed = True
     return text, changed
 
+def remove_image(text, verbose=False):
+    """[#rm] will remove the image"""
+    changed = False
+    ntext = ''
+    for l in text.split('\n'):
+        if '![#rm]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+            fn = l.replace('![#rm](', '').replace(')', '')
+            cmd = "trash '%s/%s'" % (PATH_TO_MD, fn)
+            print(cmd)
+            os.system(cmd)
+            # skip this line
+            changed = True
+        else:
+            ntext += l + '\n'
+    return ntext, changed
 
 def get_youtube_embeds_insert(text):
     from bs4 import BeautifulSoup as bs

@@ -22,7 +22,8 @@ from engine.postprocessing import (add_title,
                                    get_divhr, use_icons)
 
 from engine.preprocessing import (include_md_files, get_image_path, get_youtube_embeds, get_abstract,
-                                  include_file, make_interna_links, make_sport_links, tablify_images, update_upper_note,
+                                  include_file, make_interna_links, make_sport_links, tablify_images,
+                                  update_upper_note,
                                   misc_on_text, color_dna)
 
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN
