@@ -133,7 +133,6 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             else:
                 t = datetime.datetime.today().strftime('%y%m%d') + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             # clean % from the names
-
             try:
                 shutil.copy(source_path, td + IMG_PREFIX + t)
             except IOError:
@@ -211,12 +210,13 @@ def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbo
         files.extend(p)
     if files:
         newest = max(files, key=os.path.getctime)
+        size = get_file_size(newest)
         # copy to img
         t = os.path.basename(newest.replace(' ','_'))
         # add date
         # datetime.datetime.today().strftime('%y%m%d')
         creation_time = get_creation_time(newest)
-        t = creation_time + '_' + t
+        t = creation_time + '_' + size + '_' + t
         shutil.move(newest, td + IMG_PREFIX + t)
         return '![](' + IMG_PREFIX  + t + ')'
     else:
@@ -227,7 +227,6 @@ def get_creation_time_via_stat(fn):
     import pathlib
     fname = pathlib.Path(fn)
     ctime = datetime.datetime.fromtimestamp(fname.stat().st_ctime)
-
     # replaces to get to the format:
     # 2021-01-26_09:28:54.834750 to 210126_09:28:54.834750
     return str(ctime).replace('-', '').replace(' ', '-')[2:] # to remove year ;-) lame
