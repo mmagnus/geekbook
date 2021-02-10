@@ -126,6 +126,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             source_path = f
             creation_date = get_creation_time(source_path)
             t = os.path.basename(source_path) # target # is only filename without path
+            t = t.replace(' ', '_')
             #creation_date = get_creation_date(source_path)
             size = get_file_size(source_path)
             if creation_date:
