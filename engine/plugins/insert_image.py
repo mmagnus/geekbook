@@ -26,8 +26,11 @@ def exe(cmd):
 
 
 def get_creation_time_via_pil(fn):
-    from PIL import Image
-    im = Image.open(fn)
+    from PIL import Image, UnidentifiedImageError
+    try:
+        im = Image.open(fn)
+    except UnidentifiedImageError: # for heif files of Apple https://github.com/python-pillow/Pillow/issues/2806
+        return None
     exif = im.getexif() 
     creation_time = exif.get(36867)
     if creation_time:
@@ -35,7 +38,7 @@ def get_creation_time_via_pil(fn):
         d = d.replace(':', '')[2:]
         return d + '-' + t
     else:
-        return ''
+        return None
 
 
 def get_file_size(fn):
