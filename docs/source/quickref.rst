@@ -11,11 +11,19 @@ Quick Reference
      [if:<file>]
      [if:/Users/magnus/work-src/fenzymes/examples/readme.txt]
 
+     insert an image (start a line without any extra characters before /, 
+     which you can use also to block this function by putting a character before /
+     /<path to an image>
+     or
+     files:///<path to an image>
+     (mind that this function will change the original MD file (not only HTML output), 
+     so your editor should be enabled to re-load a changed file from the disk
+     
      insert the table of content in here
      [tableofcontent] or {{TOC}}
 
      to get the current date 2017-01-13
-     [date]
+     [date] or {{date}}
 
      define only width for a image:
      ![](imgs/Screen_Shot_2017-02-12_at_1.17.04_AM.png =500x)
@@ -33,14 +41,11 @@ Quick Reference
 
      #short - set for image (``max-height:400px``) to make it shorter
 
-     [tableofcontent] or {{TOC}}
-        insert the table of content in here
-
-
      add description of a note in the Index page
      [desc:info on TN]
 
-     insert a file and remove the first line and shift all headers by one to fit the structure of the file where you import to
+     insert a file and remove the first line and shift all headers by one to fit 
+     the structure of the file where you import to
      /[file:hacking-convert-pdf-to-images.md =del1 =shift1]
      
      recompile master note with a give note when the note is changed
