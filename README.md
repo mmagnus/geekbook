@@ -1,4 +1,5 @@
 # geekbook3 - note taking system for nerds!
+
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
 [![Twitter Follow](http://img.shields.io/twitter/follow/geekbookx.svg?style=social&label=Follow)](https://twitter.com/geekbookx)
@@ -14,7 +15,7 @@ Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
 (geekbook3 since finally Geekbook uses Python 3)
 
-G33KB00K3 - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds/geeks (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
+G33KB00K3 - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking system for nerds (including scientists!) (= beautiful html generator of your markdown-based notes)  docs: http://geekbook.rtfd.io
 
 **THE LATEST**
 
@@ -24,6 +25,9 @@ G33KB00K3 - fun to read & fun to write -- 🤓 eXtreme eXtendable note taking sy
 
 I started using MoinMoin for my personal notes in 2008, but something was missing... I started then playing with simple notes in Markdown written in my Emacs. The next step was to write a system to convert this notes into HTML. The system was drafted in Gdańsk, at the PTBI conference (2012) when I decided to write a tool to process a folder with notes written in Markdown. I wanted to use my CSS style and then more, and more some unique features that I found very useful for myself. I think, at the moment, the project converged pretty much to tools like http://jekyllrb.com and https://www.mkdocs.org.
 
+The system is a neat way how to combine **Emacs/Atom/Sublime/iA Writer editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. 
+
+What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name), or you can sync them to your iPhone to be edited with iAWriter (this is how I share my notes with my iPhone).
 
 ![](themes/default/qubCXZcWHl.gif)
 Figure. From an (old) homepage to a note.
@@ -31,7 +35,6 @@ Figure. From an (old) homepage to a note.
 ![](docs/imgs/56HcDqXllz.gif)
 Figure. A new Homepage.
 
-A neat way how to combine **Emacs/Atom/Sublime/iA Writer editor + Markdown Syntax + Git + Html engine** (bootstrap/python) to get the best notes-talking experience ever. Highly customizable with plugins written in Python. What's the most important, under the hood it's just a set of Markdown files.. you can do with them whatever you want, e.g. you can Pandoc (http://pandoc.org/epub.html) them to epub (that's origin of "book" part of the name).
 
   * [Features](#features)
     * [Index](#index)
