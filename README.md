@@ -1,4 +1,4 @@
-# geekbook3 - note taking system for nerds/geeks!
+# geekbook3 - note taking system for nerds!
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
 [![Twitter Follow](http://img.shields.io/twitter/follow/geekbookx.svg?style=social&label=Follow)](https://twitter.com/geekbookx)
