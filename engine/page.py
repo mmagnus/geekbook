@@ -76,7 +76,7 @@ class Page(object):
 
         E.g.::
 
-           self.md = get_image_path(self.md) """
+           self.md = get_image_path(self.md)"""
         self.md = update_upper_note(self.md)
         self.md = tablify_images(self.md)
         self.md = include_md_files(self.md)
@@ -144,7 +144,6 @@ class Page(object):
 
         if add_toc:
             out, err = exe('gh-md-toc ' + path + os.sep + self.fn)
-            print(out)
 
             with open(path + os.sep + self.fn) as f:
                 content = f.read()
@@ -221,7 +220,7 @@ if __name__ == '__main__':
     for f in args.file:
         p = Page(f)
         p.compile()
-        print(p.is_changed())
+        p.is_changed()
         p.save()
 
         p.export(args.exportto, args.add_toc, args.push, args.readme)

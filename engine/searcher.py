@@ -33,6 +33,8 @@ import os
 import sys
 import argparse
 
+import logging
+logger = logging.getLogger('geekbook')
 
 debug = False
 if not debug:
@@ -340,7 +342,7 @@ class Db():
 
 def make_db(verbose=False):
     db = Db()
-    print('searcher.py::making the db')
+    logger.info('searcher.py::making the db')
     db.collect_data(verbose)
     pickle.dump(db, open(PATH + os.sep + "engine/searchdb.pickle", "wb"), protocol=3)
 

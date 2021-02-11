@@ -42,16 +42,15 @@ def remove_image(text, verbose=False):
         if '![#rm]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
             fn = l.replace('![#rm](', '').replace(')', '')
             cmd = "trash '%s/%s'" % (PATH_TO_MD, fn)
-            print(cmd)
+            logger.info('remove image %s', cmd)
             os.system(cmd)
             # skip this line
             changed = True
         elif '![#open]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
             fn = l.replace('![#open](', '').replace(')', '')
             cmd = "open '%s/%s'" % (PATH_TO_MD, fn)
-            print(cmd)
+            logger.info('open image %s', cmd)
             os.system(cmd)
-            # skip this line
             changed = True
             ntext += l.replace('#open', '') + '\n'
         else:

@@ -20,7 +20,7 @@ FLASK_BASED = True
 def color_seq_protein(seq):
     seq_txt = ''
     protein = True
-    print(seq)
+    logging.info(seq)
     raw_seq = seq.split('#')[0]
     for s in seq:
         if protein:
@@ -186,7 +186,6 @@ def make_sport_links(text, verbose=False):
             d = r[4:]
             print(rx, y, m, d)
             l = '<a target="_top" href="http://www.myfitnesspal.com/food/diary?date=20%s-%s-%s">MFP</a> ' % (y, m, d)
-            print(l)
             l += '<a target="_top" href="https://connect.garmin.com/modern/daily-summary/mmagnus/20%s-%s-%s">Garmin Connect</a>' % (y, m, d)
             if verbose: print(l)
         ntext += l + '\n'
@@ -368,7 +367,6 @@ def include_md_files(md, remove_first_line=False):
     imported_files_list = ''
     nmd = ''
     for l in md.split('\n'):
-        print(l)
         # /[file:XXX.md]
         if l.strip().startswith('/[file:'):
             logger.info(l)
