@@ -10,6 +10,10 @@ Add:
 
 - 2021-02-08 page: export file (with images) with --add-toc --push --readme
 
+Change:
+
+- 2021-02-11 engine/plugins/insert_image.py: works also on /<path to img.png>
+
 Fix:
 
 - 2021-01-26 insert_image.py: fix pngfiles:///
