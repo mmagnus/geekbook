@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Add:
 
 - 2021-02-14 insert_image.py: handle file://localhost/localhost/private
-- 2021-02-11 Add to engine/process_md.py: ways to #rm and #open from the editor via ![#rm]()
+- 2021-02-11 Add to engine/process_md.py: ways to #rm and #open from the editor via `![#rm]()`
 - 2021-02-08 page: export file (with images) with --add-toc --push --readme
 
 Change:
