@@ -47,7 +47,7 @@ def remove_image(text, verbose=False):
             # skip this line
             changed = True
         elif '![#open]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
-            fn = l.replace('![#open](', '').replace(')', '')
+            fn = l.replace('![#open](', '').replace(')', '').strip()
             cmd = "open '%s/%s'" % (PATH_TO_MD, fn)
             logger.info('open image %s', cmd)
             os.system(cmd)
