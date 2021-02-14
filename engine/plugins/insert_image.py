@@ -238,8 +238,6 @@ def get_creation_time_via_stat(fn):
         ctime = datetime.datetime.fromtimestamp(fname.stat().st_ctime)
     except FileNotFoundError:
         return None
-    import ipdb; ipdb.set_trace()
-
     # replaces to get to the format:
     # 2021-01-26_09:28:54.834750 to 210126_09:28:54.834750
     return str(ctime).replace('-', '').replace(' ', '-')[2:].replace(':', '.')  # to remove year ;-) lame
