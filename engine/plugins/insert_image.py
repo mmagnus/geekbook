@@ -31,6 +31,8 @@ def get_creation_time_via_pil(fn):
         im = Image.open(fn)
     except UnidentifiedImageError: # for heif files of Apple https://github.com/python-pillow/Pillow/issues/2806
         return None
+    except FileNotFoundError:
+        return None    
     exif = im.getexif() 
     creation_time = exif.get(36867)
     if creation_time:
@@ -43,8 +45,9 @@ def get_creation_time_via_pil(fn):
 
 def get_file_size(fn):
     out,err = exe("ls -lh '" + fn + "'")
-    return out.split()[4]
-
+    if not err:
+        return out.split()[4]
+    return ''
     
 def get_creation_date(path_to_file):
     """
@@ -230,11 +233,16 @@ def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbo
     
 def get_creation_time_via_stat(fn):
     import pathlib
-    fname = pathlib.Path(fn)
-    ctime = datetime.datetime.fromtimestamp(fname.stat().st_ctime)
+    try:
+        fname = pathlib.Path(fn)
+        ctime = datetime.datetime.fromtimestamp(fname.stat().st_ctime)
+    except FileNotFoundError:
+        return None
+    import ipdb; ipdb.set_trace()
+
     # replaces to get to the format:
     # 2021-01-26_09:28:54.834750 to 210126_09:28:54.834750
-    return str(ctime).replace('-', '').replace(' ', '-')[2:] # to remove year ;-) lame
+    return str(ctime).replace('-', '').replace(' ', '-')[2:].replace(':', '.')  # to remove year ;-) lame
     
 def get_creation_time(fn):
     dat = get_creation_time_via_pil(fn)
