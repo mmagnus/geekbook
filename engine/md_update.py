@@ -49,6 +49,7 @@ class Md_update(object):
 
         self.md, yti = get_youtube_embeds_insert(self.md)
 
+        use_rm = False
         if USE_RM_TO_REMOVE_FIGURE:
             self.md, use_rm = remove_image(self.md)
 
