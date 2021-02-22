@@ -37,8 +37,8 @@ def get_creation_time_via_pil(fn):
     creation_time = exif.get(36867)
     if creation_time:
         d, t = creation_time.split()
-        d = d.replace(':', '')[2:]
-        return d + '-' + t
+        d = d.replace(':', '')[2:]  # remove : seperator for date
+        return d + '-' + t.replace(':', '.')
     else:
         return None
 
@@ -62,11 +62,11 @@ def get_creation_date(path_to_file):
     try:
         d = stat.st_birthtime
         d = datetime.datetime.fromtimestamp(d)
-        return d.strftime('%Y%m%d')[2:]
+        return d.strftime('%Y%m%d')[2:].replace(':', '.')
     except AttributeError:
         # We're probably on Linux. No easy way to get creation dates here,
         # so we'll settle for when its content was last modified.
-        return stat.st_mtime
+        return stat.st_mtime.replace(':', '.')
 
 
 def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
