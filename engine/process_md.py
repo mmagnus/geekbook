@@ -34,6 +34,7 @@ def right_MD_from_webservices(text):
             changed = True
     return text, changed
 
+
 def remove_image(text, verbose=False):
     """[#rm] will remove the image"""
     changed = False
@@ -53,9 +54,24 @@ def remove_image(text, verbose=False):
             os.system(cmd)
             changed = True
             ntext += l.replace('#open', '') + '\n'
+        elif '![#min]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+            fn = l.replace('![#min](', '').replace(')', '').strip()
+            #  $f  ${f}.jpeg
+            nfn = fn + '.MIN.jpeg'
+            cmd = "convert '%s/%s' -quality 40 '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nfn)
+            logger.info(cmd)
+            os.system(cmd)
+
+            cmd = "trash '%s/%s'" % (PATH_TO_MD, fn)
+            logger.info(cmd)
+            os.system(cmd)
+
+            changed = True
+            ntext += l.replace('#min', '').replace(fn, nfn) + '\n'
         else:
             ntext += l + '\n'
     return ntext, changed
+
 
 def get_youtube_embeds_insert(text):
     from bs4 import BeautifulSoup as bs
