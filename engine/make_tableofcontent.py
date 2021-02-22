@@ -147,7 +147,42 @@ def make_table_of_content(fn, text, version2=True):
                                 + tag_heading(h3) + ' </a></li>\n'
             tableofcontent_in_pure_text += '\t\t' + h3 + '\n'
 
+        # h4
+        rx = re.compile('<h4>(?P<h4>.+)</h4>').search(l)
+        if rx:
+            h4 = rx.group('h4')
+            id_of_div = replace_space_with_minus(h4)
+            # '</div>
+            l = '<div id="' + id_of_div + '"><h4>' \
+                + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md', '') + '/%23%23%23 ' + h4.replace('#', '%23').replace('/', '&#47') + '">' \
+                + tag_heading(h4) \
+                + '</a></h4>'
+            if VERBOSE:
+                print("# l", l)
+            collect_headings += '<li class="table_of_content_h4">'\
+                                + '<a href="#' + id_of_div + '">' \
+                                + tag_heading(h4) + ' </a></li>\n'
+            tableofcontent_in_pure_text += '\t\t' + h4 + '\n'
+
+        # h4
+        rx = re.compile('<h5>(?P<h5>.+)</h5>').search(l)
+        if rx:
+            h5 = rx.group('h5')
+            id_of_div = replace_space_with_minus(h5)
+            # '</div>
+            l = '<div id="' + id_of_div + '"><h5>' \
+                + '<a class="nondecoration" href="/edit_header/' + fn.replace('.md', '') + '/%23%23%23 ' + h5.replace('#', '%23').replace('/', '&#47') + '">' \
+                + tag_heading(h5) \
+                + '</a></h5>'
+            if VERBOSE:
+                print("# l", l)
+            collect_headings += '<li class="table_of_content_h5">'\
+                                + '<a href="#' + id_of_div + '">' \
+                                + tag_heading(h5) + ' </a></li>\n'
+            tableofcontent_in_pure_text += '\t\t' + h5 + '\n'
+
         output += l + '\n'
+
 
     collect_headings += list_type_end + '\n'
 
