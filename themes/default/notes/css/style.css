@@ -48,6 +48,13 @@ h4 {
     color: #333333;
 }
 
+h5 {
+    font-family: Helvetica;
+    font-size: 110%;
+    font-weight: bold;
+    color: #333333;
+}
+
 li {
     font-family: Helvetica;
     font-size: 100%;
@@ -100,7 +107,18 @@ li p{
     list-style-type: none;
     margin-left: 100px;
 }
-.table_of_content_h1 a, .table_of_content_h2 a, .table_of_content_h3 a{
+
+.table_of_content_h4 {
+    list-style-type: none;
+    margin-left: 120px;
+}
+
+.table_of_content_h5 {
+    list-style-type: none;
+    margin-left: 140px;
+}
+
+.table_of_content_h1 a, .table_of_content_h2 a, .table_of_content_h3 a, .table_of_content_h4 a, .table_of_content_h5 a{
     color: black;
     color: #355F7C;
     text-decoration: none;
@@ -115,7 +133,7 @@ li p{
 .table_of_content_h2 a{
     font-weight: bold;
 }
-.table_of_content_h1, .table_of_content_h2, .table_of_content_h3{
+.table_of_content_h1, .table_of_content_h2, .table_of_content_h3, .table_of_content_h4, .table_of_content_h5 {
     color: black;
 }
 .nondecoration { text-decoration: none; color: #059BFF; color: #333333; }
