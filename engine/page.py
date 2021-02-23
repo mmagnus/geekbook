@@ -117,7 +117,6 @@ class Page(object):
                        
         if self.fn == readme:
              self.fn = 'README.md'
-        import ipdb; ipdb.set_trace()
         
         with open(path + os.sep + self.fn, 'w') as f:
             f.write(content)
