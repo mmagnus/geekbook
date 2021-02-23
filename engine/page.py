@@ -26,7 +26,7 @@ from engine.preprocessing import (include_md_files, get_image_path, get_youtube_
                                   update_upper_note,
                                   misc_on_text, color_dna)
 
-from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN
+from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN, ADD_EXTRA_SPACE_FOR_NOTES
 from engine.make_tableofcontent import make_table_of_content
 from engine.plugins.find_files import find_files
 
@@ -106,6 +106,8 @@ class Page(object):
         self.html = add_title(self.html, self.fn)
         self.html = use_icons(self.html)
         self.html = get_divhr(self.html)
+        if ADD_EXTRA_SPACE_FOR_NOTES:
+            self.html += "<div class='notes'></div>"
 
     def export(self, path, add_toc, push, readme):
         import re

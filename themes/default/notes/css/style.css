@@ -323,26 +323,6 @@ img {
     font-family: Monospace;
 }
 
-@media print {
-    .nav {
-        display: none;
-    }
-
-    body {
-        width:100%;
-        margin-right:0px;
-        margin-left:0px;
-        font-size:3em !important;
-    }
-
-    .col-sm-9{ width: 90%;}
-
-
-    /** {
-       font-size: 170%;
-    }*/
-}
-
 /*p,ul,h1,h2,h3,h4,h5,li */
 hr {
     clear: both;
@@ -375,3 +355,38 @@ li {
      color:red;
      }
      
+
+th {
+    background-color:lightgray;
+}
+
+@media print {
+    .nav {
+        display: none;
+    }
+
+    body {
+        width:80%;
+        margin-right:0px;
+        margin-left:0px;
+        /* -- control size */
+        /*font-size: 20em !important; */
+        /* for kindle switch off for print */
+        font-family: Georgia;
+        font-size: 250%;
+
+    }
+
+    h1, h2, h3, h4, ul, li{
+        font-family: Georgia;
+    }
+    
+    .col-sm-9{ width: 90%;}
+
+    .notes {
+	    height:1000px;
+	    /*background:gray
+	      border: 1px solid black;*/
+	   }
+}
+
