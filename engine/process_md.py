@@ -54,6 +54,21 @@ def remove_image(text, verbose=False):
             os.system(cmd)
             changed = True
             ntext += l.replace('#open', '') + '\n'
+
+        elif '![#fork]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+            fn = l.replace('![#fork](', '').replace(')', '').strip()
+            nfn = os.path.splitext(fn)[0] + '_fork' + os.path.splitext(fn)[1]
+            cmd = "cp -v '%s/%s' '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nfn)
+            logger.info('%s', cmd)
+            os.system(cmd)
+
+            cmd = "open '%s/%s'" % (PATH_TO_MD, nfn)
+            logger.info('open image %s', cmd)
+            os.system(cmd)
+
+            changed = True
+            ntext += l.replace('#fork', '').replace(fn, nfn) + '\n'
+
         elif '![#min]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
             fn = l.replace('![#min](', '').replace(')', '').strip()
             #  $f  ${f}.jpeg
