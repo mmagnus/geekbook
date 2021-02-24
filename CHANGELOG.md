@@ -8,8 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Add:
 
+- 2021-02-23 Add ADD_EXTRA_SPACE_FOR_NOTES for printed notes for extra space for pdfs for Boox
+- 2021-02-22 TOC now handles h4 and h5 level headers
 - 2021-02-14 insert_image.py: handle file://localhost/localhost/private
-- 2021-02-11 Add to engine/process_md.py: ways to #rm and #open from the editor via `![#rm]()`
+- 2021-02-11/23 Add to engine/process_md.py: ways to do quick actions with  from the editor via `![#rm]()`
+             - #rm 
+			 - #open
+			 - #fork
+			 - #min
 - 2021-02-08 page: export file (with images) with --add-toc --push --readme
 
 Change:
