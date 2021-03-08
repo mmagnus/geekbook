@@ -7,6 +7,8 @@ Go to page.py (Page) pre_process to add a new function from here."""
 
 import re
 import os
+import random
+import string
 
 from engine.conf import PATH_TO_IMG, PATH_TO_MD, PATH_TO_ORIG
 
@@ -57,7 +59,10 @@ def remove_image(text, verbose=False):
 
         elif '![#fork]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
             fn = l.replace('![#fork](', '').replace(')', '').strip()
-            nfn = os.path.splitext(fn)[0] + '_fork' + os.path.splitext(fn)[1]
+            # # printing letters
+            letters = string.ascii_letters
+            hash = ''.join(random.choice(letters) for i in range(5)) # hash like ;-)
+            nfn = os.path.splitext(fn)[0] + '_fork_' + hash + os.path.splitext(fn)[1]
             cmd = "cp -v '%s/%s' '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nfn)
             logger.info('%s', cmd)
             os.system(cmd)
