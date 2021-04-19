@@ -104,6 +104,10 @@ ul {
   list-style: none; /* Remove default bullets */
 }
 
+.table_of_content_h1 li::before{
+    color:white;
+}
+
 .table_of_content_h1 {
     list-style-type: square;
     color:white;
@@ -232,6 +236,7 @@ ul strong{
     padding-bottom: 30px;
 }
 
+
 .figuredesc {
     margin: 0;
     padding: 3px;
@@ -256,12 +261,13 @@ ul strong{
 .index_list li{
     list-style-type: none;
     margin-left: 50px;
-    backgroud:black;    
 }
 
 .index_list_a{
     color: black;
+    color: #355F7C;
     text-decoration: none;
+    color: #333333;
 }
 a {
     color: #059BFF;
@@ -317,7 +323,6 @@ body{
 
 pre{
     word-wrap:normal;
-    color:lightgray;
 }
 
 /* narrow the whole note page 190410 */
@@ -335,7 +340,6 @@ img {
 
 .index_date {
     font-family: Monospace;
-    color:black;
 }
 
 /*p,ul,h1,h2,h3,h4,h5,li */
@@ -420,7 +424,3 @@ blockquote{
 	   }
 }
 
-.search {
-    background-color:black;
-    margin-left:15px;padding-left:5px;font-:15px;border:none;color:#990000;font-weight:bold;
-}
