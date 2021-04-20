@@ -276,11 +276,27 @@ a {
 }
 
 summary{
-    background-color: #d8d8d8;
+    background-color: black;
     padding: 10px;
     font-weight:bold;
     font: 400 18px/1.5 Georgia;
     text-align: justify;
+    color:white;
+}
+
+
+blockquote > p {
+    margin-top: 0%;
+}
+    
+blockquote{
+    background-color: #010;
+    padding: 10px;
+    margin-top:0%;
+    font-weight:bold;
+    font-size: 110%;
+    text-align: justify;
+    color:white;
 }
 
 big{
@@ -372,21 +388,7 @@ li {
      
 
 th {
-    background-color:lightgray;
-}
-
-blockquote > p {
-    margin-top: 0%;
-}
-    
-blockquote{
-    background-color: #d8d8d8;
-    padding: 10px;
-    margin-top:0%;
-    font-weight:bold;
-    font: 400 18px/1.5 Georgia;
-    text-align: justify;
-
+   background-color:lightgray;
 }
 
 @media print {
