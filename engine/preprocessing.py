@@ -434,6 +434,16 @@ def include_md_files(md, remove_first_line=False):
                         if remove_first_line:
                             next(f)  # skip first line? hack to get rid of # Title of the note
                         txt = f.read()
+                        #
+                        shift1 = True
+                        if shift1:
+                            nt = '# ' + os.path.basename(ffullpath) + '\n' # start with a file name ?
+                            for l in txt.split('\n'):
+                                if l.startswith('#'):
+                                    if shift1:
+                                        l = l.replace('# ', '## ')
+                                nt += l + '\n'
+                            txt = nt
                         # remove table of content for this included note
                         txt = txt.replace('{{TOC}}', '')
                         txt = txt.replace('[tableofcontent]', '')
