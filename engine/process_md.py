@@ -90,7 +90,29 @@ def remove_image(text, verbose=False):
 
             changed = True
             ntext += l.replace('#dark', '').replace(fn, nfn) + '\n'
-            fn = l.replace('![#min](', '').replace(')', '').strip()
+
+        elif '![#light]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+            fn = l.replace('![#light](', '').replace(')', '').strip()
+            #  $f  ${f}.jpeg
+            nfn = fn + '.LIGHT.jpeg'
+            cmd = "convert '%s/%s' -channel RGB -negate '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nfn)
+            logger.info(cmd)
+            os.system(cmd)
+
+            nnfn = fn + '.DARK.jpeg'
+            cmd = "convert '%s/%s' '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nnfn)
+            logger.info(cmd)
+            os.system(cmd)
+
+            cmd = "trash '%s/%s'" % (PATH_TO_MD, fn)
+            logger.info(cmd)
+            os.system(cmd)
+
+            changed = True
+            ntext += l.replace('#light', '').replace(fn, nnfn) + '\n' # dark image goes into a note
+
+        elif '![#min]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+            fn = l.replace('![#inv](', '').replace(')', '').strip()
             #  $f  ${f}.jpeg
             nfn = fn + '.MIN.jpeg'
             cmd = "convert '%s/%s' -quality 40 '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nfn)
