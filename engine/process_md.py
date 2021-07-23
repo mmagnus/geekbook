@@ -49,6 +49,7 @@ def remove_image(text, verbose=False):
             os.system(cmd)
             # skip this line
             changed = True
+
         elif '![#open]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
             fn = l.replace('![#open](', '').replace(')', '').strip()
             cmd = "open '%s/%s'" % (PATH_TO_MD, fn)
@@ -125,6 +126,22 @@ def remove_image(text, verbose=False):
 
             changed = True
             ntext += l.replace('#min', '').replace(fn, nfn) + '\n'
+
+        elif '![#smaller]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+            fn = l.replace('![#smaller](', '').replace(')', '').strip()
+            #  $f  ${f}.jpeg
+            nfn = fn + '.smaller.jpeg'
+            cmd = "convert '%s/%s' -resize 50%% '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nfn)
+            logger.info(cmd)
+            os.system(cmd)
+
+            cmd = "trash '%s/%s'" % (PATH_TO_MD, fn)
+            logger.info(cmd)
+            os.system(cmd)
+
+            changed = True
+            ntext += l.replace('#smaller', '').replace(fn, nfn) + '\n'
+
         else:
             ntext += l + '\n'
     return ntext, changed
