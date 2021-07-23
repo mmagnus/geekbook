@@ -74,7 +74,22 @@ def remove_image(text, verbose=False):
             changed = True
             ntext += l.replace('#fork', '').replace(fn, nfn) + '\n'
 
-        elif '![#min]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+        elif '![#dark]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+            fn = l.replace('![#dark](', '').replace(')', '').strip()
+            #  $f  ${f}.jpeg
+            nfn = fn + '.DARK.jpeg'
+            # convert $f  /tmp/invtemp
+            cmd = "convert '%s/%s' -channel RGB -negate '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nfn)
+            logger.info(cmd)
+            os.system(cmd)
+
+            nnfn = fn + '.LIGHT.jpeg'
+            cmd = "convert '%s/%s' '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nnfn)
+            logger.info(cmd)
+            os.system(cmd)
+
+            changed = True
+            ntext += l.replace('#dark', '').replace(fn, nfn) + '\n'
             fn = l.replace('![#min](', '').replace(')', '').strip()
             #  $f  ${f}.jpeg
             nfn = fn + '.MIN.jpeg'

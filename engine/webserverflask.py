@@ -182,6 +182,8 @@ def printpage(note_title):
 
     html = open(PATH_TO_HTML + os.sep + note_title.replace('.md', '.html')).read()
     html = html.replace('css/style.css', 'css/style_light.css')
+    html = html.replace('.DARK.jpeg', '.LIGHT.jpeg')
+
     html = html.replace('monokai.css', 'autumn.css')
 
     html = re.sub(r'<a class="nondecoration" href="/edit_header/.*?">', '', html)
