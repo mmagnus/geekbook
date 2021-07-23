@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Pre-release]
+## 3.3 dark mode with printing mode
+
+Darkmode [2021-04-19-2021-07-23]
+
+- style: up
+- process images macros smaller & light/dark & dark/light for images
+- Set light theme for code
+- Add printing mode (required after dark mode)
+- [prototype] init of darkmode
 
 Add:
 
