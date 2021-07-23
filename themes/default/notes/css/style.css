@@ -101,7 +101,7 @@ li p{
 }
 
 ul {
-  list-style: none; /* Remove default bullets */
+  /* list-style: none;  Remove default bullets */
 }
 
 .table_of_content_h1 {
@@ -273,6 +273,7 @@ a {
     font-weight:bold;
     font: 400 18px/1.5 Helvetica;
     text-align: justify;
+    color: black;
 }
 
 summary{
@@ -290,13 +291,11 @@ blockquote > p {
 }
     
 blockquote{
-    background-color: #010;
+    background-color: black;
     padding: 10px;
     margin-top:0%;
-    font-weight:bold;
-    font-size: 110%;
     text-align: justify;
-    color:white;
+    color:red;
 }
 
 big{
@@ -415,6 +414,7 @@ th {
     .col-sm-9{ width: 90%;}
 
     a {text-decoration: none}
+
     .notes {
 	    height:1000px;
 	    /*background:gray
@@ -424,5 +424,6 @@ th {
 
 .search {
     background-color:black;
-    margin-left:15px;padding-left:5px;font-:15px;border:none;color:#990000;font-weight:bold;
+    margin-left:15px;padding-left:5px;font-:15px;border:none;color:red;
+    font-weight:bold;
 }
