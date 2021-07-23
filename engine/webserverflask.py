@@ -12,6 +12,7 @@ from engine.conf import PATH_TO_HTML, PATH_TO_TEMPLATE_HTML, PATH_TO_TEMPLATE, P
 from engine.postprocessing import add_head
 from flask import Flask, redirect, url_for, send_from_directory, request
 
+import time
 import subprocess
 import re
 import argparse
@@ -156,6 +157,51 @@ def send_flav(path):
 def send_img(path):
     return send_from_directory(PATH_TO_MD + os.sep + 'imgs', path)
 
+@app.route('/print/<path:note_title>')
+def printpage(note_title):
+    """Open a note with your edit
+    http://flask.pocoo.org/snippets/76/
+    """
+    if request.remote_addr not in ['127.0.0.1', '0.0.0.0']:
+        if note_title not in OPEN_ACCESS:
+            return 'Hmm...'
+
+    if 'Users/' in note_title:
+        cmd = 'open "/' + note_title + '" &'
+        print(cmd)
+        os.system(cmd)
+        return jsonify(result="")
+
+    head = open(PATH_TO_TEMPLATE_HTML).read()
+    head = head.replace('{{ url_index }}', PATH_TO_HTML + '/' + 'index.html')
+    head = head.replace('href="img/', 'href="' + '/img/')
+    head = head.replace('="lib/', '="' + '/lib/')
+    head = head.replace('="css/', '="'+ '/css/')
+    head = head.replace('="js/', '="' + '/js/')
+    head = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->', r'', head, flags=re.M | re.DOTALL)
+
+    html = open(PATH_TO_HTML + os.sep + note_title.replace('.md', '.html')).read()
+    html = html.replace('css/style.css', 'css/style_light.css')
+    html = html.replace('.DARK.jpeg', '.LIGHT.jpeg')
+
+    html = html.replace('monokai.css', 'autumn.css')
+
+    html = re.sub(r'<a class="nondecoration" href="/edit_header/.*?">', '', html)
+    html = re.sub(r'<a data-lightbox="note".*?>', '', html)
+    #    <img style="" src="/imgs/210417-19.07.17.151407_586K_sc_2021-04-17_at_19.07.11.jpg"></a><a class="nondecoration" href="/edit_header/', '')    
+                        #imes (always) It's not easy to merge things">Sometimes (always) It's not easy to merge things</a>
+    html = '<b>' + note_title.replace('.html', '') + ' ' +  str(time.asctime()) + '</b>' + html 
+    # print(html)
+    #return head + html
+    print_code = """
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script>
+window.print();
+</script>
+"""
+    html += print_code
+    return html
+
 @app.route('/view/<path:note_title>')
 def view(note_title):
     """Open a note with your edit
@@ -180,7 +226,12 @@ def view(note_title):
     head = head.replace('="js/', '="' + '/js/')
     head = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->', r'', head, flags=re.M | re.DOTALL)
 
-    html = open(PATH_TO_HTML + os.sep + note_title.replace('.md', '.html')).read()
+    html_note_title = note_title.replace('.md', '.html')
+    html = open(PATH_TO_HTML + os.sep + html_note_title).read()
+
+    html = html.replace('<a href="/view/index.html" style="font-weight: bold;">Home</a>',
+                         '<a href="/view/index.html" style="font-weight: bold;">Home</a><a href="/print/' +
+                        html_note_title + '" style="font-weight: bold;">Print</a>')
     #return head + html
     return html
 

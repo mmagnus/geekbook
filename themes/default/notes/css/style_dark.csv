@@ -101,7 +101,11 @@ li p{
 }
 
 ul {
-  /* list-style: none;  Remove default bullets */
+  list-style: none; /* Remove default bullets */
+}
+
+.table_of_content_h1 li::before{
+    color:white;
 }
 
 .table_of_content_h1 {
@@ -232,6 +236,7 @@ ul strong{
     padding-bottom: 30px;
 }
 
+
 .figuredesc {
     margin: 0;
     padding: 3px;
@@ -256,12 +261,13 @@ ul strong{
 .index_list li{
     list-style-type: none;
     margin-left: 50px;
-    backgroud:black;    
 }
 
 .index_list_a{
     color: black;
+    color: #355F7C;
     text-decoration: none;
+    color: #333333;
 }
 a {
     color: #059BFF;
@@ -273,29 +279,14 @@ a {
     font-weight:bold;
     font: 400 18px/1.5 Helvetica;
     text-align: justify;
-    color: black;
 }
 
 summary{
-    background-color: black;
+    background-color: #d8d8d8;
     padding: 10px;
     font-weight:bold;
     font: 400 18px/1.5 Georgia;
     text-align: justify;
-    color:white;
-}
-
-
-blockquote > p {
-    margin-top: 0%;
-}
-    
-blockquote{
-    background-color: black;
-    padding: 10px;
-    margin-top:0%;
-    text-align: justify;
-    color:red;
 }
 
 big{
@@ -332,7 +323,6 @@ body{
 
 pre{
     word-wrap:normal;
-    color:lightgray;
 }
 
 /* narrow the whole note page 190410 */
@@ -350,7 +340,6 @@ img {
 
 .index_date {
     font-family: Monospace;
-    color:black;
 }
 
 /*p,ul,h1,h2,h3,h4,h5,li */
@@ -387,7 +376,21 @@ li {
      
 
 th {
-   background-color:lightgray;
+    background-color:lightgray;
+}
+
+blockquote > p {
+    margin-top: 0%;
+}
+    
+blockquote{
+    background-color: #d8d8d8;
+    padding: 10px;
+    margin-top:0%;
+    font-weight:bold;
+    font: 400 18px/1.5 Georgia;
+    text-align: justify;
+
 }
 
 @media print {
@@ -414,7 +417,6 @@ th {
     .col-sm-9{ width: 90%;}
 
     a {text-decoration: none}
-
     .notes {
 	    height:1000px;
 	    /*background:gray
@@ -422,8 +424,3 @@ th {
 	   }
 }
 
-.search {
-    background-color:black;
-    margin-left:15px;padding-left:5px;font-:15px;border:none;color:red;
-    font-weight:bold;
-}

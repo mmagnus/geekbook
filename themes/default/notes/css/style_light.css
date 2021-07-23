@@ -3,9 +3,7 @@ https://stackoverflow.com/questions/3200249/html-list-style-type-dash
 */
 
 body {
-    font-size: 200%;
-    background-color: black;
-    color:#fff;
+      font-size: 140%;
  }
 
 ul {
@@ -14,8 +12,7 @@ ul {
 }
 
 ul.dashed {
-    list-style-type: square;
-    color:white;
+  list-style-type: square;
 }
 
 ul.dashed > li {
@@ -29,23 +26,24 @@ ul.dashed > li:before {
 h1 {
     font: 250%;
     font-family: Helvetica;
-    font-weight: 800;
     font-size: 150%;
-    color: #fff;
+    color:#333333;
+    color: #000000;
+    font-weight: 800;
 }
 
 h2 {
     font-family: Helvetica;
     font-size: 130%;
     font-weight: bold;
-    color: #fff;
+    color: #333333;
 }
 
 h3 {
     font-family: Helvetica;
     font-size: 120%;
     font-weight: bold;
-    color: #fff;
+    color: #333333;
 }
 
 h4 {
@@ -72,7 +70,7 @@ li {
 p  {
     text-align: justify;
     width:100%;
-    margin-top: 5%;
+    margin-top: 2%;
     }
 
 
@@ -100,20 +98,14 @@ li p{
    padding-left: 25px;
 }
 
-ul {
-  /* list-style: none;  Remove default bullets */
-}
-
 .table_of_content_h1 {
     list-style-type: square;
-    color:white;
     margin-left: 50px;
-}
 
+}
 .table_of_content_h2 {
     list-style-type: none;
     margin-left: 70px;
-    color:white;
 
 }
 .table_of_content_h3 {
@@ -135,7 +127,7 @@ ul {
     color: black;
     color: #355F7C;
     text-decoration: none;
-    color: #fff;
+    color: #333333;
 }
 .table_of_content_h1 a{
     /*font-size: 18px;*/
@@ -149,9 +141,7 @@ ul {
 .table_of_content_h1, .table_of_content_h2, .table_of_content_h3, .table_of_content_h4, .table_of_content_h5 {
     color: black;
 }
-.nondecoration { text-decoration: none;
-                                color: #fff;
-               }
+.nondecoration { text-decoration: none; color: #059BFF; color: #333333; }
 
 .inputbox {
     border: 1px solid black;
@@ -232,6 +222,7 @@ ul strong{
     padding-bottom: 30px;
 }
 
+
 .figuredesc {
     margin: 0;
     padding: 3px;
@@ -256,12 +247,13 @@ ul strong{
 .index_list li{
     list-style-type: none;
     margin-left: 50px;
-    backgroud:black;    
 }
 
 .index_list_a{
     color: black;
+    color: #355F7C;
     text-decoration: none;
+    color: #333333;
 }
 a {
     color: #059BFF;
@@ -273,29 +265,14 @@ a {
     font-weight:bold;
     font: 400 18px/1.5 Helvetica;
     text-align: justify;
-    color: black;
 }
 
 summary{
-    background-color: black;
+    background-color: #d8d8d8;
     padding: 10px;
     font-weight:bold;
     font: 400 18px/1.5 Georgia;
     text-align: justify;
-    color:white;
-}
-
-
-blockquote > p {
-    margin-top: 0%;
-}
-    
-blockquote{
-    background-color: black;
-    padding: 10px;
-    margin-top:0%;
-    text-align: justify;
-    color:red;
 }
 
 big{
@@ -332,7 +309,6 @@ body{
 
 pre{
     word-wrap:normal;
-    color:lightgray;
 }
 
 /* narrow the whole note page 190410 */
@@ -350,7 +326,6 @@ img {
 
 .index_date {
     font-family: Monospace;
-    color:black;
 }
 
 /*p,ul,h1,h2,h3,h4,h5,li */
@@ -387,12 +362,35 @@ li {
      
 
 th {
-   background-color:lightgray;
+    background-color:lightgray;
+}
+
+blockquote > p {
+    margin-top: 0%;
+}
+    
+blockquote{
+    background-color: #d8d8d8;
+    padding: 10px;
+    margin-top:0%;
+    font-weight:bold;
+    font: 400 18px/1.5 Georgia;
+    text-align: justify;
+
 }
 
 @media print {
     .nav {
         display: none;
+    }
+
+    blockquote{
+    background-color: #d8d8d8;
+    padding: 10px;
+    margin-top:0%;
+    font-weight:bold;
+    font: 400 18px/1.5 Georgia;
+    text-align: justify;
     }
 
     body {
@@ -402,19 +400,18 @@ th {
         /* -- control size */
         /*font-size: 20em !important; */
         /* for kindle switch off for print */
-        font-family: Georgia;
-        font-size: 250%;
+        font-family: Helvetica;
+        font-size: 200%;
 
     }
 
     h1, h2, h3, h4, ul, li{
-        font-family: Georgia;
+        font-family: Helvetica;
     }
     
     .col-sm-9{ width: 90%;}
 
     a {text-decoration: none}
-
     .notes {
 	    height:1000px;
 	    /*background:gray
@@ -422,8 +419,3 @@ th {
 	   }
 }
 
-.search {
-    background-color:black;
-    margin-left:15px;padding-left:5px;font-:15px;border:none;color:red;
-    font-weight:bold;
-}

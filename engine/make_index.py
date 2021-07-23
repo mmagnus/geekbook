@@ -36,9 +36,15 @@ class Index(object):
             head = re.sub(r'<!-- start of demo -->.*<!-- end of demo -->',
                           r'', head, flags=re.M | re.DOTALL)
 
-            # insert dataTables
+            # insert dataTables  "sorting":true,
             head += """
-              <!--      "paging": false,-->
+<style>
+body {
+  background-color: black;
+}</style>
+
+              <!--      "paging": false,
+                        -->
               <table id="table_id" class="display compact hover">
                   <thead>
                       <tr>
