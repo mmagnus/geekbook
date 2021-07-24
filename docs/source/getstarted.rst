@@ -1,7 +1,7 @@
 Get Started
 ===========================================
 
-Run geekbookapp.py and edit your notes in ```<path to your geekbook>/notes/```::
+Run geekbookapp.py::
 
   [mm] geekbook git:(master) ./geekbookapp.py
   2017-01-10 09:47:46: (network.c.410) can't bind to port:  1234 Address already in use
@@ -24,8 +24,12 @@ Run geekbookapp.py and edit your notes in ```<path to your geekbook>/notes/```::
   2017-01-10 09:47:46,587 - page.py - compiling --> test.md
   2017-01-10 09:47:46,589 - postprocessing.py - youtube video detected: ICDGkVbSWUo
 
-open your browser and copy-paste the ```html path``` (in my case is ```file:///private/tmp/geekbook/engine/data/html/index.html```).
+the web browser of choice should open with the index page. You should see the test note.
 
-To make a new note, create a file in ```<path to your geekbook>/notes/<notes here>```.
+You're ready to edit your notes. 
 
-Remember to keep ``geekbookapp.py`` running all the time, it will detect a new note and compile it for you.
+Edit your notes in ```<path to your geekbook>/notes/<note>.md```.
+
+Keep the geekbookapp.py program running in the background. Whenever you edit an old note or add a new one geekbookapp.py will compile it not into a web page. Refresh the web page and you will see your note in the index or the note will be compiled on the note page.
+
+Enjoy!
