@@ -1,4 +1,6 @@
 # geekbook3 - note taking system for nerds!
+💥 Now in dark mode! 💥 
+![](docs/imgs/darkmode.jpg)
 
 Marcin Magnus (mmagnus) & Pietro Boccaletto (akaped)
 
