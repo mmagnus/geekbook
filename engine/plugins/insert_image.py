@@ -14,7 +14,7 @@ import string
 import time
 import platform
 
-from geekbook.engine.conf import INSERT_IMAGE_TAG, INSERT_IMAGE_TAG2, SCREENSHOT_INBOX, SCREENSHOT_INBOX2
+from geekbook.engine.conf import INSERT_IMAGE_TAG, INSERT_IMAGE_TAG2, SCREENSHOT_INBOX, SCREENSHOT_INBOX2, INSERT_IMAGE_TAG2_SUFFIX, INSERT_IMAGE_TAG_SUFFIX
 
 import subprocess
 def exe(cmd):
@@ -110,12 +110,12 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
 
         # desktop, but can be configure
         if ltext[c].strip() == INSERT_IMAGE_TAG:
-            ltext[c] = insert_image(SCREENSHOT_INBOX, td, IMG_PREFIX)
+            ltext[c] = insert_image(SCREENSHOT_INBOX, td, IMG_PREFIX, INSERT_IMAGE_TAG_SUFFIX)
             changed = True
 
         # dropbox, but can be configure
         if ltext[c].strip() == INSERT_IMAGE_TAG2:
-            ltext[c] = insert_image(SCREENSHOT_INBOX2, td, IMG_PREFIX)
+            ltext[c] = insert_image(SCREENSHOT_INBOX2, td, IMG_PREFIX, INSERT_IMAGE_TAG2_SUFFIX)
             changed = True
 
         ############################
@@ -203,9 +203,9 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
 ##     return '\n'.join(ltext), changed # trigger compiles
 
 
-def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbook/notes/imgs/', IMG_PREFIX='imgs/'):
+def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbook/notes/imgs/', IMG_PREFIX='imgs/', suffix=''):
     """Check the latest file in d-rectory and copy it to t-arget d-rectory.
-
+    suffix: add a text to a file name for example "scanned" to get <pic>_scanned.png
     Put a time of creation into a filename."""
     # make folder with imgs
     try:
@@ -221,10 +221,12 @@ def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbo
         size = get_file_size(newest)
         # copy to img
         t = os.path.basename(newest.replace(' ','_'))
+        ext = os.path.splitext(t)[1] # get ext
         # add date
         # datetime.datetime.today().strftime('%y%m%d')
+        # 130818-10.03.32_201K_938BEFCE-D2D3-4B80-9AE1-243408DDBFDA_1_105_c.jpeg
         creation_time = get_creation_time(newest)
-        t = creation_time + '_' + size + '_' + t
+        t = creation_time + '_' + size + '_' + t.replace(ext, suffix + ext) # 
         shutil.move(newest, td + IMG_PREFIX + t)
         return '![](' + IMG_PREFIX  + t + ')'
     else:
