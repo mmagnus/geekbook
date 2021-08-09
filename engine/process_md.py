@@ -49,7 +49,7 @@ def simply_interal_links(text):
             l = l.replace('http://127.0.0.1:5000/view/', '[file:')
             l = l.replace('.html', '.md]')            
             changed = True
-        ntext += l.replace('#open', '') + '\n'
+        ntext += l + '\n'
     return ntext, changed
 
 def remove_image(text, verbose=False):
