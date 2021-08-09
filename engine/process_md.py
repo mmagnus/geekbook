@@ -36,6 +36,21 @@ def right_MD_from_webservices(text):
             changed = True
     return text, changed
 
+def simply_interal_links(text):
+    """Change http://127.0.0.1:5000/view/cwc15-reporters-h5-r6-210803.html into
+    [file:cwc15-reporters-h5-r6-210803.md]
+
+    Next: define 127.0.0.1:5000 by option.
+    """
+    ntext = ''
+    changed = False
+    for l in text.split('\n'):
+        if l.startswith('http://127.0.0.1:5000'):
+            l = l.replace('http://127.0.0.1:5000/view/', '[file:')
+            l = l.replace('.html', '.md]')            
+            changed = True
+        ntext += l.replace('#open', '') + '\n'
+    return ntext, changed
 
 def remove_image(text, verbose=False):
     """[#rm] will remove the image"""
