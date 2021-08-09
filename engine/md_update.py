@@ -4,7 +4,7 @@
 
 import codecs
 from engine.conf import PATH_TO_MD, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX, AI_WRITER, USE_RM_TO_REMOVE_FIGURE
-from engine.process_md import right_MD_from_webservices, get_youtube_embeds_insert, remove_image
+from engine.process_md import right_MD_from_webservices, get_youtube_embeds_insert, remove_image, simply_interal_links
 from engine.plugins.insert_image import insert_image_in_md
 from engine.plugins.draw_secondary_structure import get_ss
 from engine.plugins.ia_writer import edit_syntax_from_ai_writer_to_geekbook
@@ -48,6 +48,7 @@ class Md_update(object):
         self.md, is_right_MD = right_MD_from_webservices(self.md)
 
         self.md, yti = get_youtube_embeds_insert(self.md)
+        self.md, is_simply_interal_links = simply_interal_links(self.md)
 
         use_rm = False
         if USE_RM_TO_REMOVE_FIGURE:
@@ -59,7 +60,8 @@ class Md_update(object):
             self.md, is_edit_synatx_ai = edit_syntax_from_ai_writer_to_geekbook(self.md, IMG_PREFIX)
 
         # check if anything changed
-        if any([is_get_ss, is_ii, is_right_MD, is_edit_synatx_ai, yti, use_rm]):
+        if any([is_get_ss, is_ii, is_right_MD, is_edit_synatx_ai, yti, use_rm,
+                is_simply_interal_links]):
             return True
         else:
             return False
