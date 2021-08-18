@@ -188,7 +188,9 @@ macOS:
 
 - Bear http://www.bear-writer.com/
 - iA Writer https://ia.net/writer/
+- Typora https://typora.io
 
 iOS:
 
 - https://ia.net/writer/
+
