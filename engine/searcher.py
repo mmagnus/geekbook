@@ -209,7 +209,10 @@ def make_headers_objects_for_md(filename, verbose=False, version2=True):
     filename = '/home/magnus/Dropbox/lb_v2/md/bioinfo::threading.md'
     """
     # fix for flycheck_*.md
-    text = open(filename, mode="r").read()
+    try:
+        text = open(filename, mode="r").read()
+    except FileNotFoundError:  # fix for files removed
+        return ''
     #all_h = []
     #    return []
 
