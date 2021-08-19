@@ -40,6 +40,11 @@ def simply_interal_links(text):
     """Change http://127.0.0.1:5000/view/cwc15-reporters-h5-r6-210803.html into
     [file:cwc15-reporters-h5-r6-210803.md]
 
+    Fix to deal with this:
+
+    [file:cwc15-introduce-bamHI.md#Run-on-gel-210819]
+    http://127.0.0.1:5000/view/cwc15-introduce-bamHI.html#Run-on-gel-210819
+
     Next: define 127.0.0.1:5000 by option.
     """
     ntext = ''
@@ -47,7 +52,8 @@ def simply_interal_links(text):
     for l in text.split('\n'):
         if l.startswith('http://127.0.0.1:5000'):
             l = l.replace('http://127.0.0.1:5000/view/', '[file:')
-            l = l.replace('.html', '.md]')            
+            l = l.replace('.html', '.md')
+            l += ']'
             changed = True
         ntext += l + '\n'
     return ntext, changed
