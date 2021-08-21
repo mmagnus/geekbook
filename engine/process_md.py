@@ -79,7 +79,15 @@ def remove_image(text, verbose=False):
             changed = True
             ntext += l.replace('#open', '') + '\n'
 
-        elif '![#fork]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+        elif '![#ps]' in l:
+            fn = l.replace('![#ps](', '').replace(')', '').strip()
+            cmd = " open -a 'Adobe Photoshop 2021.app' '%s/%s'" % (PATH_TO_MD, fn)
+            logger.info('open Adobe PS image %s', cmd)
+            os.system(cmd)
+            changed = True
+            ntext += l.replace('#ps', '') + '\n'
+
+        elif '![#fork]' in l or '![#f]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
             fn = l.replace('![#fork](', '').replace(')', '').strip()
             # # printing letters
             letters = string.ascii_letters
