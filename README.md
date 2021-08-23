@@ -118,6 +118,10 @@ Geekbook includes also many plugins that build on top of Markdow to give even mo
 
 See for more <http://geekbook.readthedocs.io/en/latest/edit.html#geekbook-only> and <https://geekbook.readthedocs.io/en/latest/quickref.html>
 
+Export one page as a Git repository:
+
+    python page.py /Users/magnus/Desktop/geekbook-export geekbook-export.md --add-toc --push
+
 # Emacs powered
 ## Focus on your notes
 
