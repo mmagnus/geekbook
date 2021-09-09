@@ -3,7 +3,7 @@ https://stackoverflow.com/questions/3200249/html-list-style-type-dash
 */
 
 body {
-    font-size: 200%;
+    font-size: 150%;
     background-color: black;
     color:#fff;
  }
@@ -271,7 +271,7 @@ a {
     background-color: #d8d8d8;
     padding: 10px;
     font-weight:bold;
-    font: 400 18px/1.5 Helvetica;
+    font: 500 20px/1.5 Helvetica;
     text-align: justify;
     color: black;
 }
