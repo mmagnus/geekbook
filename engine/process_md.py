@@ -71,7 +71,7 @@ def remove_image(text, verbose=False):
             # skip this line
             changed = True
 
-        elif '![#open]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+        elif '![#open]' in l or '![#o]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
             fn = l.replace('![#open](', '').replace(')', '').strip()
             cmd = "open '%s/%s'" % (PATH_TO_MD, fn)
             logger.info('open image %s', cmd)
@@ -104,7 +104,7 @@ def remove_image(text, verbose=False):
             changed = True
             ntext += l.replace('#fork', '').replace(fn, nfn) + '\n'
 
-        elif '![#dark]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+        elif '![#dark]' in l or '![#dark]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
             fn = l.replace('![#dark](', '').replace(')', '').strip()
             #  $f  ${f}.jpeg
             nfn = fn + '.DARK.jpeg'
@@ -121,7 +121,7 @@ def remove_image(text, verbose=False):
             changed = True
             ntext += l.replace('#dark', '').replace(fn, nfn) + '\n'
 
-        elif '![#light]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+        elif '![#light]' in l or '![#l]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
             fn = l.replace('![#light](', '').replace(')', '').strip()
             #  $f  ${f}.jpeg
             nfn = fn + '.LIGHT.jpeg'
@@ -141,8 +141,8 @@ def remove_image(text, verbose=False):
             changed = True
             ntext += l.replace('#light', '').replace(fn, nnfn) + '\n' # dark image goes into a note
 
-        elif '![#min]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
-            fn = l.replace('![#inv](', '').replace(')', '').strip()
+        elif '![#min]' in l or '![#m]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+            fn = l.replace('![#min](', '').replace(')', '').strip()
             #  $f  ${f}.jpeg
             nfn = fn + '.MIN.jpeg'
             cmd = "convert '%s/%s' -quality 40 '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nfn)
@@ -156,7 +156,8 @@ def remove_image(text, verbose=False):
             changed = True
             ntext += l.replace('#min', '').replace(fn, nfn) + '\n'
 
-        elif '![#smaller]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+        elif '![#smaller]' in l or '![#s]' in l: # ![](imgs/210209-14:02:20.916512_146566355_244096550673487_436531621545580684_n.png)
+            fn = l.replace('![#s](', '').replace(')', '').strip()
             fn = l.replace('![#smaller](', '').replace(')', '').strip()
             #  $f  ${f}.jpeg
             nfn = fn + '.smaller.jpeg'

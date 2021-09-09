@@ -14,7 +14,8 @@ import string
 import time
 import platform
 
-from geekbook.engine.conf import INSERT_IMAGE_TAG, INSERT_IMAGE_TAG2, SCREENSHOT_INBOX, SCREENSHOT_INBOX2, INSERT_IMAGE_TAG2_SUFFIX, INSERT_IMAGE_TAG_SUFFIX
+from geekbook.engine.conf import INSERT_IMAGE_TAG, INSERT_IMAGE_TAG2, SCREENSHOT_INBOX, SCREENSHOT_INBOX2, \
+     INSERT_IMAGE_TAG2_SUFFIX, INSERT_IMAGE_TAG_SUFFIX, INSERT_IMAGE_HASHTAG, INSERT_IMAGE_HASHTAG2
 
 import subprocess
 def exe(cmd):
@@ -110,12 +111,12 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
 
         # desktop, but can be configure
         if ltext[c].strip() == INSERT_IMAGE_TAG:
-            ltext[c] = insert_image(SCREENSHOT_INBOX, td, IMG_PREFIX, INSERT_IMAGE_TAG_SUFFIX)
+            ltext[c] = insert_image(SCREENSHOT_INBOX, td, IMG_PREFIX, INSERT_IMAGE_TAG_SUFFIX, INSERT_IMAGE_HASHTAG)
             changed = True
 
         # dropbox, but can be configure
         if ltext[c].strip() == INSERT_IMAGE_TAG2:
-            ltext[c] = insert_image(SCREENSHOT_INBOX2, td, IMG_PREFIX, INSERT_IMAGE_TAG2_SUFFIX)
+            ltext[c] = insert_image(SCREENSHOT_INBOX2, td, IMG_PREFIX, INSERT_IMAGE_TAG2_SUFFIX, INSERT_IMAGE_HASHTAG2)
             changed = True
 
         ############################
@@ -126,7 +127,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
         is_image = False
         if '.jpeg' in line or '.jpg' in line or '.png' in line:
             is_image = True
-        if (('file://' in line) or line.startswith('/')) and is_image and 'Error' not in line:
+        if ('file://' in line) and is_image and 'Error' not in line:
             # FileNotFoundError: [Errno 2] No such file or directory: file://localhost/localhost/private/var/folders/yc/ssr9692s5fzf7k165grnhpk80000gp/T/Anki-CWARbe/paste-29f8f06a3d79478480a7f2baaffcaab63056e351.png
             f = ltext[c]
             f = f.replace('%28', '(').replace('%29', ')').replace('%20', ' ').replace('file://localhost/','/').replace('file://', '')
@@ -203,7 +204,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
 ##     return '\n'.join(ltext), changed # trigger compiles
 
 
-def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbook/notes/imgs/', IMG_PREFIX='imgs/', suffix=''):
+def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbook/notes/imgs/', IMG_PREFIX='imgs/', suffix='', hastag=''):
     """Check the latest file in d-rectory and copy it to t-arget d-rectory.
     suffix: add a text to a file name for example "scanned" to get <pic>_scanned.png
     Put a time of creation into a filename."""
@@ -213,7 +214,7 @@ def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbo
     except OSError:
         pass
     files = []
-    for ftype in ['*.jpg', '*.png', '*.jpeg']:
+    for ftype in ['*.jpg', '*.png', '*.jpeg', '*gif']:
         p = glob.glob(d + ftype)
         files.extend(p)
     if files:
@@ -226,9 +227,10 @@ def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbo
         # datetime.datetime.today().strftime('%y%m%d')
         # 130818-10.03.32_201K_938BEFCE-D2D3-4B80-9AE1-243408DDBFDA_1_105_c.jpeg
         creation_time = get_creation_time(newest)
-        t = creation_time + '_' + size + '_' + t.replace(ext, suffix + ext) # 
+        print(t, ext, suffix)
+        t = creation_time + '_' + size + '_' + t.replace(ext, suffix + ext)
         shutil.move(newest, td + IMG_PREFIX + t)
-        return '![](' + IMG_PREFIX  + t + ')'
+        return '![' + hastag + '](' + IMG_PREFIX  + t + ')'
     else:
         return 'error of import, any file not found'
 
