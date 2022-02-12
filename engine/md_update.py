@@ -68,7 +68,7 @@ class Md_update(object):
 
     def save(self):
         with codecs.open(PATH_TO_MD + sep + self.fn, "w", "utf-8") as outfn:
-            outfn.write(self.md)
+            outfn.write(self.md.strip())
 
 
 if __name__ == '__main__':
