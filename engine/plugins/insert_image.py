@@ -131,7 +131,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
         line = ltext[c].strip()
 
         is_image = False
-        if '.jpeg' in line.lower() or '.jpg' in line.lower() or '.png' in line.lower():
+        if '.jpeg' in line.lower() or '.jpg' in line.lower() or '.png' in line.lower() or '.heic' in line.lower():
             is_image = True
         if ('file://' in line) and is_image and 'Error' not in line:
             # FileNotFoundError: [Errno 2] No such file or directory: file://localhost/localhost/private/var/folders/yc/ssr9692s5fzf7k165grnhpk80000gp/T/Anki-CWARbe/paste-29f8f06a3d79478480a7f2baaffcaab63056e351.png
@@ -147,9 +147,25 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 t = creation_date + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
             else:
                 t = datetime.datetime.today().strftime('%y%m%d') + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+
             # clean % from the names
             try:
-                shutil.copy(source_path, td + IMG_PREFIX + t)
+                # if heic
+                if line.endswith('.heic'):
+                    t = t.replace('.heic', '.jpeg')
+                    cmd = "magick mogrify -monitor -format jpg '%s'" % source_path # ok, this is done inplace
+                    from icecream import ic
+                    import sys
+                    print(cmd)
+                    os.system(cmd)
+                    nt = t + '.MIN.jpeg'
+                    nsource_path = source_path.replace('.heic', '.jpg')
+                    cmd = "convert '%s' -quality 40 '%s'" % (nsource_path, td + IMG_PREFIX + nt)
+                    os.system(cmd)
+                    print(cmd)
+                    t = nt # for writing in a file                
+                else:
+                    shutil.copy(source_path, td + IMG_PREFIX + t)
             except IOError:
                 ltext[c] = 'Error in ' + source_path
                 changed = True
