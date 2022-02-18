@@ -171,7 +171,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 changed = True
             else:
                 if verbose:
-                    print('Coping', source_path, td + IMG_PREFIX + t)
+                    print('insert_image.py: coping', source_path, td + IMG_PREFIX + t)
                 ltext[c] = '![](' + IMG_PREFIX + t + ') '# + creation_date #  + t + ')'
                 changed = True
         ############################
