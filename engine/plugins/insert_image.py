@@ -119,13 +119,18 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             ltext[c] = insert_image(SCREENSHOT_INBOX2, td, IMG_PREFIX, INSERT_IMAGE_TAG2_SUFFIX, INSERT_IMAGE_HASHTAG2)
             changed = True
 
+        # ~/Downloads/ but can be configure
+        if ltext[c].strip() == INSERT_IMAGE_TAG3:
+            ltext[c] = insert_image(SCREENSHOT_INBOX3, td, IMG_PREFIX, INSERT_IMAGE_TAG3_SUFFIX, INSERT_IMAGE_HASHTAG3)
+            changed = True
+
         ############################
         ### Apple Photos [2] ###########
         # file:///Users/magnus/Pictures/Photos%20Library.photoslibrary/resources/derivatives/B/BC0F463E-7D5E-4FC7-A105-7A56A1121DD9_1_105_c.jpeg
         line = ltext[c].strip()
 
         is_image = False
-        if '.jpeg' in line or '.jpg' in line or '.png' in line:
+        if '.jpeg' in line.lower() or '.jpg' in line.lower() or '.png' in line.lower():
             is_image = True
         if ('file://' in line) and is_image and 'Error' not in line:
             # FileNotFoundError: [Errno 2] No such file or directory: file://localhost/localhost/private/var/folders/yc/ssr9692s5fzf7k165grnhpk80000gp/T/Anki-CWARbe/paste-29f8f06a3d79478480a7f2baaffcaab63056e351.png
