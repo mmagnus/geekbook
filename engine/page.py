@@ -48,6 +48,7 @@ class Page(object):
     def __init__(self, fn):
         """Init a Page and load the content of MD file into self.md"""
         self.fn = fn
+        self.name = fn.replace('.md', '')
         # it catches errors if the file is removed
         try:
             with codecs.open(PATH_TO_MD + sep + fn, "r", "utf-8") as f:
@@ -57,6 +58,82 @@ class Page(object):
             # logging.error('file removed ' + self.fn)
             self.md = None
 
+    def to_pdf(self):
+        with open(PATH_TO_MD + sep + self.fn) as f:
+             md = f.read()
+        md = md.replace('.DARK.jpeg', '.LIGHT.jpeg')
+        md = md.replace('\n', '\n\n')
+        md = md.replace('{{TOC}}', '')
+        # revert all images dark
+        import cv2
+        import numpy as np
+        # pip install opencv-python
+        # taken from
+        # https://github.com/imneonizer/How-to-find-if-an-image-is-bright-or-dark.git
+        def isbright(image, dim=10, thresh=0.5):
+            # 0.2 smaller more dark will be dark
+            # 0.8 almost all is dark!
+            # Resize image to 10x10
+            image = cv2.resize(image, (dim, dim))
+            # Convert color space to LAB format and extract L channel
+            L, A, B = cv2.split(cv2.cvtColor(image, cv2.COLOR_BGR2LAB))
+            # Normalize L channel by dividing all pixel values with maximum pixel value
+            L = L/np.max(L)
+            # Return True if mean is greater than thresh else False
+            return np.mean(L) > thresh
+
+        import re
+        print(md)
+        imgs = re.findall('\!\[.*\]\(imgs/(.+)\)', md)
+        print(imgs)
+        for i in imgs:
+            impath = PATH_TO_MD + '/imgs/' + i
+
+            newpath = i
+            print('make smaller')
+            cmd = '/opt/homebrew/bin/convert %s -resize 400x400 /tmp/%s' % (impath, i)#newpath)
+            os.system(cmd)
+            print('(/tmp/' + i)
+            md = md.replace('(imgs/' + i, '(/tmp/' + i)
+
+            # check brightness
+            image = cv2.imread(impath)
+            if isbright(image, thresh=0.39):
+                pass
+            else:
+                newpath = i
+                cmd = '/opt/homebrew/bin/convert %s -channel RGB -negate /tmp/%s' % (impath, i)#newpath)
+                os.system(cmd)
+                print('(/tmp/' + i)
+                md = md.replace('(imgs/' + i, '(/tmp/' + i)
+                
+        #aaaaaaa
+        if 0:
+            md = md.replace('.jpeg)', '.jpeg.small.jpeg)') #        {width=90%}
+            md = md.replace('.jpg)', '.jpg.small.jpg)')
+            md = md.replace('.png)', '.png.small.png)')
+            # for i in ls *png; do magick $i -resize 50% $i.small.png; done
+        
+        if 0:
+            md = md.replace('.jpeg)', '.jpeg){ height=200px }') #        {width=90%}
+            md = md.replace('.jpg)', '.jpg){height=200px}')
+            md = md.replace('.png)', '.png){height=200px}')
+
+
+        md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
+
+        md += '# Notes\n\n'
+        md += '|\n\n' * 50 + '\n' # add an empty page
+        tmp = '/tmp/print.md'
+        #tmp = PATH_TO_MD + sep + '/tmp.md'
+        with open(tmp, 'w') as f:
+            f.write(md)
+        # PATH_TO_MD + sep + self.fn
+        # cd ' + PATH_TO_MD + ' &&
+        cmd = 'pandoc ' + tmp + ' -o ~/Dropbox/boox/geekbook/' + self.name + '.pdf -N --toc  --metadata=title=' + self.name + '  -f gfm -V mainfont="Helvetica" --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm" &'
+        print(cmd)
+        os.system(cmd)
+        
     def get_html(self):
         """Compile md to get html"""
         self.html = markdown.markdown(
@@ -70,6 +147,7 @@ class Page(object):
         self.pre_process()
         self.get_html()
         self.post_process()
+        self.to_pdf()
 
     def pre_process(self):
         """Do preprocessing.

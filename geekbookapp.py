@@ -185,6 +185,7 @@ class App(object):
                         m.save()
 
                     p.compile()
+                    p.to_pdf()
                     p.save()
 
                     index = Index()
