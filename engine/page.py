@@ -59,6 +59,9 @@ class Page(object):
             self.md = None
 
     def to_pdf(self):
+        if self.name == '_search_':
+            return
+            
         with open(PATH_TO_MD + sep + self.fn) as f:
              md = f.read()
         md = md.replace('.DARK.jpeg', '.LIGHT.jpeg')
