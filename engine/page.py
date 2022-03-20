@@ -125,7 +125,7 @@ class Page(object):
         md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
 
         md += '# Notes\n\n'
-        md += '|\n\n' * 50 + '\n' # add an empty page
+        md += '|\n\n' * 30 + '\n' # add an empty page
         tmp = '/tmp/print.md'
         #tmp = PATH_TO_MD + sep + '/tmp.md'
         with open(tmp, 'w') as f:
