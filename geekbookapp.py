@@ -185,9 +185,9 @@ class App(object):
                         m.save()
 
                     p.compile()
-                    p.to_pdf()
                     p.save()
-
+                    p.to_pdf()
+                    
                     index = Index()
                     index.update(mf.get_files())
 
