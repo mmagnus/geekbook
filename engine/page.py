@@ -209,11 +209,12 @@ class Page(object):
             f.write('__place_for_your_imgs__')
 
         # \!\[.*?\]\(imgs/.*?\)
-        hits = re.findall('\"/imgs/.*?\"', content, re.M|re.DOTALL)
+        hits = re.findall('\((imgs/.*?)\)', content, re.M|re.DOTALL)
+        # print(hits)
         for h in hits:
-            print('Copy ',h.strip())
+            #print(h)
+            # print('Copy ',h.strip())
             shutil.copy(PATH_TO_MD + h.replace('"',''), path + os.sep + 'imgs')
-
         import subprocess
 
         def exe(cmd):
@@ -252,7 +253,6 @@ class Page(object):
         if self.md:
             if not os.path.exists(PATH_TO_ORIG):
                 os.makedirs(PATH_TO_ORIG)
-
             try:
                 with codecs.open(PATH_TO_ORIG + sep + self.fn, "r", "utf-8") as f:
                     orig_md = f.read()
