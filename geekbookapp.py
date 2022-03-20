@@ -26,7 +26,7 @@ from engine.make_index import Index
 from engine.colors import bcolors
 from engine.searcher import make_db
 from engine.plugins import ia_writer
-PINNED_NOTES = ['workflow.md']
+
 
 class GeekbookError(Exception):
     pass
@@ -67,9 +67,6 @@ class MdFiles(object):
         Update: alwasy get an updated list!"""
         self.get_filelist()
         self.sort_by_mtime()
-        self.md_files = PINNED_NOTES  + self.md_files
-        # remove duplicates, if case if the pinned note is alos the recent edit
-        self.md_files = list(dict.fromkeys(self.md_files))
         return self.md_files
 
 
