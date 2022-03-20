@@ -65,7 +65,7 @@ class Page(object):
         with open(PATH_TO_MD + sep + self.fn) as f:
              md = f.read()
         md = md.replace('.DARK.jpeg', '.LIGHT.jpeg')
-        md = md.replace('\n', '\n\n')
+        md = md.replace('\n', '\n') # \n
         md = md.replace('{{TOC}}', '')
         # revert all images dark
         import cv2
@@ -127,8 +127,8 @@ class Page(object):
 
         md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
 
-        md += '# Notes\n\n'
-        md += '|\n\n' * 30 + '\n' # add an empty page
+        md += '\n# Notes\n\n'
+        md += '|\n\n' * 15 + '\n' # add an empty page
         tmp = '/tmp/print.md'
         #tmp = PATH_TO_MD + sep + '/tmp.md'
         with open(tmp, 'w') as f:
