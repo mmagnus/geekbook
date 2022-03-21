@@ -115,19 +115,6 @@ class Page(object):
                 print('(/tmp/' + i)
                 md = md.replace('(imgs/' + i, '(/tmp/' + i)
                 
-        #aaaaaaa
-        if 0:
-            md = md.replace('.jpeg)', '.jpeg.small.jpeg)') #        {width=90%}
-            md = md.replace('.jpg)', '.jpg.small.jpg)')
-            md = md.replace('.png)', '.png.small.png)')
-            # for i in ls *png; do magick $i -resize 50% $i.small.png; done
-        
-        if 0:
-            md = md.replace('.jpeg)', '.jpeg){ height=200px }') #        {width=90%}
-            md = md.replace('.jpg)', '.jpg){height=200px}')
-            md = md.replace('.png)', '.png){height=200px}')
-
-
         md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
 
         md += '\n# Notes\n\n'
