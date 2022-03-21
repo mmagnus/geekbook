@@ -31,20 +31,27 @@ def topdf(self, negative=True):
             return np.mean(L) > thresh
 
         import re
-        print(md)
         imgs = re.findall('\!\[.*\]\(imgs/(.+)\)', md)
         print(imgs)
         for i in imgs:
             impath = PATH_TO_MD + '/imgs/' + i
+            tpath = '/tmp/' + i
             # resize
             if 0:
-                newpath = i
-                print('make smaller')
-                cmd = '/opt/homebrew/bin/convert %s -resize 400x400 /tmp/%s' % (impath, i)#newpath)
-                os.system(cmd)
-                print('(/tmp/' + i)
-                md = md.replace('(imgs/' + i, '(/tmp/' + i)
+                from PIL import Image
+                # open temp picture
+                img_bg = Image.open(impath)
+                print(img_bg.size[0], img_bg.size[1])
+                if img_bg.size[0] > 1000:
+                    # cmd = '/opt/homebrew/bin/convert %s -resize 1200x400\> %s' % (impath, tpath)#newpath)
+                    cmd = '/opt/homebrew/bin/convert %s -resize 50%% %s' % (impath, tpath)#newpath)
+                    print(cmd)
+                    os.system(cmd)
 
+                print('(/tmp/' + i)
+                #md = md.replace('(imgs/' + i, '(/tmp/' + i)
+                impath = tpath # !
+                
             if negative:
                 # check brightness
                 image = cv2.imread(impath)
