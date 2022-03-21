@@ -83,4 +83,13 @@ def topdf(self, negative=True):
             output = '~/Dropbox/boox/geekbook/' + self.name + '.pdf'
         cmd = 'pandoc ' + tmp + ' -o ' + output + ' -N --toc  --metadata=title=' + self.name + '  -f gfm -V mainfont="Helvetica" --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm" &'
         print(cmd)
+        if 0:  # for testing keep this
+            import subprocess
+            def exe(cmd):
+                o = subprocess.Popen(
+                    cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                out = o.stdout.read().strip().decode()
+                err = o.stderr.read().strip().decode()
+                return out, err
+            exe(cmd)
         os.system(cmd)
