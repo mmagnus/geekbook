@@ -117,7 +117,6 @@ class App(object):
         logger.info('You have %i notes' % len(mf.get_files()) + ' with ' + out + ' lines! Congrats, keep noting!')
 
         index = Index()
-        print(mf.get_files())
         index.update(mf.get_files())
 
         # yappi.start()
