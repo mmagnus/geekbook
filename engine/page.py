@@ -67,6 +67,9 @@ class Page(object):
         md = md.replace('.DARK.jpeg', '.LIGHT.jpeg')
         md = md.replace('\n', '\n') # \n
         md = md.replace('{{TOC}}', '')
+
+        md = md.replace("\n![", "\n\n![") # ?
+            
         # revert all images dark
         import cv2
         import numpy as np
