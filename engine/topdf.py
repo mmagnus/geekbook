@@ -7,7 +7,7 @@ def topdf(self, negative=True):
         with open(PATH_TO_MD + os.sep + self.fn) as f:
              md = f.read()
         md = md.replace('.DARK.jpeg', '.LIGHT.jpeg')
-        md = md.replace('\n', '\n') # \n
+        # md = md.replace('\n', '\n\n') # \n
         md = md.replace('{{TOC}}', '')
 
         md = md.replace("\n![", "\n\n![") # ?
