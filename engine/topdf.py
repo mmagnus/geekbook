@@ -65,7 +65,8 @@ def topdf(self, negative=True):
             # with replace('qr.jpeg))', 'qr.jpeg)')
             #md = md.replace('(imgs/' + i, '(/tmp/' + qi)
 
-            md = md.replace('(imgs/' + i, '(/tmp/' + qi)
+            md = md.replace('(imgs/' + i, '(/tmp/' + i)
+            
         md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
 
         md += '\n# Notes\n\n'
