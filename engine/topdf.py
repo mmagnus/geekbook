@@ -71,8 +71,28 @@ def topdf(self, negative=True):
             #qi = i + ')![](/tmp/qr.jpg)' # here you get qr.jpg)) so you can fix it
             # with replace('qr.jpeg))', 'qr.jpeg)')
             #md = md.replace('(imgs/' + i, '(/tmp/' + qi)
+            QR = True
+            if QR:
+                import qrcode
+                from PIL import Image
 
-            md = md.replace('(imgs/' + i, '(/tmp/' + i)
+                # open temp picture
+                img_bg = Image.open(tpath)
+
+                qr = qrcode.QRCode(box_size=img_bg.size[0] / 10) # vs 2 1/10?
+                qr.add_data('http://18.193.7.215:8080/4j6scj6p82zw400/' + i)
+                print('http://18.193.7.215:8080/4j6scj6p82zw400/' + i)
+                qr.make()
+                # original pictures should be send
+                cmd = 'scp ' + PATH_TO_MD + '/imgs/' + i + ' aws:/home/ubuntu/rna-tools/rna_tools/tools/webserver-engine/qr/' + i
+                # for test you can keep this off
+                # os.system(cmd)
+        
+                img_qr = qr.make_image()
+                #pos = (img_bg.size[0] - img_qr.size[0], img_bg.size[1] - img_qr.size[1])
+                pos = (img_bg.size[0] + 100, img_bg.size[1] - img_qr.size[1])
+                img_bg.paste(img_qr, pos)
+                img_bg.save(tpath) #impath) #'data/dst/qr_lena.png')
             
         md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
 
