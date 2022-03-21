@@ -81,7 +81,7 @@ def topdf(self, negative=True):
             output = '~/Dropbox/boox-geekbook-color/' + self.name + '-color.pdf'
         else:
             output = '~/Dropbox/boox/geekbook/' + self.name + '.pdf'
-        cmd = 'pandoc ' + tmp + ' -o ' + output + ' -N --toc  --metadata=title=' + self.name + '  -f gfm -V mainfont="Helvetica" --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm" &'
+        cmd = 'pandoc ' + tmp + ' -o ' + output + ' --toc  --metadata=title=' + self.name + '  -V mainfont="Helvetica" --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm" &' # -N -f gfm 
         print(cmd)
         if 0:  # for testing keep this
             import subprocess
