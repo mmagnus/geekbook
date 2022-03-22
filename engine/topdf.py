@@ -64,19 +64,20 @@ def topdf(self, negative=True):
                 
             if negative:
                 # check brightness
+                ic(impath)
                 image = cv2.imread(impath)
                 if isbright(image, thresh=0.39):
                     pass
                 else:
-                    newpath = i
-                    cmd = '/opt/homebrew/bin/convert %s -channel RGB -negate /tmp/%s' % (impath, i)#newpath)
+                    # or https://note.nkmk.me/en/python-pillow-invert/
+                    cmd = '/opt/homebrew/bin/convert %s -channel RGB -negate %s' % (impath, tpath)#newpath)
+                    print(cmd)
                     os.system(cmd)
             else:
                impath = PATH_TO_MD + '/imgs/' + i
                cmd = 'cp %s /tmp/%s' % (impath, i)#newpath)
                os.system(cmd)
 
-            print('(/tmp/' + i)
             #/tmp/qr.jpg
             #qi = i + ')![](/tmp/qr.jpg)' # here you get qr.jpg)) so you can fix it
             # with replace('qr.jpeg))', 'qr.jpeg)')
@@ -107,7 +108,7 @@ def topdf(self, negative=True):
             md = md.replace('(imgs/' + i, '(/tmp/' + i + '){ height=400px }!!!!') # { height=350px }
         md = md.replace('!!!!)', '\n') # ugly
             
-        md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
+        #md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
 
         md += '\n# Notes\n\n'
         md += '|\n\n' * 15 + '\n' # add an empty page
