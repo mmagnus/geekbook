@@ -127,7 +127,7 @@ def topdf(self, negative=True):
         toc = ' --toc '
         if self.name == 'snippets':
             toc = ''
-        cmd = 'pandoc ' + tmp + ' -o ' + output + toc + ' --metadata=title=' + self.name + '  -V mainfont="Helvetica" --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm" &' # -N -f gfm 
+        cmd = 'pandoc ' + tmp + ' -o ' + output + toc + ' --metadata=title=' + self.name + '  -V mainfont="Helvetica" --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm"' # -N -f gfm 
         print(cmd)
         if 0:  # for testing keep this
             import subprocess
