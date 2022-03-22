@@ -61,22 +61,27 @@ def topdf(self, negative=True):
                 print('(/tmp/' + i)
                 #md = md.replace('(imgs/' + i, '(/tmp/' + i)
                 impath = tpath # !
+            tpath_neg = '/tmp/neg' + i            
                 
             if negative:
                 # check brightness
                 ic(impath)
                 image = cv2.imread(impath)
-                if isbright(image, thresh=0.39):
-                    pass
+                if isbright(image, thresh=0.4): # 0.39
+                    tmpi = i
                 else:
+                    tmpi = 'neg' + i
                     # or https://note.nkmk.me/en/python-pillow-invert/
-                    cmd = '/opt/homebrew/bin/convert %s -channel RGB -negate %s' % (impath, tpath)#newpath)
-                    print(cmd)
+                    cmd = '/opt/homebrew/bin/convert %s -channel RGB -negate %s' % (impath, tpath_neg)#newpath)
+                    ic(cmd)
                     os.system(cmd)
-            else:
+
+            if not negative:
                impath = PATH_TO_MD + '/imgs/' + i
                cmd = 'cp %s /tmp/%s' % (impath, i)#newpath)
+               print(cmd)
                os.system(cmd)
+               tmpi = i
 
             #/tmp/qr.jpg
             #qi = i + ')![](/tmp/qr.jpg)' # here you get qr.jpg)) so you can fix it
@@ -105,7 +110,7 @@ def topdf(self, negative=True):
                 img_bg.paste(img_qr, pos)
                 img_bg.save(tpath) #impath) #'data/dst/qr_lena.png')
                 
-            md = md.replace('(imgs/' + i, '(/tmp/' + i + '){ height=400px }!!!!') # { height=350px }
+            md = md.replace('(imgs/' + i, '(/tmp/' + tmpi + '){ height=400px }!!!!') # { height=350px }
         md = md.replace('!!!!)', '\n') # ugly
             
         #md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
