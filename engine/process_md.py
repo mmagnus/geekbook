@@ -58,6 +58,35 @@ def simply_interal_links(text):
         ntext += l + '\n'
     return ntext, changed
 
+def insert_file_into_archive(text):
+    """Change file:///Users/magnus/Desktop/1VQM-01642-01680_rpr.pdb
+    into
+    [file:cwc15-reporters-h5-r6-210803.md]
+
+    Fix to deal with this:
+
+    [file:cwc15-introduce-bamHI.md#Run-on-gel-210819]
+    http://127.0.0.1:5000/view/cwc15-introduce-bamHI.html#Run-on-gel-210819
+
+    Next: define 127.0.0.1:5000 by option.
+    """
+    ntext = ''
+    changed = False
+    GEEKBOOK_ARCHIVE = '/Users/magnus/Dropbox/geekbook-archive/'
+    for l in text.split('\n'):
+        if l.startswith('file:///'):
+            if l.endswith('.png') or l.endswith('.jpeg') or l.endswith('.jpg'):
+                continue
+            else:
+                fpath = l.replace('file://', '')
+                import shutil
+                fn = os.path.basename(fpath)
+                shutil.move(fpath, '' + fn, GEEKBOOK_ARCHIVE)
+                l = '[ff:' + fn + ']'
+            changed = True
+        ntext += l + '\n'
+    return ntext, changed
+
 def remove_image(text, verbose=False):
     """[#rm] will remove the image"""
     changed = False
