@@ -138,4 +138,5 @@ def topdf(self, negative=True):
                 err = o.stderr.read().strip().decode()
                 return out, err
             exe(cmd)
-        os.system(cmd)
+        else:
+            os.system(cmd)
