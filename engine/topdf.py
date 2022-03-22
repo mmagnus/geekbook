@@ -105,7 +105,7 @@ def topdf(self, negative=True):
                 img_bg.paste(img_qr, pos)
                 img_bg.save(tpath) #impath) #'data/dst/qr_lena.png')
                 
-            md = md.replace('(imgs/' + i, '(/tmp/' + i + '){ height=400px }!!!!') # { height=350px }
+            md = md.replace('(imgs/' + i, '(/tmp/' + tmpi + '){ height=400px }!!!!') # { height=350px }
         md = md.replace('!!!!)', '\n') # ugly
             
         #md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
