@@ -81,7 +81,7 @@ def topdf(self, negative=True):
             #qi = i + ')![](/tmp/qr.jpg)' # here you get qr.jpg)) so you can fix it
             # with replace('qr.jpeg))', 'qr.jpeg)')
             #md = md.replace('(imgs/' + i, '(/tmp/' + qi)
-            QR = True
+            QR = False
             if QR:
                 import qrcode
                 from PIL import Image
