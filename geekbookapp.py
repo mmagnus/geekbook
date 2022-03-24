@@ -18,6 +18,10 @@ logger.setLevel('INFO')
 PATH = os.path.dirname(os.path.dirname(os.path.abspath(sys.argv[0])))  # __file__)))
 sys.path.append(PATH)
 
+from icecream import ic
+import sys
+ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
+ic.configureOutput(prefix='')
 
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_IMG, PATH_TO_ORIG, AI_WRITER
 from engine.page import Page
