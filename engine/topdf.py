@@ -46,35 +46,22 @@ def topdf(self, negative=True):
         for i in imgs:
             impath = PATH_TO_MD + '/imgs/' + i
             tpath = '/tmp/' + i
-            # resize
-            if 0:
-                from PIL import Image
-                # open temp picture
-                img_bg = Image.open(impath)
-                print(img_bg.size[0], img_bg.size[1])
-                if img_bg.size[0] > 1000:
-                    # cmd = '/opt/homebrew/bin/convert %s -resize 1200x400\> %s' % (impath, tpath)#newpath)
-                    cmd = '/opt/homebrew/bin/convert %s -resize 50%% %s' % (impath, tpath)#newpath)
-                    print(cmd)
-                    os.system(cmd)
-
-                print('(/tmp/' + i)
-                #md = md.replace('(imgs/' + i, '(/tmp/' + i)
-                impath = tpath # !
             tpath_neg = '/tmp/neg' + i            
                 
             if negative:
                 # check brightness
                 ic(impath)
-                image = cv2.imread(impath)
-                if isbright(image, thresh=0.4): # 0.39
+                try:
+                    image = cv2.imread(impath)
+                    if isbright(image, thresh=0.5): # 0.39
+                        tmpi = i
+                    else:
+                        tmpi = 'neg' + i
+                        # or https://note.nkmk.me/en/python-pillow-invert/
+                        cmd = '/opt/homebrew/bin/convert %s -channel RGB -negate %s' % (impath, tpath_neg)#newpath)
+                        ic(cmd)
+                except:
                     tmpi = i
-                else:
-                    tmpi = 'neg' + i
-                    # or https://note.nkmk.me/en/python-pillow-invert/
-                    cmd = '/opt/homebrew/bin/convert %s -channel RGB -negate %s' % (impath, tpath_neg)#newpath)
-                    ic(cmd)
-                    os.system(cmd)
 
             if not negative:
                impath = PATH_TO_MD + '/imgs/' + i
@@ -132,9 +119,10 @@ def topdf(self, negative=True):
         toc = ' --toc '
         if self.name == 'snippets':
             toc = ''
+# cmd
         cmd = 'pandoc ' + tmp + ' -o ' + output + toc + ' --metadata=title=' + self.name + '  -V mainfont="Helvetica" --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm"' # -N -f gfm 
         print(cmd)
-        if 0:  # for testing keep this
+        if 1:  # for testing keep this
             import subprocess
             def exe(cmd):
                 o = subprocess.Popen(

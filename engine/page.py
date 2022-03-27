@@ -65,6 +65,27 @@ class Page(object):
         # keep this order, of use exe not os.system!
         topdf(self, negative=False)
         topdf(self, negative=True)
+        pass
+        
+    def to_pdf_save(self):
+        fn = '/Users/magnus/geekbook/to-pdf.txt'
+
+        s = set()
+
+        try:
+            for i in open(fn):
+                if i:
+                    s.add(i.strip())
+        except FileNotFoundError:
+            pass
+        
+        s.add(self.fn)
+
+        print(len(s), s)
+        
+        with open(fn, 'w') as f:
+            for i in s:
+                f.write(i + '\n')
         
     def get_html(self):
         """Compile md to get html"""
@@ -79,7 +100,6 @@ class Page(object):
         self.pre_process()
         self.get_html()
         self.post_process()
-        self.to_pdf()
 
     def pre_process(self):
         """Do preprocessing.

@@ -96,7 +96,7 @@ class App(object):
         except OSError:
             pass
 
-    def start(self):
+    def start(self, update):
         """Start the App.
         """
         if not self.args.debug:
@@ -189,7 +189,7 @@ class App(object):
 
                     p.compile()
                     p.save()
-                    p.to_pdf()
+                    p.to_pdf_save()
                     
                     index = Index()
                     index.update(mf.get_files())
@@ -198,7 +198,17 @@ class App(object):
                     # is changed
                     make_db()
 
-            if UPDATE:
+            if update == -1:
+                fn = '/Users/magnus/geekbook/to-pdf.txt'
+                try:
+                    update = len(open(fn).read().split('\n')) + 1
+                    os.remove(fn) # remove file
+                except FileNotFoundError:
+                    sys.exit(0) # update = 0 # dont update
+                    pass
+
+            if update:
+                i = 0
                 for f in mf.get_files():
                     if f == 'imgs':
                         pass
@@ -206,6 +216,11 @@ class App(object):
                         p = Page(f)
                         p.compile()
                         p.save()
+                        p.to_pdf()
+
+                        i += 1
+                        if i > update: # do it for last x notes
+                            sys.exit(0)                            
 
                 sys.exit(0)
 
@@ -267,7 +282,7 @@ def get_parser():
     parser = argparse.ArgumentParser('geekbookapp.py')
     parser.add_argument('-d', '--debug', help='debug mode, run only for file,' +
                         'WARNING: use only name of the note, e.g. test.md, NOT notes/test.md')
-    parser.add_argument('-u', '--update', help='updates all the pages', action='store_true')
+    parser.add_argument('-u', '--update', help='updates of # last notes', type=int) #action='store_true')
     parser.add_argument('-s', '--silent', help='dont bring up the Internet Browser', action='store_true')
     parser.add_argument('-n', '--notebook',
                         help='updates all jupiter notebooks!', action='store_true')
@@ -320,7 +335,7 @@ if __name__ == '__main__':
         DEV = True
         UPDATE = False
     elif args.update:
-        UPDATE = True
+        UPDATE = args.update #True
         DEV = False
     else:
         DEV = False
@@ -330,4 +345,4 @@ if __name__ == '__main__':
             time.sleep(1)  # so it's time for the Flask to be opened in the browser
             start_browser_with_index()
 
-    app.start()
+    app.start(UPDATE)
