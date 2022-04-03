@@ -189,7 +189,8 @@ class App(object):
 
                     p.compile()
                     p.save()
-                    p.to_pdf_save()
+                    #p.to_pdf_save()
+                    #p.to_pdf()
                     
                     index = Index()
                     index.update(mf.get_files())
@@ -239,6 +240,7 @@ class App(object):
                 p = Page(args.debug)
                 p.compile()
                 p.save()
+                p.to_pdf()
 
                 sys.exit(0)
 

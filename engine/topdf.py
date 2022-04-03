@@ -3,7 +3,7 @@ import os
 
 from icecream import ic
 import sys
-ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
+ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr), , includeContext=True)
 ic.configureOutput(prefix='')
 
 def topdf(self, negative=True):
@@ -42,7 +42,7 @@ def topdf(self, negative=True):
 
         import re
         imgs = re.findall('\!\[.*\]\(imgs/(.+)\)', md)
-        print(imgs)
+        # print(imgs)
         for i in imgs:
             impath = PATH_TO_MD + '/imgs/' + i
             tpath = '/tmp/' + i
@@ -60,13 +60,14 @@ def topdf(self, negative=True):
                         # or https://note.nkmk.me/en/python-pillow-invert/
                         cmd = '/opt/homebrew/bin/convert %s -channel RGB -negate %s' % (impath, tpath_neg)#newpath)
                         ic(cmd)
+                        os.system(cmd)
                 except:
                     tmpi = i
 
             if not negative:
                impath = PATH_TO_MD + '/imgs/' + i
                cmd = 'cp %s /tmp/%s' % (impath, i)#newpath)
-               print(cmd)
+               ic(cmd)
                os.system(cmd)
                tmpi = i
 
@@ -84,7 +85,7 @@ def topdf(self, negative=True):
 
                 qr = qrcode.QRCode(box_size=img_bg.size[0] / 10) # vs 2 1/10?
                 qr.add_data('http://18.193.7.215:8080/4j6scj6p82zw400/' + i)
-                print('http://18.193.7.215:8080/4j6scj6p82zw400/' + i)
+                ic('http://18.193.7.215:8080/4j6scj6p82zw400/' + i)
                 qr.make()
                 # original pictures should be send
                 cmd = 'scp ' + PATH_TO_MD + '/imgs/' + i + ' aws:/home/ubuntu/rna-tools/rna_tools/tools/webserver-engine/qr/' + i
@@ -130,6 +131,8 @@ def topdf(self, negative=True):
                 out = o.stdout.read().strip().decode()
                 err = o.stderr.read().strip().decode()
                 return out, err
-            exe(cmd)
+            out, err = exe(cmd)
+            # print(out)
+            # print(err)
         else:
             os.system(cmd)
