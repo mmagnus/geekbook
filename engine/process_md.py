@@ -12,9 +12,23 @@ import string
 
 from engine.conf import PATH_TO_IMG, PATH_TO_MD, PATH_TO_ORIG
 
+from icecream import ic
+import sys
+ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr), includeContext=True)
+ic.configureOutput(prefix='> ')
+
 import logging
 logger = logging.getLogger('geekbook')
 logger.setLevel(logging.INFO)
+
+
+import subprocess
+def exe(cmd):
+    o = subprocess.Popen(
+        cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out = o.stdout.read().strip().decode()
+    err = o.stderr.read().strip().decode()
+    return out, err
 
 
 def right_MD_from_webservices(text):
@@ -55,6 +69,26 @@ def simply_interal_links(text):
             l = l.replace('.html', '.md')
             l += ']'
             changed = True
+        ntext += l + '\n'
+    return ntext, changed
+
+def insert_safari_url(text):
+    ntext = ''
+    changed = False
+    for l in text.split('\n'):
+        if l.startswith('\is'):
+            with open('/tmp/is.applescript', 'w') as f:
+                f.write("""tell application "Safari"
+	tell window 1
+		tell current tab
+			return URL
+		end tell
+	end tell
+end tell""")
+            url, err = exe('osascript /tmp/is.applescript')
+            ic(url)
+            changed = True
+            l = url
         ntext += l + '\n'
     return ntext, changed
 
@@ -228,3 +262,7 @@ def get_youtube_embeds_insert(text):
             changed = True
         ntext += l + '\n'
     return ntext, changed
+
+
+if __name__ == '__main__':
+    print(insert_safari_url('\is'))
