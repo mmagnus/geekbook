@@ -63,7 +63,7 @@ class Page(object):
         # if negative True is first then I guess negative False overwrites /tmp/images
         # bug (yeah, so that's why half of images are negatives and other are OK
         # keep this order, of use exe not os.system!
-        topdf(self, negative=False)
+        #topdf(self, negative=False)
         topdf(self, negative=True)
         pass
         
