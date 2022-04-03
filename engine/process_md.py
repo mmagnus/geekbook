@@ -106,7 +106,8 @@ def insert_file_into_archive(text):
     """
     ntext = ''
     changed = False
-    GEEKBOOK_ARCHIVE = '/Users/magnus/Dropbox/geekbook-archive/'
+    GEEKBOOK_ARCHIVE = '/Users/magnus/Library/Mobile\ Documents/27N4MQEA55~pro~writer/Documents/x'
+    #'/Users/magnus/Dropbox/geekbook-archive/'
     for l in text.split('\n'):
         if l.startswith('file:///'):
             if l.endswith('.png') or l.endswith('.jpeg') or l.endswith('.jpg'):
