@@ -48,6 +48,7 @@ class Page(object):
     def __init__(self, fn):
         """Init a Page and load the content of MD file into self.md"""
         self.fn = fn
+        self.name = fn.replace('.md', '')
         # it catches errors if the file is removed
         try:
             with codecs.open(PATH_TO_MD + sep + fn, "r", "utf-8") as f:
@@ -57,6 +58,35 @@ class Page(object):
             # logging.error('file removed ' + self.fn)
             self.md = None
 
+    def to_pdf(self):
+        from engine.topdf import topdf
+        # if negative True is first then I guess negative False overwrites /tmp/images
+        # bug (yeah, so that's why half of images are negatives and other are OK
+        # keep this order, of use exe not os.system!
+        topdf(self, negative=False)
+        topdf(self, negative=True)
+        pass
+        
+    def to_pdf_save(self):
+        fn = '/Users/magnus/geekbook/to-pdf.txt'
+
+        s = set()
+
+        try:
+            for i in open(fn):
+                if i:
+                    s.add(i.strip())
+        except FileNotFoundError:
+            pass
+        
+        s.add(self.fn)
+
+        print(len(s), s)
+        
+        with open(fn, 'w') as f:
+            for i in s:
+                f.write(i + '\n')
+        
     def get_html(self):
         """Compile md to get html"""
         self.html = markdown.markdown(
@@ -129,11 +159,12 @@ class Page(object):
             f.write('__place_for_your_imgs__')
 
         # \!\[.*?\]\(imgs/.*?\)
-        hits = re.findall('\"/imgs/.*?\"', content, re.M|re.DOTALL)
+        hits = re.findall('\((imgs/.*?)\)', content, re.M|re.DOTALL)
+        # print(hits)
         for h in hits:
-            print('Copy ',h.strip())
+            #print(h)
+            # print('Copy ',h.strip())
             shutil.copy(PATH_TO_MD + h.replace('"',''), path + os.sep + 'imgs')
-
         import subprocess
 
         def exe(cmd):
@@ -172,7 +203,6 @@ class Page(object):
         if self.md:
             if not os.path.exists(PATH_TO_ORIG):
                 os.makedirs(PATH_TO_ORIG)
-
             try:
                 with codecs.open(PATH_TO_ORIG + sep + self.fn, "r", "utf-8") as f:
                     orig_md = f.read()
