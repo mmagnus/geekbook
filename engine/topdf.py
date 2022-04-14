@@ -96,8 +96,14 @@ def topdf(self, negative=True):
                 pos = (img_bg.size[0] + 100, img_bg.size[1] - img_qr.size[1])
                 img_bg.paste(img_qr, pos)
                 img_bg.save(tpath) #impath) #'data/dst/qr_lena.png')
-                
-            md = md.replace('(imgs/' + i, '(/tmp/' + tmpi + '){ height=400px }!!!!') # { height=350px }
+
+            tmpi = '/tmp/' + tmpi
+            if os.path.exists(tmpi):
+                md = md.replace('(imgs/' + i, '(' + tmpi + '){ height=400px }!!!!') # { height=350px }
+            else:
+                print('missing image %s ' % i)
+                #md = md.replace('(imgs/' + i, '(' + tmpi + '){ height=400px }!!!!') # { height=350px }
+ 
         md = md.replace('!!!!)', '\n') # ugly
             
         #md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
