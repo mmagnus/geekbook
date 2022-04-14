@@ -55,6 +55,7 @@ def topdf(self, negative=True):
                     image = cv2.imread(impath)
                     if isbright(image, thresh=0.5): # 0.39
                         tmpi = i
+                       cmd = "cp '%s' '/tmp/%s'" % (impath, i)#newpath) # fix for path with spaces
                     else:
                         tmpi = 'neg' + i
                         # or https://note.nkmk.me/en/python-pillow-invert/
