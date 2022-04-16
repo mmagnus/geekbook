@@ -452,6 +452,9 @@ def include_md_files(md, remove_first_line=False):
                         nmd += '\n' + txt + '\n'
                         imported_files_list += '/' + os.path.basename(f.name) + '\n'
 
+            with open(PATH_TO_MD + os.sep + 'topdf/' + mdname.replace('*', '') + 'x.md', 'w') as f:
+                f.write(nmd)
+            
         if l.startswith('/') and l.endswith('.md') and l.count('/') == 1:  # /shell.md
             ffullpath = PATH_TO_MD + os.sep + l.replace('/', '').strip()
             mdname = l.replace('/', '').strip()

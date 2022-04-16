@@ -9,8 +9,19 @@ ic.configureOutput(prefix='')
 def topdf(self, negative=True):
         if self.name == '_search_':
             return
-        with open(PATH_TO_MD + os.sep + self.fn) as f:
-             md = f.read()
+
+        if self.name.endswith('x'):
+            fn = PATH_TO_MD + os.sep + 'topdf/' + self.fn
+            if os.path.exists(fn): # if the files in in topdf/ then its X cross file but it can
+                # be a file with dropbox.md 
+                with open(fn) as f:
+                     md = f.read()
+            else: # dropbox should be open here
+                with open(PATH_TO_MD + os.sep + self.fn) as f:
+                     md = f.read()
+        else:    
+            with open(PATH_TO_MD + os.sep + self.fn) as f:
+                 md = f.read()
         md = md.replace('.DARK.jpeg', '.LIGHT.jpeg')
         # md = md.replace('\n', '\n\n') # \n
         md = md.replace('{{TOC}}', '')
