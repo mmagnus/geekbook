@@ -153,19 +153,20 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 # if heic
                 if line.endswith('.heic'):
                     t = t.replace('.heic', '.jpeg')
-                    cmd = "magick mogrify -monitor -format jpg '%s'" % source_path # ok, this is done inplace
+                    cmd = "/opt/homebrew/bin/magick mogrify -monitor -format jpg '%s'" % source_path # ok, this is done inplace
                     from icecream import ic
                     import sys
                     print(cmd)
                     os.system(cmd)
                     nt = t + '.MIN.jpeg'
                     nsource_path = source_path.replace('.heic', '.jpg')
-                    cmd = "convert '%s' -quality 40 '%s'" % (nsource_path, td + IMG_PREFIX + nt)
+                    cmd = "/Users/magnus/miniconda3/bin/convert '%s' -quality 40 '%s'" % (nsource_path, td + IMG_PREFIX + nt)
                     os.system(cmd)
                     print(cmd)
                     t = nt # for writing in a file                
                 else:
                     shutil.copy(source_path, td + IMG_PREFIX + t)
+                    os.system("/opt/homebrew/bin/trash '" + source_path + "'")
             except IOError:
                 ltext[c] = 'Error in ' + source_path
                 changed = True
@@ -200,6 +201,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             else:
                 if verbose:
                     print('Coping', source_path, td + IMG_PREFIX + t)
+                shutil.copy(source_path, td + IMG_PREFIX + t)
                 ltext[c] = '![](' + IMG_PREFIX + t + ') '# + creation_date #  + t + ')'
                 changed = True
     return '\n'.join(ltext), changed # trigger compiles
@@ -274,13 +276,59 @@ def get_creation_time(fn):
         dat = get_creation_time_via_stat(fn)
     return dat
 
+def get_creation_time_v3(filepath):
+    """Gets the date taken for a photo through a shell."""
+    cmd = "mdls '%s'" % filepath
+    output = subprocess.check_output(cmd, shell = True)
+    lines = output.decode("ascii").split("\n")
+    for l in lines:
+        if "kMDItemContentCreationDate" in l:
+            datetime_str = l.split("= ")[1]
+            print(datetime_str)
+            # ugly fix for time one +1
+            d = datetime.datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S +0000") + timedelta(hours=1) 
+            print(d)
+            return str(d.strftime('%y%m%d')),  str(d.strftime('%H%M'))
+    raise DateNotFoundException("No EXIF date taken found for file %s" % filepath)
+
+
+def get_creation_time_v2(fn):
+
+        from PIL import Image
+        try:
+            im = Image.open(fn)
+            exif = im.getexif() 
+            creation_time = exif.get(36867)
+            if creation_time:
+                d, t = creation_time.split()
+                d = d.replace(':', '')[2:]
+                t = t.replace(':', '-')
+                return (d, t)
+        except:
+            print(fn)
+            return ('error', '')
+        
+
 if __name__ == '__main__':
     # insert_image()
     fn = '/Users/magnus/Desktop/h5a_5foa/IMG_1888.jpeg'
+    fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/9/977FC017-D725-42EC-8C81-7B5B35E1CE7C_1_102_a.jpeg"
+    fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/renders/9/977FC017-D725-42EC-8C81-7B5B35E1CE7C_1_201_a.heic"
+    fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/D/D943BC4D-BFA2-476A-A7E3-D51C5837B45F_1_105_c.jpeg"
     #dat = get_creation_time(fn)
     #print(dat)
     #fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/E/E412371D-8D5A-408C-845F-BCA826EB4F6A_1_105_c.jpeg"
     #insert_image_file:file:///Users/magnus/Pictures/Photos%20Library.photoslibrary/resources/derivatives/E/E412371D-8D5A-408C-845F-BCA826EB4F6A_1_105_c.jpeg//from_Apple_Photos(text, verbose=True)
     #dat = get_creation_time(fn)
     #print(dat)
-    print(get_file_size(fn))
+    from icecream import ic
+    import sys
+    ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
+    ic.configureOutput(prefix='> ')
+
+    ic(get_file_size(fn))
+    ic(get_creation_time(fn))
+    ic(get_creation_time_v2(fn))
+    # ic(get_creation_time_v3(fn))
+    ic(get_creation_time_via_stat(fn))
+    # 2022-03-09T08:21:10Z
