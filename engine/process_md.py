@@ -208,7 +208,7 @@ def remove_image(text, verbose=False):
             fn = l.replace('![#min](', '').replace(')', '').strip()
             #  $f  ${f}.jpeg
             nfn = fn + '.MIN.jpeg'
-            cmd = "convert '%s/%s' -quality 40 '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nfn)
+            cmd = "convert '%s/%s' -quality 40 -resize 70%% '%s/%s'" % (PATH_TO_MD, fn, PATH_TO_MD, nfn)
             logger.info(cmd)
             os.system(cmd)
 
