@@ -3,15 +3,33 @@ import os
 
 from icecream import ic
 import sys
-ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
+ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr), includeContext=True)
 ic.configureOutput(prefix='')
+
+
+import subprocess
+def exe(cmd):
+    o = subprocess.Popen(
+        cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out = o.stdout.read().strip().decode()
+    err = o.stderr.read().strip().decode()
+    return out, err
 
 def topdf(self, negative=True):
         if self.name == '_search_':
             return
 
+        if self.name == 'workflow': # !!!!!!!!
+            return
+
+        ic(self.name)
+
         if self.name.endswith('x'):
+            # ok, detect the file with XXXx.md
+            # print(self.name + ' xx processing')
+            # what is this?
             fn = PATH_TO_MD + os.sep + 'topdf/' + self.fn
+            # fn: '/Users/magnus/geekbook/notes//topdf/backup-time-machinex.md'#
             if os.path.exists(fn): # if the files in in topdf/ then its X cross file but it can
                 # be a file with dropbox.md 
                 with open(fn) as f:
@@ -22,6 +40,7 @@ def topdf(self, negative=True):
         else:    
             with open(PATH_TO_MD + os.sep + self.fn) as f:
                  md = f.read()
+                 
         md = md.replace('.DARK.jpeg', '.LIGHT.jpeg')
         # md = md.replace('\n', '\n\n') # \n
         md = md.replace('{{TOC}}', '')
@@ -53,7 +72,7 @@ def topdf(self, negative=True):
 
         import re
         imgs = re.findall('\!\[.*\]\(imgs/(.+)\)', md)
-        print(imgs)
+        # ic(imgs)
         for i in imgs:
             impath = PATH_TO_MD + '/imgs/' + i
             tpath = '/tmp/' + i
@@ -61,24 +80,32 @@ def topdf(self, negative=True):
                 
             if negative:
                 # check brightness
-                ic(impath)
+                # ic(impath)
                 try:
                     image = cv2.imread(impath)
                     if isbright(image, thresh=0.5): # 0.39
-                        tmpi = i
+                       tmpi = i
+                       impath = PATH_TO_MD + '/imgs/' + i
                        cmd = "cp '%s' '/tmp/%s'" % (impath, i)#newpath) # fix for path with spaces
+                       ic(cmd)
+                       os.system(cmd)
+
                     else:
                         tmpi = 'neg' + i
                         # or https://note.nkmk.me/en/python-pillow-invert/
                         cmd = '/opt/homebrew/bin/convert %s -channel RGB -negate %s' % (impath, tpath_neg)#newpath)
-                        ic(cmd)
+                        # ic(cmd)
+                        out, err = exe(cmd)
+                        if err:
+                            ic(err)
+                        
                 except:
                     tmpi = i
 
             if not negative:
                impath = PATH_TO_MD + '/imgs/' + i
                cmd = 'cp %s /tmp/%s' % (impath, i)#newpath)
-               print(cmd)
+               ic(cmd)
                os.system(cmd)
                tmpi = i
 
@@ -139,15 +166,9 @@ def topdf(self, negative=True):
             toc = ''
 # cmd
         cmd = 'pandoc ' + tmp + ' -o ' + output + toc + ' --metadata=title=' + self.name + '  -V mainfont="Helvetica" --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm"' # -N -f gfm 
-        print(cmd)
-        if 1:  # for testing keep this
-            import subprocess
-            def exe(cmd):
-                o = subprocess.Popen(
-                    cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                out = o.stdout.read().strip().decode()
-                err = o.stderr.read().strip().decode()
-                return out, err
-            exe(cmd)
-        else:
-            os.system(cmd)
+        # print(cmd)
+        ic(cmd)
+        out, err = exe(cmd)
+        if err:
+            ic(err)
+        # os.system(cmd)
