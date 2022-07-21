@@ -156,9 +156,9 @@ def topdf(self, negative=True):
         # PATH_TO_MD + sep + self.fn
         # cd ' + PATH_TO_MD + ' &&
         if not negative:
-            output = '~/Dropbox/boox-geekbook-color/' + self.name + '-color.pdf '
+            output = '~/Sync/boox-geekbook-color/' + self.name + '-color.pdf '
         else:
-            output = '~/Dropbox/boox/geekbook/' + self.name + '.pdf '
+            output = '~/Sync/geekbook/' + self.name + '.pdf '
 
         # no toc for snippets
         toc = ' --toc '
