@@ -146,8 +146,8 @@ def topdf(self, negative=True):
         md = md.replace('!!!!)', '\n') # ugly
             
         #md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
-
-        md += '\n# Notes\n\n'
+        # \n to fix missing \n at the end and then # Notes merges with the last line
+        md += '\n\n\n# Notes\n\n'
         md += '|\n\n' * 15 + '\n' # add an empty page
         tmp = '/tmp/print.md'
         #tmp = PATH_TO_MD + sep + '/tmp.md'
