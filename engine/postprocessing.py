@@ -196,17 +196,19 @@ def get_todo(text):
     return ntext
 
 
-def get_captions(text):
+def get_captions(text):     #figure
     """Replace *in text* @todo, @inprogress and @done with `<span class="label label-danger">@todo</span>` and so on.
     """
     ntext = ''
     for l in text.split('\n'):
         if l.startswith('Fig.') or l.startswith('Figure.'):
-            style = '<small><b style="background-color: white;">Figure.</b>'
+            style = '<small><b alt="caption" style="">Figure. </b>'
             l = l.replace('Figure.', style)
             l = l.replace('Fig.', style)
             l += '</small>'
-        ntext += l + '\n'
+        ntext += l + '\n' #\n<small><b style="">Figure.</b> -> <small><b style="">Figure.</b>
+        ntext = ntext.replace('\n<small><b alt="caption"', '<small><b alt="caption"')
+
     return ntext
 
 def get_divhr(text):
