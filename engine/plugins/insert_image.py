@@ -153,20 +153,20 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 # if heic
                 if line.endswith('.heic'):
                     t = t.replace('.heic', '.jpeg')
-                    cmd = "/opt/homebrew/bin/magick mogrify -monitor -format jpg '%s'" % source_path # ok, this is done inplace
+                    cmd = "magick mogrify -monitor -format jpg '%s'" % source_path # ok, this is done inplace
                     from icecream import ic
                     import sys
                     print(cmd)
                     os.system(cmd)
                     nt = t + '.MIN.jpeg'
                     nsource_path = source_path.replace('.heic', '.jpg')
-                    cmd = "/Users/magnus/miniconda3/bin/convert '%s' -quality 40 '%s'" % (nsource_path, td + IMG_PREFIX + nt)
+                    cmd = "convert '%s' -quality 40 '%s'" % (nsource_path, td + IMG_PREFIX + nt)
                     os.system(cmd)
                     print(cmd)
                     t = nt # for writing in a file                
                 else:
                     shutil.copy(source_path, td + IMG_PREFIX + t)
-                    os.system("/opt/homebrew/bin/trash '" + source_path + "'")
+                    os.system("trash '" + source_path + "'")
             except IOError:
                 ltext[c] = 'Error in ' + source_path
                 changed = True
