@@ -14,6 +14,11 @@ import string
 import time
 import platform
 
+from icecream import ic
+import sys
+ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
+ic.configureOutput(prefix='> ')
+
 from geekbook.engine.conf import INSERT_IMAGE_TAG, INSERT_IMAGE_TAG2, SCREENSHOT_INBOX, SCREENSHOT_INBOX2,\
      INSERT_IMAGE_TAG2_SUFFIX, INSERT_IMAGE_TAG_SUFFIX, INSERT_IMAGE_HASHTAG, INSERT_IMAGE_HASHTAG2,\
      INSERT_IMAGE_TAG3, SCREENSHOT_INBOX3, INSERT_IMAGE_TAG3_SUFFIX, INSERT_IMAGE_HASHTAG3
@@ -258,7 +263,6 @@ def insert_image(d = '/Users/magnus/Desktop/', td = '/home/magnus/Dropbox/geekbo
     else:
         return 'error of import, any file not found'
 
-    
 def get_creation_time_via_stat(fn):
     import pathlib
     try:
@@ -271,9 +275,14 @@ def get_creation_time_via_stat(fn):
     return str(ctime).replace('-', '').replace(' ', '-')[2:].replace(':', '.')  # to remove year ;-) lame
     
 def get_creation_time(fn):
-    dat = get_creation_time_via_pil(fn)
+    """ function to wrap on time"""
+    return get_date_exiftool(fn) # for screenshots etc
+    # !!!!!!!!!!!! #
+    if not dat:
+        dat = get_creation_time_via_pil(fn)
     if not dat:
         dat = get_creation_time_via_stat(fn)
+
     return dat
 
 def get_creation_time_v3(filepath):
@@ -286,7 +295,7 @@ def get_creation_time_v3(filepath):
             datetime_str = l.split("= ")[1]
             print(datetime_str)
             # ugly fix for time one +1
-            d = datetime.datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S +0000") + timedelta(hours=1) 
+            d = datetime.datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S +0000") + datetime.timedelta(hours=2) 
             print(d)
             return str(d.strftime('%y%m%d')),  str(d.strftime('%H%M'))
     raise DateNotFoundException("No EXIF date taken found for file %s" % filepath)
@@ -307,28 +316,75 @@ def get_creation_time_v2(fn):
         except:
             print(fn)
             return ('error', '')
-        
 
+def get_date_exiftool(fn):
+    """pyexiftool https://pypi.org/project/PyExifTool/"""
+    import exiftool
+    files = [fn]
+    ic(fn)
+    with exiftool.ExifToolHelper() as et:
+        metadata = et.get_metadata(files)
+
+    d = ''
+    for d in metadata:
+        try:
+            d = d["EXIF:DateTimeOriginal"].replace(' ', '-').replace(':', '').replace(':', '.')[2:] + '_v2' # remove the year [2:]
+            #print("{:20.20} {:20.20}".format(d["SourceFile"], d["EXIF:DateTimeOriginal"])) # example
+        except KeyError: # if not date then this
+            d = d["File:FileAccessDate"].replace(' ', '-').replace(':', '').replace(':', '.')[2:] + '_v2'
+    return d
+
+def get_date_file(fn):
+    cmd = "file '" + fn + "'"
+    output = subprocess.check_output(cmd, shell = True)
+    #os.system()
+    # datetime=
+    import re
+    #x = str(output).split('datetime=')[1].split('image')[0].replace(':', '').strip().replace(' ', '-')
+    #return x
+    print(output)
+    print(str(output).split(','))
+    for i in str(output).split(','):
+        print('dupa', i)
+        #if 'datetime':
+        #    d = i.strip().replace('datetime=','') #2021:09:16 19:39:41
+        #    ic(d)
+        #    return d
+    #r = re.findall(r'datetime=(?P<dt>.*?)', str(output), re.M) # [\d: ]+
+    #print(r)
+    #if r:
+    #    dt = r.group('dt')
+    #    ic(dt)
+    #aaaaaaaa    
+        
+#main
 if __name__ == '__main__':
     # insert_image()
     fn = '/Users/magnus/Desktop/h5a_5foa/IMG_1888.jpeg'
     fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/9/977FC017-D725-42EC-8C81-7B5B35E1CE7C_1_102_a.jpeg"
     fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/renders/9/977FC017-D725-42EC-8C81-7B5B35E1CE7C_1_201_a.heic"
     fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/D/D943BC4D-BFA2-476A-A7E3-D51C5837B45F_1_105_c.jpeg"
+    fn = "/Users/magnus/Library/Mobile Documents/27N4MQEA55~pro~writer/Documents/imgs/221003-17.17.44.534412_3.4M_IMG_6615.jpeg"
     #dat = get_creation_time(fn)
     #print(dat)
     #fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/E/E412371D-8D5A-408C-845F-BCA826EB4F6A_1_105_c.jpeg"
     #insert_image_file:file:///Users/magnus/Pictures/Photos%20Library.photoslibrary/resources/derivatives/E/E412371D-8D5A-408C-845F-BCA826EB4F6A_1_105_c.jpeg//from_Apple_Photos(text, verbose=True)
     #dat = get_creation_time(fn)
     #print(dat)
-    from icecream import ic
-    import sys
-    ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr))
-    ic.configureOutput(prefix='> ')
+    # date format
+    # 220927-11.09.24.364393_467K_sc_2022-09-27_at_11.09.18.jpg)
 
-    ic(get_file_size(fn))
-    ic(get_creation_time(fn))
-    ic(get_creation_time_v2(fn))
-    # ic(get_creation_time_v3(fn))
-    ic(get_creation_time_via_stat(fn))
-    # 2022-03-09T08:21:10Z
+    if 0:
+        ic(get_file_size(fn))
+        ic(get_creation_time(fn))
+        ic(get_creation_time_v2(fn))
+        ic(get_creation_time_via_pil(fn))
+        ic(get_creation_time_v3(fn))
+        ic(get_creation_time_via_stat(fn))
+        # 2022-03-09T08:21:10Z
+        print('stats')
+        os.system("stat '" + fn + "'")
+        print('file')
+        os.system("file '" + fn + "'")
+        get_date_file(fn)
+    get_date_exiftool(fn)
