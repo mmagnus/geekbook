@@ -173,14 +173,13 @@ def get_todo(text):
                 l = l.replace('@inprogress', '<span class="label label-warning">@inprogress</span>')
                 l = l.replace('@progress', '<span class="label label-warning">@progress</span> ')
                 l = l.replace('#progress', '<span class="label label-warning">#progress</span> ')
+                l = l.replace('#work', '<span class="label label-primary">#work</span>')
                 l = l.replace('@done', '<span class="label label-success">@done</span>')
-                l = l.replace('#done', '<span class="label label-success">#done</span>')
-                l = l.replace('#DONE', '<span class="label label-success">#DONE</span>')
+                #l = l.replace('#DONE', '<span class="label label-success">#DONE</span>')
                 l = l.replace('#@k', '<span class="label label-success">@ok</span>')
                 l = l.replace('#ok', '<span class="label label-success">#ok</span>')
                 l = l.replace('#success', '<span class="label label-success">#success</span>')
                 l = l.replace('@fixed', '<span class="label label-info">@fixed</span>')
-
 
                 l = l.replace('#waiting', '<span class="label label-info">#waiting</span>')
 
@@ -190,6 +189,8 @@ def get_todo(text):
 
                 l = l.replace('#True', '<span class="label label-success">True</span>')
                 l = l.replace('#False', '<span class="label label-danger">False</span>')
+
+                l = l.replace('#done', '<span class="label label-success">#done</span>')
 
         ntext += l + '\n'
     ntext = change_todo_square_chainbox_or_icon(ntext)

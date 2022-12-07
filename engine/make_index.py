@@ -93,6 +93,11 @@ body {
                         if l.strip().startswith('[desc:'):
                             desc = l.replace('[desc:', '').replace(']', '').strip()
 
+                    desc = desc.replace('#todo', '<span class="label label-danger">#todo</span>')
+                    desc = desc.replace('#work', '<span class="label label-primary">#work</span>')
+                    desc = desc.replace('#done', '<span class="label label-success">#done</span>')
+                    desc = desc.replace('#progress', '<span class="label label-warning">#progress</span> ')
+                    desc = desc.replace('#waiting', '<span class="label label-info">#waiting</span>')
 
                     mdfn = re.sub('.md$', '', mdfn)  # replace only .md at the very end
                     path = PATH_TO_HTML + '/' + mdfn
