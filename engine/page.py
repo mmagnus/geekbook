@@ -24,7 +24,7 @@ from engine.postprocessing import (add_title,
 from engine.preprocessing import (include_md_files, get_image_path, get_youtube_embeds, get_abstract,
                                   include_file, make_interna_links, make_sport_links, tablify_images,
                                   update_upper_note,
-                                  misc_on_text, color_dna)
+                                  misc_on_text, color_dna, format_orgmode_statistcs)
 
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN, ADD_EXTRA_SPACE_FOR_NOTES
 from engine.make_tableofcontent import make_table_of_content
@@ -118,8 +118,9 @@ class Page(object):
         self.md = make_interna_links(self.md)
         self.md = make_sport_links(self.md)
         self.md = misc_on_text(self.md)
+        self.md = format_orgmode_statistcs(self.md)
+        
         # self.md = right_link_from_dropbox_screenshot(self.md)
-
     def post_process(self):
         """Do postprocessing"""
         self.html = make_table_of_content(self.fn, self.html)
