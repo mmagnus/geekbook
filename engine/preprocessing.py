@@ -126,6 +126,16 @@ def misc_on_text(text, verbose=False):
             ntext += l + '\n'
     return ntext
 
+def format_orgmode_statistcs(text, verbose=False):
+    # !!!!!!!!!!!!
+    ntext = ''
+    for l in text.split('\n'):
+        if l.startswith(' |'):
+            l = '   ' + l
+        ntext += l + '\n'
+    #text = text.replace(' | ', '    |')
+    return ntext
+
 def get_abstract(text):
     """Collect all lines starting with ``! `` and insert it as in abstract in a place tagged as [abstract].
 
