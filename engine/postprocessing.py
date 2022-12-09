@@ -22,7 +22,7 @@ from engine.conf import PATH_TO_BASE_IMG, PATH_TO_TEMPLATE, PATH_TO_TEMPLATE_HTM
 
 def change_data_tag_into_actual_data(mdfn, text):
     """change [date] OR {{date}} into actual date"""
-    date = time.strftime("%Y-%m-%d", time.localtime(os.path.getctime(PATH_TO_MD + mdfn)))
+    date = time.strftime("%Y-%m-%d", time.localtime(os.path.getctime(PATH_TO_MD + os.sep + mdfn)))
     text = text.replace('[date]', date)
     text = text.replace('{{date}}', date)
     return text
