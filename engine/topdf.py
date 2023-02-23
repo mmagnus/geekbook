@@ -46,7 +46,8 @@ def topdf(self, negative=True):
         md = md.replace('{{TOC}}', '')
 
         # add a link for easy edits
-        md = "<b>http://127.0.0.1:5000/view/" + self.name + ".html</b>\n\n" + md
+        md = "<b>http://127.0.0.1:5000/view/" + self.name + ".html</b>\n\\pagebreak" + md
+        
         # this does not work
         #md = "<a href='http://127.0.0.1:5000/view/" + self.name + ".html'>go to note</a>n" + md
         
