@@ -149,9 +149,9 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             #creation_date = get_creation_date(source_path)
             size = get_file_size(source_path)
             if creation_date:
-                t = creation_date + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+                t = creation_date + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')[:5]
             else:
-                t = datetime.datetime.today().strftime('%y%m%d') + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+                t = datetime.datetime.today().strftime('%y%m%d') + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')[:5]
 
             # clean % from the names
             try:
