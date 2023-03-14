@@ -198,3 +198,11 @@ iOS:
 
 - https://ia.net/writer/
 
+# Quickref
+
+	\ii get a file from ~/Desktop
+	\ix get a file from ~/Downloads
+	\dx get a file from ~/Dropbox
+
+	\ip get a file from selected in Apple Photos
+	\ic get clipboard
