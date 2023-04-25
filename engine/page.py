@@ -90,7 +90,8 @@ class Page(object):
     def get_html(self):
         """Compile md to get html"""
         self.html = markdown.markdown(
-            self.md, extensions=[GithubFlavoredMarkdownExtension(), 'footnotes'])  # (linenums=False)'])
+            self.md, extensions=[GithubFlavoredMarkdownExtension(),
+                                 'mdx_math', 'footnotes'])  # (linenums=False)'])
         # html = '<link rel="stylesheet" href="/home/magnus/Dropbox/lb_v2/templates/Pygments/css/pygments.css" type="text/css">' + html
 
     def compile(self):
