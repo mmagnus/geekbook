@@ -168,6 +168,15 @@ def get_abstract(text):
 
 
 def make_interna_links(text, verbose=False):
+    """
+    Convert::
+    
+    [file:openfold-structure-module-meeting-230428.md]
+
+    into::
+
+      <a href="http://127.0.0.1:5000/view/openfold-structure-module-meeting-230428.html">openfold-structure-module-meeting-230428</a>
+    """
     ntext = ''
     for l in text.split('\n'):
         # [file:xxxx.md]
@@ -177,12 +186,11 @@ def make_interna_links(text, verbose=False):
                 l = l.replace('[file:' + r + ']', '<a href="http://127.0.0.1:5000/view' + r.replace('.md', '.html') + '">' +
                               r.replace('.md','') + '</a>')
             else:
-                l = l.replace('[file:' + r + ']', '<a href="http://127.0.0.1:5000/view/' + r.replace('.md', '.html') + '">' + \
-                              r.replace('.md','') + '</a>')
+                #l = l.replace('[file:' + r + ']', '<a href="http://127.0.0.1:5000/view/' + r.replace('.md', '.html') + '">' + r.replace('.md','') + '</a>')
+                l = l.replace('[file:' + r + ']', '[' + r.replace('.md','') + '](http://127.0.0.1:5000/view/' + r.replace('.md', '.html') + ')')
             if verbose: print(l)
         ntext += l + '\n'
     return ntext
-
 
 def make_sport_links(text, verbose=False):
     ntext = ''
