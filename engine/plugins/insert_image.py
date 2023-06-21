@@ -141,7 +141,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
         if ('file://' in line) and is_image and 'Error' not in line:
             # FileNotFoundError: [Errno 2] No such file or directory: file://localhost/localhost/private/var/folders/yc/ssr9692s5fzf7k165grnhpk80000gp/T/Anki-CWARbe/paste-29f8f06a3d79478480a7f2baaffcaab63056e351.png
             f = ltext[c]
-            f = f.replace('%28', '(').replace('%29', ')').replace('%20', ' ').replace('file://localhost/','/').replace('file://', '')
+            f = f.replace('%2C', ',').replace('%28', '(').replace('%29', ')').replace('%20', ' ').replace('file://localhost/','/').replace('file://', '')
             source_path = f
             creation_date = get_creation_time(source_path)
             t = os.path.basename(source_path) # target # is only filename without path
