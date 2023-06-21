@@ -179,7 +179,7 @@ See http://geekbook.readthedocs.io/en/latest/install.html
  
  http://geekbook.readthedocs.io/en/latest/thoughts.html
  
- # Markdown Editors
+# Markdown Editors
 
 PyCharm - Python IDE and Markdown editor https://www.jetbrains.com/pycharm/
 
@@ -206,3 +206,7 @@ iOS:
 
 	\ip get a file from selected in Apple Photos
 	\ic get clipboard
+ 
+    #dark to make a figure dark (inverse colors)
+
+	'[notes]', '\pagebreak'
