@@ -1,3 +1,11 @@
+"""
+EXPERIMENTAL
+
+Track ~/geekbook/to-pdf.txt to see new files comming.
+Many things hardcoded here, right now this is experimental.
+
+"""
+
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN, ADD_EXTRA_SPACE_FOR_NOTES
 import os
 
