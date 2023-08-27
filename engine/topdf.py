@@ -136,7 +136,16 @@ def topdf(self, negative=True, pdf=True):
 
             tmpi = '/tmp/' + tmpi
             if os.path.exists(tmpi):
-                md = md.replace('(imgs/' + i, '(' + tmpi + '){ height=400px }!!!!') # { height=350px }
+                # fixed size
+                full_size = False
+                for l in md.split('\n'):
+                    if i in l and '[#]' in l:
+                        full_size = True
+
+                if full_size:
+                    md = md.replace('(imgs/' + i, '(' + tmpi + '')
+                else:
+                    md = md.replace('(imgs/' + i, '(' + tmpi + '')#{ height=400px }!!!!') # { height=350px }
             else:
                 print('missing image %s ' % i)
                 #md = md.replace('(imgs/' + i, '(' + tmpi + '){ height=400px }!!!!') # { height=350px }
@@ -145,37 +154,69 @@ def topdf(self, negative=True, pdf=True):
             
         md = md.replace('\n#', '\n\n#') # fix merging line with <text>#
 
+        # actually this brings # as a caption and makes a figure smaller in latex
+        # with just [] the figure is full size
+        md = md.replace('![#](', '![](') 
+
+        # maybe all \n change to more
+        # this is a problem with pre !
+        # md = md.replace('\n', '\n\n')
+        
         #md = md.replace('(imgs/', '(' + PATH_TO_MD + '/imgs/')
         # \n to fix missing \n at the end and then # Notes merges with the last line
-        md += '\n\n\n# Notes\n\n'
+        print(md)
+
+        nmd = ''
+        for l in md.split('\n'):
+            if l.startswith('//'):
+                nmd += l.replace('//', '\n\pagebreak\n') + '\n'
+            else:
+                nmd += l + '\n'
+        md = nmd
+
+        md = md.replace('[notes]', '\pagebreak') #'>\n\n' * 15 + '\n XX' ) # add an empty page
+        print(md)
+
+        md += '\n\n\n ...\n\n' 
         md += '|\n\n' * 15 + '\n' # add an empty page
-        tmp = '/tmp/print.md'
+
+        md += '\pagebreak \n \pagebreak ...'
+
+        tmp = '/tmp/' + self.name + '.md' # self name, so you dont have to wait for cmd to end
         #tmp = PATH_TO_MD + sep + '/tmp.md'
         with open(tmp, 'w') as f:
             f.write(md)
         # PATH_TO_MD + sep + self.fn
         # cd ' + PATH_TO_MD + ' &&
-        if not negative:
-            output = '~/Sync/boox-geekbook-color/' + self.name + '-color.pdf '
-        else:
-            output = '~/Sync/geekbook/' + self.name + '.pdf '
+        #if not negative:
+        #    output = '~/Sync/boox-geekbook-color/' + self.name + '-color.pdf '
+        #else:
+        if not pdf:
+            PATH_TO_EBOOKS = '~/Dropbox/geekbook-ebooks/'
+            output = PATH_TO_EBOOKS + self.name + '.epub' # tex#pdf '
+        if pdf:
+            # if self.name
+            output = ''
+            for i in ['mail', 'workflow', 'work', 'rnahub', 'openfold', 'rna-tools', 'elena-meeting',
+                      'rna-annotation']:  # mail then overwrite by openfold
+                if i in self.name:
+                    try:
+                        os.mkdir(PATH_TO_PDF + '/work/' + i )
+                    except:
+                        output = PATH_TO_PDF + '/work/' + i + '/' + self.name + '.pdf' # tex#pdf '
+            if not output:
+                output = PATH_TO_PDF + self.name + '.pdf' # tex#pdf '
 
         # no toc for snippets
         toc = ' --toc '
         if self.name == 'snippets':
             toc = ''
+
 # cmd
         if pdf:
             cmd = 'pandoc ' + tmp + ' -o ' + output + toc + ' --metadata=title=' + self.name + '  -V mainfont="Helvetica" -f markdown+implicit_figures --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm"'
 
         else:
-            ## # epub
-            output = output.replace('.pdf', '.epub')
-            ## with open(tmp, 'r') as f:
-            ##     md = f.read()
-            ## md = md.replace('/tmp/neg', '/tmp/')
-            ## with open(tmp, 'w') as f:
-            ##     f.write(md)
             cmd = 'pandoc ' + tmp + ' -o ' + output + toc + ' --metadata=title=' + self.name + '  -V mainfont="Helvetica" -f markdown+implicit_figures --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm"'
 
         # add & so it will not block !
