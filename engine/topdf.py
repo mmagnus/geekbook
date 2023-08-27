@@ -17,6 +17,7 @@ def exe(cmd):
 
 def topdf(self, negative=True):
         if self.name == '_search_':
+def topdf(self, negative=True, pdf=True):
             return
 
         if self.name == 'workflow': # !!!!!!!!
@@ -168,10 +169,26 @@ def topdf(self, negative=True):
         if self.name == 'snippets':
             toc = ''
 # cmd
-        cmd = 'pandoc ' + tmp + ' -o ' + output + toc + ' --metadata=title=' + self.name + '  -V mainfont="Helvetica" --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm"' # -N -f gfm 
-        # print(cmd)
-        ic(cmd)
-        out, err = exe(cmd)
-        if err:
-            ic(err)
-        # os.system(cmd)
+        if pdf:
+            cmd = 'pandoc ' + tmp + ' -o ' + output + toc + ' --metadata=title=' + self.name + '  -V mainfont="Helvetica" -f markdown+implicit_figures --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm"'
+
+        else:
+            ## # epub
+            output = output.replace('.pdf', '.epub')
+            ## with open(tmp, 'r') as f:
+            ##     md = f.read()
+            ## md = md.replace('/tmp/neg', '/tmp/')
+            ## with open(tmp, 'w') as f:
+            ##     f.write(md)
+            cmd = 'pandoc ' + tmp + ' -o ' + output + toc + ' --metadata=title=' + self.name + '  -V mainfont="Helvetica" -f markdown+implicit_figures --pdf-engine=xelatex -V geometry:"top=3cm, bottom=3cm, left=3cm, right=3cm"'
+
+        # add & so it will not block !
+        # -N -f gfm
+        print(cmd)
+        if True:
+            out, err = exe(cmd)
+            if err:
+                ic(err)
+        else:
+            os.system(cmd)
+
