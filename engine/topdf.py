@@ -15,12 +15,8 @@ def exe(cmd):
     err = o.stderr.read().strip().decode()
     return out, err
 
-def topdf(self, negative=True):
-        if self.name == '_search_':
 def topdf(self, negative=True, pdf=True):
-            return
-
-        if self.name == 'workflow': # !!!!!!!!
+        if self.name in ['password', 'address', '_search_']: # 'workflow'
             return
 
         ic(self.name)

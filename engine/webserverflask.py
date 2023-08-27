@@ -56,39 +56,6 @@ open ~/Desktop/*epub""" % note_title.replace('.html', '.md')
     os.system('bash /tmp/gkb.sh')
     return 'send note: <pre>%s</pre>' % code
 
-@app.route('/open_file2/<filename>')
-def open_file2(filename):
-    import urllib
-    import urllib.parse
-
-    # for folder paths
-    if '/' in filename: # so this is path
-        cmd = 'open "' + filename + '" &'
-        os.system(cmd)
-        return jsonify(result="")
-
-    if platform.system() == "Linux":
-        cmd = 'locate ' + filename
-        out = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).stdout.read().decode()
-
-    if platform.system() == "Darwin":
-        # out = commands.getoutput('glocate ' + filename)
-        cmd = 'mdfind -name "' + filename + '"'
-        print('\_ flask search with ', cmd)
-        out = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).stdout.read().decode()
-
-    first_hit = out.split('\n')[0]
-    print('# of hits ' + str(len(out.split('\n'))) + " " + out.replace('\n',', '))
-    if not first_hit:
-        print('not found')
-        return jsonify(result='Not found ' + filename)
-    else:
-        print('hit ' + first_hit)
-        #cmd = 'open "/' + first_hit + '" &'
-        cmd = 'open "' + first_hit + '" &'
-        os.system(cmd)
-        return jsonify(result="")
-
 @app.route('/open_file/')
 def open_file():
     import urllib
