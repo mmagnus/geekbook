@@ -192,3 +192,11 @@ def topdf(self, negative=True, pdf=True):
         else:
             os.system(cmd)
 
+if __name__ == '__main__':
+    class Page:
+        name = ''
+    p = Page()
+    p.name = 'workflow'
+    p.fn = p.name + '.md'
+    topdf(p)
+    topdf(p, negative=False, pdf=False)    
