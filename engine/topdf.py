@@ -15,6 +15,8 @@ ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr), include
 ic.configureOutput(prefix='')
 
 
+PATH_TO_PDF = '~/Dropbox/Apps/boox/geekbook/' # '~/Sync/geekbook/'
+
 import subprocess
 def exe(cmd):
     o = subprocess.Popen(
