@@ -252,11 +252,14 @@ def get_youtube_embeds_insert(text):
             video_url = "https://www.youtube.com/watch?v=" + video_id
             content = requests.get(video_url)
             soup = bs(content.content, "html.parser")
-            title = soup.find("title").text.replace('- YouTube', '').strip()
+            # title = soup.find("title").text.replace('- YouTube', '').strip()
             # title is wrong right now
+            from pytube import YouTube
+            yt = YouTube(video_url)
+            title = yt.title
             logger.info('youtube video detected: %s', video_id)
             # '**' + title + '**\n
-            l = '<iframe width="800" height="441" src="https://www.youtube.com/embed/' + \
+            l = title + '\n<iframe width="800" height="441" src="https://www.youtube.com/embed/' + \
                 video_id + '" frameborder="0" allowfullscreen></iframe>\n' + \
                            '<https://www.youtube.com/watch?v=' + video_id + '>'
             changed = True
