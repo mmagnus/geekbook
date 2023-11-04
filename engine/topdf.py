@@ -16,6 +16,7 @@ ic.configureOutput(prefix='')
 
 
 PATH_TO_PDF = '~/Dropbox/Apps/boox/geekbook/' # '~/Sync/geekbook/'
+PATH_TO_PDF_WORK = '~/Dropbox/Apps/boox/geekbook-work/' # '~/Sync/geekbook/'
 
 import subprocess
 def exe(cmd):
@@ -211,9 +212,9 @@ def topdf(self, negative=True, pdf=True):
                       'rna-annotation']:  # mail then overwrite by openfold
                 if i in self.name:
                     try:
-                        os.mkdir(PATH_TO_PDF + '/work/' + i )
+                        os.mkdir(PATH_TO_PDF_WORK + '/' + i )
                     except:
-                        output = PATH_TO_PDF + '/work/' + i + '/' + self.name + '.pdf' # tex#pdf '
+                        output = PATH_TO_PDF_WORK + '/' + i + '/' + self.name + '.pdf' # tex#pdf '
             if not output:
                 output = PATH_TO_PDF + self.name + '.pdf' # tex#pdf '
 
