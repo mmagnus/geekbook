@@ -296,6 +296,13 @@ blockquote{
     margin-top:0%;
     text-align: justify;
     color:violet;
+blockquote{
+    background-color: #d8d8d8;
+    padding: 10px;
+    font-weight:bold;
+    font: 500 20px/1.5 Helvetica;
+    text-align: justify;
+    color: black;
 }
 
 big{
