@@ -72,6 +72,24 @@ def simply_interal_links(text):
         ntext += l + '\n'
     return ntext, changed
 
+def prettify_chatgpt(text):
+    """todo you could add \n to the first point"""
+    ntext = ''
+    changed = False
+    prev_line = ''
+    for l in text.split('\n'):
+        if l.startswith('	•	'):
+            l = l.replace('	•	', '- ')
+            changed = True
+
+        #if not prev_line.startswith('- '):
+        #    l = '\n' + l
+        #    changed = True
+        ntext += l + '\n'
+        prev_line = l
+
+    return ntext, changed
+    
 def insert_safari_url(text):
     ntext = ''
     changed = False

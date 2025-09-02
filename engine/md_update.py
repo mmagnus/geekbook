@@ -4,7 +4,8 @@
 
 import codecs
 from engine.conf import PATH_TO_MD, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX, AI_WRITER, USE_RM_TO_REMOVE_FIGURE
-from engine.process_md import right_MD_from_webservices, get_youtube_embeds_insert, remove_image, simply_interal_links, insert_file_into_archive, insert_safari_url
+from engine.process_md import right_MD_from_webservices, get_youtube_embeds_insert, remove_image, simply_interal_links, insert_file_into_archive, insert_safari_url, insert_selected_photo, prettify_chatgpt
+
 from engine.plugins.insert_image import insert_image_in_md
 from engine.plugins.draw_secondary_structure import get_ss
 from engine.plugins.ia_writer import edit_syntax_from_ai_writer_to_geekbook
@@ -57,6 +58,7 @@ class Md_update(object):
         self.md, file_inserted = insert_file_into_archive(self.md)
 
         self.md, changed = insert_safari_url(self.md)
+        self.md, changed = prettify_chatgpt(self.md)
 
         # ai writer
         is_edit_synatx_ai = False
