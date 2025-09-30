@@ -258,6 +258,43 @@ def remove_image(text, verbose=False):
     return ntext, changed
 
 
+def convert_youtube_timestamps(text):
+    """Convert YouTube links with timestamp parameters to just the timestamp in mm:ss format.
+    
+    Example: https://youtu.be/KYTz2PZ_y00?t=1538 -> 25:38
+    """
+    changed = False
+    ntext = ''
+    
+    # Regex pattern to match YouTube URLs with timestamp parameters
+    youtube_pattern = re.compile(r'(https://(?:www\.)?(?:youtube\.com/watch\?v=|youtu\.be/)([a-zA-Z0-9_-]+)(?:\?t=(\d+))?)')
+    
+    for line in text.split('\n'):
+        # Check if line contains YouTube URLs with timestamps
+        matches = youtube_pattern.findall(line)
+        if matches:
+            for match in matches:
+                full_url = match[0]
+                video_id = match[1]
+                timestamp_seconds = match[2]
+                
+                if timestamp_seconds:
+                    # Convert seconds to minutes:seconds format
+                    total_seconds = int(timestamp_seconds)
+                    minutes = total_seconds // 60
+                    seconds = total_seconds % 60
+                    timestamp_formatted = f"{minutes}:{seconds:02d}"
+                    
+                    # Replace the entire URL with just the timestamp
+                    line = line.replace(full_url, timestamp_formatted)
+                    changed = True
+                    logger.info('YouTube timestamp converted: %s -> %s', full_url, timestamp_formatted)
+        
+        ntext += line + '\n'
+    
+    return ntext, changed
+
+
 def get_youtube_embeds_insert(text):
     from bs4 import BeautifulSoup as bs
     import requests

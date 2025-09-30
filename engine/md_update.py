@@ -4,7 +4,7 @@
 
 import codecs
 from engine.conf import PATH_TO_MD, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX, AI_WRITER, USE_RM_TO_REMOVE_FIGURE
-from engine.process_md import right_MD_from_webservices, get_youtube_embeds_insert, remove_image, simply_interal_links, insert_file_into_archive, insert_safari_url, insert_selected_photo, prettify_chatgpt
+from engine.process_md import right_MD_from_webservices, get_youtube_embeds_insert, remove_image, simply_interal_links, insert_file_into_archive, insert_safari_url, insert_selected_photo, prettify_chatgpt, convert_youtube_timestamps
 
 from engine.plugins.insert_image import insert_image_in_md
 from engine.plugins.draw_secondary_structure import get_ss
@@ -49,6 +49,7 @@ class Md_update(object):
         self.md, is_right_MD = right_MD_from_webservices(self.md)
 
         self.md, yti = get_youtube_embeds_insert(self.md)
+        self.md, youtube_timestamp_changed = convert_youtube_timestamps(self.md)
         self.md, is_simply_interal_links = simply_interal_links(self.md)
 
         use_rm = False
@@ -67,7 +68,7 @@ class Md_update(object):
 
         # check if anything changed
         if any([is_get_ss, is_ii, is_right_MD, is_edit_synatx_ai, yti, use_rm,
-                is_simply_interal_links, file_inserted, changed]):
+                is_simply_interal_links, file_inserted, changed, insert_selected_photo_flag, youtube_timestamp_changed]):
             return True
         else:
             return False
