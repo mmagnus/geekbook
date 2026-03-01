@@ -3,6 +3,7 @@
 """I'm working on this.Trying to cope with the pre processing of the MD file."""
 
 import codecs
+import re
 from engine.conf import PATH_TO_MD, SCREENSHOT_INBOX, PATH_TO_IMG, IMG_PREFIX, AI_WRITER, USE_RM_TO_REMOVE_FIGURE
 from engine.process_md import right_MD_from_webservices, get_youtube_embeds_insert, remove_image, simply_interal_links, insert_file_into_archive, insert_safari_url, insert_selected_photo, prettify_chatgpt, convert_youtube_timestamps
 
@@ -66,9 +67,14 @@ class Md_update(object):
         if AI_WRITER:
             self.md, is_edit_synatx_ai = edit_syntax_from_ai_writer_to_geekbook(self.md, IMG_PREFIX)
 
+        # Normalize checklist shorthand in source notes: "- x task" -> "- [x] task"
+        normalized_md = re.sub(r'^(\s*-\s+)[xX](\s|$)', r'\1[x]\2', self.md, flags=re.M)
+        checkbox_shortcut_changed = normalized_md != self.md
+        self.md = normalized_md
+
         # check if anything changed
         if any([is_get_ss, is_ii, is_right_MD, is_edit_synatx_ai, yti, use_rm,
-                is_simply_interal_links, file_inserted, changed, insert_selected_photo_flag, youtube_timestamp_changed]):
+                is_simply_interal_links, file_inserted, changed, insert_selected_photo_flag, youtube_timestamp_changed, checkbox_shortcut_changed]):
             return True
         else:
             return False
