@@ -6,7 +6,7 @@ LOCAL = True
 
 PATH = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-PATH_TO_MD = PATH + '/notes/'
+PATH_TO_MD = PATH + '/notes'
 PATH_TO_HTML = PATH + "/engine/data/html/"
 PATH_TO_ORIG = PATH + "/engine/data/orig/"
 
