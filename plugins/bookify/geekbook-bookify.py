@@ -31,7 +31,9 @@ if __name__ == '__main__':
     title = file.replace('.md', '') #+ 'aaaaaaaaaaaaaaafasdf'
     if len(title) > 15:
         title = title[:15] + '...'
-    outfn = file.replace('.md', '.epub')
+    # outfn = file.replace('.md', '.mobi')# epub')
+    # mobi there is now mobi?
+    outfn = file.replace('.md', '.epub')# epub')
     plugin_base = os.path.abspath(os.path.dirname(__file__))
     cover_file =  plugin_base + '/cover.png'
     cover_file_tmp =  plugin_base + '/cover_tmp.png'
@@ -50,11 +52,23 @@ if __name__ == '__main__':
 
     date = datetime.today().strftime('%Y-%m-%d')
     
-    cmd = "cd " + dir + " && pandoc " + file + " -o '" + args.output_dir + "/" + outfn + "'" + \
-    " --toc -N --epub-cover-image='" + cover_file_tmp + "'" + \
+    if 0:
+        cmd = "cd " + dir + " && pandoc " + file + " -o '" + args.output_dir + "/" + outfn + "'" + \
+    "  -N --epub-cover-image='" + cover_file_tmp + "'" + \
     " --metadata=title:'" + full_title + " (geekboook)' --metadata='subtitle:geekbook' --metadata='date:" + date + \
     "' --metadata=author:'" +  args.author + "'" #+ \
+
+    if 1:
+        cmd = "cd " + dir + " && pandoc " + file + " -o '" + args.output_dir + "/" + outfn + "'" + \
+        " --toc -N --epub-cover-image='" + cover_file_tmp + "'" + \
+        " --metadata=title:'" + full_title + " (geekboook)' --metadata='subtitle:geekbook' --metadata='date:" + date + \
+        "' --metadata=author:'" +  args.author + "'" #+ \
     #" --data-dir='" + dir + "'"
     #"' --epub-metadata='" + meta_file + "'"
     print(cmd)
     os.system(cmd)
+    f =  args.output_dir + "/" + outfn + "'" 
+    cmd =  'ebook-convert \'' + f + ' \'' + f.replace('.epub', '.mobi')
+    print(cmd)
+    os.system(cmd)
+    
