@@ -109,3 +109,4 @@ notes-jupyter/*
 
 .idea/*
 bucket
+*.bak
