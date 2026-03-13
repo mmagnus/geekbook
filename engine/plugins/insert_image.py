@@ -89,18 +89,24 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
         Text
     """
     verbose = True
+
+    text = text.replace('file:/', 'file:///') #fix?
+
     text = text.replace('.jpg/Users/', '.jpg\n/Users/')
     text = text.replace('.jpeg/Users/', '.jpeg\n/Users/')
 
     text = text.replace('.jpegfile:///Users/', '.jpeg\nfile:///Users/')
     text = text.replace('.jpgfile:///Users/', '.jpg\nfile:///Users/')
     text = text.replace('.pngfile:///Users/', '.png\nfile:///Users/')
-
+    text = text.replace('![link text](<../../', 'file:///Users/magnus/')
+    text = text.replace('>)', '')
+    
     ltext = text.split('\n')
+    
     changed = False
     for c in range(0, len(ltext)):
         ### Clipboard ####################
-        if ltext[c].strip() == '\ip':
+        if ltext[c].strip() == '\ic':
             im = ImageGrab.grabclipboard()
             N = 10
             t = datetime.datetime.today().strftime('%y%m%d') + '_' + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(N))
@@ -112,7 +118,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 ltext[c] = '![](' + IMG_PREFIX + t + '.jpeg)'
                 changed = True
             else:
-                ltext[c] = '\ip error'
+                ltext[c] = '\ic error'
                 changed = True
 
         # desktop, but can be configure
@@ -149,9 +155,9 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
             #creation_date = get_creation_date(source_path)
             size = get_file_size(source_path)
             if creation_date:
-                t = creation_date + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')[:5]
+                t = creation_date + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')[-5:]
             else:
-                t = datetime.datetime.today().strftime('%y%m%d') + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')[:5]
+                t = datetime.datetime.today().strftime('%y%m%d') + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')[-5:]
 
             # clean % from the names
             try:
@@ -161,7 +167,7 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                     cmd = "magick mogrify -monitor -format jpg '%s'" % source_path # ok, this is done inplace
                     from icecream import ic
                     import sys
-                    print(cmd)
+                    ic(cmd)
                     os.system(cmd)
                     nt = t + '.MIN.jpeg'
                     nsource_path = source_path.replace('.heic', '.jpg')
@@ -177,7 +183,8 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 changed = True
             else:
                 if verbose:
-                    print('insert_image.py: coping', source_path, td + IMG_PREFIX + t)
+                    from icecream import ic
+                    ic('insert_image.py: coping', source_path, td + IMG_PREFIX + t)
                 ltext[c] = '![](' + IMG_PREFIX + t + ') '# + creation_date #  + t + ')'
                 changed = True
         ############################
@@ -192,12 +199,12 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
 
             size = get_file_size(source_path)
             if creation_date:
-                t = creation_date + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+                t = creation_date + '_' + size + '.' + t.replace('UNADJUSTEDNONRAW_', '').split('.')[-1] # [-10:] # just extension add 
             else:
-                t = datetime.datetime.today().strftime('%y%m%d') + '_' + size + '_' + t.replace('UNADJUSTEDNONRAW_', '')
+                t = datetime.datetime.today().strftime('%y%m%d') + '_' + size + '.' + t.replace('UNADJUSTEDNONRAW_', '').split('.')[-1] # just extension add 
+            verbose = True
             # clean % from the names
             t = t.replace('%', '')
-            # copy
             try:
                 shutil.copy(source_path, td + IMG_PREFIX + t)
             except IOError:
@@ -205,7 +212,8 @@ def insert_image_in_md(text, td, IMG_PREFIX, verbose=False):
                 changed = True
             else:
                 if verbose:
-                    print('Coping', source_path, td + IMG_PREFIX + t)
+                    from icecream import ic # ugly, did i use ic somewhere?
+                    ic('Coping', source_path, td + IMG_PREFIX + t)
                 shutil.copy(source_path, td + IMG_PREFIX + t)
                 ltext[c] = '![](' + IMG_PREFIX + t + ') '# + creation_date #  + t + ')'
                 changed = True
@@ -321,10 +329,13 @@ def get_date_exiftool(fn):
     """pyexiftool https://pypi.org/project/PyExifTool/"""
     import exiftool
     files = [fn]
+    print(fn)
     ic(fn)
     with exiftool.ExifToolHelper() as et:
-        metadata = et.get_metadata(files)
-
+        try:
+            metadata = et.get_metadata(files)
+        except exiftool.exceptions.ExifToolExecuteError:
+            return 'exiftool_err'
     d = ''
     for d in metadata:
         try:
@@ -360,11 +371,12 @@ def get_date_file(fn):
 #main
 if __name__ == '__main__':
     # insert_image()
-    fn = '/Users/magnus/Desktop/h5a_5foa/IMG_1888.jpeg'
     fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/9/977FC017-D725-42EC-8C81-7B5B35E1CE7C_1_102_a.jpeg"
     fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/renders/9/977FC017-D725-42EC-8C81-7B5B35E1CE7C_1_201_a.heic"
     fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/D/D943BC4D-BFA2-476A-A7E3-D51C5837B45F_1_105_c.jpeg"
     fn = "/Users/magnus/Library/Mobile Documents/27N4MQEA55~pro~writer/Documents/imgs/221003-17.17.44.534412_3.4M_IMG_6615.jpeg"
+    fn = "/Users/magnus/Desktop/Screenshots/Screenshot_20221026-134738.png"
+    fn = ""
     #dat = get_creation_time(fn)
     #print(dat)
     #fn = "/Users/magnus/Pictures/Photos Library.photoslibrary/resources/derivatives/E/E412371D-8D5A-408C-845F-BCA826EB4F6A_1_105_c.jpeg"
