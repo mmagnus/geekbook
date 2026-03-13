@@ -33,47 +33,28 @@ def tag_heading(heading):
     """
     tags = re.findall('@\w+', heading)
     for t in tags:
-        if t == '@done':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-success">' + t + '</span>')
-        if t == 'DONE':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-success">' + t + '</span>')
-        elif t == '@progress':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-warning">' + t + '</span>')
-        elif t == '@inprogress':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-warning">' + t + '</span>')
+        if t in ('@done', '@ok', 'DONE'):
+            replacement = '<span style="font-family:"  class="label label-success">' + t + '</span>'
+        elif t in ('@progress', '@inprogress'):
+            replacement = '<span style="font-family:"  class="label label-warning">' + t + '</span>'
         elif t == '@todo':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-danger">' + t + '</span>')
+            replacement = '<span style="font-family:"  class="label label-danger">' + t + '</span>'
         else:
-            heading = heading.replace(t, '<span class="label label-info">' + t + '</span>')
+            replacement = '<span class="label label-info">' + t + '</span>'
+        heading = heading.replace(t, replacement)
 
     # also work with #<tag> not only @<tag.
     tags = re.findall('\#\w+', heading)
     for t in tags:
-        if t == '#done':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-success">' + t + '</span>')
-        elif t == 'DONE':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-success">' + t + '</span>')
-        elif t == '#progress':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-warning">' + t + '</span>')
-        elif t == '#inprogress':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-warning">' + t + '</span>')
-        elif t == '#todo':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-danger">' + t + '</span>')
-        elif t == '#vip':
-            heading = heading.replace(
-                t, '<span style="font-family:"  class="label label-danger">' + t + '</span>')
+        if t in ('#done', '#ok'):
+            replacement = '<span style="font-family:"  class="label label-success">' + t + '</span>'
+        elif t in ('#progress', '#inprogress'):
+            replacement = '<span style="font-family:"  class="label label-warning">' + t + '</span>'
+        elif t in ('#todo', '#vip'):
+            replacement = '<span style="font-family:"  class="label label-danger">' + t + '</span>'
         else:
-            heading = heading.replace(t, '<span class="label label-info">' + t + '</span>')
+            replacement = '<span class="label label-info">' + t + '</span>'
+        heading = heading.replace(t, replacement)
     return heading
 
 
