@@ -41,10 +41,158 @@ class Index(object):
 <style>
 body {
   background-color: black;
-}</style>
+}
 
-              <!--      "paging": false,
-                        -->
+.index-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  border: 1px solid #4a90e2;
+  color: #4a90e2;
+  background: transparent;
+  padding: 4px 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter-btn:hover {
+  background: rgba(74, 144, 226, 0.15);
+}
+
+.filter-btn.active-filter {
+  background: #4a90e2;
+  color: #fff;
+}
+
+.filter-btn.random-btn {
+  border-color: #9ca3af;
+  color: #9ca3af;
+}
+
+.filter-btn.random-btn:hover {
+  background: rgba(156, 163, 175, 0.15);
+}
+
+.filter-btn.random-btn.active-filter {
+  background: #9ca3af;
+  color: #111;
+}
+
+.filter-btn.skills-btn {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.filter-btn.skills-btn:hover {
+  background: rgba(245, 158, 11, 0.15);
+}
+
+.filter-btn.skills-btn.active-filter {
+  background: #f59e0b;
+  color: #111;
+}
+
+#table_id {
+  width: 100%;
+  background-color: #161616;
+  color: #f2f2f2;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+#table_id thead th {
+  background-color: #232323;
+  color: #f5f5f5;
+  border-bottom: 2px solid #3a3a3a;
+}
+
+#table_id tbody tr {
+  background-color: #1b1b1b;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+#table_id tbody tr:nth-child(even) {
+  background-color: #151515;
+}
+
+#table_id tbody tr:hover {
+  background-color: #272727;
+}
+
+#table_id td,
+#table_id th {
+  color: inherit;
+  padding: 12px;
+  vertical-align: top;
+}
+
+#table_id td span,
+#table_id td small {
+  color: rgba(245, 245, 245, 0.75);
+}
+
+.index_list_a {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.index_list_a:hover {
+  color: #7aa8ff;
+}
+
+.index_date {
+  color: #f5f5f5 !important;
+}
+
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_info {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dataTables_wrapper .dataTables_filter input,
+.dataTables_wrapper .dataTables_length select {
+  background-color: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f5f5f5;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_filter {
+  float: none;
+  text-align: left;
+  margin-top: 12px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  text-align: center;
+  padding-top: 15px;
+}
+</style>
+
+              <div class="index-controls">
+                <button id="filter-openfold" class="filter-btn" type="button" data-filter="openfold">OpenFold</button>
+                <button class="filter-btn" type="button" data-filter="rnahub">RNAHub</button>
+                <button class="filter-btn" type="button" data-filter="trx">TRX</button>
+                <button class="filter-btn skills-btn" type="button" data-filter="skills">Skills</button>
+                <button id="random-note-btn" class="filter-btn random-btn" type="button">Random</button>
+              </div>
+
               <table id="table_id" class="display compact hover">
                   <thead>
                       <tr>
@@ -107,7 +255,7 @@ body {
                     # else:
                     if FLASK_BASED:
                         html += '<tr><td style=""><a class="index_list_a" href="/view/' + mdfn + '.html">' \
-                                 + mdfn + '</a>' + '</br><span style="font-size:10px;color:gray">' + desc + '</td>' \
+                                 + mdfn + '</a>' + '</br><span style="font-size:10px;color:#f5f5f5">' + desc + '</span></td>' \
                                  + '<td style="white-space: nowrap;"><small><center class="index_date">' \
                                  + time.ctime(os.stat(os.path.join(PATH_TO_MD, mdfn + '.md')).st_mtime) \
                                             + '</center></small></td>' \
@@ -121,8 +269,6 @@ body {
                                 + '<td><small><center class="index_date">' + \
                                 time.ctime(os.stat(os.path.join(PATH_TO_MD, mdfn + '.md')
                                                    ).st_mtime) + '</center></small></td></tr>'
-
-        html += '</p>'
 
         html += "</tbody></table>"
 

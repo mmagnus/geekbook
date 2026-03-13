@@ -82,10 +82,52 @@ MathJax.Hub.Config({
 
               <script type="text/javascript">
                $(document).ready( function () {
-                   $('#table_id').DataTable( {
-                       "bSort": false,
-                       "lengthMenu": [[20, 50, -1], [20, 50, "All"]]
-                   } );
+                   var $table = $('#table_id');
+                   var table = null;
+
+                   if ($table.length) {
+                       table = $table.DataTable({
+                           "bSort": false,
+                           "lengthMenu": [[20, 50, -1], [20, 50, "All"]],
+                           "dom": '<"table-top"f>rt<"table-bottom"lip>'
+                       });
+
+                       var $filterButtons = $('.filter-btn[data-filter]');
+                       if ($filterButtons.length) {
+                           $filterButtons.on('click', function () {
+                               var $btn = $(this);
+                               var filterValue = $btn.data('filter');
+                               var isActive = $btn.hasClass('active-filter');
+
+                               if (isActive) {
+                                   $btn.removeClass('active-filter');
+                                   table.search('').draw();
+                                   return;
+                               }
+
+                               $filterButtons.removeClass('active-filter');
+                               $btn.addClass('active-filter');
+                               table.search(filterValue).draw();
+                           });
+                       }
+
+                       var $randomButton = $('#random-note-btn');
+                       if ($randomButton.length) {
+                           $randomButton.on('click', function () {
+                               var nodes = table.rows({ search: 'applied' }).nodes().toArray();
+                               if (!nodes.length) {
+                                   return;
+                               }
+
+                               var randomNode = nodes[Math.floor(Math.random() * nodes.length)];
+                               var $link = $(randomNode).find('a.index_list_a').first();
+
+                               if ($link.length) {
+                                   window.location.href = $link.attr('href');
+                               }
+                           });
+                       }
+                   }
                })
               </script>
 

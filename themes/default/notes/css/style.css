@@ -3,7 +3,7 @@ https://stackoverflow.com/questions/3200249/html-list-style-type-dash
 */
 
 body {
-    font-size: 150%;
+    font-size: 200%;
     background-color: black;
     color:#fff;
  }
@@ -194,6 +194,33 @@ em {
 .inputpanel{
 /*    border-bottom: 1px solid #CCCCCC;    */
 }
+
+.page-edit-link {
+    text-align: right;
+    margin: 0 0 15px;
+}
+
+.page-edit-link__anchor {
+    display: inline-block;
+    font-size: 65%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border: 1px solid #7aa8ff;
+    border-radius: 4px;
+    color: #7aa8ff;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.page-edit-link__anchor:hover {
+    background-color: #7aa8ff;
+    color: #0f1116;
+}
+
+.page-edit-link__anchor + .page-edit-link__anchor {
+    margin-left: 8px;
+}
 .panelwatch{
     text-align:right;
     font-size:5px;
@@ -280,7 +307,7 @@ summary{
     background-color: black;
     padding: 10px;
     font-weight:bold;
-    font: 400 18px/1.5 Georgia;
+    /*font: 400 18px/1.5 Georgia;*/
     text-align: justify;
     color:white;
 }
@@ -291,12 +318,24 @@ blockquote > p {
 }
     
 blockquote{
-    background-color: black;
     padding: 10px;
     margin-top:0%;
     text-align: justify;
+
+    background-color: #d8d8d8;
+    padding: 10px;
+    font-weight:bold;
+    font: 500 20px/1.5 Helvetica;
+    text-align: justify;
+    color: black;
+
+    /*
     color:violet;
-blockquote{
+    background-color: black;
+    */
+}
+
+__blockquote{
     background-color: #d8d8d8;
     padding: 10px;
     font-weight:bold;

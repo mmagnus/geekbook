@@ -61,6 +61,32 @@ def add_head_for_flask(text):
     return head + text
 
 
+def add_page_edit_link(text, note_name):
+    """Insert a top-of-page edit link that points to the Flask edit endpoint."""
+    if not note_name:
+        return text
+
+    if note_name.endswith('.md'):
+        link_name = note_name[:-3]
+    else:
+        link_name = note_name
+
+    if note_name.endswith('.html'):
+        print_target = note_name
+    elif note_name.endswith('.md'):
+        print_target = note_name[:-3] + '.html'
+    else:
+        print_target = note_name + '.html'
+
+    edit_block = (
+        '<div class="page-edit-link">'
+        '<a class="page-edit-link__anchor" href="/edit/' + link_name + '">edit</a>'
+        '<a class="page-edit-link__anchor" href="/print/' + print_target + '">print</a>'
+        '</div>'
+    )
+    return edit_block + text
+
+
 def add_head(text):
     """Add head html from template  """
     head = open(PATH_TO_TEMPLATE_HTML).read()
