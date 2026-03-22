@@ -19,12 +19,13 @@ from engine.postprocessing import (add_title,
                                    add_head_for_flask, change_data_tag_into_actual_data,
                                    add_path_to_img, change_html_tags_bootstrap,
                                    unhighlight, personal_tags_to_html, get_todo, get_captions,
-                                   get_divhr, use_icons)
+                                   get_divhr, use_icons, add_page_edit_link)
 
 from engine.preprocessing import (include_md_files, get_image_path, get_youtube_embeds, get_abstract,
                                   include_file, make_interna_links, make_sport_links, tablify_images,
                                   update_upper_note,
-                                  misc_on_text, color_dna, format_orgmode_statistcs)
+                                  misc_on_text, color_dna, format_orgmode_statistcs,
+                                  normalize_checkbox_shortcuts, convert_tex_math_delimiters)
 
 from engine.conf import PATH_TO_MD, PATH_TO_HTML, PATH_TO_ORIG, FIND_FILES_PLUGIN, ADD_EXTRA_SPACE_FOR_NOTES
 from engine.make_tableofcontent import make_table_of_content
@@ -65,17 +66,19 @@ class Page(object):
         # keep this order, of use exe not os.system!
         #topdf(self, negative=False)
         topdf(self, negative=True)
+        #topdf(self, negative=False, pdf=False)  ## also for epubs ;-)
         pass
         
     def collect_to_pdf_save(self):
         fn = '/Users/magnus/geekbook/to-pdf.txt'
-
+        ignore = ['password.md']
         s = set()
 
         try:
             for i in open(fn):
                 if i:
-                    s.add(i.strip())
+                    if i not in ignore:
+                        s.add(i.strip())
         except FileNotFoundError:
             pass
         
@@ -89,9 +92,19 @@ class Page(object):
         
     def get_html(self):
         """Compile md to get html"""
+        # GithubFlavoredMarkdownExtension(),
+        # 'mdx_gfm', 'mdx_math', 
+        import markdown
+        from mdx_gfm import GithubFlavoredMarkdownExtension
+
         self.html = markdown.markdown(
-            self.md, extensions=[GithubFlavoredMarkdownExtension(),
-                                 'mdx_math', 'footnotes'])  # (linenums=False)'])
+            self.md,
+            extensions=[GithubFlavoredMarkdownExtension()]
+        )
+
+        #self.html = markdown.markdown(
+        #    self.md, extensions=['footnotes', 'mdx_gfm'])  # (linenums=False)'])
+        
         # html = '<link rel="stylesheet" href="/home/magnus/Dropbox/lb_v2/templates/Pygments/css/pygments.css" type="text/css">' + html
 
     def compile(self):
@@ -119,6 +132,8 @@ class Page(object):
         self.md = make_interna_links(self.md)
         self.md = make_sport_links(self.md)
         self.md = misc_on_text(self.md)
+        self.md = normalize_checkbox_shortcuts(self.md)
+        self.md = convert_tex_math_delimiters(self.md)
         self.md = format_orgmode_statistcs(self.md)
         
         # self.md = right_link_from_dropbox_screenshot(self.md)
@@ -225,8 +240,20 @@ class Page(object):
         if not os.path.exists(PATH_TO_HTML):
             os.mkdir(PATH_TO_HTML)
 
-        with codecs.open(PATH_TO_HTML + self.fn.replace('.md', '.html'), "w", "utf-8") as outfn:
+        target = PATH_TO_HTML + self.fn.replace('.md', '.html')
+
+        try:
+            with codecs.open(target, "r", "utf-8") as infile:
+                if infile.read() == self.html:
+                    logger.info('skip html save, unchanged: %s', self.fn)
+                    return False
+        except IOError:
+            pass
+
+        with codecs.open(target, "w", "utf-8") as outfn:
             outfn.write(self.html)
+
+        return True
 
 import argparse
 

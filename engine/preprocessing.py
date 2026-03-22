@@ -14,6 +14,10 @@ import glob
 import logging
 logger = logging.getLogger('geekbook')
 logger.setLevel(logging.INFO)
+from icecream import ic
+import sys
+ic.configureOutput(outputFunction=lambda *a: print(*a, file=sys.stderr), includeContext=True)
+ic.configureOutput(prefix=' ')
 
 FLASK_BASED = True
 
@@ -46,7 +50,7 @@ def color_seq_protein(seq):
                 seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: black;">' + s + '</span>'
             elif s.lower() in ["\\", "/"]:
                 seq_txt += '<span style="font-family: Menlo,Monaco,Consolas,Courier New,monospace; background-color: lightgray;">' + s + '</span>'
-        if s is '#':
+        if s == '#':
             protein = False
         if not protein:
             seq_txt += s
@@ -115,6 +119,70 @@ def change_todo_square_chainbox_or_icon(text, verbose=False):
     return text
 
 
+def normalize_checkbox_shortcuts(text, verbose=False):
+    """Normalize shorthand checklist items like ``- x task`` to ``- [x] task``."""
+    return re.sub(r'^(\s*-\s+)[xX](\s|$)', r'\1[x]\2', text, flags=re.M)
+
+
+def convert_tex_math_delimiters(text, verbose=False):
+    """Convert TeX math delimiters into MathJax script tags before Markdown runs.
+
+    Supported delimiters:
+    - ``$$...$$`` for display math
+    - ``\\[...\\]`` for display math
+    - ``\\(...\\)`` for inline math
+
+    Existing MathJax script tags and fenced code blocks are preserved.
+    """
+    protected_blocks = []
+
+    def protect(pattern, source):
+        def _store(match):
+            protected_blocks.append(match.group(0))
+            return '@@GEEKBLOCK%s@@' % (len(protected_blocks) - 1)
+        return re.sub(pattern, _store, source, flags=re.M | re.S)
+
+    def restore(source):
+        for idx, block in enumerate(protected_blocks):
+            source = source.replace('@@GEEKBLOCK%s@@' % idx, block)
+        return source
+
+    text = protect(r'```.*?```', text)
+    text = protect(r'<script type="math/tex.*?</script>', text)
+
+    text = re.sub(
+        r'\$\$(.+?)\$\$',
+        lambda m: '<script type="math/tex; mode=display">%s</script>' % m.group(1).strip(),
+        text,
+        flags=re.S
+    )
+    text = re.sub(
+        r'\\\[(.+?)\\\]',
+        lambda m: '<script type="math/tex; mode=display">%s</script>' % m.group(1).strip(),
+        text,
+        flags=re.S
+    )
+    text = re.sub(
+        r'\\\((.+?)\\\)',
+        lambda m: '<script type="math/tex">%s</script>' % m.group(1).strip(),
+        text,
+        flags=re.S
+    )
+
+    return restore(text)
+
+
+def misc_on_text(text, verbose=False):
+    """Set of rules to replace [i] etc with <img ... >  [ OK ]"""
+    # of list
+    ntext = ''
+    for l in text.split('\n'):
+        if l == '<summary>':
+            ntext += l # + '<b>SUMMARY</b>'
+        else:
+            ntext += l + '\n'
+    return ntext
+
 def misc_on_text(text, verbose=False):
     """Set of rules to replace [i] etc with <img ... >  [ OK ]"""
     # of list
@@ -170,6 +238,7 @@ def get_abstract(text):
 def make_interna_links(text, verbose=False):
     """
     Convert::
+    
     
     [file:openfold-structure-module-meeting-230428.md]
 
@@ -322,6 +391,7 @@ def get_image_path_in_line(l):
                 height_html = "height:" + height + "px;"
 
         # if this is an external link then name is href
+        log = False
         if name.startswith('http'):
             if log:
                 logger.info('http image link %s', name)
