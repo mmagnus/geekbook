@@ -46,7 +46,7 @@ def tag_heading(heading):
     # also work with #<tag> not only @<tag.
     tags = re.findall('\#\w+', heading)
     for t in tags:
-        if t in ('#done', '#ok'):
+        if t in ('#done', '#ok', '#fixed'):
             replacement = '<span style="font-family:"  class="label label-success">' + t + '</span>'
         elif t in ('#progress', '#inprogress'):
             replacement = '<span style="font-family:"  class="label label-warning">' + t + '</span>'

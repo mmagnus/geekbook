@@ -244,6 +244,7 @@ body {
                     desc = desc.replace('#todo', '<span class="label label-danger">#todo</span>')
                     desc = desc.replace('#work', '<span class="label label-primary">#work</span>')
                     desc = desc.replace('#done', '<span class="label label-success">#done</span>')
+                    desc = desc.replace('#fixed', '<span class="label label-success">#fixed</span>')
                     desc = desc.replace('#progress', '<span class="label label-warning">#progress</span> ')
                     desc = desc.replace('#waiting', '<span class="label label-info">#waiting</span>')
 

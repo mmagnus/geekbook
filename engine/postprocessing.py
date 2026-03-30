@@ -217,6 +217,7 @@ def get_todo(text):
                 l = l.replace('#False', '<span class="label label-danger">False</span>')
 
                 l = l.replace('#done', '<span class="label label-success">#done</span>')
+                l = l.replace('#fixed', '<span class="label label-success">#fixed</span>')
 
         ntext += l + '\n'
     ntext = change_todo_square_chainbox_or_icon(ntext)
