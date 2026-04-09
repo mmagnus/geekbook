@@ -198,6 +198,34 @@ iOS:
 
 - https://ia.net/writer/
 
+# RAG — Ask Your Notes with AI
+
+Query all your notes using natural language, powered by ChromaDB (semantic search) + Claude (LLM).
+
+## Setup
+
+    pip install chromadb anthropic
+    export ANTHROPIC_API_KEY="your-key-here"
+
+## Usage
+
+    python geekbook_rag.py index          # build/rebuild the search index (~6800 notes)
+    python geekbook_rag.py ask "question"  # ask a question about your notes
+    python geekbook_rag.py chat           # interactive chat mode
+    python geekbook_rag.py todos          # summarize TODOs from .org files
+
+## How it works
+
+1. **Index** — reads all `.md`, `.org`, `.txt` files (including subdirectories) and builds a ChromaDB vector database with semantic embeddings (all-MiniLM-L6-v2)
+2. **Retrieve** — when you ask a question, finds the 15 most semantically similar notes
+3. **Generate** — sends relevant note excerpts to Claude, which answers grounded in your notes and cites sources
+
+## Examples
+
+    $ python geekbook_rag.py ask "what do I know about RNA modeling?"
+    $ python geekbook_rag.py ask "how do I set up conda?"
+    $ python geekbook_rag.py todos
+
 # Quickref
 
 	\ii get a file from ~/Desktop

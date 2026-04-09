@@ -3,24 +3,25 @@
 RAG system for querying your geekbook notes using Claude.
 
 Usage:
-    python notes_rag.py index          # Build/rebuild the search index
-    python notes_rag.py ask "question"  # Ask a question about your notes
-    python notes_rag.py chat           # Interactive chat mode
-    python notes_rag.py todos          # Summarize TODOs from org files
+    python geekbook_rag.py index          # Build/rebuild the search index
+    python geekbook_rag.py ask "question"  # Ask a question about your notes
+    python geekbook_rag.py chat           # Interactive chat mode
+    python geekbook_rag.py todos          # Summarize TODOs from org files
 """
 
 import os
 import sys
 import glob
-import pickle
+import hashlib
 
-import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
+import chromadb
 import anthropic
 
 NOTES_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "notes")
-INDEX_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".notes_index.pkl")
+DB_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".notes_chromadb")
+COLLECTION_NAME = "geekbook_notes"
 TOP_K = 15
+MAX_DOC_CHARS = 5000  # truncate long notes for embedding
 
 
 def load_notes():
@@ -44,72 +45,59 @@ def load_notes():
 
 
 def build_index():
-    """Build the TF-IDF search index from notes."""
+    """Build the ChromaDB vector index from notes."""
     print("Loading notes...")
     notes = load_notes()
     print(f"Found {len(notes)} notes")
 
-    print("Building TF-IDF index...")
-    texts = [n["text"] for n in notes]
-    filenames = [n["filename"] for n in notes]
+    # Clean up old DB
+    import shutil
+    if os.path.exists(DB_DIR):
+        shutil.rmtree(DB_DIR)
 
-    vectorizer = TfidfVectorizer(
-        max_features=50000,
-        stop_words="english",
-        ngram_range=(1, 2),
-        sublinear_tf=True,
+    print("Building ChromaDB index (semantic embeddings)...")
+    client = chromadb.PersistentClient(path=DB_DIR)
+    collection = client.create_collection(
+        name=COLLECTION_NAME,
+        metadata={"hnsw:space": "cosine"},
     )
-    tfidf_matrix = vectorizer.fit_transform(texts)
 
-    index = {
-        "vectorizer": vectorizer,
-        "tfidf_matrix": tfidf_matrix,
-        "filenames": filenames,
-        "texts": texts,
-    }
+    # Index in small batches to avoid ChromaDB issues
+    batch_size = 200
+    for i in range(0, len(notes), batch_size):
+        batch = notes[i : i + batch_size]
+        ids = [hashlib.md5(n["filename"].encode()).hexdigest() for n in batch]
+        # Truncate docs for embedding, store full text in metadata
+        documents = [n["text"][:MAX_DOC_CHARS] for n in batch]
+        metadatas = [{"source": n["filename"], "full_text": n["text"][:10000]} for n in batch]
+        collection.add(ids=ids, documents=documents, metadatas=metadatas)
+        done = min(i + batch_size, len(notes))
+        print(f"  Indexed {done}/{len(notes)} notes")
 
-    with open(INDEX_PATH, "wb") as f:
-        pickle.dump(index, f)
-
-    print(f"Done! Index saved to {INDEX_PATH} ({len(notes)} notes indexed)")
-
-
-def load_index():
-    """Load the search index from disk."""
-    with open(INDEX_PATH, "rb") as f:
-        return pickle.load(f)
+    print(f"Done! Index saved to {DB_DIR} ({len(notes)} notes)")
 
 
 def query_notes(question, top_k=TOP_K):
-    """Query notes and return the most relevant ones."""
-    index = load_index()
-    query_vec = index["vectorizer"].transform([question])
-    scores = (index["tfidf_matrix"] @ query_vec.T).toarray().flatten()
+    """Query notes using semantic search."""
+    client = chromadb.PersistentClient(path=DB_DIR)
+    collection = client.get_collection(COLLECTION_NAME)
+    results = collection.query(query_texts=[question], n_results=top_k)
 
-    # Boost scores for filename matches
-    query_lower = question.lower()
-    query_words = query_lower.split()
-    for i, filename in enumerate(index["filenames"]):
-        fname_lower = filename.lower()
-        for word in query_words:
-            if len(word) > 2 and word in fname_lower:
-                scores[i] += 0.5
-
-    top_indices = np.argsort(scores)[::-1][:top_k]
-
-    results = []
+    chunks = []
     sources = set()
-    for i in top_indices:
-        if scores[i] > 0:
-            results.append({"text": index["texts"][i], "source": index["filenames"][i], "score": scores[i]})
-            sources.add(index["filenames"][i])
-    return results, sources
+    for doc, metadata in zip(results["documents"][0], results["metadatas"][0]):
+        source = metadata["source"]
+        text = metadata.get("full_text", doc)
+        chunks.append({"text": text, "source": source})
+        sources.add(source)
+
+    return chunks, sources
 
 
 def ask(question):
     """Ask a question about your notes."""
-    if not os.path.exists(INDEX_PATH):
-        print("Index not found. Run 'python notes_rag.py index' first.")
+    if not os.path.exists(DB_DIR):
+        print("Index not found. Run 'python geekbook_rag.py index' first.")
         sys.exit(1)
 
     print("Searching notes...")
@@ -122,9 +110,9 @@ def ask(question):
     # Build context — truncate each note to keep within token limits
     context_parts = []
     total_chars = 0
-    max_chars = 30000  # ~7500 tokens, leaves room for the answer
+    max_chars = 30000
     for r in results:
-        snippet = r["text"][:3000]  # max 3k chars per note
+        snippet = r["text"][:3000]
         if total_chars + len(snippet) > max_chars:
             break
         context_parts.append(f"[From: {r['source']}]\n{snippet}")
@@ -163,8 +151,8 @@ def ask(question):
 
 def chat():
     """Interactive chat mode."""
-    if not os.path.exists(INDEX_PATH):
-        print("Index not found. Run 'python notes_rag.py index' first.")
+    if not os.path.exists(DB_DIR):
+        print("Index not found. Run 'python geekbook_rag.py index' first.")
         sys.exit(1)
 
     print("Notes Chat -- ask questions about your notes (type 'quit' to exit)\n")
@@ -206,7 +194,6 @@ def todos():
         items = []
         for line in lines:
             stripped = line.strip()
-            # Match org-mode TODOs, unchecked boxes, WAITING, NEXT, DEADLINE, SCHEDULED
             if re.match(r"^\*+\s+(TODO|NEXT|WAITING)\s+", stripped):
                 items.append(stripped)
             elif re.match(r"^-\s+\[ \]", stripped):
@@ -258,7 +245,7 @@ def main():
         build_index()
     elif command == "ask":
         if len(sys.argv) < 3:
-            print('Usage: python notes_rag.py ask "your question"')
+            print('Usage: python geekbook_rag.py ask "your question"')
             sys.exit(1)
         question = " ".join(sys.argv[2:])
         ask(question)
