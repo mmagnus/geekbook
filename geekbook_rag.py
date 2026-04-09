@@ -3,7 +3,8 @@
 RAG system for querying your geekbook notes using Claude.
 
 Usage:
-    python geekbook_rag.py index          # Build/rebuild the search index
+    python geekbook_rag.py index          # Build/rebuild the search index from scratch
+    python geekbook_rag.py update         # Incrementally update changed/new/deleted notes
     python geekbook_rag.py ask "question"  # Ask a question about your notes
     python geekbook_rag.py chat           # Interactive chat mode
     python geekbook_rag.py todos          # Summarize TODOs from org files
@@ -45,7 +46,7 @@ def load_notes():
 
 
 def build_index():
-    """Build the ChromaDB vector index from notes."""
+    """Build the ChromaDB vector index from scratch."""
     print("Loading notes...")
     notes = load_notes()
     print(f"Found {len(notes)} notes")
@@ -75,6 +76,66 @@ def build_index():
         print(f"  Indexed {done}/{len(notes)} notes")
 
     print(f"Done! Index saved to {DB_DIR} ({len(notes)} notes)")
+
+
+def update_index():
+    """Incrementally update the index — only re-index new or modified notes."""
+    if not os.path.exists(DB_DIR):
+        print("No existing index found, building from scratch...")
+        build_index()
+        return
+
+    print("Checking for changed notes...")
+    notes = load_notes()
+    client = chromadb.PersistentClient(path=DB_DIR)
+    collection = client.get_collection(COLLECTION_NAME)
+
+    # Get all existing IDs and their sources
+    existing = collection.get(include=["metadatas"])
+    existing_map = {}  # filename -> id
+    for doc_id, meta in zip(existing["ids"], existing["metadatas"]):
+        existing_map[meta["source"]] = doc_id
+
+    current_filenames = set()
+    to_upsert = []
+
+    for note in notes:
+        current_filenames.add(note["filename"])
+        doc_id = hashlib.md5(note["filename"].encode()).hexdigest()
+        filepath = os.path.join(NOTES_DIR, note["filename"])
+        mtime = os.path.getmtime(filepath)
+
+        # Check if note is new or modified (compare mtime with index creation time)
+        if note["filename"] not in existing_map:
+            to_upsert.append(note)
+        else:
+            # Re-index if file was modified after the DB directory was last updated
+            db_mtime = os.path.getmtime(DB_DIR)
+            if mtime > db_mtime:
+                to_upsert.append(note)
+
+    # Remove deleted notes
+    deleted = set(existing_map.keys()) - current_filenames
+    if deleted:
+        del_ids = [existing_map[f] for f in deleted]
+        collection.delete(ids=del_ids)
+        print(f"  Removed {len(deleted)} deleted notes")
+
+    if not to_upsert:
+        print("Index is up to date.")
+        return
+
+    # Upsert changed/new notes in batches
+    print(f"Updating {len(to_upsert)} notes...")
+    batch_size = 200
+    for i in range(0, len(to_upsert), batch_size):
+        batch = to_upsert[i : i + batch_size]
+        ids = [hashlib.md5(n["filename"].encode()).hexdigest() for n in batch]
+        documents = [n["text"][:MAX_DOC_CHARS] for n in batch]
+        metadatas = [{"source": n["filename"], "full_text": n["text"][:10000]} for n in batch]
+        collection.upsert(ids=ids, documents=documents, metadatas=metadatas)
+
+    print(f"Done! Updated {len(to_upsert)} notes.")
 
 
 def query_notes(question, top_k=TOP_K):
@@ -243,6 +304,8 @@ def main():
 
     if command == "index":
         build_index()
+    elif command == "update":
+        update_index()
     elif command == "ask":
         if len(sys.argv) < 3:
             print('Usage: python geekbook_rag.py ask "your question"')

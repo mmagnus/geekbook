@@ -29,8 +29,9 @@ from engine.md_update import Md_update
 from engine.make_index import Index
 from engine.colors import bcolors
 from engine.searcher import make_db
+from geekbook_rag import update_index as update_rag_index
 from engine.plugins import ia_writer
-PINNED_NOTES = ['workflow.md']
+PINNED_NOTES = []#'workflow.md']
 
 class GeekbookError(Exception):
     pass
@@ -40,8 +41,9 @@ class MdFiles(object):
     """MdFiles manages the index of your md files (notes)"""
     path_to_watch = PATH_TO_MD
 
-    def __init__(self):
+    def __init__(self, replace_space_with_underscore=False):
         self.md_files = []
+        self.replace_space_with_underscore = replace_space_with_underscore
         self.get_filelist()
         self.sort_by_mtime()
 
@@ -53,12 +55,45 @@ class MdFiles(object):
         for f in self.md_files:
             if f.startswith('flycheck_') and f.endswith('.md'):
                 continue
-            if f.endswith('.md') and not f.startswith('.#'):
-                if ' ' in f:
-                    # print("""We don't handle names of you notes with spaces, please \
-   # use `-`. e.g. geekbook-is-the-best.md Please rename your note and start this app again. Fix: %s """ % f)
+            if not (f.endswith('.md') and not f.startswith('.#')):
+                continue
+
+            original_name = f
+            normalize_chars = (' ', '"', "'", '(')
+            if any(ch in f for ch in normalize_chars):
+                name_part, ext = os.path.splitext(f)
+                replacement_char = '_' if self.replace_space_with_underscore else '-'
+                sanitized_name = name_part.replace(' ', replacement_char)
+                for ch in ('"', "'", '('):
+                    sanitized_name = sanitized_name.replace(ch, '')
+                double_char = replacement_char * 2
+                while double_char in sanitized_name:
+                    sanitized_name = sanitized_name.replace(double_char, replacement_char)
+                sanitized_name = sanitized_name.strip(replacement_char) or 'note'
+                sanitized = sanitized_name + ext
+
+                src = os.path.join(self.path_to_watch, f)
+                dst = os.path.join(self.path_to_watch, sanitized)
+
+                if os.path.exists(dst):
+                    base, ext = os.path.splitext(sanitized)
+                    idx = 1
+                    candidate = f"{base}-{idx}{ext}"
+                    while os.path.exists(os.path.join(self.path_to_watch, candidate)):
+                        idx += 1
+                        candidate = f"{base}-{idx}{ext}"
+                    dst = os.path.join(self.path_to_watch, candidate)
+                    sanitized = candidate
+
+                try:
+                    os.rename(src, dst)
+                    logger.info("Renamed note '%s' -> '%s' to normalize filename", original_name, sanitized)
+                    f = sanitized
+                except OSError as exc:
+                    logger.warning("Failed to rename '%s': %s", original_name, exc)
                     continue
-                nfiles.append(f)
+
+            nfiles.append(f)
         self.md_files = nfiles
 
     def sort_by_mtime(self):
@@ -99,6 +134,7 @@ class App(object):
     def start(self, update):
         """Start the App.
         """
+        debug = False
         if not self.args.debug:
             # os.system('clear')
             print (bcolors.OKGREEN + "\n                 ________               __   __________               __    \n                /  _____/  ____   ____ |  | _\______   \ ____   ____ |  | __\n               /   \  ____/ __ \_/ __ \|  |/ /|    |  _//  _ \ /  _ \|  |/ /\n               \    \_\  \  ___/\  ___/|    < |    |   (  <_> |  <_> )    < \n                \______  /\___  >\___  >__|_ \|______  /\____/ \____/|__|_ \ \n                       \/     \/     \/     \/       \/                   \/ \n" + bcolors.ENDC)
@@ -117,7 +153,7 @@ class App(object):
         o = subprocess.Popen('cd "' + PATH_TO_MD + '" && cat *md | wc -l', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         out = o.stdout.read().strip().decode()
 
-        mf = MdFiles()
+        mf = MdFiles(replace_space_with_underscore=self.args.spaces_to_underscores)
         logger.info('You have %i notes' % len(mf.get_files()) + ' with ' + out + ' lines! Congrats, keep noting!')
 
         index = Index()
@@ -157,9 +193,17 @@ class App(object):
 
             # see what's new - diff between to folders your notes and orig files that keep copy of our notes
             # grep -v removes things from your list, ~, # (and in mmagnus case org mode files)
+
+            # | grep -v '\.org'
             cmd = "diff -u -r \"" + PATH_TO_MD + "\" \"" + PATH_TO_ORIG + "\" " + \
-                " | grep -v '\.org' | grep -v 'flycheck_' | grep -v '~$' | grep -v '#' | grep '\.md'".strip()
+                "  | grep -v 'flycheck_' | grep -v '~$' | grep -v '#' | grep '\.md'".strip()
             out, err  = exe(cmd)
+
+            debug = 0
+            if debug:
+                print(out, err)
+                print(PATH_TO_MD)
+            
             if err:
                 if 'No such file or directory' in err:
                     continue
@@ -172,9 +216,11 @@ class App(object):
             for l in out.split('\n'):
                 # new notes
                 if l.startswith('Only in ' + PATH_TO_MD):
+                    #ic(files_changed)
                     files_changed.append(os.path.basename(l.split()[-1]))
                 # changes notes
                 if l.startswith('diff -u -r'):
+                    #ic(files_changed)
                     files_changed.append(os.path.basename(l.split()[-1]))
 
             # if there are files change compile them
@@ -197,6 +243,7 @@ class App(object):
                     # update search db if any of the files
                     # is changed
                     make_db()
+                    update_rag_index()
 
             if update == -1:
                 fn = '/Users/magnus/geekbook/to-pdf.txt'
@@ -288,8 +335,11 @@ def get_parser():
     parser.add_argument('-n', '--notebook',
                         help='updates all jupiter notebooks!', action='store_true')
     parser.add_argument('--noflask', help='dont run flask', action='store_true')
+    parser.add_argument('--nojupyter', help='dont run jupyter', action='store_true')
     parser.add_argument('--noupdatedb', help='dont update the db', action='store_true')
+    parser.add_argument('--verbose', help='', action='store_true')
     parser.add_argument('--public', help='run as public server, edit engine.open_access to configure', action='store_true')
+    parser.add_argument('--spaces-to-underscores', help='replace spaces with underscores while normalizing note filenames', action='store_true')
     return parser
 
 
@@ -324,6 +374,7 @@ if __name__ == '__main__':
     app = App(args)
     if not args.noupdatedb:
         make_db()
+        update_rag_index()
     convert_jupyter_notebook_to_markdown()
 
     if not args.debug and not args.update:
@@ -345,5 +396,7 @@ if __name__ == '__main__':
             start_gitweb()
             time.sleep(1)  # so it's time for the Flask to be opened in the browser
             start_browser_with_index()
-
+            # geekbook loves jupyter!
+            #if not args.nojupyter:
+            #    os.system("cd ~/d/jupyter && jupyter notebook --NotebookApp.token='' &") # combo for jupyter as well
     app.start(UPDATE)
