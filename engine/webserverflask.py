@@ -145,14 +145,14 @@ def edit_header(note_title, note_header, verbose=False):
     if request.remote_addr not in ['127.0.0.1', '0.0.0.0']:
         return 'Hmm...'
 
-    cmd = "cd '" + PATH_TO_MD + "' && /usr/bin/grep -n '" + note_header + "' '" + note_title + ".md'"
+    cmd = ['/usr/bin/grep', '-n', note_header, note_title + '.md']
     if verbose: print('edit_header::cmd:', cmd)
-    out = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).stdout.read().decode()
+    out = subprocess.Popen(cmd, cwd=PATH_TO_MD, stdout=subprocess.PIPE).stdout.read().decode()
     if verbose: print('edit_header::out:', out)
-    note_line = out.split(':')[0]
-    cmd = 'emacsclient +' + note_line + ' "' + PATH_TO_MD + '/' + note_title + '.md" &'
+    note_line = out.split(':')[0] or '1'
+    cmd = ['emacsclient', '+' + note_line, os.path.join(PATH_TO_MD, note_title + '.md')]
     if verbose: print('Emacs cmd', cmd)
-    os.system(cmd)
+    subprocess.Popen(cmd)
     return redirect('/view/' + note_title + '.md#' + note_header.lstrip('#').strip().replace(' ', '-'))
 
 ## @app.route('/open/<filename>')
